@@ -19,16 +19,15 @@ public class Log extends BaseModel{
     private String schoolSupervisorComment;
 
 
-    private Log() {}
+    public Log() {}
 
+    @Builder
     public Log(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String workDone, String industrySupervisorComment, String schoolSupervisorComment) {
         super(Id, createdAt, updatedAt, deletedAt);
         this.workDone = workDone;
         this.industrySupervisorComment = industrySupervisorComment;
         this.schoolSupervisorComment = schoolSupervisorComment;
     }
-
-    @Builder
 
 
     @Override

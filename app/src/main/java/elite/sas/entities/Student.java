@@ -17,7 +17,7 @@ public class Student extends User{
 
     public Student() {}
 
-    @Builder
+    @Builder(builderMethodName = "StudentBuilder")
     public Student(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Tenant tenant, String email, String userName, String firstName, String lastName, UserType userType, Course course) {
         super(Id, createdAt, updatedAt, deletedAt, tenant, email, userName, firstName, lastName, userType);
         this.course = course;

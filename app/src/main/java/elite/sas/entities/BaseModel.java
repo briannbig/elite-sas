@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter @Builder
+@Getter @Setter
 public abstract class BaseModel {
     @Id
     @GeneratedValue(generator = "UUID")
