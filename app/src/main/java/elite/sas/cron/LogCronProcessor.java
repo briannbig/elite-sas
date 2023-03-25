@@ -4,6 +4,7 @@ import elite.sas.entities.Log;
 import elite.sas.repository.LogRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import java.util.UUID;
  * Checks if student submitted work done for that day and sets it as no record if no work was submitted.
  *
  */
+@Component
 @RequiredArgsConstructor
 public class LogCronProcessor extends BaseCronProcessor<Log> {
 
