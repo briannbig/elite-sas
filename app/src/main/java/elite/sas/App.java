@@ -1,28 +1,19 @@
 package elite.sas;
 
-import elite.sas.core.LogJob;
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
+import elite.sas.cron.LogsCronRunner;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
+@SpringBootApplication
 public class App {
-    public static void main(String[] args) throws SchedulerException {
-        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-
-        // Define the job
-        JobDetail job = JobBuilder.newJob(LogJob.class)
-                .withIdentity("logJob", "group1")
-                .build();
-
-        // Define a cron trigger
-        Trigger trigger = TriggerBuilder.newTrigger()
-                .withIdentity("myCronTrigger", "group1")
-                .withSchedule(CronScheduleBuilder.cronSchedule("0 0/1 * 1/1 * ? *")) // fire every 1 minutes
-                .build();
-
-        // Schedule the job with the trigger
-        scheduler.scheduleJob(job, trigger);
-
-        // Start the scheduler
-        scheduler.start();
+    public static void main(String[] args) {
+        SpringApplication.run(App.class);
     }
+    @Bean
+    CommandLineRunner startLogsCronRunner() {
+        return args -> LogsCronRunner.getInstance().run();
+    }
+
 }
