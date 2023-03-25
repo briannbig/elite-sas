@@ -1,5 +1,7 @@
 package elite.sas.util;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 public final class TimeUtil {
@@ -11,5 +13,13 @@ public final class TimeUtil {
 
         return hour + ":" + min + ":" + sec;
 
+    }
+    public static LocalDateTime getNextMonday() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nextMonday = now.with(DayOfWeek.MONDAY);
+        if (nextMonday.isBefore(now)) {
+            nextMonday = nextMonday.plusWeeks(1);
+        }
+        return nextMonday;
     }
 }
