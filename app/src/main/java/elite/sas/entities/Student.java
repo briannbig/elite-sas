@@ -2,6 +2,7 @@ package elite.sas.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,15 +12,20 @@ import java.util.UUID;
 
 @Entity
 @Setter @Getter
-public class Student extends User{
+public class Student extends BaseModel{
+
+    @OneToOne
+    private User user;
+
     @ManyToOne
     private Course course;
 
     public Student() {}
 
-    @Builder(builderMethodName = "StudentBuilder")
-    public Student(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Tenant tenant, String email, String userName, String firstName, String lastName, UserType userType, Course course) {
-        super(Id, createdAt, updatedAt, deletedAt, tenant, email, userName, firstName, lastName, userType);
+    @Builder()
+    public Student(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, User user, Course course) {
+        super(Id, createdAt, updatedAt, deletedAt);
+        this.user = user;
         this.course = course;
     }
 }
