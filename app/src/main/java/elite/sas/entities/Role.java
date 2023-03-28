@@ -27,13 +27,13 @@ public class Role extends BaseModel {
             }, mappedBy = "roles"
     )
     @JsonIgnore
-    private Set<User> usersWithRole;
+    private Set<AppUser> usersWithRole;
 
 
     public Role() {}
 
     @Builder
-    public Role(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, RoleName roleName, Set<User> usersWithRole) {
+    public Role(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, RoleName roleName, Set<AppUser> usersWithRole) {
         super(Id, createdAt, updatedAt, deletedAt);
         this.roleName = roleName;
         this.usersWithRole = usersWithRole;

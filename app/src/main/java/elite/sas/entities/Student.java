@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Student extends BaseModel{
 
     @OneToOne
-    private User user;
+    private AppUser appUser;
 
     @ManyToOne
     private Course course;
@@ -23,9 +23,9 @@ public class Student extends BaseModel{
     public Student() {}
 
     @Builder()
-    public Student(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, User user, Course course) {
+    public Student(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, AppUser appUser, Course course) {
         super(Id, createdAt, updatedAt, deletedAt);
-        this.user = user;
+        this.appUser = appUser;
         this.course = course;
     }
 }

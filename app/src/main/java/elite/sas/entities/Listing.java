@@ -21,7 +21,7 @@ public class Listing extends BaseModel{
     private Course course;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "default 'APR_JUN'")
+    @Column(nullable = false, columnDefinition = "VARCHAR(7) DEFAULT 'APR_JUN'")
     private AttachmentPeriod attachmentPeriod;
 
     private String description;
