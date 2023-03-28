@@ -1,5 +1,6 @@
 package elite.sas;
 
+import elite.sas.service.TenantService;
 import elite.sas.util.TemporalUtil;
 import elite.sas.api.params.CreateTenantParams;
 import elite.sas.cron.LogsCronRunner;
@@ -27,12 +28,18 @@ public class App {
     }
 
     @Bean
-    public CommandLineRunner saveSampleUser(WorkerFactory workerFactory) {
+    public CommandLineRunner saveSampleUser(TenantService tenantService) {
         return args -> {
-            workerFactory.start();
+//            check if internal tenant exists and create one if false
+
+            var optionalTenant = tenantService.getInternalTenant();
+            if (optionalTenant.isPresent()){
+                return;
+            }
+
             log.info("Creating default tenant");
             TemporalUtil.tenantRegistrationWorkflow().handle(
-                    new CreateTenantParams("Brian holdings ltd", "Nairobi kenya", "098736363", "brian@holdings.com", TenantType.COMPANY)
+                    new CreateTenantParams("Elite Student Attachment System", "Nairobi kenya", "0768656107", "support@elitesas.com", TenantType.INTERNAL)
             );
 
         };
