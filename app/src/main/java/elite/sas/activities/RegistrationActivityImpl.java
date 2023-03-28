@@ -11,20 +11,14 @@ import elite.sas.entities.Tenant;
 import elite.sas.service.AppUserService;
 import elite.sas.service.TenantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 
-@Service
 @RequiredArgsConstructor
 public class RegistrationActivityImpl implements RegistrationActivity {
 
-    @Autowired
     private final AppUserService userService;
-
-    @Autowired
     private final TenantService tenantService;
 
 

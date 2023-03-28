@@ -1,30 +1,23 @@
 package elite.sas.workflows;
 
+import elite.sas.util.TemporalUtil;
+import elite.sas.activities.definition.RegistrationActivity;
 import elite.sas.api.params.CreateTenantParams;
 import elite.sas.api.params.CreateUserParams;
-import elite.sas.config.temporal.TemporalConfig;
 import elite.sas.entities.Tenant;
 import elite.sas.entities.UserType;
 import elite.sas.workflows.definition.TenantRegistrationWorkflow;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 @Slf4j
-@RequiredArgsConstructor
 public class TenantRegistrationWorkflowImpl implements TenantRegistrationWorkflow {
 
-    @Autowired
-    private final TemporalConfig config;
-
-
+    private final RegistrationActivity registrationActivity = TemporalUtil.registrationActivitiesStub();
     @Override
     public Tenant handle(CreateTenantParams params) {
 
         // 1 create tenant;
-        var optionalTenant = config.registrationActivity().registerTenant(params);
+        var optionalTenant = registrationActivity.registerTenant(params);
         if (optionalTenant.isEmpty()) {
             return null;
         }
@@ -41,7 +34,7 @@ public class TenantRegistrationWorkflowImpl implements TenantRegistrationWorkflo
                 .lastName(tenant.getName())
                 .build();
 
-        config.userAccountRegistrationWorkflow().handle(createUserParams);
+        TemporalUtil.userAccountRegistrationWorkflow().handle(createUserParams);
 
         return tenant;
     }
