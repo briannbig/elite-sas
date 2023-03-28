@@ -31,6 +31,7 @@ public class TenantRegistrationWorkflowImpl implements TenantRegistrationWorkflo
 
         // 2 create admin account for tenant;
         var createUserParams = CreateUserParams.builder()
+                .tenantId(tenant.getId())
                 .email(tenant.getEmail())
                 .userName(tenant.getEmail())
                 .userType(UserType.ADMIN)

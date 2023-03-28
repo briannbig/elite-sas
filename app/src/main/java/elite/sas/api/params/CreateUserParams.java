@@ -3,11 +3,14 @@ package elite.sas.api.params;
 import elite.sas.entities.UserType;
 import lombok.*;
 
+import java.util.UUID;
 
-@Getter @Setter @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class CreateUserParams extends Params{
+
+@Builder
+@NoArgsConstructor @AllArgsConstructor
+@Getter @Setter
+public class CreateUserParams {
+    private UUID tenantId;
     private String email;
     private String userName;
     private String firstName;
@@ -15,4 +18,5 @@ public class CreateUserParams extends Params{
     private UserType userType;
     private String password;
     private String passwordConfirm;
+
 }

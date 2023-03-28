@@ -5,6 +5,6 @@ import lombok.*;
 @Getter @Setter @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TokenRefreshParams extends Params{
+public class TokenRefreshParams{
     String refreshToken;
 }
