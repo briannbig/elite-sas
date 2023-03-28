@@ -1,5 +1,6 @@
 package elite.sas.workflows;
 
+import elite.sas.activities.definition.NotificationsActivity;
 import elite.sas.util.TemporalUtil;
 import elite.sas.activities.definition.RegistrationActivity;
 import elite.sas.api.params.CreateTenantParams;
@@ -9,10 +10,15 @@ import elite.sas.entities.UserType;
 import elite.sas.workflows.definition.TenantRegistrationWorkflow;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 public class TenantRegistrationWorkflowImpl implements TenantRegistrationWorkflow {
 
     private final RegistrationActivity registrationActivity = TemporalUtil.registrationActivitiesStub();
+    private final NotificationsActivity notificationsActivity = TemporalUtil.notificationsActivityStub();
+
     @Override
     public Tenant handle(CreateTenantParams params) {
 
@@ -34,7 +40,13 @@ public class TenantRegistrationWorkflowImpl implements TenantRegistrationWorkflo
                 .lastName(tenant.getName())
                 .build();
 
-        TemporalUtil.userAccountRegistrationWorkflow().handle(createUserParams);
+        var user = registrationActivity.createUserAccount(createUserParams);
+        user.ifPresent(value -> {
+            Map<String, String> data = new HashMap<>();
+            data.put("title", "User creation Successful!");
+            notificationsActivity.sendNotification(value, data);
+        });
+
 
         return tenant;
     }
