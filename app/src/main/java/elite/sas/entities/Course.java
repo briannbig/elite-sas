@@ -18,7 +18,7 @@ public class Course extends BaseModel{
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "default 'DIPLOMA")
+    @Column(nullable = false, columnDefinition = "VARCHAR(15) DEFAULT 'DIPLOMA'")
     private CourseLevel courseLevel;
 
     public Course() {}

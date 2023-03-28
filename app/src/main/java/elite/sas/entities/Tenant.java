@@ -26,7 +26,7 @@ public class Tenant extends BaseModel{
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "varchar(20) default 'SCHOOL'")
+    @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'SCHOOL'")
     private TenantType tenantType;
 
     public Tenant() {}

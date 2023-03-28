@@ -25,13 +25,13 @@ public class Account extends BaseModel implements UserDetails {
     private String password;
 
     @OneToOne
-    private User user;
+    private AppUser appUser;
 
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getRoles().stream()
+        return appUser.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
                 .collect(Collectors.toList());
     }
@@ -43,7 +43,7 @@ public class Account extends BaseModel implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return appUser.getUserName();
     }
 
     @Override
@@ -69,23 +69,23 @@ public class Account extends BaseModel implements UserDetails {
     public Account() {}
 
     @Builder
-    public Account(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String password, User user, Collection<? extends GrantedAuthority> authorities) {
+    public Account(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String password, AppUser appUser, Collection<? extends GrantedAuthority> authorities) {
         super(Id, createdAt, updatedAt, deletedAt);
         this.password = password;
-        this.user = user;
+        this.appUser = appUser;
     }
 
     private Account(CustomBuilder customBuilder) {
         this.password = customBuilder.password;
-        this.user = customBuilder.user;
+        this.appUser = customBuilder.appUser;
     }
 
     public static final class CustomBuilder {
-        private User user;
+        private AppUser appUser;
         private String password;
 
-        public CustomBuilder setuser(User user) {
-            this.user = user;
+        public CustomBuilder setuser(AppUser appUser) {
+            this.appUser = appUser;
             return this;
         }
         public CustomBuilder setPassword(String password) {

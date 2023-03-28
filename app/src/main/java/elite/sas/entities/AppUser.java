@@ -10,24 +10,24 @@ import java.util.Set;
 import java.util.UUID;
 
 
-@Entity
+@Entity(name = "app_user")
 @Setter @Getter
-public class User extends BaseModel {
+public class AppUser extends BaseModel {
 
     @ManyToOne
     private Tenant tenant;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String userName;
 
     private String firstName;
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "varchar(20) default 'STUDENT'")
+    @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'STUDENT'")
     private UserType userType;
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -41,10 +41,10 @@ public class User extends BaseModel {
     )
     private Set<Role> roles;
 
-    public User() {}
+    public AppUser() {}
 
     @Builder
-    public User(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Tenant tenant, String email, String userName, String firstName, String lastName, UserType userType) {
+    public AppUser(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Tenant tenant, String email, String userName, String firstName, String lastName, UserType userType) {
         super(Id, createdAt, updatedAt, deletedAt);
         this.tenant = tenant;
         this.email = email;

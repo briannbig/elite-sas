@@ -31,10 +31,10 @@ public class Attachment extends BaseModel{
     private LocalDateTime endDate = startDate.plusMonths(3);
     @ManyToOne
     @JoinColumn(name = "industry_supervisor")
-    private User industrySupervisor;
+    private AppUser industrySupervisor;
     @ManyToOne
     @JoinColumn(name = "school_supervisor")
-    private User schoolSupervisor;
+    private AppUser schoolSupervisor;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<AttachmentWeek> attachmentWeeks;
@@ -42,7 +42,7 @@ public class Attachment extends BaseModel{
     public Attachment() {}
 
     @Builder
-    public Attachment(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Student student, Tenant tenant, AttachmentPeriod attachmentPeriod, LocalDateTime startDate, LocalDateTime endDate, User industrySupervisor, User schoolSupervisor, List<AttachmentWeek> attachmentWeeks) {
+    public Attachment(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Student student, Tenant tenant, AttachmentPeriod attachmentPeriod, LocalDateTime startDate, LocalDateTime endDate, AppUser industrySupervisor, AppUser schoolSupervisor, List<AttachmentWeek> attachmentWeeks) {
         super(Id, createdAt, updatedAt, deletedAt);
         this.student = student;
         this.tenant = tenant;

@@ -21,10 +21,10 @@ public abstract class BaseModel {
     )
     private UUID Id;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     @Column
@@ -37,6 +37,12 @@ public abstract class BaseModel {
     void generateId(){
         if(Id==null){
             Id= UUID.randomUUID();
+        }
+        if(createdAt==null){
+            createdAt= LocalDateTime.now();
+        }
+        if(updatedAt==null){
+            updatedAt= LocalDateTime.now();
         }
     }
 
