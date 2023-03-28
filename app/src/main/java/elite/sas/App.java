@@ -1,7 +1,7 @@
 package elite.sas;
 
+import elite.sas.util.TemporalUtil;
 import elite.sas.api.params.CreateTenantParams;
-import elite.sas.config.temporal.TemporalConfig;
 import elite.sas.cron.LogsCronRunner;
 import elite.sas.entities.TenantType;
 import io.temporal.worker.WorkerFactory;
@@ -27,11 +27,11 @@ public class App {
     }
 
     @Bean
-    public CommandLineRunner saveSampleUser(WorkerFactory workerFactory, TemporalConfig config) {
+    public CommandLineRunner saveSampleUser(WorkerFactory workerFactory) {
         return args -> {
             workerFactory.start();
             log.info("Creating default tenant");
-            config.tenantRegistrationWorkflow().handle(
+            TemporalUtil.tenantRegistrationWorkflow().handle(
                     new CreateTenantParams("Brian holdings ltd", "Nairobi kenya", "098736363", "brian@holdings.com", TenantType.COMPANY)
             );
 
