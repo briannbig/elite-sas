@@ -11,6 +11,7 @@ import elite.sas.entities.Account;
 import elite.sas.entities.Tenant;
 import elite.sas.entities.AppUser;
 import elite.sas.api.params.CreateUserParams;
+import elite.sas.entities.UserType;
 import elite.sas.repository.AccountRepository;
 import elite.sas.repository.TenantRepository;
 import elite.sas.repository.UserRepository;
@@ -91,6 +92,10 @@ public class AppUserService  {
             return Optional.empty();
         }
 
+        UserType userType = UserType.STUDENT;
+        if (Objects.nonNull(request.getUserType())){
+            userType = request.getUserType();
+        }
 
         var userBuilder = AppUser.builder();
         userBuilder
@@ -98,7 +103,8 @@ public class AppUserService  {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .userName(request.getUserName())
-                .email(request.getEmail());
+                .email(request.getEmail())
+                .userType(userType);
 
         var createdUser = userRepository.save(userBuilder.build());
 
