@@ -10,6 +10,7 @@ import elite.sas.entities.AppUser;
 import elite.sas.service.AppUserService;
 import elite.sas.util.TemporalUtil;
 import elite.sas.workflows.definition.UserAccountRegistrationWorkflow;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/auth")
+@Tag(name = "Login")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
