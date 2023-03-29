@@ -1,8 +1,11 @@
 package elite.sas.api.params;
 
+import elite.sas.entities.Role;
 import elite.sas.entities.UserType;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -18,5 +21,7 @@ public class CreateUserParams {
     private UserType userType;
     private String password;
     private String passwordConfirm;
+    @Builder.Default
+    private List<Role> roles = new ArrayList<>();
 
 }

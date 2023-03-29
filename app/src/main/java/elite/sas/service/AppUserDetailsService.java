@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AppUserDetailsService implements UserDetailsService {
     @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         return accountRepository.findByAppUserUserName(userName)

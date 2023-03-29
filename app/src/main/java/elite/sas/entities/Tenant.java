@@ -1,14 +1,12 @@
 package elite.sas.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -28,6 +26,9 @@ public class Tenant extends BaseModel{
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'SCHOOL'")
     private TenantType tenantType;
+
+    @OneToMany(mappedBy = "tenant", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    private List<AppUser> users;
 
     public Tenant() {}
 

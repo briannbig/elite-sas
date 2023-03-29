@@ -7,15 +7,14 @@ import elite.sas.api.params.LoginParams;
 import elite.sas.api.params.TokenRefreshParams;
 import elite.sas.api.response.JWTResponse;
 import elite.sas.api.response.TokenRefreshResponse;
-import elite.sas.entities.Account;
-import elite.sas.entities.Tenant;
-import elite.sas.entities.AppUser;
+import elite.sas.entities.*;
 import elite.sas.api.params.CreateUserParams;
-import elite.sas.entities.UserType;
 import elite.sas.repository.AccountRepository;
+import elite.sas.repository.RoleRepository;
 import elite.sas.repository.TenantRepository;
 import elite.sas.repository.UserRepository;
 import elite.sas.util.JWTUtil;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Brian Barasa
@@ -41,6 +41,9 @@ public class AppUserService  {
 
     @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    private final RoleRepository roleRepository;
     @Autowired
     private final AccountRepository accountRepository;
 
@@ -55,12 +58,13 @@ public class AppUserService  {
 
 
 
+    @Transactional
     public Optional<Account> registerNewUserAccount(CreateUserParams request) {
 
         if (Objects.isNull(request.getTenantId()) || Objects.isNull(request.getFirstName()) ||
                 Objects.isNull(request.getLastName()) || Objects.isNull(request.getUserName()) ||
                 Objects.isNull(request.getEmail()) || Objects.isNull(request.getPassword()) ||
-                Objects.isNull(request.getPasswordConfirm())
+                Objects.isNull(request.getPasswordConfirm()) || request.getRoles().isEmpty()
         ) {
             log.error("Missing required field(s) in the request");
             return Optional.empty();
@@ -97,16 +101,30 @@ public class AppUserService  {
             userType = request.getUserType();
         }
 
-        var userBuilder = AppUser.builder();
-        userBuilder
+        var user = AppUser.builder()
                 .tenant(optionalTenant.get())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .userName(request.getUserName())
                 .email(request.getEmail())
-                .userType(userType);
+                .userType(userType)
+                .build();
 
-        var createdUser = userRepository.save(userBuilder.build());
+        Set<Role> roles = new HashSet<>();
+
+
+        request.getRoles().forEach(r -> {
+            Optional<Role> optionalRole = roleRepository.findByRoleName(RoleName.INTERNAL_ADMIN);
+            optionalRole.ifPresent(roles::add);
+        });
+
+        if (!roles.isEmpty()) {
+            user.setRoles(roles);
+        }
+
+
+
+        var createdUser = userRepository.save(user);
 
         var account = new Account.CustomBuilder()
                 .setPassword(passwordEncoder.encode(request.getPassword()))
@@ -142,6 +160,7 @@ public class AppUserService  {
                 .toList();
 
         var jwtResponse = JWTResponse.builder()
+                .id(userDetails.getId())
                 .username(userDetails.getUsername())
                 .email(userDetails.getAppUser().getEmail())
                 .roles(roles)
@@ -204,6 +223,30 @@ public class AppUserService  {
 
     public List<AppUser> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    public Role saveRole(Role role){
+
+        var optionalInternalAdminRole = roleRepository.findByRoleName(RoleName.INTERNAL_ADMIN);
+        var optionalTenantAdminRole = roleRepository.findByRoleName(RoleName.TENANT_ADMIN);
+        var optionalSupervisorRole = roleRepository.findByRoleName(RoleName.SUPERVISOR);
+        var optionalStudentRole = roleRepository.findByRoleName(RoleName.STUDENT);
+
+        if (optionalInternalAdminRole.isPresent() && role.getRoleName() == RoleName.INTERNAL_ADMIN) {
+            log.error("Role: {} already present", role.getRoleName());
+            return null;
+        } else if (optionalTenantAdminRole.isPresent() && Objects.equals(role.getRoleName(), RoleName.TENANT_ADMIN)) {
+            log.error("Role: {} already present", role.getRoleName());
+            return null;
+        } else if (optionalSupervisorRole.isPresent() && Objects.equals(role.getRoleName(), RoleName.SUPERVISOR)) {
+            log.error("Role: {} already present", role.getRoleName());
+            return null;
+        } else if (optionalStudentRole.isPresent() && Objects.equals(role.getRoleName(), RoleName.STUDENT)) {
+            log.error("Role: {} already present", role.getRoleName());
+            return null;
+        } else {
+            return roleRepository.save(role);
+        }
     }
 
 }

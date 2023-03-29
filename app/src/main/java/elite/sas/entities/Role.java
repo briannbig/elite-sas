@@ -20,12 +20,7 @@ public class Role extends BaseModel {
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }, mappedBy = "roles"
-    )
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "roles", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<AppUser> usersWithRole;
 

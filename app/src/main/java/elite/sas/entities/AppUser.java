@@ -1,5 +1,6 @@
 package elite.sas.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +15,9 @@ import java.util.UUID;
 @Setter @Getter
 public class AppUser extends BaseModel {
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "tenant_id")
     private Tenant tenant;
 
     @Column(unique = true, nullable = false)
@@ -30,9 +33,8 @@ public class AppUser extends BaseModel {
     @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'STUDENT'")
     private UserType userType;
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
-                    CascadeType.PERSIST,
                     CascadeType.MERGE
             })
     @JoinTable(name = "user_has_role",
@@ -44,7 +46,7 @@ public class AppUser extends BaseModel {
     public AppUser() {}
 
     @Builder
-    public AppUser(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Tenant tenant, String email, String userName, String firstName, String lastName, UserType userType) {
+    public AppUser(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Tenant tenant, String email, String userName, String firstName, String lastName, UserType userType, Set<Role> roles) {
         super(Id, createdAt, updatedAt, deletedAt);
         this.tenant = tenant;
         this.email = email;
@@ -52,5 +54,6 @@ public class AppUser extends BaseModel {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userType = userType;
+        this.roles = roles;
     }
 }

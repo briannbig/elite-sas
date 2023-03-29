@@ -1,5 +1,8 @@
 package elite.sas;
 
+import elite.sas.entities.Role;
+import elite.sas.entities.RoleName;
+import elite.sas.service.AppUserService;
 import elite.sas.service.TenantService;
 import elite.sas.util.TemporalUtil;
 import elite.sas.api.params.CreateTenantParams;
@@ -28,8 +31,37 @@ public class App {
     }
 
     @Bean
-    public CommandLineRunner saveSampleUser(TenantService tenantService) {
+    public CommandLineRunner initAppRolesAndInternalAdmin(AppUserService appUserService, TenantService tenantService) {
         return args -> {
+
+//            save roles
+//          internal admin
+            appUserService.saveRole(
+                    Role.builder()
+                            .roleName(RoleName.INTERNAL_ADMIN)
+                            .build()
+            );
+
+//          tenant admin
+            appUserService.saveRole(
+                    Role.builder()
+                            .roleName(RoleName.TENANT_ADMIN)
+                            .build()
+            );
+//          supervisor
+            appUserService.saveRole(
+                    Role.builder()
+                            .roleName(RoleName.SUPERVISOR)
+                            .build()
+            );
+//          student
+            appUserService.saveRole(
+                    Role.builder()
+                            .roleName(RoleName.STUDENT)
+                            .build()
+            );
+
+
 //            check if internal tenant exists and create one if false
 
             var optionalTenant = tenantService.getInternalTenant();
