@@ -1,14 +1,11 @@
 package elite.sas.workflows;
 
 import elite.sas.activities.definition.NotificationsActivity;
-import elite.sas.entities.Role;
-import elite.sas.entities.RoleName;
+import elite.sas.entities.*;
 import elite.sas.util.TemporalUtil;
 import elite.sas.activities.definition.RegistrationActivity;
 import elite.sas.api.params.CreateTenantParams;
 import elite.sas.api.params.CreateUserParams;
-import elite.sas.entities.Tenant;
-import elite.sas.entities.UserType;
 import elite.sas.workflows.definition.TenantRegistrationWorkflow;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,11 +32,21 @@ public class TenantRegistrationWorkflowImpl implements TenantRegistrationWorkflo
 
         // 2 create admin account for tenant;
         List<Role> roles = new ArrayList<>();
+
+        if (tenant.getTenantType() == TenantType.INTERNAL) {
+            roles.add(
+                    Role.builder()
+                            .roleName(RoleName.INTERNAL_ADMIN)
+                            .build()
+            );
+        }
+
         roles.add(
                 Role.builder()
-                        .roleName(RoleName.INTERNAL_ADMIN)
+                        .roleName(RoleName.TENANT_ADMIN)
                         .build()
-        );
+            );
+
         var createUserParams = CreateUserParams.builder()
                 .tenantId(tenant.getId())
                 .email(tenant.getEmail())
