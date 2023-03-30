@@ -2,8 +2,8 @@ package elite.sas.config.temporal;
 
 import elite.sas.activities.NotificationsActivityImpl;
 import elite.sas.activities.RegistrationActivityImpl;
+import elite.sas.repository.TenantRepository;
 import elite.sas.service.AppUserService;
-import elite.sas.service.TenantService;
 import elite.sas.workflows.TenantRegistrationWorkflowImpl;
 import elite.sas.workflows.UserAccountRegistrationWorkflowImpl;
 import io.temporal.client.WorkflowClient;
@@ -23,7 +23,7 @@ public class TemporalConfig {
     @Autowired
     private final AppUserService appUserService;
     @Autowired
-    private final TenantService tenantService;
+    private final TenantRepository tenantRepository;
 
 
     @Bean
@@ -37,8 +37,8 @@ public class TemporalConfig {
         WorkerFactory workerFactory = WorkerFactory.newInstance(workflowClient());
         Worker worker = workerFactory.newWorker("SAS_TASK_QUEUE");
 
-        var registrationActivity = new RegistrationActivityImpl(appUserService, tenantService);
-        var  notificationsActivity = new NotificationsActivityImpl();
+        var registrationActivity = new RegistrationActivityImpl(appUserService, tenantRepository);
+        var notificationsActivity = new NotificationsActivityImpl();
 
         worker.registerWorkflowImplementationTypes(UserAccountRegistrationWorkflowImpl.class, TenantRegistrationWorkflowImpl.class);
         worker.registerActivitiesImplementations(registrationActivity, notificationsActivity);
