@@ -1,7 +1,9 @@
 package elite.sas;
 
+import elite.sas.cron.DailyLogJob;
 import elite.sas.entities.Role;
 import elite.sas.entities.RoleName;
+import elite.sas.repository.AttachmentRepository;
 import elite.sas.service.AppUserService;
 import elite.sas.service.TenantService;
 import elite.sas.util.TemporalUtil;
@@ -28,6 +30,11 @@ public class App {
             workerFactory.start();
             LogsCronRunner.getInstance().run();
         };
+    }
+
+    @Bean
+    public DailyLogJob dailyLogJob(AttachmentRepository attachmentRepository) {
+        return new DailyLogJob(attachmentRepository);
     }
 
     @Bean

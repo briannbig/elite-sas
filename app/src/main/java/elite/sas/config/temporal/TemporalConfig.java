@@ -1,8 +1,10 @@
 package elite.sas.config.temporal;
 
+import elite.sas.activities.LogBookActivityImpl;
 import elite.sas.activities.NotificationsActivityImpl;
 import elite.sas.activities.RegistrationActivityImpl;
 import elite.sas.repository.*;
+import elite.sas.workflows.ProcessDailyLogBookWorkflowImpl;
 import elite.sas.workflows.RegisterStudentWorkflowImpl;
 import elite.sas.workflows.TenantRegistrationWorkflowImpl;
 import elite.sas.workflows.UserAccountRegistrationWorkflowImpl;
@@ -34,6 +36,10 @@ public class TemporalConfig {
     @Autowired
     private final CourseRepository courseRepository;
     @Autowired
+    private final LogRepository logRepository;
+    @Autowired
+    private final AttachmentWeekRepository attachmentWeekRepository;
+    @Autowired
     private final PasswordEncoder passwordEncoder;
 
 
@@ -59,17 +65,18 @@ public class TemporalConfig {
         );
         var notificationsActivity = new NotificationsActivityImpl();
 
+        var logBookActivity = new LogBookActivityImpl(attachmentWeekRepository, logRepository);
+
         worker.registerWorkflowImplementationTypes(
                 UserAccountRegistrationWorkflowImpl.class,
                 TenantRegistrationWorkflowImpl.class,
-                RegisterStudentWorkflowImpl.class
+                RegisterStudentWorkflowImpl.class,
+                ProcessDailyLogBookWorkflowImpl.class
         );
-        worker.registerActivitiesImplementations(registrationActivity, notificationsActivity);
+        worker.registerActivitiesImplementations(registrationActivity, notificationsActivity, logBookActivity);
 
         return workerFactory;
     }
-
-
 
 
 }

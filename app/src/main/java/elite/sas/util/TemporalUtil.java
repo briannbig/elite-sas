@@ -1,7 +1,9 @@
 package elite.sas.util;
 
+import elite.sas.activities.definition.LogBookActivity;
 import elite.sas.activities.definition.NotificationsActivity;
 import elite.sas.activities.definition.RegistrationActivity;
+import elite.sas.workflows.definition.ProcessDailyLogBookWorkflow;
 import elite.sas.workflows.definition.RegisterStudentWorkflow;
 import elite.sas.workflows.definition.TenantRegistrationWorkflow;
 import elite.sas.workflows.definition.UserAccountRegistrationWorkflow;
@@ -57,6 +59,10 @@ public final class TemporalUtil {
         return workflowClient().newWorkflowStub(RegisterStudentWorkflow.class, workflowOptions());
     }
 
+    public static ProcessDailyLogBookWorkflow processDailyLogBookWorkflow() {
+        return workflowClient().newWorkflowStub(ProcessDailyLogBookWorkflow.class, workflowOptions());
+    }
+
     public static RegistrationActivity registrationActivitiesStub() {
         return Workflow.newActivityStub(
                 RegistrationActivity.class,
@@ -66,6 +72,12 @@ public final class TemporalUtil {
     public static NotificationsActivity notificationsActivityStub() {
         return Workflow.newActivityStub(
                 NotificationsActivity.class,
+                defaultActivityOptions());
+    }
+
+    public static LogBookActivity logBookActivityStub() {
+        return Workflow.newActivityStub(
+                LogBookActivity.class,
                 defaultActivityOptions());
     }
 }
