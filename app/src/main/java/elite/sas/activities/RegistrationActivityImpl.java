@@ -5,21 +5,29 @@ import elite.sas.api.params.CreateStudentParams;
 import elite.sas.api.params.CreateTenantParams;
 import elite.sas.api.params.CreateUserParams;
 import elite.sas.entities.*;
+import elite.sas.repository.AccountRepository;
+import elite.sas.repository.RoleRepository;
 import elite.sas.repository.TenantRepository;
-import elite.sas.service.AppUserService;
+import elite.sas.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 
 @RequiredArgsConstructor
 @Slf4j
 public class RegistrationActivityImpl implements RegistrationActivity {
 
-    private final AppUserService userService;
+    private final AccountRepository accountRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
     private final TenantRepository tenantRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -28,9 +36,83 @@ public class RegistrationActivityImpl implements RegistrationActivity {
     }
 
     @Override
-    public Optional<AppUser> createUserAccount(CreateUserParams createUserParams) {
-        Optional<Account> optionalAccount = userService.registerNewUserAccount(createUserParams);
-        return optionalAccount.map(Account::getAppUser);
+    public Optional<AppUser> createUserAccount(CreateUserParams request) {
+        if (Objects.isNull(request.getTenantId()) || Objects.isNull(request.getFirstName()) ||
+                Objects.isNull(request.getLastName()) || Objects.isNull(request.getUserName()) ||
+                Objects.isNull(request.getEmail()) || Objects.isNull(request.getPassword()) ||
+                Objects.isNull(request.getPasswordConfirm()) || request.getRoles().isEmpty()
+        ) {
+            log.error("Missing required field(s) in the request");
+            return Optional.empty();
+        }
+
+        if (!Objects.equals(request.getPassword(), request.getPasswordConfirm())) {
+            log.error("Passwords do not match!");
+            return Optional.empty();
+        }
+
+        Optional<Account> optionalAccount = accountRepository.findByAppUserUserName(request.getUserName());
+
+        if (optionalAccount.isPresent()) {
+            log.error("Username {} already taken!", request.getUserName());
+            return Optional.empty();
+        }
+
+        Optional<Account> optionalAccountWithEmail = accountRepository.findByAppUserEmail(request.getEmail());
+
+        if (optionalAccountWithEmail.isPresent()) {
+            log.debug("Email already taken!");
+            return Optional.empty();
+        }
+
+        Optional<Tenant> optionalTenant = tenantRepository.findById(request.getTenantId());
+
+        if (optionalTenant.isEmpty()){
+            log.error("Tenant with id {} not exists!", request.getTenantId());
+            return Optional.empty();
+        }
+
+        UserType userType = UserType.STUDENT;
+        if (Objects.nonNull(request.getUserType())){
+            userType = request.getUserType();
+        }
+
+        var user = AppUser.builder()
+                .tenant(optionalTenant.get())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .userName(request.getUserName())
+                .email(request.getEmail())
+                .userType(userType)
+                .build();
+
+        Set<Role> roles = new HashSet<>();
+
+
+        request.getRoles().forEach(r -> {
+            Optional<Role> optionalRole = roleRepository.findByRoleName(RoleName.INTERNAL_ADMIN);
+            optionalRole.ifPresent(roles::add);
+        });
+
+        if (!roles.isEmpty()) {
+            user.setRoles(roles);
+        }
+
+
+
+        var createdUser = userRepository.save(user);
+
+        var account = new Account.CustomBuilder()
+                .setPassword(passwordEncoder.encode(request.getPassword()))
+                .setuser(createdUser)
+                .build();
+
+        var acc = accountRepository.save(account);
+
+        log.info("User account created successfully! {}", acc);
+
+
+        return Optional.of(acc).map(Account::getAppUser);
     }
 
 
