@@ -6,7 +6,7 @@ import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
 
 @WorkflowInterface
-public interface UserAccountRegistrationWorkflow{
+public interface UserAccountRegistrationWorkflow extends BaseWorkflow{
     @WorkflowMethod
     AppUser handle(CreateUserParams params);
 }

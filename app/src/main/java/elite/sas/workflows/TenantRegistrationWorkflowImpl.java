@@ -7,6 +7,7 @@ import elite.sas.activities.definition.RegistrationActivity;
 import elite.sas.api.params.CreateTenantParams;
 import elite.sas.api.params.CreateUserParams;
 import elite.sas.workflows.definition.TenantRegistrationWorkflow;
+import elite.sas.workflows.definition.WorkflowStatus;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -20,12 +21,22 @@ public class TenantRegistrationWorkflowImpl implements TenantRegistrationWorkflo
     private final RegistrationActivity registrationActivity = TemporalUtil.registrationActivitiesStub();
     private final NotificationsActivity notificationsActivity = TemporalUtil.notificationsActivityStub();
 
+    private WorkflowStatus status = WorkflowStatus.STARTED;
+
+    @Override
+    public WorkflowStatus getStatus() {
+        return status;
+    }
+
     @Override
     public Tenant handle(CreateTenantParams params) {
+
+        status = WorkflowStatus.EXECUTING;
 
         // 1 create tenant;
         var optionalTenant = registrationActivity.registerTenant(params);
         if (optionalTenant.isEmpty()) {
+            status = WorkflowStatus.FAILED;
             return null;
         }
         var tenant = optionalTenant.get();
@@ -60,11 +71,18 @@ public class TenantRegistrationWorkflowImpl implements TenantRegistrationWorkflo
                 .build();
 
         var user = registrationActivity.createUserAccount(createUserParams);
-        user.ifPresent(value -> {
-            Map<String, String> data = new HashMap<>();
-            data.put("title", "User creation Successful!");
-            notificationsActivity.sendNotification(value, data);
-        });
+        if (user.isEmpty()) {
+            status = WorkflowStatus.FAILED;
+            return tenant;
+        }
+
+        // send notification
+
+        Map<String, String> data = new HashMap<>();
+        data.put("title", "User creation Successful!");
+        notificationsActivity.sendNotification(user.get(), data);
+
+        status = WorkflowStatus.SUCCESSFUL;
 
 
         return tenant;

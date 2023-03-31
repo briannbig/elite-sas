@@ -6,6 +6,7 @@ import elite.sas.api.params.CreateUserParams;
 import elite.sas.entities.*;
 import elite.sas.util.TemporalUtil;
 import elite.sas.workflows.definition.RegisterStudentWorkflow;
+import elite.sas.workflows.definition.WorkflowStatus;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -16,8 +17,18 @@ public class RegisterStudentWorkflowImpl implements RegisterStudentWorkflow {
 
     private final RegistrationActivity registrationActivity = TemporalUtil.registrationActivitiesStub();
 
+    private WorkflowStatus status = WorkflowStatus.STARTED;
+
+    @Override
+    public WorkflowStatus getStatus() {
+        return status;
+    }
+
     @Override
     public Optional<Student> handle(CreateStudentParams params) {
+
+        status = WorkflowStatus.EXECUTING;
+
         // register user
 
         var studentRole = Role.builder().roleName(RoleName.STUDENT).build();
@@ -38,6 +49,7 @@ public class RegisterStudentWorkflowImpl implements RegisterStudentWorkflow {
         Optional<AppUser> optionalAppUser = registrationActivity.createUserAccount(userParams);
 
         if (optionalAppUser.isEmpty()) {
+            status = WorkflowStatus.FAILED;
             return Optional.empty();
         }
 
@@ -46,6 +58,16 @@ public class RegisterStudentWorkflowImpl implements RegisterStudentWorkflow {
 
         params.setUserId(appUser.getId());
 
-        return registrationActivity.registerStudent(params);
+        var optionalStudent = registrationActivity.registerStudent(params);
+
+        if (optionalStudent.isEmpty()){
+            status = WorkflowStatus.FAILED;
+            return optionalStudent;
+        }
+
+        status = WorkflowStatus.SUCCESSFUL;
+        return optionalStudent;
+
+
     }
 }

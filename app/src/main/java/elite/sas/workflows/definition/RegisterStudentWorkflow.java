@@ -8,7 +8,7 @@ import io.temporal.workflow.WorkflowMethod;
 import java.util.Optional;
 
 @WorkflowInterface
-public interface RegisterStudentWorkflow {
+public interface RegisterStudentWorkflow extends BaseWorkflow{
     @WorkflowMethod
     Optional<Student> handle(CreateStudentParams params);
 }

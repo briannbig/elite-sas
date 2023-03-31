@@ -6,7 +6,7 @@ import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
 
 @WorkflowInterface
-public interface TenantRegistrationWorkflow{
+public interface TenantRegistrationWorkflow extends BaseWorkflow{
     @WorkflowMethod
     Tenant handle(CreateTenantParams params);
 }
