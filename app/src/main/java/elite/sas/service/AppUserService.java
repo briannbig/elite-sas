@@ -3,6 +3,7 @@ package elite.sas.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import elite.sas.api.params.CreateStudentParams;
 import elite.sas.api.params.CreateUserParams;
 import elite.sas.api.params.LoginParams;
 import elite.sas.api.params.TokenRefreshParams;
@@ -11,7 +12,6 @@ import elite.sas.api.response.TokenRefreshResponse;
 import elite.sas.entities.*;
 import elite.sas.repository.AccountRepository;
 import elite.sas.repository.RoleRepository;
-import elite.sas.repository.TenantRepository;
 import elite.sas.repository.UserRepository;
 import elite.sas.util.JWTUtil;
 import elite.sas.util.TemporalUtil;
@@ -24,7 +24,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -59,6 +58,13 @@ public class AppUserService {
         AppUser appUser = TemporalUtil.userAccountRegistrationWorkflow().handle(request);
 
         return accountRepository.findByAppUserUserName(appUser.getUserName());
+    }
+
+    @Transactional
+    public Optional<Student> registerNewStudent(CreateStudentParams request) {
+
+        return TemporalUtil.studentCreationWorkflow().handle(request);
+
     }
 
     public JWTResponse login(LoginParams request) {

@@ -2,6 +2,7 @@ package elite.sas.util;
 
 import elite.sas.activities.definition.NotificationsActivity;
 import elite.sas.activities.definition.RegistrationActivity;
+import elite.sas.workflows.definition.RegisterStudentWorkflow;
 import elite.sas.workflows.definition.TenantRegistrationWorkflow;
 import elite.sas.workflows.definition.UserAccountRegistrationWorkflow;
 import io.temporal.activity.ActivityOptions;
@@ -31,6 +32,7 @@ public final class TemporalUtil {
                 .setHeartbeatTimeout(Duration.ofSeconds(5))
                 .build();
     }
+
     public static WorkflowOptions workflowOptions() {
         return WorkflowOptions.newBuilder()
                 .setRetryOptions(defaultRetryOptions())
@@ -46,8 +48,13 @@ public final class TemporalUtil {
     public static TenantRegistrationWorkflow tenantRegistrationWorkflow() {
         return workflowClient().newWorkflowStub(TenantRegistrationWorkflow.class, workflowOptions());
     }
+
     public static UserAccountRegistrationWorkflow userAccountRegistrationWorkflow() {
         return workflowClient().newWorkflowStub(UserAccountRegistrationWorkflow.class, workflowOptions());
+    }
+
+    public static RegisterStudentWorkflow studentCreationWorkflow() {
+        return workflowClient().newWorkflowStub(RegisterStudentWorkflow.class, workflowOptions());
     }
 
     public static RegistrationActivity registrationActivitiesStub() {
@@ -55,6 +62,7 @@ public final class TemporalUtil {
                 RegistrationActivity.class,
                 defaultActivityOptions());
     }
+
     public static NotificationsActivity notificationsActivityStub() {
         return Workflow.newActivityStub(
                 NotificationsActivity.class,

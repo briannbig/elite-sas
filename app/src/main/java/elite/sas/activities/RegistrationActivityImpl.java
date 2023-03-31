@@ -5,10 +5,7 @@ import elite.sas.api.params.CreateStudentParams;
 import elite.sas.api.params.CreateTenantParams;
 import elite.sas.api.params.CreateUserParams;
 import elite.sas.entities.*;
-import elite.sas.repository.AccountRepository;
-import elite.sas.repository.RoleRepository;
-import elite.sas.repository.TenantRepository;
-import elite.sas.repository.UserRepository;
+import elite.sas.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +24,8 @@ public class RegistrationActivityImpl implements RegistrationActivity {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final TenantRepository tenantRepository;
+    private final StudentRepository studentRepository;
+    private final CourseRepository courseRepository;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -67,13 +66,13 @@ public class RegistrationActivityImpl implements RegistrationActivity {
 
         Optional<Tenant> optionalTenant = tenantRepository.findById(request.getTenantId());
 
-        if (optionalTenant.isEmpty()){
+        if (optionalTenant.isEmpty()) {
             log.error("Tenant with id {} not exists!", request.getTenantId());
             return Optional.empty();
         }
 
         UserType userType = UserType.STUDENT;
-        if (Objects.nonNull(request.getUserType())){
+        if (Objects.nonNull(request.getUserType())) {
             userType = request.getUserType();
         }
 
@@ -99,7 +98,6 @@ public class RegistrationActivityImpl implements RegistrationActivity {
         }
 
 
-
         var createdUser = userRepository.save(user);
 
         var account = new Account.CustomBuilder()
@@ -117,8 +115,38 @@ public class RegistrationActivityImpl implements RegistrationActivity {
 
 
     @Override
-    public Student registerStudent(CreateStudentParams createStudentParams) {
-        return null;
+    public Optional<Student> registerStudent(CreateStudentParams request) {
+
+        if (Objects.isNull(request.getUserId()) ||
+                Objects.isNull(request.getAdmissionNumber()) ||
+                Objects.isNull(request.getCourseId())
+        ) {
+            log.error("Missing required field(s) in the request");
+            return Optional.empty();
+        }
+
+        Optional<AppUser> optionalAppUser = userRepository.findById(request.getUserId());
+
+        if (optionalAppUser.isEmpty()) {
+            return Optional.empty();
+        }
+
+
+        Optional<Course> optionalCourse = courseRepository.findById(request.getCourseId());
+
+        if (optionalCourse.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Student student = Student.builder()
+                .appUser(optionalAppUser.get())
+                .admissionNumber(request.getAdmissionNumber())
+                .course(optionalCourse.get())
+                .build();
+
+        return Optional.of(studentRepository.save(student));
+
+
     }
 
     @Override

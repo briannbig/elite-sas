@@ -21,7 +21,7 @@ public interface RegistrationActivity {
     Optional<AppUser> createUserAccount(CreateUserParams createUserParams);
 
     @ActivityMethod
-    Student registerStudent(CreateStudentParams createStudentParams);
+    Optional<Student> registerStudent(CreateStudentParams createStudentParams);
 
     @ActivityMethod
     AppUser registerSupervisor(CreateUserParams createUserParams);

@@ -2,8 +2,8 @@ package elite.sas.config.temporal;
 
 import elite.sas.activities.NotificationsActivityImpl;
 import elite.sas.activities.RegistrationActivityImpl;
-import elite.sas.repository.TenantRepository;
-import elite.sas.service.AppUserService;
+import elite.sas.repository.*;
+import elite.sas.workflows.RegisterStudentWorkflowImpl;
 import elite.sas.workflows.TenantRegistrationWorkflowImpl;
 import elite.sas.workflows.UserAccountRegistrationWorkflowImpl;
 import io.temporal.client.WorkflowClient;
@@ -15,15 +15,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
 public class TemporalConfig {
     @Autowired
-    private final AppUserService appUserService;
-    @Autowired
     private final TenantRepository tenantRepository;
+    @Autowired
+    private final StudentRepository studentRepository;
+    @Autowired
+    private final RoleRepository roleRepository;
+    @Autowired
+    private final AccountRepository accountRepository;
+    @Autowired
+    private final UserRepository userRepository;
+    @Autowired
+    private final CourseRepository courseRepository;
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
 
     @Bean
@@ -37,10 +48,22 @@ public class TemporalConfig {
         WorkerFactory workerFactory = WorkerFactory.newInstance(workflowClient());
         Worker worker = workerFactory.newWorker("SAS_TASK_QUEUE");
 
-        var registrationActivity = new RegistrationActivityImpl(appUserService, tenantRepository);
+        var registrationActivity = new RegistrationActivityImpl(
+                accountRepository,
+                roleRepository,
+                userRepository,
+                tenantRepository,
+                studentRepository,
+                courseRepository,
+                passwordEncoder
+        );
         var notificationsActivity = new NotificationsActivityImpl();
 
-        worker.registerWorkflowImplementationTypes(UserAccountRegistrationWorkflowImpl.class, TenantRegistrationWorkflowImpl.class);
+        worker.registerWorkflowImplementationTypes(
+                UserAccountRegistrationWorkflowImpl.class,
+                TenantRegistrationWorkflowImpl.class,
+                RegisterStudentWorkflowImpl.class
+        );
         worker.registerActivitiesImplementations(registrationActivity, notificationsActivity);
 
         return workerFactory;
