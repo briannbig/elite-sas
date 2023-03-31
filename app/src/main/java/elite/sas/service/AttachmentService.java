@@ -34,7 +34,7 @@ public class AttachmentService {
     }
 
     public Optional<Attachment> getAttachmentsByCourseId(String courseId) {
-        return attachmentRepository.findByCourseId(UUID.fromString(courseId));
+        return attachmentRepository.findByStudentCourseId(UUID.fromString(courseId));
     }
 
     public Optional<Attachment> getAttachmentByStudentAdmissionNumber(String id) {

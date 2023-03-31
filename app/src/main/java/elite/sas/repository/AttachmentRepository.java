@@ -16,7 +16,7 @@ public interface AttachmentRepository extends JpaRepository<Attachment, UUID> {
 
     Optional<Attachment> findByStudentAdmissionNumber(UUID studentAdmissionNumber);
 
-    Optional<Attachment> findByCourseId(UUID courseId);
+    Optional<Attachment> findByStudentCourseId(UUID courseId);
 
 
     /**
