@@ -1,5 +1,6 @@
 package elite.sas.config.security;
 
+import elite.sas.entities.RoleName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +43,8 @@ public class SecurityConfig {
                                 .requestMatchers(antMatcher("/api/v1/auth/**")).permitAll()
                                 .requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
                                 .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
+                                .requestMatchers(antMatcher("/api/v1/admin/**")).hasAnyAuthority(""+RoleName.INTERNAL_ADMIN, ""+RoleName.TENANT_ADMIN)
+                                .requestMatchers(antMatcher("/api/v1/admin/internal/**")).hasAnyAuthority(""+RoleName.INTERNAL_ADMIN)
                                 .anyRequest().authenticated()
                 )
 

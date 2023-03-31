@@ -53,6 +53,14 @@ public class TenantService {
                         .collect(Collectors.toList())).orElseGet(ArrayList::new);
     }
 
+    public List<AppUser> getSchoolStudents(String id) {
+        var optionalTenant = tenantRepository.findById(UUID.fromString(id));
+        return optionalTenant.map(tenant ->
+                tenant.getUsers().stream().
+                        filter(u -> u.getUserType() == UserType.STUDENT)
+                        .collect(Collectors.toList())).orElseGet(ArrayList::new);
+    }
+
     @Transactional
     public Tenant createTenant(CreateTenantParams createTenantParams) {
         return TemporalUtil.tenantRegistrationWorkflow().handle(createTenantParams);

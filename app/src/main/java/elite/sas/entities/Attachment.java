@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Setter @Getter
-public class Attachment extends BaseModel{
+@Setter
+@Getter
+public class Attachment extends BaseModel {
     @ManyToOne
     private Student student;
     @ManyToOne
@@ -39,7 +40,8 @@ public class Attachment extends BaseModel{
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<AttachmentWeek> attachmentWeeks;
 
-    public Attachment() {}
+    public Attachment() {
+    }
 
     @Builder
     public Attachment(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Student student, Tenant tenant, AttachmentPeriod attachmentPeriod, LocalDateTime startDate, LocalDateTime endDate, AppUser industrySupervisor, AppUser schoolSupervisor, List<AttachmentWeek> attachmentWeeks) {
@@ -55,10 +57,11 @@ public class Attachment extends BaseModel{
     }
 
 
-    public boolean isActive () {
+    public boolean isActive() {
         var now = LocalDateTime.now();
         return startDate.isBefore(now) && endDate.isAfter(now);
     }
+
     public static LocalDateTime getNextMonday() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nextMonday = now.with(DayOfWeek.MONDAY);

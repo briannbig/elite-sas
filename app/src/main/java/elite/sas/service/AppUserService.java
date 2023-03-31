@@ -3,12 +3,12 @@ package elite.sas.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import elite.sas.api.params.CreateUserParams;
 import elite.sas.api.params.LoginParams;
 import elite.sas.api.params.TokenRefreshParams;
 import elite.sas.api.response.JWTResponse;
 import elite.sas.api.response.TokenRefreshResponse;
 import elite.sas.entities.*;
-import elite.sas.api.params.CreateUserParams;
 import elite.sas.repository.AccountRepository;
 import elite.sas.repository.RoleRepository;
 import elite.sas.repository.TenantRepository;
@@ -27,7 +27,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author Brian Barasa
@@ -249,4 +248,7 @@ public class AppUserService  {
         }
     }
 
+    public Optional<AppUser> getUserByUserName(String username) {
+        return userRepository.findByUserName(username);
+    }
 }
