@@ -1,12 +1,15 @@
 package elite.sas.activities;
 
 import elite.sas.activities.definition.LogBookActivity;
+import elite.sas.entities.Attachment;
 import elite.sas.entities.AttachmentWeek;
 import elite.sas.entities.Log;
+import elite.sas.repository.AttachmentRepository;
 import elite.sas.repository.AttachmentWeekRepository;
 import elite.sas.repository.LogRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -15,6 +18,7 @@ import java.util.Optional;
 public class LogBookActivityImpl implements LogBookActivity {
 
     private final AttachmentWeekRepository attachmentWeekRepository;
+    private final AttachmentRepository attachmentRepository;
     private final LogRepository logRepository;
 
 
@@ -41,5 +45,11 @@ public class LogBookActivityImpl implements LogBookActivity {
         }
 
         return attachmentWeek;
+    }
+
+    @Override
+    public List<Attachment> getActiveAttachments() {
+        return attachmentRepository.findAll().stream()
+                .filter(Attachment::isActive).toList();
     }
 }

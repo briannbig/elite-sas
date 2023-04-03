@@ -5,16 +5,19 @@ import elite.sas.entities.Attachment;
 import elite.sas.entities.AttachmentWeek;
 import elite.sas.entities.Log;
 import elite.sas.util.TemporalUtil;
+import elite.sas.util.TimeUtil;
 import elite.sas.workflows.definition.ProcessDailyLogBookWorkflow;
 import elite.sas.workflows.definition.WorkflowStatus;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Calendar;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @RequiredArgsConstructor
+@Slf4j
 public class ProcessDailyLogBookWorkflowImpl implements ProcessDailyLogBookWorkflow {
 
     private final LogBookActivity logBookActivity = TemporalUtil.logBookActivityStub();
@@ -30,29 +33,34 @@ public class ProcessDailyLogBookWorkflowImpl implements ProcessDailyLogBookWorkf
      * fetch log for the previous day for each active attachment, if not exists, create with previous day timestamp and finally process
      */
     @Override
-    public String handle(List<Attachment> activeAttachments) {
+    public String handle() {
         AtomicInteger counter = new AtomicInteger();
         status = WorkflowStatus.EXECUTING;
         // fetch log for the previous day, if not exists, create with previous day timestamp and finally process
-        activeAttachments.forEach(
-                attachment -> {
-                    var optionalAttachmentWeek = attachment.getAttachmentWeeks().stream().filter(AttachmentWeek::isActive).findFirst();
-                    if (optionalAttachmentWeek.isEmpty()) {
-                        return;
-                    }
-                    var optionalLog = optionalAttachmentWeek.get().previousDayLog();
+        var activeAttachments = logBookActivity.getActiveAttachments();
+        if (activeAttachments.isEmpty()) {
+            log.info("-------> No active attachments as at {}", TimeUtil.toString(Calendar.getInstance().getTimeInMillis()));
+            status = WorkflowStatus.SUCCESSFUL;
+            return "-------> No active attachments as at " + TimeUtil.toString(Calendar.getInstance().getTimeInMillis());
+        }
 
-                    Log logEntry = optionalLog.orElseGet(() -> Log.builder()
-                            .createdAt(LocalDateTime.now().minusDays(1))
-                            .build());
+        for (Attachment attachment : activeAttachments) {
+            var optionalAttachmentWeek = attachment.getAttachmentWeeks().stream().filter(AttachmentWeek::isActive).findFirst();
+            if (optionalAttachmentWeek.isEmpty()) {
+                continue;
+            }
+            var optionalLog = optionalAttachmentWeek.get().previousDayLog();
 
-                    Optional<Log> optionalLogEntry = logBookActivity.processLogEntry(logEntry);
+            Log logEntry = optionalLog.orElseGet(() -> Log.builder()
+                    .createdAt(LocalDateTime.now().minusDays(1))
+                    .build());
 
-                    if (optionalLogEntry.isPresent()) {
-                        counter.getAndIncrement();
-                    }
-                }
-        );
+            Optional<Log> optionalLogEntry = logBookActivity.processLogEntry(logEntry);
+
+            if (optionalLogEntry.isPresent()) {
+                counter.getAndIncrement();
+            }
+        }
 
         status = WorkflowStatus.SUCCESSFUL;
 
