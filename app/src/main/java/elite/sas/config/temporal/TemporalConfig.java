@@ -39,6 +39,9 @@ public class TemporalConfig {
     private final LogRepository logRepository;
     @Autowired
     private final AttachmentWeekRepository attachmentWeekRepository;
+
+    @Autowired
+    private final AttachmentRepository attachmentRepository;
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
@@ -65,7 +68,7 @@ public class TemporalConfig {
         );
         var notificationsActivity = new NotificationsActivityImpl();
 
-        var logBookActivity = new LogBookActivityImpl(attachmentWeekRepository, logRepository);
+        var logBookActivity = new LogBookActivityImpl(attachmentWeekRepository, attachmentRepository, logRepository);
 
         worker.registerWorkflowImplementationTypes(
                 UserAccountRegistrationWorkflowImpl.class,
