@@ -10,3 +10,4 @@
 
 rootProject.name = 'elite-sas'
 include('app')
+include('api')
