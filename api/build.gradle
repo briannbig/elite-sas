@@ -1,5 +1,17 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // ASSUMES GRADLE 2.12 OR HIGHER. Use plugin version 0.7.5 with earlier
+        // gradle versions
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.19'
+    }
+}
+
 plugins {
     id 'java'
+    id 'com.google.protobuf' version "0.8.19"
 }
 
 group 'elite.sas'
@@ -10,10 +22,45 @@ repositories {
 }
 
 dependencies {
+
+    implementation 'io.grpc:grpc-netty-shaded:1.49.1'
+    implementation 'io.grpc:grpc-protobuf:1.49.1'
+    compileOnly group: 'io.grpc', name:'grpc-stub', version:'1.49.1'
+
+    compileOnly group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.12.2'
+
+    compileOnly project(':app')
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
-    implementation project(':app')
+}
+
+protobuf {
+    generatedFilesBaseDir = "$projectDir/src"
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.21.1"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.49.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+// Inform IDEs like IntelliJ IDEA, Eclipse or NetBeans about the generated code.
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
 }
 
 test {
