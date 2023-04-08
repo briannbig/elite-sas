@@ -63,6 +63,8 @@ message SearchUserParams {
 }
 
 message SearchAccountParams {
+  string id = 1;
+  string appUserId = 2;
 
 }
 

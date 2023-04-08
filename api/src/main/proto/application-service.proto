@@ -34,8 +34,8 @@ message Listing {
 
 message SearchApplicationParams {
   string id = 1;
-  AppUser applicant = 2;
-  Listing listing = 3;
+  string applicantId = 2;
+  string listingId = 3;
   ApplicationStatus applicationStatus = 4;
 }
 
