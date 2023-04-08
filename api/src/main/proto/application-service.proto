@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "student-service.proto";
+import "user-service.proto";
+import "tenant-service.proto";
+import "commons.proto";
+
+option java_package = "elite.sas.api.grpc";
+option java_multiple_files = false;
+option java_outer_classname = "ApplicationServiceProto";
+
+message Application {
+  string id = 1;
+  AppUser applicant = 2;
+  Listing listing = 3;
+  ApplicationStatus applicationStatus = 4;
+  string application = 5;
+  string schoolLetterUrl = 6;
+  string cvUrl = 7;
+
+}
+
+message Listing {
+
+  string id = 1;
+  Tenant tenant = 2;
+  Course course = 3;
+  AttachmentPeriod attachmentPeriod = 4;
+  string description = 5;
+  google.protobuf.Timestamp deadline = 6;
+
+}
+
+message SearchApplicationParams {
+  string id = 1;
+  AppUser applicant = 2;
+  Listing listing = 3;
+  ApplicationStatus applicationStatus = 4;
+}
+
+message SearchListingParams {
+
+  string id = 1;
+  string tenantId = 2;
+  string courseId = 3;
+  AttachmentPeriod attachmentPeriod = 4;
+}
+
+message UpdateListingRequest {
+
+  string id = 1;
+  Tenant tenant = 2;
+  Course course = 3;
+  AttachmentPeriod attachmentPeriod = 4;
+  string description = 5;
+  google.protobuf.Timestamp deadline = 6;
+
+}
+
+message UpdateApplicationRequest {
+  string id = 1;
+  AppUser applicant = 2;
+  Listing listing = 3;
+  ApplicationStatus applicationStatus = 4;
+  string application = 5;
+  string schoolLetterUrl = 6;
+  string cvUrl = 7;
+
+}
+
+
+service applicationService {
+  //add a listing
+  rpc addListing (Listing) returns (Listing);
+  //get all listings
+  rpc getAllListings (Empty) returns (stream Listing);
+  //search listings
+  rpc getListings (SearchListingParams) returns (stream Listing);
+
+  rpc getListing (SearchListingParams) returns (Listing);
+
+  rpc updateListing (UpdateListingRequest) returns (Listing);
+
+  rpc addApplication (Application) returns (Application);
+
+  rpc getAllApplications (Empty) returns (stream Application);
+
+  rpc getApplications (SearchApplicationParams) returns (stream Application);
+
+  rpc getApplication (SearchApplicationParams) returns (Application);
+
+  rpc updateApplication (UpdateApplicationRequest) returns (Application);
+
+
+}
+
+
+
+

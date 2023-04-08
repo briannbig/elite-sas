@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "user-service.proto";
+import "commons.proto";
+
+option java_package = "elite.sas.api.grpc";
+option java_multiple_files = false;
+option java_outer_classname = "TenantServiceProto";
+
+message Tenant {
+  string id = 1;
+  string name = 2;
+  string location = 3;
+  string telephone = 4;
+  string email = 5;
+  TenantType tenantType = 6;
+  repeated AppUser users = 7;
+
+}
+
+message RegisterTenantRequest {
+  string name = 1;
+  string location = 2;
+  string telephone = 3;
+  string email = 4;
+  TenantType tenantType = 5;
+}
+
+message UpdateTenantRequest {
+  string name = 1;
+  string location = 2;
+  string telephone = 3;
+  string email = 4;
+  TenantType tenantType = 5;
+}
+
+message SearchParams {
+  string id = 1;
+  string email = 2;
+  string telephone = 3;
+  string location = 4;
+  TenantType tenantType = 5;
+}
+
+service tenantService {
+
+  rpc registerTenant (RegisterTenantRequest) returns (Tenant);
+
+  rpc getAllTenants (Empty) returns (stream Tenant);
+
+  rpc getTenantById (SearchParams) returns (Tenant);
+
+  rpc getTenantByType(SearchParams) returns (Tenant);
+
+  rpc updateTenant(UpdateTenantRequest) returns (Tenant);
+
+}
