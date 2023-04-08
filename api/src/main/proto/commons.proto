@@ -1,10 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-import "student-service.proto";
-import "user-service.proto";
-import "tenant-service.proto";
-
 option java_package = "elite.sas.api.grpc";
 option java_multiple_files = false;
 option java_outer_classname = "CommonsProto";

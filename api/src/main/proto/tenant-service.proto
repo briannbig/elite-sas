@@ -1,7 +1,6 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "user-service.proto";
 import "commons.proto";
 
 option java_package = "elite.sas.api.grpc";
@@ -15,7 +14,6 @@ message Tenant {
   string telephone = 4;
   string email = 5;
   TenantType tenantType = 6;
-  repeated AppUser users = 7;
 
 }
 
