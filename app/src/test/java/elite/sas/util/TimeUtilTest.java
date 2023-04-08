@@ -1,5 +1,6 @@
 package elite.sas.util;
 
+import elite.sas.core.util.TimeUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

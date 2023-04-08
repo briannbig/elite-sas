@@ -1,13 +1,13 @@
 package elite.sas;
 
-import elite.sas.entities.Role;
-import elite.sas.entities.RoleName;
-import elite.sas.service.AppUserService;
-import elite.sas.service.TenantService;
-import elite.sas.util.TemporalUtil;
-import elite.sas.api.params.CreateTenantParams;
-import elite.sas.cron.LogsCronRunner;
-import elite.sas.entities.TenantType;
+import elite.sas.core.entities.Role;
+import elite.sas.core.entities.RoleName;
+import elite.sas.core.service.AppUserService;
+import elite.sas.core.service.TenantService;
+import elite.sas.core.util.TemporalUtil;
+import elite.sas.core.api.params.CreateTenantParams;
+import elite.sas.core.cron.LogsCronRunner;
+import elite.sas.core.entities.TenantType;
 import io.temporal.worker.WorkerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
