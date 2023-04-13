@@ -11620,16 +11620,16 @@ public final class UserServiceProto {
       "e\"P\n\023UpdateAccountParams\022\016\n\006userId\030\001 \001(\t" +
       "\022\020\n\010password\030\002 \001(\t\022\027\n\017passwordConfirm\030\003 " +
       "\001(\t\"6\n\021GetAccountRequest\022\016\n\006userId\030\001 \001(\t" +
-      "\022\021\n\taccountId\030\002 \001(\t2\274\002\n\013userService\022.\n\014r" +
+      "\022\021\n\taccountId\030\002 \001(\t2\275\002\n\013userService\022.\n\014r" +
       "egisterUser\022\024.RegisterUserRequest\032\010.AppU" +
-      "ser\022 \n\013getAllUsers\022\006.Empty\032\007.Tenant0\001\022)\n" +
-      "\010getUsers\022\021.SearchUserParams\032\010.AppUser0\001" +
-      "\022&\n\007getUser\022\021.SearchUserParams\032\010.AppUser" +
-      "\022*\n\nupdateUser\022\022.UpdateUserRequest\032\010.App" +
-      "User\0220\n\016updatePassword\022\024.UpdateAccountPa" +
-      "rams\032\010.Account\022*\n\ngetAccount\022\022.GetAccoun" +
-      "tRequest\032\010.AccountB(\n\022elite.sas.api.grpc" +
-      "B\020UserServiceProtoP\000b\006proto3"
+      "ser\022!\n\013getAllUsers\022\006.Empty\032\010.AppUser0\001\022)" +
+      "\n\010getUsers\022\021.SearchUserParams\032\010.AppUser0" +
+      "\001\022&\n\007getUser\022\021.SearchUserParams\032\010.AppUse" +
+      "r\022*\n\nupdateUser\022\022.UpdateUserRequest\032\010.Ap" +
+      "pUser\0220\n\016updatePassword\022\024.UpdateAccountP" +
+      "arams\032\010.Account\022*\n\ngetAccount\022\022.GetAccou" +
+      "ntRequest\032\010.AccountB(\n\022elite.sas.api.grp" +
+      "cB\020UserServiceProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

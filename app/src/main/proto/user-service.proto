@@ -98,7 +98,7 @@ service userService {
 
   rpc registerUser (RegisterUserRequest) returns (AppUser);
 
-  rpc getAllUsers (Empty) returns (stream Tenant);
+  rpc getAllUsers (Empty) returns (stream AppUser);
 
   rpc getUsers (SearchUserParams) returns (stream AppUser);
 

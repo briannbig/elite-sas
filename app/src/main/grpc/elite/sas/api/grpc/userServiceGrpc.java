@@ -47,28 +47,28 @@ public final class userServiceGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.CommonsProto.Empty,
-      elite.sas.api.grpc.TenantServiceProto.Tenant> getGetAllUsersMethod;
+      elite.sas.api.grpc.UserServiceProto.AppUser> getGetAllUsersMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getAllUsers",
       requestType = elite.sas.api.grpc.CommonsProto.Empty.class,
-      responseType = elite.sas.api.grpc.TenantServiceProto.Tenant.class,
+      responseType = elite.sas.api.grpc.UserServiceProto.AppUser.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<elite.sas.api.grpc.CommonsProto.Empty,
-      elite.sas.api.grpc.TenantServiceProto.Tenant> getGetAllUsersMethod() {
-    io.grpc.MethodDescriptor<elite.sas.api.grpc.CommonsProto.Empty, elite.sas.api.grpc.TenantServiceProto.Tenant> getGetAllUsersMethod;
+      elite.sas.api.grpc.UserServiceProto.AppUser> getGetAllUsersMethod() {
+    io.grpc.MethodDescriptor<elite.sas.api.grpc.CommonsProto.Empty, elite.sas.api.grpc.UserServiceProto.AppUser> getGetAllUsersMethod;
     if ((getGetAllUsersMethod = userServiceGrpc.getGetAllUsersMethod) == null) {
       synchronized (userServiceGrpc.class) {
         if ((getGetAllUsersMethod = userServiceGrpc.getGetAllUsersMethod) == null) {
           userServiceGrpc.getGetAllUsersMethod = getGetAllUsersMethod =
-              io.grpc.MethodDescriptor.<elite.sas.api.grpc.CommonsProto.Empty, elite.sas.api.grpc.TenantServiceProto.Tenant>newBuilder()
+              io.grpc.MethodDescriptor.<elite.sas.api.grpc.CommonsProto.Empty, elite.sas.api.grpc.UserServiceProto.AppUser>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getAllUsers"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   elite.sas.api.grpc.CommonsProto.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  elite.sas.api.grpc.TenantServiceProto.Tenant.getDefaultInstance()))
+                  elite.sas.api.grpc.UserServiceProto.AppUser.getDefaultInstance()))
               .setSchemaDescriptor(new userServiceMethodDescriptorSupplier("getAllUsers"))
               .build();
         }
@@ -290,7 +290,7 @@ public final class userServiceGrpc {
     /**
      */
     public void getAllUsers(elite.sas.api.grpc.CommonsProto.Empty request,
-        io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant> responseObserver) {
+        io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.AppUser> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllUsersMethod(), responseObserver);
     }
 
@@ -343,7 +343,7 @@ public final class userServiceGrpc {
             io.grpc.stub.ServerCalls.asyncServerStreamingCall(
               new MethodHandlers<
                 elite.sas.api.grpc.CommonsProto.Empty,
-                elite.sas.api.grpc.TenantServiceProto.Tenant>(
+                elite.sas.api.grpc.UserServiceProto.AppUser>(
                   this, METHODID_GET_ALL_USERS)))
           .addMethod(
             getGetUsersMethod(),
@@ -409,7 +409,7 @@ public final class userServiceGrpc {
     /**
      */
     public void getAllUsers(elite.sas.api.grpc.CommonsProto.Empty request,
-        io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant> responseObserver) {
+        io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.AppUser> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getGetAllUsersMethod(), getCallOptions()), request, responseObserver);
     }
@@ -478,7 +478,7 @@ public final class userServiceGrpc {
 
     /**
      */
-    public java.util.Iterator<elite.sas.api.grpc.TenantServiceProto.Tenant> getAllUsers(
+    public java.util.Iterator<elite.sas.api.grpc.UserServiceProto.AppUser> getAllUsers(
         elite.sas.api.grpc.CommonsProto.Empty request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getGetAllUsersMethod(), getCallOptions(), request);
@@ -607,7 +607,7 @@ public final class userServiceGrpc {
           break;
         case METHODID_GET_ALL_USERS:
           serviceImpl.getAllUsers((elite.sas.api.grpc.CommonsProto.Empty) request,
-              (io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant>) responseObserver);
+              (io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.AppUser>) responseObserver);
           break;
         case METHODID_GET_USERS:
           serviceImpl.getUsers((elite.sas.api.grpc.UserServiceProto.SearchUserParams) request,
