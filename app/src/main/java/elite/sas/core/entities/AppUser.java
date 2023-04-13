@@ -58,4 +58,13 @@ public class AppUser extends BaseModel {
         this.userType = userType;
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "AppUser: [id: " + getId() +
+                " username: " + userName +
+                " userType: " + userType.name() +
+                " tenant: " + tenant.getName() +
+                "]";
+    }
 }

@@ -11,8 +11,9 @@ import java.util.UUID;
 
 
 @Entity
-@Getter @Setter
-public class Tenant extends BaseModel{
+@Getter
+@Setter
+public class Tenant extends BaseModel {
 
     @Column(unique = true)
     private String name;
@@ -30,7 +31,8 @@ public class Tenant extends BaseModel{
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<AppUser> users;
 
-    public Tenant() {}
+    public Tenant() {
+    }
 
     @Builder
 
@@ -41,5 +43,16 @@ public class Tenant extends BaseModel{
         this.telephone = telephone;
         this.email = email;
         this.tenantType = tenantType;
+    }
+
+    @Override
+    public String toString() {
+        return "Tenant [ id:" + getId() +
+                " name: " + name +
+                " tenantType: " + tenantType +
+                " email: " + email +
+                " telephone: " + telephone +
+                " location: " + location +
+                " ]";
     }
 }
