@@ -89,7 +89,7 @@ public class RegistrationActivityImpl implements RegistrationActivity {
 
 
         request.getRoles().forEach(r -> {
-            Optional<Role> optionalRole = roleRepository.findByRoleName(RoleName.INTERNAL_ADMIN);
+            Optional<Role> optionalRole = roleRepository.findByRoleName(r.getRoleName());
             optionalRole.ifPresent(roles::add);
         });
 
