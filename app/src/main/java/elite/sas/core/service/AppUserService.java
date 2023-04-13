@@ -143,12 +143,16 @@ public class AppUserService {
         return tokenRefreshResponse;
     }
 
-    public Optional<AppUser> findUserById(UUID uuid) {
-        return Optional.of(userRepository.findById(uuid).orElseThrow());
+    public Optional<AppUser> findUserById(String uuid) {
+        return Optional.of(userRepository.findById(UUID.fromString(uuid)).orElseThrow());
     }
 
     public List<AppUser> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    public List<AppUser> getAllUsersForTenant(String tenantId) {
+        return userRepository.findByTenantId(UUID.fromString(tenantId));
     }
 
     public Role saveRole(Role role) {

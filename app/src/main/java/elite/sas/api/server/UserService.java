@@ -17,6 +17,9 @@ import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Slf4j
 public class UserService extends userServiceGrpc.userServiceImplBase {
@@ -50,9 +53,9 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
 
     @Override
     public void getAllUsers(CommonsProto.Empty request, StreamObserver<UserServiceProto.AppUser> responseObserver) {
-        log.info("-------------- Listing all users");
+        log.debug("-------------- Listing all users");
         appUserService.findAllUsers().forEach(u -> {
-            log.info("user ----> {}", u);
+            log.debug("user ----> {}", u);
             try {
                 responseObserver.onNext(APIUtil.appUserToApi(u));
             } catch (UnretriableException e) {
@@ -64,13 +67,49 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
 
     @Override
     public void getUsers(UserServiceProto.SearchUserParams request, StreamObserver<UserServiceProto.AppUser> responseObserver) {
-        super.getUsers(request, responseObserver);
+        // list users by tenant
+        if (Objects.nonNull(request.getTenantId())) {
+            appUserService.getAllUsersForTenant(request.getTenantId()).forEach(u -> {
+                        try {
+                            responseObserver.onNext(APIUtil.appUserToApi(u));
+                        } catch (UnretriableException e) {
+                            responseObserver.onError(e);
+                        }
+                    }
+            );
+        }
+        responseObserver.onCompleted();
 
     }
 
     @Override
     public void getUser(UserServiceProto.SearchUserParams request, StreamObserver<UserServiceProto.AppUser> responseObserver) {
-        super.getUser(request, responseObserver);
+
+        if (Objects.nonNull(request.getId())) {
+            Optional<AppUser> optionalAppUser = appUserService.findUserById(request.getId());
+            if (optionalAppUser.isEmpty()) {
+                responseObserver.onCompleted();
+            }
+            try {
+                responseObserver.onNext(APIUtil.appUserToApi(optionalAppUser.get()));
+            } catch (UnretriableException e) {
+                responseObserver.onError(e);
+            }
+        }
+
+        if (Objects.nonNull(request.getUserName())) {
+            Optional<AppUser> optionalAppUser = appUserService.getUserByUserName(request.getUserName());
+            if (optionalAppUser.isEmpty()) {
+                responseObserver.onCompleted();
+            }
+            try {
+                responseObserver.onNext(APIUtil.appUserToApi(optionalAppUser.get()));
+            } catch (UnretriableException e) {
+                responseObserver.onError(e);
+            }
+        }
+
+        responseObserver.onCompleted();
     }
 
     @Override

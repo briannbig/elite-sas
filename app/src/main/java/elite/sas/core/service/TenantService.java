@@ -61,6 +61,12 @@ public class TenantService {
                         .collect(Collectors.toList())).orElseGet(ArrayList::new);
     }
 
+    public List<AppUser> getAllUsersForTenant(String id) {
+        var optionalTenant = tenantRepository.findById(UUID.fromString(id));
+        return optionalTenant.get().getUsers();
+
+    }
+
     @Transactional
     public Tenant createTenant(CreateTenantParams createTenantParams) {
         return TemporalUtil.tenantRegistrationWorkflow().handle(createTenantParams);
