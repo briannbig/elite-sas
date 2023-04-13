@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_package = "elite.sas.api.grpc";
+option java_multiple_files = false;
+option java_outer_classname = "CommonsProto";
+
+message Empty {
+
+}
+enum TenantType {
+  SCHOOL = 0;
+  COMPANY = 1;
+  INTERNAL = 2;
+}
+
+enum UserType {
+  STUDENT = 0;
+  SUPERVISOR = 1;
+  ADMIN = 2;
+}
+
+enum RoleName {
+  student = 0;
+  supervisor = 1;
+  TENANT_ADMIN = 2;
+  INTERNAL_ADMIN = 3;
+}
+
+enum ApplicationStatus {
+  PENDING = 0;
+  ACCEPTED = 1;
+  REJECTED = 2;
+}
+
+enum AttachmentPeriod {
+  JAN_MAR = 0; FEB_APR = 1; MAR_MAY = 2; APR_JUN = 3 ;MAY_JUL = 4; JUN_AUG = 5; JUL_SEP = 6; AUG_OCT = 7; SEP_NOV = 8; OCT_DEC = 9; NOV_JAN = 10; DEC_FEB = 11;
+}
+
+enum CourseLevel {
+  DIPLOMA = 0;
+  CERTIFICATE = 1;
+  DEGREE = 2;
+}
+
+
+

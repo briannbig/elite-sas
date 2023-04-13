@@ -1,0 +1,11 @@
+package elite.sas.core.api.params;
+
+import lombok.*;
+
+@Getter @Setter @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class LoginParams{
+    String userName;
+    String password;
+}

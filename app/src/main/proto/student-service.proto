@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "user-service.proto";
+import "commons.proto";
+
+option java_package = "elite.sas.api.grpc";
+option java_multiple_files = false;
+option java_outer_classname = "CourseServiceProto";
+
+message Student {
+  string id = 1;
+  AppUser appUser = 2;
+  string admissionNumber = 3;
+  Course course = 4;
+
+}
+
+message Course {
+  string id = 1;
+  string name = 2;
+  CourseLevel courseLevel = 3;
+
+}
+
+message SearchStudentParams {
+  string id = 1;
+  string appUserId = 2;
+  string admissionNumber = 3;
+  string courseId = 4;
+}
+
+message UpdateStudentRequest {
+
+  string id = 1;
+  AppUser appUser = 2;
+  string admissionNumber = 3;
+  Course course = 4;
+
+}
+
+message SearchCourseParams {
+  string id = 1;
+  string name = 2;
+  CourseLevel courseLevel = 3;
+
+}
+message UpdateCourseRequest {
+  string id = 1;
+  string name = 2;
+  CourseLevel courseLevel = 3;
+
+}
+
+
+
+service studentService {
+
+  rpc addStudent (Student) returns (Student);
+
+  rpc getAllStudents (Empty) returns (stream Student);
+
+  rpc getStudent (SearchStudentParams) returns (Student);
+
+  rpc getStudents (SearchStudentParams) returns (stream Student);
+
+  rpc updateStudent (UpdateStudentRequest) returns (Student);
+
+  rpc addCourse (Course) returns (Course);
+
+  rpc getAllCourses (Empty) returns (stream Course);
+
+  rpc getCourse (SearchCourseParams) returns (Course);
+
+  rpc getCourses (SearchCourseParams) returns (stream Course);
+
+  rpc updateCourse (UpdateCourseRequest) returns (Course);
+
+
+
+}
+
+

@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "tenant-service.proto";
+import "commons.proto";
+
+option java_package = "elite.sas.api.grpc";
+option java_multiple_files = false;
+option java_outer_classname = "UserServiceProto";
+
+message AppUser {
+
+  string id = 1;
+  Tenant tenant = 2;
+  string email = 3;
+  string userName = 4;
+  string firstName = 5;
+  string lastName = 6;
+  UserType userType = 7;
+  repeated Role roles = 8;
+
+}
+
+message Account {
+
+  string id = 1;
+  AppUser appUser = 2;
+  string password = 3;
+
+}
+
+message Role {
+  string id = 1;
+  RoleName roleName = 2;
+
+}
+
+message RegisterUserRequest {
+  string id = 1;
+  Tenant tenant = 2;
+  string email = 3;
+  string userName = 4;
+  string firstName = 5;
+  string lastName = 6;
+  UserType userType = 7;
+  repeated Role roles = 8;
+  string password = 9;
+  string passwordConfirm = 10;
+
+}
+
+
+message SearchUserParams {
+  string id = 1;
+  string tenantId = 2;
+  string email = 3;
+  string userName = 4;
+  string firstName = 5;
+  string lastName = 6;
+  UserType userType = 7;
+  repeated Role roles = 8;
+
+}
+
+message SearchAccountParams {
+  string id = 1;
+  string appUserId = 2;
+
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  string tenantId = 2;
+  string email = 3;
+  string userName = 4;
+  string firstName = 5;
+  string lastName = 6;
+  UserType userType = 7;
+  repeated Role roles = 8;
+
+}
+
+message UpdateAccountParams {
+
+  string userId = 1;
+  string password = 2;
+  string passwordConfirm = 3;
+
+}
+
+message GetAccountRequest {
+  string userId = 1;
+  string accountId = 2;
+
+}
+
+service userService {
+
+  rpc registerUser (RegisterUserRequest) returns (AppUser);
+
+  rpc getAllUsers (Empty) returns (stream AppUser);
+
+  rpc getUsers (SearchUserParams) returns (stream AppUser);
+
+  rpc getUser (SearchUserParams) returns (AppUser);
+
+  rpc updateUser(UpdateUserRequest) returns (AppUser);
+
+  rpc updatePassword (UpdateAccountParams) returns (Account);
+
+  rpc getAccount (GetAccountRequest) returns (Account);
+
+
+}

@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "student-service.proto";
+import "user-service.proto";
+import "tenant-service.proto";
+import "commons.proto";
+
+option java_package = "elite.sas.api.grpc";
+option java_multiple_files = false;
+option java_outer_classname = "InternshipServiceProto";
+
+message Attachment {
+  string id = 1;
+  Student student = 2;
+  Tenant company = 3;
+  AttachmentPeriod attachmentPeriod = 4;
+  google.protobuf.Timestamp startDate = 5;
+  google.protobuf.Timestamp endDate = 6;
+  AppUser industrySupervisor = 7;
+  AppUser schoolSupervisor = 8;
+  repeated AttachmentWeek attachmentWeeks = 9;
+
+}
+
+message AttachmentWeek {
+  string id = 1;
+  int32 weekNumber = 2;
+  repeated Log logs = 3;
+  string weekSummary = 4;
+  string studentComment = 5;
+  string industrySupervisorComment = 6;
+  string schoolSupervisorComment = 7;
+  bool isActive = 8;
+
+}
+message Log {
+
+  string id = 1;
+  string workDone = 2;
+  string industrySupervisorComment = 3;
+  string schoolSupervisorComment = 4;
+
+}
+
+message SearchAttachmentParams {
+  string id = 1;
+  string studentId = 2;
+  string companyId = 3;
+  AttachmentPeriod attachmentPeriod = 4;
+  google.protobuf.Timestamp startDate = 5;
+  google.protobuf.Timestamp endDate = 6;
+  string industrySupervisorId = 7;
+  string schoolSupervisorId = 8;
+
+}
+
+service internshipService {
+
+  rpc addAttachment (Attachment) returns (Attachment);
+
+  rpc getAllAttachments (Empty) returns (stream Attachment);
+
+  rpc getAttachment (SearchAttachmentParams) returns (Attachment);
+
+  rpc getAttachments (SearchAttachmentParams) returns (stream Attachment);
+
+  rpc addLog (Log) returns (Log);
+
+  rpc addAttachmentWeek (AttachmentWeek) returns (AttachmentWeek);
+}
