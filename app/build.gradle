@@ -43,7 +43,7 @@ dependencies {
     // grpc
     implementation 'io.grpc:grpc-netty-shaded:1.49.1'
     implementation 'io.grpc:grpc-protobuf:1.49.1'
-    implementation group: 'io.grpc', name:'grpc-stub', version:'1.49.1'
+    implementation group: 'io.grpc', name: 'grpc-stub', version: '1.49.1'
     compileOnly group: 'com.google.protobuf', name: 'protobuf-java-util', version: '3.12.2'
 
     // validator
@@ -89,17 +89,12 @@ sourceSets {
 }
 
 
-
-testing {
-
-    suites {
-        // Configure the built-in test suite
-        test {
-            // Use JUnit Jupiter test framework
-            useJUnitJupiter('5.9.1')
-        }
-    }
+// Configure the built-in test suite
+test {
+    // Use JUnit Jupiter test framework
+    useJUnitPlatform()
 }
+
 
 application {
     // Define the main class for the application.
