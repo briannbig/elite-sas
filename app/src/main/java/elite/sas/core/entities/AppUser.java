@@ -12,11 +12,12 @@ import java.util.UUID;
 
 
 @Entity(name = "app_user")
-@Setter @Getter
+@Setter
+@Getter
 public class AppUser extends BaseModel {
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "tenant_id")
     private Tenant tenant;
 
@@ -43,7 +44,8 @@ public class AppUser extends BaseModel {
     )
     private Set<Role> roles;
 
-    public AppUser() {}
+    public AppUser() {
+    }
 
     @Builder
     public AppUser(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Tenant tenant, String email, String userName, String firstName, String lastName, UserType userType, Set<Role> roles) {
