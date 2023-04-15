@@ -64,6 +64,24 @@ public final class ApiUtil {
         return tenantBuilder.build();
     }
 
+    public static Student studentFromApi(CourseServiceProto.Student apiStudent) throws ModelConversionException {
+        if (Objects.isNull(apiStudent.getId()) || !apiStudent.hasAppUser()
+                || Objects.isNull(apiStudent.getAdmissionNumber()) ||
+                apiStudent.hasCourse()
+        ) {
+            throw new ModelConversionException("Missing required field(s)");
+        }
+
+        var student = Student.builder()
+                .Id(UUID.fromString(apiStudent.getId()))
+                .admissionNumber(apiStudent.getAdmissionNumber())
+                .appUser(appUserFromApi(apiStudent.getAppUser()))
+                .course(courseFromApi(apiStudent.getCourse()))
+                .build();
+
+        return student;
+    }
+
     public static UserType userTypeFromAPi(CommonsProto.UserType userType) throws ModelConversionException {
         switch (userType.name()) {
             case "STUDENT":
@@ -223,6 +241,22 @@ public final class ApiUtil {
         return tenantBuilder.build();
     }
 
+    public static CourseServiceProto.Student studentToApi(Student student) throws ModelConversionException {
+        if (Objects.isNull(student.getId()) || Objects.isNull(student.getAppUser()) ||
+                Objects.isNull(student.getAdmissionNumber()) || Objects.isNull(student.getCourse())
+        ) {
+            throw new ModelConversionException("Missing required field(s)");
+        }
+
+        var apiStudent = CourseServiceProto.Student.newBuilder()
+                .setId(String.valueOf(student.getId()))
+                .setAdmissionNumber(student.getAdmissionNumber())
+                .setAppUser(appUserToApi(student.getAppUser()))
+                .setCourse(courseToApi(student.getCourse()))
+                .build();
+
+        return apiStudent;
+    }
 
     public static CommonsProto.RoleName roleNameToApi(RoleName roleName) throws ModelConversionException {
         switch (roleName.name()) {

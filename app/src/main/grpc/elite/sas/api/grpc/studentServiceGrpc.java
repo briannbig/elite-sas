@@ -15,35 +15,35 @@ public final class studentServiceGrpc {
   public static final String SERVICE_NAME = "studentService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.CourseServiceProto.Student,
-      elite.sas.api.grpc.CourseServiceProto.Student> getAddStudentMethod;
+  private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest,
+      elite.sas.api.grpc.CourseServiceProto.Student> getRegisterStudentMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "addStudent",
-      requestType = elite.sas.api.grpc.CourseServiceProto.Student.class,
+      fullMethodName = SERVICE_NAME + '/' + "registerStudent",
+      requestType = elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest.class,
       responseType = elite.sas.api.grpc.CourseServiceProto.Student.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<elite.sas.api.grpc.CourseServiceProto.Student,
-      elite.sas.api.grpc.CourseServiceProto.Student> getAddStudentMethod() {
-    io.grpc.MethodDescriptor<elite.sas.api.grpc.CourseServiceProto.Student, elite.sas.api.grpc.CourseServiceProto.Student> getAddStudentMethod;
-    if ((getAddStudentMethod = studentServiceGrpc.getAddStudentMethod) == null) {
+  public static io.grpc.MethodDescriptor<elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest,
+      elite.sas.api.grpc.CourseServiceProto.Student> getRegisterStudentMethod() {
+    io.grpc.MethodDescriptor<elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest, elite.sas.api.grpc.CourseServiceProto.Student> getRegisterStudentMethod;
+    if ((getRegisterStudentMethod = studentServiceGrpc.getRegisterStudentMethod) == null) {
       synchronized (studentServiceGrpc.class) {
-        if ((getAddStudentMethod = studentServiceGrpc.getAddStudentMethod) == null) {
-          studentServiceGrpc.getAddStudentMethod = getAddStudentMethod =
-              io.grpc.MethodDescriptor.<elite.sas.api.grpc.CourseServiceProto.Student, elite.sas.api.grpc.CourseServiceProto.Student>newBuilder()
+        if ((getRegisterStudentMethod = studentServiceGrpc.getRegisterStudentMethod) == null) {
+          studentServiceGrpc.getRegisterStudentMethod = getRegisterStudentMethod =
+              io.grpc.MethodDescriptor.<elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest, elite.sas.api.grpc.CourseServiceProto.Student>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "addStudent"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "registerStudent"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  elite.sas.api.grpc.CourseServiceProto.Student.getDefaultInstance()))
+                  elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   elite.sas.api.grpc.CourseServiceProto.Student.getDefaultInstance()))
-              .setSchemaDescriptor(new studentServiceMethodDescriptorSupplier("addStudent"))
+              .setSchemaDescriptor(new studentServiceMethodDescriptorSupplier("registerStudent"))
               .build();
         }
       }
     }
-    return getAddStudentMethod;
+    return getRegisterStudentMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.CommonsProto.Empty,
@@ -375,9 +375,9 @@ public final class studentServiceGrpc {
 
     /**
      */
-    public void addStudent(elite.sas.api.grpc.CourseServiceProto.Student request,
+    public void registerStudent(elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Student> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddStudentMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRegisterStudentMethod(), responseObserver);
     }
 
     /**
@@ -446,12 +446,12 @@ public final class studentServiceGrpc {
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getAddStudentMethod(),
+            getRegisterStudentMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                elite.sas.api.grpc.CourseServiceProto.Student,
+                elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest,
                 elite.sas.api.grpc.CourseServiceProto.Student>(
-                  this, METHODID_ADD_STUDENT)))
+                  this, METHODID_REGISTER_STUDENT)))
           .addMethod(
             getGetAllStudentsMethod(),
             io.grpc.stub.ServerCalls.asyncServerStreamingCall(
@@ -535,10 +535,10 @@ public final class studentServiceGrpc {
 
     /**
      */
-    public void addStudent(elite.sas.api.grpc.CourseServiceProto.Student request,
+    public void registerStudent(elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Student> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getAddStudentMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getRegisterStudentMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -630,9 +630,9 @@ public final class studentServiceGrpc {
 
     /**
      */
-    public elite.sas.api.grpc.CourseServiceProto.Student addStudent(elite.sas.api.grpc.CourseServiceProto.Student request) {
+    public elite.sas.api.grpc.CourseServiceProto.Student registerStudent(elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getAddStudentMethod(), getCallOptions(), request);
+          getChannel(), getRegisterStudentMethod(), getCallOptions(), request);
     }
 
     /**
@@ -719,10 +719,10 @@ public final class studentServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<elite.sas.api.grpc.CourseServiceProto.Student> addStudent(
-        elite.sas.api.grpc.CourseServiceProto.Student request) {
+    public com.google.common.util.concurrent.ListenableFuture<elite.sas.api.grpc.CourseServiceProto.Student> registerStudent(
+        elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getAddStudentMethod(), getCallOptions()), request);
+          getChannel().newCall(getRegisterStudentMethod(), getCallOptions()), request);
     }
 
     /**
@@ -766,7 +766,7 @@ public final class studentServiceGrpc {
     }
   }
 
-  private static final int METHODID_ADD_STUDENT = 0;
+  private static final int METHODID_REGISTER_STUDENT = 0;
   private static final int METHODID_GET_ALL_STUDENTS = 1;
   private static final int METHODID_GET_STUDENT = 2;
   private static final int METHODID_GET_STUDENTS = 3;
@@ -794,8 +794,8 @@ public final class studentServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_ADD_STUDENT:
-          serviceImpl.addStudent((elite.sas.api.grpc.CourseServiceProto.Student) request,
+        case METHODID_REGISTER_STUDENT:
+          serviceImpl.registerStudent((elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest) request,
               (io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Student>) responseObserver);
           break;
         case METHODID_GET_ALL_STUDENTS:
@@ -895,7 +895,7 @@ public final class studentServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new studentServiceFileDescriptorSupplier())
-              .addMethod(getAddStudentMethod())
+              .addMethod(getRegisterStudentMethod())
               .addMethod(getGetAllStudentsMethod())
               .addMethod(getGetStudentMethod())
               .addMethod(getGetStudentsMethod())

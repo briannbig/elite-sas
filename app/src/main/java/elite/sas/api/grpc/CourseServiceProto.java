@@ -1967,6 +1967,1926 @@ public final class CourseServiceProto {
 
   }
 
+  public interface RegisterStudentRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:RegisterStudentRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string tenantId = 1;</code>
+     * @return The tenantId.
+     */
+    java.lang.String getTenantId();
+    /**
+     * <code>string tenantId = 1;</code>
+     * @return The bytes for tenantId.
+     */
+    com.google.protobuf.ByteString
+        getTenantIdBytes();
+
+    /**
+     * <code>string email = 2;</code>
+     * @return The email.
+     */
+    java.lang.String getEmail();
+    /**
+     * <code>string email = 2;</code>
+     * @return The bytes for email.
+     */
+    com.google.protobuf.ByteString
+        getEmailBytes();
+
+    /**
+     * <code>string userName = 3;</code>
+     * @return The userName.
+     */
+    java.lang.String getUserName();
+    /**
+     * <code>string userName = 3;</code>
+     * @return The bytes for userName.
+     */
+    com.google.protobuf.ByteString
+        getUserNameBytes();
+
+    /**
+     * <code>string firstName = 4;</code>
+     * @return The firstName.
+     */
+    java.lang.String getFirstName();
+    /**
+     * <code>string firstName = 4;</code>
+     * @return The bytes for firstName.
+     */
+    com.google.protobuf.ByteString
+        getFirstNameBytes();
+
+    /**
+     * <code>string lastName = 5;</code>
+     * @return The lastName.
+     */
+    java.lang.String getLastName();
+    /**
+     * <code>string lastName = 5;</code>
+     * @return The bytes for lastName.
+     */
+    com.google.protobuf.ByteString
+        getLastNameBytes();
+
+    /**
+     * <code>string password = 6;</code>
+     * @return The password.
+     */
+    java.lang.String getPassword();
+    /**
+     * <code>string password = 6;</code>
+     * @return The bytes for password.
+     */
+    com.google.protobuf.ByteString
+        getPasswordBytes();
+
+    /**
+     * <code>string passwordConfirm = 7;</code>
+     * @return The passwordConfirm.
+     */
+    java.lang.String getPasswordConfirm();
+    /**
+     * <code>string passwordConfirm = 7;</code>
+     * @return The bytes for passwordConfirm.
+     */
+    com.google.protobuf.ByteString
+        getPasswordConfirmBytes();
+
+    /**
+     * <code>string userId = 8;</code>
+     * @return The userId.
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>string userId = 8;</code>
+     * @return The bytes for userId.
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    /**
+     * <code>string admissionNumber = 9;</code>
+     * @return The admissionNumber.
+     */
+    java.lang.String getAdmissionNumber();
+    /**
+     * <code>string admissionNumber = 9;</code>
+     * @return The bytes for admissionNumber.
+     */
+    com.google.protobuf.ByteString
+        getAdmissionNumberBytes();
+
+    /**
+     * <code>string courseId = 10;</code>
+     * @return The courseId.
+     */
+    java.lang.String getCourseId();
+    /**
+     * <code>string courseId = 10;</code>
+     * @return The bytes for courseId.
+     */
+    com.google.protobuf.ByteString
+        getCourseIdBytes();
+  }
+  /**
+   * Protobuf type {@code RegisterStudentRequest}
+   */
+  public static final class RegisterStudentRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:RegisterStudentRequest)
+      RegisterStudentRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use RegisterStudentRequest.newBuilder() to construct.
+    private RegisterStudentRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RegisterStudentRequest() {
+      tenantId_ = "";
+      email_ = "";
+      userName_ = "";
+      firstName_ = "";
+      lastName_ = "";
+      password_ = "";
+      passwordConfirm_ = "";
+      userId_ = "";
+      admissionNumber_ = "";
+      courseId_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new RegisterStudentRequest();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RegisterStudentRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              tenantId_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              email_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userName_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              firstName_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              lastName_ = s;
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              password_ = s;
+              break;
+            }
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              passwordConfirm_ = s;
+              break;
+            }
+            case 66: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userId_ = s;
+              break;
+            }
+            case 74: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              admissionNumber_ = s;
+              break;
+            }
+            case 82: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              courseId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return elite.sas.api.grpc.CourseServiceProto.internal_static_RegisterStudentRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return elite.sas.api.grpc.CourseServiceProto.internal_static_RegisterStudentRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest.class, elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest.Builder.class);
+    }
+
+    public static final int TENANTID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object tenantId_;
+    /**
+     * <code>string tenantId = 1;</code>
+     * @return The tenantId.
+     */
+    @java.lang.Override
+    public java.lang.String getTenantId() {
+      java.lang.Object ref = tenantId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tenantId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string tenantId = 1;</code>
+     * @return The bytes for tenantId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getTenantIdBytes() {
+      java.lang.Object ref = tenantId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tenantId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int EMAIL_FIELD_NUMBER = 2;
+    private volatile java.lang.Object email_;
+    /**
+     * <code>string email = 2;</code>
+     * @return The email.
+     */
+    @java.lang.Override
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        email_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string email = 2;</code>
+     * @return The bytes for email.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getEmailBytes() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        email_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERNAME_FIELD_NUMBER = 3;
+    private volatile java.lang.Object userName_;
+    /**
+     * <code>string userName = 3;</code>
+     * @return The userName.
+     */
+    @java.lang.Override
+    public java.lang.String getUserName() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userName = 3;</code>
+     * @return The bytes for userName.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserNameBytes() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FIRSTNAME_FIELD_NUMBER = 4;
+    private volatile java.lang.Object firstName_;
+    /**
+     * <code>string firstName = 4;</code>
+     * @return The firstName.
+     */
+    @java.lang.Override
+    public java.lang.String getFirstName() {
+      java.lang.Object ref = firstName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        firstName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string firstName = 4;</code>
+     * @return The bytes for firstName.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getFirstNameBytes() {
+      java.lang.Object ref = firstName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        firstName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int LASTNAME_FIELD_NUMBER = 5;
+    private volatile java.lang.Object lastName_;
+    /**
+     * <code>string lastName = 5;</code>
+     * @return The lastName.
+     */
+    @java.lang.Override
+    public java.lang.String getLastName() {
+      java.lang.Object ref = lastName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        lastName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string lastName = 5;</code>
+     * @return The bytes for lastName.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getLastNameBytes() {
+      java.lang.Object ref = lastName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        lastName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PASSWORD_FIELD_NUMBER = 6;
+    private volatile java.lang.Object password_;
+    /**
+     * <code>string password = 6;</code>
+     * @return The password.
+     */
+    @java.lang.Override
+    public java.lang.String getPassword() {
+      java.lang.Object ref = password_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        password_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string password = 6;</code>
+     * @return The bytes for password.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPasswordBytes() {
+      java.lang.Object ref = password_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        password_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PASSWORDCONFIRM_FIELD_NUMBER = 7;
+    private volatile java.lang.Object passwordConfirm_;
+    /**
+     * <code>string passwordConfirm = 7;</code>
+     * @return The passwordConfirm.
+     */
+    @java.lang.Override
+    public java.lang.String getPasswordConfirm() {
+      java.lang.Object ref = passwordConfirm_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        passwordConfirm_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string passwordConfirm = 7;</code>
+     * @return The bytes for passwordConfirm.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPasswordConfirmBytes() {
+      java.lang.Object ref = passwordConfirm_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        passwordConfirm_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERID_FIELD_NUMBER = 8;
+    private volatile java.lang.Object userId_;
+    /**
+     * <code>string userId = 8;</code>
+     * @return The userId.
+     */
+    @java.lang.Override
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string userId = 8;</code>
+     * @return The bytes for userId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ADMISSIONNUMBER_FIELD_NUMBER = 9;
+    private volatile java.lang.Object admissionNumber_;
+    /**
+     * <code>string admissionNumber = 9;</code>
+     * @return The admissionNumber.
+     */
+    @java.lang.Override
+    public java.lang.String getAdmissionNumber() {
+      java.lang.Object ref = admissionNumber_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        admissionNumber_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string admissionNumber = 9;</code>
+     * @return The bytes for admissionNumber.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getAdmissionNumberBytes() {
+      java.lang.Object ref = admissionNumber_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        admissionNumber_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int COURSEID_FIELD_NUMBER = 10;
+    private volatile java.lang.Object courseId_;
+    /**
+     * <code>string courseId = 10;</code>
+     * @return The courseId.
+     */
+    @java.lang.Override
+    public java.lang.String getCourseId() {
+      java.lang.Object ref = courseId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        courseId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string courseId = 10;</code>
+     * @return The bytes for courseId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getCourseIdBytes() {
+      java.lang.Object ref = courseId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        courseId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tenantId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, tenantId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(email_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, email_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userName_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, userName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(firstName_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, firstName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(lastName_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, lastName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(password_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, password_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(passwordConfirm_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, passwordConfirm_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, userId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(admissionNumber_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, admissionNumber_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(courseId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, courseId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tenantId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, tenantId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(email_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, email_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userName_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, userName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(firstName_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, firstName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(lastName_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, lastName_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(password_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, password_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(passwordConfirm_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, passwordConfirm_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, userId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(admissionNumber_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, admissionNumber_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(courseId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, courseId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest)) {
+        return super.equals(obj);
+      }
+      elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest other = (elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest) obj;
+
+      if (!getTenantId()
+          .equals(other.getTenantId())) return false;
+      if (!getEmail()
+          .equals(other.getEmail())) return false;
+      if (!getUserName()
+          .equals(other.getUserName())) return false;
+      if (!getFirstName()
+          .equals(other.getFirstName())) return false;
+      if (!getLastName()
+          .equals(other.getLastName())) return false;
+      if (!getPassword()
+          .equals(other.getPassword())) return false;
+      if (!getPasswordConfirm()
+          .equals(other.getPasswordConfirm())) return false;
+      if (!getUserId()
+          .equals(other.getUserId())) return false;
+      if (!getAdmissionNumber()
+          .equals(other.getAdmissionNumber())) return false;
+      if (!getCourseId()
+          .equals(other.getCourseId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TENANTID_FIELD_NUMBER;
+      hash = (53 * hash) + getTenantId().hashCode();
+      hash = (37 * hash) + EMAIL_FIELD_NUMBER;
+      hash = (53 * hash) + getEmail().hashCode();
+      hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getUserName().hashCode();
+      hash = (37 * hash) + FIRSTNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getFirstName().hashCode();
+      hash = (37 * hash) + LASTNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getLastName().hashCode();
+      hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
+      hash = (53 * hash) + getPassword().hashCode();
+      hash = (37 * hash) + PASSWORDCONFIRM_FIELD_NUMBER;
+      hash = (53 * hash) + getPasswordConfirm().hashCode();
+      hash = (37 * hash) + USERID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId().hashCode();
+      hash = (37 * hash) + ADMISSIONNUMBER_FIELD_NUMBER;
+      hash = (53 * hash) + getAdmissionNumber().hashCode();
+      hash = (37 * hash) + COURSEID_FIELD_NUMBER;
+      hash = (53 * hash) + getCourseId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code RegisterStudentRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:RegisterStudentRequest)
+        elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return elite.sas.api.grpc.CourseServiceProto.internal_static_RegisterStudentRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return elite.sas.api.grpc.CourseServiceProto.internal_static_RegisterStudentRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest.class, elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest.Builder.class);
+      }
+
+      // Construct using elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        tenantId_ = "";
+
+        email_ = "";
+
+        userName_ = "";
+
+        firstName_ = "";
+
+        lastName_ = "";
+
+        password_ = "";
+
+        passwordConfirm_ = "";
+
+        userId_ = "";
+
+        admissionNumber_ = "";
+
+        courseId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return elite.sas.api.grpc.CourseServiceProto.internal_static_RegisterStudentRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest getDefaultInstanceForType() {
+        return elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest build() {
+        elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest buildPartial() {
+        elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest result = new elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest(this);
+        result.tenantId_ = tenantId_;
+        result.email_ = email_;
+        result.userName_ = userName_;
+        result.firstName_ = firstName_;
+        result.lastName_ = lastName_;
+        result.password_ = password_;
+        result.passwordConfirm_ = passwordConfirm_;
+        result.userId_ = userId_;
+        result.admissionNumber_ = admissionNumber_;
+        result.courseId_ = courseId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest) {
+          return mergeFrom((elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest other) {
+        if (other == elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest.getDefaultInstance()) return this;
+        if (!other.getTenantId().isEmpty()) {
+          tenantId_ = other.tenantId_;
+          onChanged();
+        }
+        if (!other.getEmail().isEmpty()) {
+          email_ = other.email_;
+          onChanged();
+        }
+        if (!other.getUserName().isEmpty()) {
+          userName_ = other.userName_;
+          onChanged();
+        }
+        if (!other.getFirstName().isEmpty()) {
+          firstName_ = other.firstName_;
+          onChanged();
+        }
+        if (!other.getLastName().isEmpty()) {
+          lastName_ = other.lastName_;
+          onChanged();
+        }
+        if (!other.getPassword().isEmpty()) {
+          password_ = other.password_;
+          onChanged();
+        }
+        if (!other.getPasswordConfirm().isEmpty()) {
+          passwordConfirm_ = other.passwordConfirm_;
+          onChanged();
+        }
+        if (!other.getUserId().isEmpty()) {
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (!other.getAdmissionNumber().isEmpty()) {
+          admissionNumber_ = other.admissionNumber_;
+          onChanged();
+        }
+        if (!other.getCourseId().isEmpty()) {
+          courseId_ = other.courseId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object tenantId_ = "";
+      /**
+       * <code>string tenantId = 1;</code>
+       * @return The tenantId.
+       */
+      public java.lang.String getTenantId() {
+        java.lang.Object ref = tenantId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tenantId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string tenantId = 1;</code>
+       * @return The bytes for tenantId.
+       */
+      public com.google.protobuf.ByteString
+          getTenantIdBytes() {
+        java.lang.Object ref = tenantId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tenantId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string tenantId = 1;</code>
+       * @param value The tenantId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTenantId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        tenantId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tenantId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTenantId() {
+        
+        tenantId_ = getDefaultInstance().getTenantId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tenantId = 1;</code>
+       * @param value The bytes for tenantId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTenantIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        tenantId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object email_ = "";
+      /**
+       * <code>string email = 2;</code>
+       * @return The email.
+       */
+      public java.lang.String getEmail() {
+        java.lang.Object ref = email_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          email_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string email = 2;</code>
+       * @return The bytes for email.
+       */
+      public com.google.protobuf.ByteString
+          getEmailBytes() {
+        java.lang.Object ref = email_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          email_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string email = 2;</code>
+       * @param value The email to set.
+       * @return This builder for chaining.
+       */
+      public Builder setEmail(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        email_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string email = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearEmail() {
+        
+        email_ = getDefaultInstance().getEmail();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string email = 2;</code>
+       * @param value The bytes for email to set.
+       * @return This builder for chaining.
+       */
+      public Builder setEmailBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        email_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userName_ = "";
+      /**
+       * <code>string userName = 3;</code>
+       * @return The userName.
+       */
+      public java.lang.String getUserName() {
+        java.lang.Object ref = userName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userName = 3;</code>
+       * @return The bytes for userName.
+       */
+      public com.google.protobuf.ByteString
+          getUserNameBytes() {
+        java.lang.Object ref = userName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userName = 3;</code>
+       * @param value The userName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userName = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserName() {
+        
+        userName_ = getDefaultInstance().getUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userName = 3;</code>
+       * @param value The bytes for userName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object firstName_ = "";
+      /**
+       * <code>string firstName = 4;</code>
+       * @return The firstName.
+       */
+      public java.lang.String getFirstName() {
+        java.lang.Object ref = firstName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          firstName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string firstName = 4;</code>
+       * @return The bytes for firstName.
+       */
+      public com.google.protobuf.ByteString
+          getFirstNameBytes() {
+        java.lang.Object ref = firstName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          firstName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string firstName = 4;</code>
+       * @param value The firstName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFirstName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        firstName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string firstName = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFirstName() {
+        
+        firstName_ = getDefaultInstance().getFirstName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string firstName = 4;</code>
+       * @param value The bytes for firstName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFirstNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        firstName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object lastName_ = "";
+      /**
+       * <code>string lastName = 5;</code>
+       * @return The lastName.
+       */
+      public java.lang.String getLastName() {
+        java.lang.Object ref = lastName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          lastName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string lastName = 5;</code>
+       * @return The bytes for lastName.
+       */
+      public com.google.protobuf.ByteString
+          getLastNameBytes() {
+        java.lang.Object ref = lastName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          lastName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string lastName = 5;</code>
+       * @param value The lastName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setLastName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        lastName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string lastName = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearLastName() {
+        
+        lastName_ = getDefaultInstance().getLastName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string lastName = 5;</code>
+       * @param value The bytes for lastName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setLastNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        lastName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object password_ = "";
+      /**
+       * <code>string password = 6;</code>
+       * @return The password.
+       */
+      public java.lang.String getPassword() {
+        java.lang.Object ref = password_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          password_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string password = 6;</code>
+       * @return The bytes for password.
+       */
+      public com.google.protobuf.ByteString
+          getPasswordBytes() {
+        java.lang.Object ref = password_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          password_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string password = 6;</code>
+       * @param value The password to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPassword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        password_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string password = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPassword() {
+        
+        password_ = getDefaultInstance().getPassword();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string password = 6;</code>
+       * @param value The bytes for password to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPasswordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        password_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object passwordConfirm_ = "";
+      /**
+       * <code>string passwordConfirm = 7;</code>
+       * @return The passwordConfirm.
+       */
+      public java.lang.String getPasswordConfirm() {
+        java.lang.Object ref = passwordConfirm_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          passwordConfirm_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string passwordConfirm = 7;</code>
+       * @return The bytes for passwordConfirm.
+       */
+      public com.google.protobuf.ByteString
+          getPasswordConfirmBytes() {
+        java.lang.Object ref = passwordConfirm_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          passwordConfirm_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string passwordConfirm = 7;</code>
+       * @param value The passwordConfirm to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPasswordConfirm(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        passwordConfirm_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string passwordConfirm = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPasswordConfirm() {
+        
+        passwordConfirm_ = getDefaultInstance().getPasswordConfirm();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string passwordConfirm = 7;</code>
+       * @param value The bytes for passwordConfirm to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPasswordConfirmBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        passwordConfirm_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <code>string userId = 8;</code>
+       * @return The userId.
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string userId = 8;</code>
+       * @return The bytes for userId.
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string userId = 8;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUserId() {
+        
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string userId = 8;</code>
+       * @param value The bytes for userId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object admissionNumber_ = "";
+      /**
+       * <code>string admissionNumber = 9;</code>
+       * @return The admissionNumber.
+       */
+      public java.lang.String getAdmissionNumber() {
+        java.lang.Object ref = admissionNumber_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          admissionNumber_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string admissionNumber = 9;</code>
+       * @return The bytes for admissionNumber.
+       */
+      public com.google.protobuf.ByteString
+          getAdmissionNumberBytes() {
+        java.lang.Object ref = admissionNumber_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          admissionNumber_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string admissionNumber = 9;</code>
+       * @param value The admissionNumber to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAdmissionNumber(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        admissionNumber_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string admissionNumber = 9;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAdmissionNumber() {
+        
+        admissionNumber_ = getDefaultInstance().getAdmissionNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string admissionNumber = 9;</code>
+       * @param value The bytes for admissionNumber to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAdmissionNumberBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        admissionNumber_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object courseId_ = "";
+      /**
+       * <code>string courseId = 10;</code>
+       * @return The courseId.
+       */
+      public java.lang.String getCourseId() {
+        java.lang.Object ref = courseId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          courseId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string courseId = 10;</code>
+       * @return The bytes for courseId.
+       */
+      public com.google.protobuf.ByteString
+          getCourseIdBytes() {
+        java.lang.Object ref = courseId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          courseId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string courseId = 10;</code>
+       * @param value The courseId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCourseId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        courseId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string courseId = 10;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCourseId() {
+        
+        courseId_ = getDefaultInstance().getCourseId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string courseId = 10;</code>
+       * @param value The bytes for courseId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCourseIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        courseId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:RegisterStudentRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:RegisterStudentRequest)
+    private static final elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest();
+    }
+
+    public static elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RegisterStudentRequest>
+        PARSER = new com.google.protobuf.AbstractParser<RegisterStudentRequest>() {
+      @java.lang.Override
+      public RegisterStudentRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RegisterStudentRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RegisterStudentRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RegisterStudentRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface SearchStudentParamsOrBuilder extends
       // @@protoc_insertion_point(interface_extends:SearchStudentParams)
       com.google.protobuf.MessageOrBuilder {
@@ -2018,6 +3938,18 @@ public final class CourseServiceProto {
      */
     com.google.protobuf.ByteString
         getCourseIdBytes();
+
+    /**
+     * <code>string schoolId = 5;</code>
+     * @return The schoolId.
+     */
+    java.lang.String getSchoolId();
+    /**
+     * <code>string schoolId = 5;</code>
+     * @return The bytes for schoolId.
+     */
+    com.google.protobuf.ByteString
+        getSchoolIdBytes();
   }
   /**
    * Protobuf type {@code SearchStudentParams}
@@ -2036,6 +3968,7 @@ public final class CourseServiceProto {
       appUserId_ = "";
       admissionNumber_ = "";
       courseId_ = "";
+      schoolId_ = "";
     }
 
     @java.lang.Override
@@ -2090,6 +4023,12 @@ public final class CourseServiceProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               courseId_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              schoolId_ = s;
               break;
             }
             default: {
@@ -2278,6 +4217,44 @@ public final class CourseServiceProto {
       }
     }
 
+    public static final int SCHOOLID_FIELD_NUMBER = 5;
+    private volatile java.lang.Object schoolId_;
+    /**
+     * <code>string schoolId = 5;</code>
+     * @return The schoolId.
+     */
+    @java.lang.Override
+    public java.lang.String getSchoolId() {
+      java.lang.Object ref = schoolId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        schoolId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string schoolId = 5;</code>
+     * @return The bytes for schoolId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getSchoolIdBytes() {
+      java.lang.Object ref = schoolId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        schoolId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2304,6 +4281,9 @@ public final class CourseServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(courseId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, courseId_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, schoolId_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2324,6 +4304,9 @@ public final class CourseServiceProto {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(courseId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, courseId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, schoolId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2348,6 +4331,8 @@ public final class CourseServiceProto {
           .equals(other.getAdmissionNumber())) return false;
       if (!getCourseId()
           .equals(other.getCourseId())) return false;
+      if (!getSchoolId()
+          .equals(other.getSchoolId())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2367,6 +4352,8 @@ public final class CourseServiceProto {
       hash = (53 * hash) + getAdmissionNumber().hashCode();
       hash = (37 * hash) + COURSEID_FIELD_NUMBER;
       hash = (53 * hash) + getCourseId().hashCode();
+      hash = (37 * hash) + SCHOOLID_FIELD_NUMBER;
+      hash = (53 * hash) + getSchoolId().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2508,6 +4495,8 @@ public final class CourseServiceProto {
 
         courseId_ = "";
 
+        schoolId_ = "";
+
         return this;
       }
 
@@ -2538,6 +4527,7 @@ public final class CourseServiceProto {
         result.appUserId_ = appUserId_;
         result.admissionNumber_ = admissionNumber_;
         result.courseId_ = courseId_;
+        result.schoolId_ = schoolId_;
         onBuilt();
         return result;
       }
@@ -2600,6 +4590,10 @@ public final class CourseServiceProto {
         }
         if (!other.getCourseId().isEmpty()) {
           courseId_ = other.courseId_;
+          onChanged();
+        }
+        if (!other.getSchoolId().isEmpty()) {
+          schoolId_ = other.schoolId_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -2931,6 +4925,82 @@ public final class CourseServiceProto {
   checkByteStringIsUtf8(value);
         
         courseId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object schoolId_ = "";
+      /**
+       * <code>string schoolId = 5;</code>
+       * @return The schoolId.
+       */
+      public java.lang.String getSchoolId() {
+        java.lang.Object ref = schoolId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          schoolId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string schoolId = 5;</code>
+       * @return The bytes for schoolId.
+       */
+      public com.google.protobuf.ByteString
+          getSchoolIdBytes() {
+        java.lang.Object ref = schoolId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          schoolId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string schoolId = 5;</code>
+       * @param value The schoolId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSchoolId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        schoolId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string schoolId = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSchoolId() {
+        
+        schoolId_ = getDefaultInstance().getSchoolId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string schoolId = 5;</code>
+       * @param value The bytes for schoolId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSchoolIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        schoolId_ = value;
         onChanged();
         return this;
       }
@@ -5778,6 +7848,11 @@ public final class CourseServiceProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Course_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_RegisterStudentRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_RegisterStudentRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_SearchStudentParams_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -5812,29 +7887,35 @@ public final class CourseServiceProto {
       "pUser\030\002 \001(\0132\010.AppUser\022\027\n\017admissionNumber" +
       "\030\003 \001(\t\022\027\n\006course\030\004 \001(\0132\007.Course\"E\n\006Cours" +
       "e\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022!\n\013courseLev" +
-      "el\030\003 \001(\0162\014.CourseLevel\"_\n\023SearchStudentP" +
-      "arams\022\n\n\002id\030\001 \001(\t\022\021\n\tappUserId\030\002 \001(\t\022\027\n\017" +
-      "admissionNumber\030\003 \001(\t\022\020\n\010courseId\030\004 \001(\t\"" +
-      "o\n\024UpdateStudentRequest\022\n\n\002id\030\001 \001(\t\022\031\n\007a" +
-      "ppUser\030\002 \001(\0132\010.AppUser\022\027\n\017admissionNumbe" +
-      "r\030\003 \001(\t\022\027\n\006course\030\004 \001(\0132\007.Course\"Q\n\022Sear" +
-      "chCourseParams\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t" +
-      "\022!\n\013courseLevel\030\003 \001(\0162\014.CourseLevel\"R\n\023U" +
-      "pdateCourseRequest\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002" +
-      " \001(\t\022!\n\013courseLevel\030\003 \001(\0162\014.CourseLevel2" +
-      "\264\003\n\016studentService\022 \n\naddStudent\022\010.Stude" +
-      "nt\032\010.Student\022$\n\016getAllStudents\022\006.Empty\032\010" +
-      ".Student0\001\022,\n\ngetStudent\022\024.SearchStudent" +
-      "Params\032\010.Student\022/\n\013getStudents\022\024.Search" +
-      "StudentParams\032\010.Student0\001\0220\n\rupdateStude" +
-      "nt\022\025.UpdateStudentRequest\032\010.Student\022\035\n\ta" +
-      "ddCourse\022\007.Course\032\007.Course\022\"\n\rgetAllCour" +
-      "ses\022\006.Empty\032\007.Course0\001\022)\n\tgetCourse\022\023.Se" +
-      "archCourseParams\032\007.Course\022,\n\ngetCourses\022" +
-      "\023.SearchCourseParams\032\007.Course0\001\022-\n\014updat" +
-      "eCourse\022\024.UpdateCourseRequest\032\007.CourseB*" +
-      "\n\022elite.sas.api.grpcB\022CourseServiceProto" +
-      "P\000b\006proto3"
+      "el\030\003 \001(\0162\014.CourseLevel\"\326\001\n\026RegisterStude" +
+      "ntRequest\022\020\n\010tenantId\030\001 \001(\t\022\r\n\005email\030\002 \001" +
+      "(\t\022\020\n\010userName\030\003 \001(\t\022\021\n\tfirstName\030\004 \001(\t\022" +
+      "\020\n\010lastName\030\005 \001(\t\022\020\n\010password\030\006 \001(\t\022\027\n\017p" +
+      "asswordConfirm\030\007 \001(\t\022\016\n\006userId\030\010 \001(\t\022\027\n\017" +
+      "admissionNumber\030\t \001(\t\022\020\n\010courseId\030\n \001(\t\"" +
+      "q\n\023SearchStudentParams\022\n\n\002id\030\001 \001(\t\022\021\n\tap" +
+      "pUserId\030\002 \001(\t\022\027\n\017admissionNumber\030\003 \001(\t\022\020" +
+      "\n\010courseId\030\004 \001(\t\022\020\n\010schoolId\030\005 \001(\t\"o\n\024Up" +
+      "dateStudentRequest\022\n\n\002id\030\001 \001(\t\022\031\n\007appUse" +
+      "r\030\002 \001(\0132\010.AppUser\022\027\n\017admissionNumber\030\003 \001" +
+      "(\t\022\027\n\006course\030\004 \001(\0132\007.Course\"Q\n\022SearchCou" +
+      "rseParams\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022!\n\013c" +
+      "ourseLevel\030\003 \001(\0162\014.CourseLevel\"R\n\023Update" +
+      "CourseRequest\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022" +
+      "!\n\013courseLevel\030\003 \001(\0162\014.CourseLevel2\310\003\n\016s" +
+      "tudentService\0224\n\017registerStudent\022\027.Regis" +
+      "terStudentRequest\032\010.Student\022$\n\016getAllStu" +
+      "dents\022\006.Empty\032\010.Student0\001\022,\n\ngetStudent\022" +
+      "\024.SearchStudentParams\032\010.Student\022/\n\013getSt" +
+      "udents\022\024.SearchStudentParams\032\010.Student0\001" +
+      "\0220\n\rupdateStudent\022\025.UpdateStudentRequest" +
+      "\032\010.Student\022\035\n\taddCourse\022\007.Course\032\007.Cours" +
+      "e\022\"\n\rgetAllCourses\022\006.Empty\032\007.Course0\001\022)\n" +
+      "\tgetCourse\022\023.SearchCourseParams\032\007.Course" +
+      "\022,\n\ngetCourses\022\023.SearchCourseParams\032\007.Co" +
+      "urse0\001\022-\n\014updateCourse\022\024.UpdateCourseReq" +
+      "uest\032\007.CourseB*\n\022elite.sas.api.grpcB\022Cou" +
+      "rseServiceProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -5855,26 +7936,32 @@ public final class CourseServiceProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Course_descriptor,
         new java.lang.String[] { "Id", "Name", "CourseLevel", });
-    internal_static_SearchStudentParams_descriptor =
+    internal_static_RegisterStudentRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_RegisterStudentRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_RegisterStudentRequest_descriptor,
+        new java.lang.String[] { "TenantId", "Email", "UserName", "FirstName", "LastName", "Password", "PasswordConfirm", "UserId", "AdmissionNumber", "CourseId", });
+    internal_static_SearchStudentParams_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_SearchStudentParams_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SearchStudentParams_descriptor,
-        new java.lang.String[] { "Id", "AppUserId", "AdmissionNumber", "CourseId", });
+        new java.lang.String[] { "Id", "AppUserId", "AdmissionNumber", "CourseId", "SchoolId", });
     internal_static_UpdateStudentRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_UpdateStudentRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UpdateStudentRequest_descriptor,
         new java.lang.String[] { "Id", "AppUser", "AdmissionNumber", "Course", });
     internal_static_SearchCourseParams_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_SearchCourseParams_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SearchCourseParams_descriptor,
         new java.lang.String[] { "Id", "Name", "CourseLevel", });
     internal_static_UpdateCourseRequest_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_UpdateCourseRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UpdateCourseRequest_descriptor,

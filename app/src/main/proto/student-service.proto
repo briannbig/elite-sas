@@ -23,18 +23,31 @@ message Course {
 
 }
 
+message RegisterStudentRequest {
+  string tenantId = 1;
+  string email = 2;
+  string userName = 3;
+  string firstName = 4;
+  string lastName = 5;
+  string password = 6;
+  string passwordConfirm = 7;
+  string userId = 8;
+  string admissionNumber = 9;
+  string courseId = 10;
+}
+
+
 message SearchStudentParams {
   string id = 1;
   string appUserId = 2;
   string admissionNumber = 3;
   string courseId = 4;
+  string schoolId = 5;
 }
 
 message UpdateStudentRequest {
 
   string id = 1;
-  AppUser appUser = 2;
-  string admissionNumber = 3;
   Course course = 4;
 
 }
@@ -56,7 +69,7 @@ message UpdateCourseRequest {
 
 service studentService {
 
-  rpc addStudent (Student) returns (Student);
+  rpc registerStudent (RegisterStudentRequest) returns (Student);
 
   rpc getAllStudents (Empty) returns (stream Student);
 
@@ -75,7 +88,6 @@ service studentService {
   rpc getCourses (SearchCourseParams) returns (stream Course);
 
   rpc updateCourse (UpdateCourseRequest) returns (Course);
-
 
 
 }
