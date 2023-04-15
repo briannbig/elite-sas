@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public final class ApiUtil {
 
-    public static AppUser tenantFromApi(UserServiceProto.AppUser appUser) throws UnretriableException {
+    public static AppUser appUserFromApi(UserServiceProto.AppUser appUser) throws UnretriableException {
         if (Objects.isNull(appUser.getId()) || Objects.isNull(appUser.getEmail()) ||
                 Objects.isNull(appUser.getFirstName()) || Objects.isNull(appUser.getLastName()) ||
                 Objects.isNull(appUser.getUserName()) || !appUser.hasTenant() ||
@@ -55,7 +55,7 @@ public final class ApiUtil {
                 .Id(UUID.fromString(tenant.getId()))
                 .email(tenant.getEmail())
                 .name(tenant.getName())
-                .tenantType(tenantTypeFromApi(tenant.getTenantType()));
+                .tenantType(TenantType.valueOf(tenant.getTenantType().name()));
 
         if (Objects.isNull(tenant.getLocation())) {
             tenantBuilder.location(tenant.getLocation());
@@ -146,6 +146,34 @@ public final class ApiUtil {
     }
 
 
+    public static Application applicationFromApi(ApplicationServiceProto.Application apiApplication) throws UnretriableException {
+        if (Objects.isNull(apiApplication.getId()) || Objects.isNull(apiApplication.getApplicant()) ||
+                Objects.isNull(apiApplication.getListing())
+        ) {
+            throw new UnretriableException();
+        }
+
+        var builder = Application.builder()
+                .Id(UUID.fromString(apiApplication.getId()))
+                .applicant(appUserFromApi(apiApplication.getApplicant()))
+                .listing(listingFromApi(apiApplication.getListing()));
+
+        if (Objects.nonNull(apiApplication.getApplication())) {
+            builder.application(apiApplication.getApplication());
+        }
+
+        if (Objects.nonNull(apiApplication.getCvUrl())) {
+            builder.cvUrl(apiApplication.getCvUrl());
+        }
+
+        if (Objects.nonNull(apiApplication.getApplicationStatus())) {
+            builder.applicationStatus(ApplicationStatus.valueOf(apiApplication.getApplicationStatus().name()));
+        }
+
+        return builder.build();
+    }
+
+
     /*
      To Api
     */
@@ -178,7 +206,7 @@ public final class ApiUtil {
                 .setLastName(appUser.getLastName())
                 .setUserName(appUser.getUserName())
                 .setTenant(tenantToApi(appUser.getTenant()))
-                .setUserType(userTypeToAPi(appUser.getUserType()))
+                .setUserType(CommonsProto.UserType.valueOf(appUser.getUserType().name()))
                 .addAllRoles(roleSet);
 
         return userBuilder.build();
@@ -202,19 +230,6 @@ public final class ApiUtil {
         }
 
         return tenantBuilder.build();
-    }
-
-    public static CommonsProto.UserType userTypeToAPi(UserType userType) throws UnretriableException {
-        switch (userType.name()) {
-            case "STUDENT":
-                return CommonsProto.UserType.STUDENT;
-            case "SUPERVISOR":
-                return CommonsProto.UserType.SUPERVISOR;
-            case "ADMIN":
-                return CommonsProto.UserType.ADMIN;
-            default:
-                throw new UnretriableException();
-        }
     }
 
 
@@ -272,4 +287,32 @@ public final class ApiUtil {
 
         return listingBuilder.build();
     }
+
+    public static ApplicationServiceProto.Application applicationToApi(Application application) throws UnretriableException {
+        if (Objects.isNull(application.getId()) || Objects.isNull(application.getApplicant()) ||
+                Objects.isNull(application.getListing())
+        ) {
+            throw new UnretriableException();
+        }
+
+        var builder = ApplicationServiceProto.Application.newBuilder()
+                .setId(String.valueOf(application.getId()))
+                .setApplicant(appUserToApi(application.getApplicant()))
+                .setListing(listingToApi(application.getListing()));
+
+        if (Objects.nonNull(application.getApplication())) {
+            builder.setApplication(application.getApplication());
+        }
+
+        if (Objects.nonNull(application.getCvUrl())) {
+            builder.setCvUrl(application.getCvUrl());
+        }
+
+        if (Objects.nonNull(application.getApplicationStatus())) {
+            builder.setApplicationStatus(CommonsProto.ApplicationStatus.valueOf(application.getApplicationStatus().name()));
+        }
+
+        return builder.build();
+    }
+
 }

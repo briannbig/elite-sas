@@ -3024,12 +3024,24 @@ public final class ApplicationServiceProto {
         getListingIdBytes();
 
     /**
-     * <code>.ApplicationStatus applicationStatus = 4;</code>
+     * <code>string tenantId = 4;</code>
+     * @return The tenantId.
+     */
+    java.lang.String getTenantId();
+    /**
+     * <code>string tenantId = 4;</code>
+     * @return The bytes for tenantId.
+     */
+    com.google.protobuf.ByteString
+        getTenantIdBytes();
+
+    /**
+     * <code>.ApplicationStatus applicationStatus = 5;</code>
      * @return The enum numeric value on the wire for applicationStatus.
      */
     int getApplicationStatusValue();
     /**
-     * <code>.ApplicationStatus applicationStatus = 4;</code>
+     * <code>.ApplicationStatus applicationStatus = 5;</code>
      * @return The applicationStatus.
      */
     elite.sas.api.grpc.CommonsProto.ApplicationStatus getApplicationStatus();
@@ -3050,6 +3062,7 @@ public final class ApplicationServiceProto {
       id_ = "";
       applicantId_ = "";
       listingId_ = "";
+      tenantId_ = "";
       applicationStatus_ = 0;
     }
 
@@ -3101,7 +3114,13 @@ public final class ApplicationServiceProto {
               listingId_ = s;
               break;
             }
-            case 32: {
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              tenantId_ = s;
+              break;
+            }
+            case 40: {
               int rawValue = input.readEnum();
 
               applicationStatus_ = rawValue;
@@ -3255,17 +3274,55 @@ public final class ApplicationServiceProto {
       }
     }
 
-    public static final int APPLICATIONSTATUS_FIELD_NUMBER = 4;
+    public static final int TENANTID_FIELD_NUMBER = 4;
+    private volatile java.lang.Object tenantId_;
+    /**
+     * <code>string tenantId = 4;</code>
+     * @return The tenantId.
+     */
+    @java.lang.Override
+    public java.lang.String getTenantId() {
+      java.lang.Object ref = tenantId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tenantId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string tenantId = 4;</code>
+     * @return The bytes for tenantId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getTenantIdBytes() {
+      java.lang.Object ref = tenantId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tenantId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int APPLICATIONSTATUS_FIELD_NUMBER = 5;
     private int applicationStatus_;
     /**
-     * <code>.ApplicationStatus applicationStatus = 4;</code>
+     * <code>.ApplicationStatus applicationStatus = 5;</code>
      * @return The enum numeric value on the wire for applicationStatus.
      */
     @java.lang.Override public int getApplicationStatusValue() {
       return applicationStatus_;
     }
     /**
-     * <code>.ApplicationStatus applicationStatus = 4;</code>
+     * <code>.ApplicationStatus applicationStatus = 5;</code>
      * @return The applicationStatus.
      */
     @java.lang.Override public elite.sas.api.grpc.CommonsProto.ApplicationStatus getApplicationStatus() {
@@ -3297,8 +3354,11 @@ public final class ApplicationServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(listingId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, listingId_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tenantId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, tenantId_);
+      }
       if (applicationStatus_ != elite.sas.api.grpc.CommonsProto.ApplicationStatus.PENDING.getNumber()) {
-        output.writeEnum(4, applicationStatus_);
+        output.writeEnum(5, applicationStatus_);
       }
       unknownFields.writeTo(output);
     }
@@ -3318,9 +3378,12 @@ public final class ApplicationServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(listingId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, listingId_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tenantId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, tenantId_);
+      }
       if (applicationStatus_ != elite.sas.api.grpc.CommonsProto.ApplicationStatus.PENDING.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, applicationStatus_);
+          .computeEnumSize(5, applicationStatus_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3343,6 +3406,8 @@ public final class ApplicationServiceProto {
           .equals(other.getApplicantId())) return false;
       if (!getListingId()
           .equals(other.getListingId())) return false;
+      if (!getTenantId()
+          .equals(other.getTenantId())) return false;
       if (applicationStatus_ != other.applicationStatus_) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -3361,6 +3426,8 @@ public final class ApplicationServiceProto {
       hash = (53 * hash) + getApplicantId().hashCode();
       hash = (37 * hash) + LISTINGID_FIELD_NUMBER;
       hash = (53 * hash) + getListingId().hashCode();
+      hash = (37 * hash) + TENANTID_FIELD_NUMBER;
+      hash = (53 * hash) + getTenantId().hashCode();
       hash = (37 * hash) + APPLICATIONSTATUS_FIELD_NUMBER;
       hash = (53 * hash) + applicationStatus_;
       hash = (29 * hash) + unknownFields.hashCode();
@@ -3502,6 +3569,8 @@ public final class ApplicationServiceProto {
 
         listingId_ = "";
 
+        tenantId_ = "";
+
         applicationStatus_ = 0;
 
         return this;
@@ -3533,6 +3602,7 @@ public final class ApplicationServiceProto {
         result.id_ = id_;
         result.applicantId_ = applicantId_;
         result.listingId_ = listingId_;
+        result.tenantId_ = tenantId_;
         result.applicationStatus_ = applicationStatus_;
         onBuilt();
         return result;
@@ -3592,6 +3662,10 @@ public final class ApplicationServiceProto {
         }
         if (!other.getListingId().isEmpty()) {
           listingId_ = other.listingId_;
+          onChanged();
+        }
+        if (!other.getTenantId().isEmpty()) {
+          tenantId_ = other.tenantId_;
           onChanged();
         }
         if (other.applicationStatus_ != 0) {
@@ -3854,16 +3928,92 @@ public final class ApplicationServiceProto {
         return this;
       }
 
+      private java.lang.Object tenantId_ = "";
+      /**
+       * <code>string tenantId = 4;</code>
+       * @return The tenantId.
+       */
+      public java.lang.String getTenantId() {
+        java.lang.Object ref = tenantId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tenantId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string tenantId = 4;</code>
+       * @return The bytes for tenantId.
+       */
+      public com.google.protobuf.ByteString
+          getTenantIdBytes() {
+        java.lang.Object ref = tenantId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tenantId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string tenantId = 4;</code>
+       * @param value The tenantId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTenantId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        tenantId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tenantId = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTenantId() {
+        
+        tenantId_ = getDefaultInstance().getTenantId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tenantId = 4;</code>
+       * @param value The bytes for tenantId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTenantIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        tenantId_ = value;
+        onChanged();
+        return this;
+      }
+
       private int applicationStatus_ = 0;
       /**
-       * <code>.ApplicationStatus applicationStatus = 4;</code>
+       * <code>.ApplicationStatus applicationStatus = 5;</code>
        * @return The enum numeric value on the wire for applicationStatus.
        */
       @java.lang.Override public int getApplicationStatusValue() {
         return applicationStatus_;
       }
       /**
-       * <code>.ApplicationStatus applicationStatus = 4;</code>
+       * <code>.ApplicationStatus applicationStatus = 5;</code>
        * @param value The enum numeric value on the wire for applicationStatus to set.
        * @return This builder for chaining.
        */
@@ -3874,7 +4024,7 @@ public final class ApplicationServiceProto {
         return this;
       }
       /**
-       * <code>.ApplicationStatus applicationStatus = 4;</code>
+       * <code>.ApplicationStatus applicationStatus = 5;</code>
        * @return The applicationStatus.
        */
       @java.lang.Override
@@ -3884,7 +4034,7 @@ public final class ApplicationServiceProto {
         return result == null ? elite.sas.api.grpc.CommonsProto.ApplicationStatus.UNRECOGNIZED : result;
       }
       /**
-       * <code>.ApplicationStatus applicationStatus = 4;</code>
+       * <code>.ApplicationStatus applicationStatus = 5;</code>
        * @param value The applicationStatus to set.
        * @return This builder for chaining.
        */
@@ -3898,7 +4048,7 @@ public final class ApplicationServiceProto {
         return this;
       }
       /**
-       * <code>.ApplicationStatus applicationStatus = 4;</code>
+       * <code>.ApplicationStatus applicationStatus = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearApplicationStatus() {
@@ -7957,38 +8107,38 @@ public final class ApplicationServiceProto {
       "tenant\030\002 \001(\0132\007.Tenant\022\027\n\006course\030\003 \001(\0132\007." +
       "Course\022+\n\020attachmentPeriod\030\004 \001(\0162\021.Attac" +
       "hmentPeriod\022\023\n\013description\030\005 \001(\t\022,\n\010dead" +
-      "line\030\006 \001(\0132\032.google.protobuf.Timestamp\"|" +
-      "\n\027SearchApplicationParams\022\n\n\002id\030\001 \001(\t\022\023\n" +
-      "\013applicantId\030\002 \001(\t\022\021\n\tlistingId\030\003 \001(\t\022-\n" +
-      "\021applicationStatus\030\004 \001(\0162\022.ApplicationSt" +
-      "atus\"r\n\023SearchListingParams\022\n\n\002id\030\001 \001(\t\022" +
-      "\020\n\010tenantId\030\002 \001(\t\022\020\n\010courseId\030\003 \001(\t\022+\n\020a" +
-      "ttachmentPeriod\030\004 \001(\0162\021.AttachmentPeriod" +
-      "\"\304\001\n\024UpdateListingRequest\022\n\n\002id\030\001 \001(\t\022\027\n" +
-      "\006tenant\030\002 \001(\0132\007.Tenant\022\027\n\006course\030\003 \001(\0132\007" +
-      ".Course\022+\n\020attachmentPeriod\030\004 \001(\0162\021.Atta" +
-      "chmentPeriod\022\023\n\013description\030\005 \001(\t\022,\n\010dea" +
-      "dline\030\006 \001(\0132\032.google.protobuf.Timestamp\"" +
-      "\312\001\n\030UpdateApplicationRequest\022\n\n\002id\030\001 \001(\t" +
-      "\022\033\n\tapplicant\030\002 \001(\0132\010.AppUser\022\031\n\007listing" +
-      "\030\003 \001(\0132\010.Listing\022-\n\021applicationStatus\030\004 " +
-      "\001(\0162\022.ApplicationStatus\022\023\n\013application\030\005" +
-      " \001(\t\022\027\n\017schoolLetterUrl\030\006 \001(\t\022\r\n\005cvUrl\030\007" +
-      " \001(\t2\376\003\n\022applicationService\022 \n\naddListin" +
-      "g\022\010.Listing\032\010.Listing\022$\n\016getAllListings\022" +
-      "\006.Empty\032\010.Listing0\001\022/\n\013getListings\022\024.Sea" +
-      "rchListingParams\032\010.Listing0\001\022,\n\ngetListi" +
-      "ng\022\024.SearchListingParams\032\010.Listing\0220\n\rup" +
-      "dateListing\022\025.UpdateListingRequest\032\010.Lis" +
-      "ting\022,\n\016addApplication\022\014.Application\032\014.A" +
-      "pplication\022,\n\022getAllApplications\022\006.Empty" +
-      "\032\014.Application0\001\022;\n\017getApplications\022\030.Se" +
-      "archApplicationParams\032\014.Application0\001\0228\n" +
-      "\016getApplication\022\030.SearchApplicationParam" +
-      "s\032\014.Application\022<\n\021updateApplication\022\031.U" +
-      "pdateApplicationRequest\032\014.ApplicationB/\n" +
-      "\022elite.sas.api.grpcB\027ApplicationServiceP" +
-      "rotoP\000b\006proto3"
+      "line\030\006 \001(\0132\032.google.protobuf.Timestamp\"\216" +
+      "\001\n\027SearchApplicationParams\022\n\n\002id\030\001 \001(\t\022\023" +
+      "\n\013applicantId\030\002 \001(\t\022\021\n\tlistingId\030\003 \001(\t\022\020" +
+      "\n\010tenantId\030\004 \001(\t\022-\n\021applicationStatus\030\005 " +
+      "\001(\0162\022.ApplicationStatus\"r\n\023SearchListing" +
+      "Params\022\n\n\002id\030\001 \001(\t\022\020\n\010tenantId\030\002 \001(\t\022\020\n\010" +
+      "courseId\030\003 \001(\t\022+\n\020attachmentPeriod\030\004 \001(\016" +
+      "2\021.AttachmentPeriod\"\304\001\n\024UpdateListingReq" +
+      "uest\022\n\n\002id\030\001 \001(\t\022\027\n\006tenant\030\002 \001(\0132\007.Tenan" +
+      "t\022\027\n\006course\030\003 \001(\0132\007.Course\022+\n\020attachment" +
+      "Period\030\004 \001(\0162\021.AttachmentPeriod\022\023\n\013descr" +
+      "iption\030\005 \001(\t\022,\n\010deadline\030\006 \001(\0132\032.google." +
+      "protobuf.Timestamp\"\312\001\n\030UpdateApplication" +
+      "Request\022\n\n\002id\030\001 \001(\t\022\033\n\tapplicant\030\002 \001(\0132\010" +
+      ".AppUser\022\031\n\007listing\030\003 \001(\0132\010.Listing\022-\n\021a" +
+      "pplicationStatus\030\004 \001(\0162\022.ApplicationStat" +
+      "us\022\023\n\013application\030\005 \001(\t\022\027\n\017schoolLetterU" +
+      "rl\030\006 \001(\t\022\r\n\005cvUrl\030\007 \001(\t2\376\003\n\022applicationS" +
+      "ervice\022 \n\naddListing\022\010.Listing\032\010.Listing" +
+      "\022$\n\016getAllListings\022\006.Empty\032\010.Listing0\001\022/" +
+      "\n\013getListings\022\024.SearchListingParams\032\010.Li" +
+      "sting0\001\022,\n\ngetListing\022\024.SearchListingPar" +
+      "ams\032\010.Listing\0220\n\rupdateListing\022\025.UpdateL" +
+      "istingRequest\032\010.Listing\022,\n\016addApplicatio" +
+      "n\022\014.Application\032\014.Application\022,\n\022getAllA" +
+      "pplications\022\006.Empty\032\014.Application0\001\022;\n\017g" +
+      "etApplications\022\030.SearchApplicationParams" +
+      "\032\014.Application0\001\0228\n\016getApplication\022\030.Sea" +
+      "rchApplicationParams\032\014.Application\022<\n\021up" +
+      "dateApplication\022\031.UpdateApplicationReque" +
+      "st\032\014.ApplicationB/\n\022elite.sas.api.grpcB\027" +
+      "ApplicationServiceProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -8016,7 +8166,7 @@ public final class ApplicationServiceProto {
     internal_static_SearchApplicationParams_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SearchApplicationParams_descriptor,
-        new java.lang.String[] { "Id", "ApplicantId", "ListingId", "ApplicationStatus", });
+        new java.lang.String[] { "Id", "ApplicantId", "ListingId", "TenantId", "ApplicationStatus", });
     internal_static_SearchListingParams_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_SearchListingParams_fieldAccessorTable = new

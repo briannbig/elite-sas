@@ -36,7 +36,8 @@ message SearchApplicationParams {
   string id = 1;
   string applicantId = 2;
   string listingId = 3;
-  ApplicationStatus applicationStatus = 4;
+  string tenantId = 4;
+  ApplicationStatus applicationStatus = 5;
 }
 
 message SearchListingParams {
