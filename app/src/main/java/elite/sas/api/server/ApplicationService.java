@@ -1,8 +1,7 @@
 package elite.sas.api.server;
 
 
-import elite.sas.api.ApiUtil;
-import elite.sas.api.exceptions.UnretriableException;
+import elite.sas.api.exceptions.ModelConversionException;
 import elite.sas.api.grpc.ApplicationServiceProto;
 import elite.sas.api.grpc.CommonsProto;
 import elite.sas.api.grpc.applicationServiceGrpc;
@@ -34,7 +33,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
                  responseObserver.onNext(listingToApi(optionalListing.get()));
              }
              responseObserver.onCompleted();
-        } catch (UnretriableException e) {
+        } catch (ModelConversionException e) {
             responseObserver.onError(e);
         }
 
@@ -47,7 +46,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
                 l -> {
                     try {
                         responseObserver.onNext(listingToApi(l));
-                    } catch (UnretriableException e) {
+                    } catch (ModelConversionException e) {
                         log.debug("Conversion error: {}", e);
                     }
                 }
@@ -62,7 +61,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
                     l -> {
                         try {
                             responseObserver.onNext(listingToApi(l));
-                        } catch (UnretriableException e) {
+                        } catch (ModelConversionException e) {
                             log.debug("Conversion error: {}", e);
                         }
                     }
@@ -73,7 +72,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
                     l -> {
                         try {
                             responseObserver.onNext(listingToApi(l));
-                        } catch (UnretriableException e) {
+                        } catch (ModelConversionException e) {
                             log.debug("Conversion error: {}", e);
                         }
                     }
@@ -91,7 +90,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
             if (optionalListing.isPresent()){
                 try {
                     responseObserver.onNext(listingToApi(optionalListing.get()));
-                } catch (UnretriableException e) {
+                } catch (ModelConversionException e) {
                     log.debug("Conversion error: {}", e);
                 }
             }
@@ -110,7 +109,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
 
         try {
             Optional<Listing> listingOptional = applicationService.updateListing(listingFromApi(apiListingBuilder.build()));
-        } catch (UnretriableException e) {
+        } catch (ModelConversionException e) {
             log.debug("Conversion error: {}", e);
         }
     }
@@ -120,14 +119,14 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
         Optional<Application> optionalApplication;
         try {
              optionalApplication = applicationService.addApplication(applicationFromApi(request));
-        } catch (UnretriableException e) {
+        } catch (ModelConversionException e) {
             responseObserver.onError(e);
             return;
         }
         if (optionalApplication.isPresent()) {
             try {
                 responseObserver.onNext(applicationToApi(optionalApplication.get()));
-            } catch (UnretriableException e) {
+            } catch (ModelConversionException e) {
                 responseObserver.onError(e);
                 return;
             }
@@ -143,7 +142,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
                 application -> {
                     try {
                         responseObserver.onNext(applicationToApi(application));
-                    } catch (UnretriableException e) {
+                    } catch (ModelConversionException e) {
                         log.debug("Conversion error: {}", e);
                     }
                 }
@@ -160,7 +159,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
                     application -> {
                         try {
                             responseObserver.onNext(applicationToApi(application));
-                        } catch (UnretriableException e) {
+                        } catch (ModelConversionException e) {
                             log.debug("Conversion error: {}", e);
                         }
                     }
@@ -172,7 +171,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
                     application -> {
                         try {
                             responseObserver.onNext(applicationToApi(application));
-                        } catch (UnretriableException e) {
+                        } catch (ModelConversionException e) {
                             log.debug("Conversion error: {}", e);
                         }
                     }
@@ -184,7 +183,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
                     application -> {
                         try {
                             responseObserver.onNext(applicationToApi(application));
-                        } catch (UnretriableException e) {
+                        } catch (ModelConversionException e) {
                             log.debug("Conversion error: {}", e);
                         }
                     }
@@ -198,7 +197,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
     @Override
     public void getApplication(ApplicationServiceProto.SearchApplicationParams request, StreamObserver<ApplicationServiceProto.Application> responseObserver) {
         if (Objects.isNull(request.getId())) {
-            responseObserver.onError(new UnretriableException());
+            responseObserver.onError(new ModelConversionException());
             log.debug("no application id specified in SearchApplicationParams");
             return;
         }
@@ -207,7 +206,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
         if (optionalApplication.isPresent()) {
             try {
                 responseObserver.onNext(applicationToApi(optionalApplication.get()));
-            } catch (UnretriableException e) {
+            } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
             }
         }
@@ -219,7 +218,7 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
     @Override
     public void updateApplication(ApplicationServiceProto.UpdateApplicationRequest request, StreamObserver<ApplicationServiceProto.Application> responseObserver) {
         if (Objects.isNull(request.getId())) {
-            responseObserver.onError(new UnretriableException("no id specified for application to be updated"));
+            responseObserver.onError(new ModelConversionException("no id specified for application to be updated"));
         }
 
         Application application = Application.builder().build();
@@ -227,12 +226,12 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
         Optional<Application> optionalApplication = applicationService.updateApplication(application);
 
         if (optionalApplication.isEmpty()) {
-            responseObserver.onError(new UnretriableException("Could not update application " + application ));
+            responseObserver.onError(new ModelConversionException("Could not update application " + application ));
         }
 
         try {
             responseObserver.onNext(applicationToApi(optionalApplication.get()));
-        } catch (UnretriableException e) {
+        } catch (ModelConversionException e) {
             log.debug("Conversion error: {}", e);
         }
 

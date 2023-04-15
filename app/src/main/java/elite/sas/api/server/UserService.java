@@ -1,7 +1,7 @@
 package elite.sas.api.server;
 
 import elite.sas.api.ApiUtil;
-import elite.sas.api.exceptions.UnretriableException;
+import elite.sas.api.exceptions.ModelConversionException;
 import elite.sas.api.grpc.CommonsProto;
 import elite.sas.api.grpc.UserServiceProto;
 import elite.sas.api.grpc.userServiceGrpc;
@@ -34,14 +34,14 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
                     .userName(request.getUserName())
                     .userType(ApiUtil.userTypeFromAPi(request.getUserType()))
                     .build();
-        } catch (UnretriableException e) {
+        } catch (ModelConversionException e) {
             responseObserver.onError(e);
         }
         AppUser appUser = userAccountRegistrationWorkflow.handle(createUserParams);
 
         try {
             responseObserver.onNext(ApiUtil.appUserToApi(appUser));
-        } catch (UnretriableException e) {
+        } catch (ModelConversionException e) {
             responseObserver.onCompleted();
         }
         responseObserver.onCompleted();
@@ -55,7 +55,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
             log.debug("user ----> {}", u);
             try {
                 responseObserver.onNext(ApiUtil.appUserToApi(u));
-            } catch (UnretriableException e) {
+            } catch (ModelConversionException e) {
                 responseObserver.onError(e);
             }
         });
@@ -69,7 +69,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
             appUserService.getAllUsersForTenant(request.getTenantId()).forEach(u -> {
                         try {
                             responseObserver.onNext(ApiUtil.appUserToApi(u));
-                        } catch (UnretriableException e) {
+                        } catch (ModelConversionException e) {
                             responseObserver.onError(e);
                         }
                     }
@@ -89,7 +89,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
             }
             try {
                 responseObserver.onNext(ApiUtil.appUserToApi(optionalAppUser.get()));
-            } catch (UnretriableException e) {
+            } catch (ModelConversionException e) {
                 responseObserver.onError(e);
             }
         }
@@ -101,7 +101,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
             }
             try {
                 responseObserver.onNext(ApiUtil.appUserToApi(optionalAppUser.get()));
-            } catch (UnretriableException e) {
+            } catch (ModelConversionException e) {
                 responseObserver.onError(e);
             }
         }

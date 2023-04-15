@@ -1,6 +1,6 @@
 package elite.sas.api;
 
-import elite.sas.api.exceptions.UnretriableException;
+import elite.sas.api.exceptions.ModelConversionException;
 import elite.sas.api.grpc.*;
 import elite.sas.core.entities.*;
 
@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 
 public final class ApiUtil {
 
-    public static AppUser appUserFromApi(UserServiceProto.AppUser appUser) throws UnretriableException {
+    public static AppUser appUserFromApi(UserServiceProto.AppUser appUser) throws ModelConversionException {
         if (Objects.isNull(appUser.getId()) || Objects.isNull(appUser.getEmail()) ||
                 Objects.isNull(appUser.getFirstName()) || Objects.isNull(appUser.getLastName()) ||
                 Objects.isNull(appUser.getUserName()) || !appUser.hasTenant() ||
                 Objects.isNull(appUser.getUserType()) || appUser.getRolesList().isEmpty()
         ) {
-            throw new UnretriableException();
+            throw new ModelConversionException();
         }
 
         Set<Role> roleSet = appUser.getRolesList().stream().map(r -> {
@@ -26,7 +26,7 @@ public final class ApiUtil {
                         .Id(UUID.fromString(r.getId()))
                         .roleName(tenantFromApi(r.getRoleName()))
                         .build();
-            } catch (UnretriableException e) {
+            } catch (ModelConversionException e) {
                 throw new RuntimeException(e);
             }
         }).collect(Collectors.toSet());
@@ -44,11 +44,11 @@ public final class ApiUtil {
         return userBuilder.build();
     }
 
-    public static Tenant tenantFromApi(TenantServiceProto.Tenant tenant) throws UnretriableException {
+    public static Tenant tenantFromApi(TenantServiceProto.Tenant tenant) throws ModelConversionException {
         if (Objects.isNull(tenant.getId()) || Objects.isNull(tenant.getEmail()) ||
                 Objects.isNull(tenant.getName()) || Objects.isNull(tenant.getTenantType())
         ) {
-            throw new UnretriableException();
+            throw new ModelConversionException();
         }
 
         Tenant.TenantBuilder tenantBuilder = Tenant.builder()
@@ -64,7 +64,7 @@ public final class ApiUtil {
         return tenantBuilder.build();
     }
 
-    public static UserType userTypeFromAPi(CommonsProto.UserType userType) throws UnretriableException {
+    public static UserType userTypeFromAPi(CommonsProto.UserType userType) throws ModelConversionException {
         switch (userType.name()) {
             case "STUDENT":
                 return UserType.STUDENT;
@@ -73,11 +73,11 @@ public final class ApiUtil {
             case "ADMIN":
                 return UserType.ADMIN;
             default:
-                throw new UnretriableException();
+                throw new ModelConversionException();
         }
     }
 
-    public static RoleName tenantFromApi(CommonsProto.RoleName roleName) throws UnretriableException {
+    public static RoleName tenantFromApi(CommonsProto.RoleName roleName) throws ModelConversionException {
         switch (roleName.name()) {
             case "student":
                 return RoleName.STUDENT;
@@ -88,11 +88,11 @@ public final class ApiUtil {
             case "INTERNAL_ADMIN":
                 return RoleName.INTERNAL_ADMIN;
             default:
-                throw new UnretriableException();
+                throw new ModelConversionException();
         }
     }
 
-    public static TenantType tenantTypeFromApi(CommonsProto.TenantType tenantType) throws UnretriableException {
+    public static TenantType tenantTypeFromApi(CommonsProto.TenantType tenantType) throws ModelConversionException {
         switch (tenantType.name()) {
             case "SCHOOL":
                 return TenantType.SCHOOL;
@@ -101,15 +101,15 @@ public final class ApiUtil {
             case "INTERNAL":
                 return TenantType.INTERNAL;
             default:
-                throw new UnretriableException();
+                throw new ModelConversionException();
         }
     }
 
-    public static Course courseFromApi(CourseServiceProto.Course apiCourse) throws UnretriableException {
+    public static Course courseFromApi(CourseServiceProto.Course apiCourse) throws ModelConversionException {
         if (Objects.isNull(apiCourse.getId()) || Objects.isNull(apiCourse.getName()) ||
                 Objects.isNull(apiCourse.getCourseLevel())
         ) {
-            throw new UnretriableException();
+            throw new ModelConversionException();
         }
         return Course.builder()
                 .Id(UUID.fromString(apiCourse.getId()))
@@ -118,11 +118,11 @@ public final class ApiUtil {
                 .build();
     }
 
-    public static Listing listingFromApi(ApplicationServiceProto.Listing apiListing) throws UnretriableException {
+    public static Listing listingFromApi(ApplicationServiceProto.Listing apiListing) throws ModelConversionException {
         if (Objects.isNull(apiListing.getId()) || !apiListing.hasTenant() ||
                 !apiListing.hasCourse()
         ) {
-            throw new UnretriableException();
+            throw new ModelConversionException();
         }
         var listingBuilder = Listing.builder()
                 .Id(UUID.fromString(apiListing.getId()))
@@ -146,11 +146,11 @@ public final class ApiUtil {
     }
 
 
-    public static Application applicationFromApi(ApplicationServiceProto.Application apiApplication) throws UnretriableException {
+    public static Application applicationFromApi(ApplicationServiceProto.Application apiApplication) throws ModelConversionException {
         if (Objects.isNull(apiApplication.getId()) || Objects.isNull(apiApplication.getApplicant()) ||
                 Objects.isNull(apiApplication.getListing())
         ) {
-            throw new UnretriableException();
+            throw new ModelConversionException();
         }
 
         var builder = Application.builder()
@@ -178,13 +178,13 @@ public final class ApiUtil {
      To Api
     */
 
-    public static UserServiceProto.AppUser appUserToApi(AppUser appUser) throws UnretriableException {
+    public static UserServiceProto.AppUser appUserToApi(AppUser appUser) throws ModelConversionException {
         if (Objects.isNull(appUser.getId()) || Objects.isNull(appUser.getEmail()) ||
                 Objects.isNull(appUser.getFirstName()) || Objects.isNull(appUser.getLastName()) ||
                 Objects.isNull(appUser.getUserName()) || Objects.isNull(appUser.getTenant()) ||
                 Objects.isNull(appUser.getUserType()) || appUser.getRoles().isEmpty()
         ) {
-            throw new UnretriableException();
+            throw new ModelConversionException();
         }
 
         Set<UserServiceProto.Role> roleSet = appUser.getRoles().stream().map(r -> {
@@ -193,7 +193,7 @@ public final class ApiUtil {
                         .setId(String.valueOf(r.getId()))
                         .setRoleName(roleNameToApi(r.getRoleName()))
                         .build();
-            } catch (UnretriableException e) {
+            } catch (ModelConversionException e) {
                 throw new RuntimeException(e);
             }
         }).collect(Collectors.toSet());
@@ -212,11 +212,11 @@ public final class ApiUtil {
         return userBuilder.build();
     }
 
-    public static TenantServiceProto.Tenant tenantToApi(Tenant tenant) throws UnretriableException {
+    public static TenantServiceProto.Tenant tenantToApi(Tenant tenant) throws ModelConversionException {
         if (Objects.isNull(tenant.getId()) || Objects.isNull(tenant.getEmail()) ||
                 Objects.isNull(tenant.getName()) || Objects.isNull(tenant.getTenantType())
         ) {
-            throw new UnretriableException("Bad tenant data");
+            throw new ModelConversionException("Bad tenant data");
         }
 
         TenantServiceProto.Tenant.Builder tenantBuilder = TenantServiceProto.Tenant.newBuilder()
@@ -233,7 +233,7 @@ public final class ApiUtil {
     }
 
 
-    public static CommonsProto.RoleName roleNameToApi(RoleName roleName) throws UnretriableException {
+    public static CommonsProto.RoleName roleNameToApi(RoleName roleName) throws ModelConversionException {
         switch (roleName.name()) {
             case "STUDENT":
                 return CommonsProto.RoleName.student;
@@ -244,11 +244,11 @@ public final class ApiUtil {
             case "INTERNAL_ADMIN":
                 return CommonsProto.RoleName.INTERNAL_ADMIN;
             default:
-                throw new UnretriableException();
+                throw new ModelConversionException();
         }
     }
 
-    public static CommonsProto.TenantType tenantTypeToApi(TenantType tenantType) throws UnretriableException {
+    public static CommonsProto.TenantType tenantTypeToApi(TenantType tenantType) throws ModelConversionException {
         switch (tenantType.name()) {
             case "SCHOOL":
                 return CommonsProto.TenantType.SCHOOL;
@@ -257,15 +257,15 @@ public final class ApiUtil {
             case "INTERNAL":
                 return CommonsProto.TenantType.INTERNAL;
             default:
-                throw new UnretriableException();
+                throw new ModelConversionException();
         }
     }
 
-    public static CourseServiceProto.Course courseToApi(Course course) throws UnretriableException {
+    public static CourseServiceProto.Course courseToApi(Course course) throws ModelConversionException {
         if (Objects.isNull(course.getId()) || Objects.isNull(course.getName()) ||
                 Objects.isNull(course.getCourseLevel())
         ) {
-            throw new UnretriableException();
+            throw new ModelConversionException();
         }
         return CourseServiceProto.Course.newBuilder()
                 .setId(String.valueOf(course.getId()))
@@ -274,11 +274,11 @@ public final class ApiUtil {
                 .build();
     }
 
-    public static ApplicationServiceProto.Listing listingToApi(Listing listing) throws UnretriableException {
+    public static ApplicationServiceProto.Listing listingToApi(Listing listing) throws ModelConversionException {
         if (Objects.isNull(listing.getId()) || Objects.isNull(listing.getCourse()) ||
                 Objects.isNull(listing.getTenant())
         ) {
-            throw new UnretriableException();
+            throw new ModelConversionException();
         }
         var listingBuilder = ApplicationServiceProto.Listing.newBuilder()
                 .setId(String.valueOf(listing.getId()))
@@ -288,11 +288,11 @@ public final class ApiUtil {
         return listingBuilder.build();
     }
 
-    public static ApplicationServiceProto.Application applicationToApi(Application application) throws UnretriableException {
+    public static ApplicationServiceProto.Application applicationToApi(Application application) throws ModelConversionException {
         if (Objects.isNull(application.getId()) || Objects.isNull(application.getApplicant()) ||
                 Objects.isNull(application.getListing())
         ) {
-            throw new UnretriableException();
+            throw new ModelConversionException();
         }
 
         var builder = ApplicationServiceProto.Application.newBuilder()
