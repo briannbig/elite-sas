@@ -5074,33 +5074,6 @@ public final class CourseServiceProto {
         getIdBytes();
 
     /**
-     * <code>.AppUser appUser = 2;</code>
-     * @return Whether the appUser field is set.
-     */
-    boolean hasAppUser();
-    /**
-     * <code>.AppUser appUser = 2;</code>
-     * @return The appUser.
-     */
-    elite.sas.api.grpc.UserServiceProto.AppUser getAppUser();
-    /**
-     * <code>.AppUser appUser = 2;</code>
-     */
-    elite.sas.api.grpc.UserServiceProto.AppUserOrBuilder getAppUserOrBuilder();
-
-    /**
-     * <code>string admissionNumber = 3;</code>
-     * @return The admissionNumber.
-     */
-    java.lang.String getAdmissionNumber();
-    /**
-     * <code>string admissionNumber = 3;</code>
-     * @return The bytes for admissionNumber.
-     */
-    com.google.protobuf.ByteString
-        getAdmissionNumberBytes();
-
-    /**
      * <code>.Course course = 4;</code>
      * @return Whether the course field is set.
      */
@@ -5129,7 +5102,6 @@ public final class CourseServiceProto {
     }
     private UpdateStudentRequest() {
       id_ = "";
-      admissionNumber_ = "";
     }
 
     @java.lang.Override
@@ -5166,25 +5138,6 @@ public final class CourseServiceProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               id_ = s;
-              break;
-            }
-            case 18: {
-              elite.sas.api.grpc.UserServiceProto.AppUser.Builder subBuilder = null;
-              if (appUser_ != null) {
-                subBuilder = appUser_.toBuilder();
-              }
-              appUser_ = input.readMessage(elite.sas.api.grpc.UserServiceProto.AppUser.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(appUser_);
-                appUser_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              admissionNumber_ = s;
               break;
             }
             case 34: {
@@ -5272,70 +5225,6 @@ public final class CourseServiceProto {
       }
     }
 
-    public static final int APPUSER_FIELD_NUMBER = 2;
-    private elite.sas.api.grpc.UserServiceProto.AppUser appUser_;
-    /**
-     * <code>.AppUser appUser = 2;</code>
-     * @return Whether the appUser field is set.
-     */
-    @java.lang.Override
-    public boolean hasAppUser() {
-      return appUser_ != null;
-    }
-    /**
-     * <code>.AppUser appUser = 2;</code>
-     * @return The appUser.
-     */
-    @java.lang.Override
-    public elite.sas.api.grpc.UserServiceProto.AppUser getAppUser() {
-      return appUser_ == null ? elite.sas.api.grpc.UserServiceProto.AppUser.getDefaultInstance() : appUser_;
-    }
-    /**
-     * <code>.AppUser appUser = 2;</code>
-     */
-    @java.lang.Override
-    public elite.sas.api.grpc.UserServiceProto.AppUserOrBuilder getAppUserOrBuilder() {
-      return getAppUser();
-    }
-
-    public static final int ADMISSIONNUMBER_FIELD_NUMBER = 3;
-    private volatile java.lang.Object admissionNumber_;
-    /**
-     * <code>string admissionNumber = 3;</code>
-     * @return The admissionNumber.
-     */
-    @java.lang.Override
-    public java.lang.String getAdmissionNumber() {
-      java.lang.Object ref = admissionNumber_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        admissionNumber_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string admissionNumber = 3;</code>
-     * @return The bytes for admissionNumber.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getAdmissionNumberBytes() {
-      java.lang.Object ref = admissionNumber_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        admissionNumber_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     public static final int COURSE_FIELD_NUMBER = 4;
     private elite.sas.api.grpc.CourseServiceProto.Course course_;
     /**
@@ -5379,12 +5268,6 @@ public final class CourseServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
       }
-      if (appUser_ != null) {
-        output.writeMessage(2, getAppUser());
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(admissionNumber_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, admissionNumber_);
-      }
       if (course_ != null) {
         output.writeMessage(4, getCourse());
       }
@@ -5399,13 +5282,6 @@ public final class CourseServiceProto {
       size = 0;
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
-      }
-      if (appUser_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getAppUser());
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(admissionNumber_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, admissionNumber_);
       }
       if (course_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -5428,13 +5304,6 @@ public final class CourseServiceProto {
 
       if (!getId()
           .equals(other.getId())) return false;
-      if (hasAppUser() != other.hasAppUser()) return false;
-      if (hasAppUser()) {
-        if (!getAppUser()
-            .equals(other.getAppUser())) return false;
-      }
-      if (!getAdmissionNumber()
-          .equals(other.getAdmissionNumber())) return false;
       if (hasCourse() != other.hasCourse()) return false;
       if (hasCourse()) {
         if (!getCourse()
@@ -5453,12 +5322,6 @@ public final class CourseServiceProto {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId().hashCode();
-      if (hasAppUser()) {
-        hash = (37 * hash) + APPUSER_FIELD_NUMBER;
-        hash = (53 * hash) + getAppUser().hashCode();
-      }
-      hash = (37 * hash) + ADMISSIONNUMBER_FIELD_NUMBER;
-      hash = (53 * hash) + getAdmissionNumber().hashCode();
       if (hasCourse()) {
         hash = (37 * hash) + COURSE_FIELD_NUMBER;
         hash = (53 * hash) + getCourse().hashCode();
@@ -5598,14 +5461,6 @@ public final class CourseServiceProto {
         super.clear();
         id_ = "";
 
-        if (appUserBuilder_ == null) {
-          appUser_ = null;
-        } else {
-          appUser_ = null;
-          appUserBuilder_ = null;
-        }
-        admissionNumber_ = "";
-
         if (courseBuilder_ == null) {
           course_ = null;
         } else {
@@ -5639,12 +5494,6 @@ public final class CourseServiceProto {
       public elite.sas.api.grpc.CourseServiceProto.UpdateStudentRequest buildPartial() {
         elite.sas.api.grpc.CourseServiceProto.UpdateStudentRequest result = new elite.sas.api.grpc.CourseServiceProto.UpdateStudentRequest(this);
         result.id_ = id_;
-        if (appUserBuilder_ == null) {
-          result.appUser_ = appUser_;
-        } else {
-          result.appUser_ = appUserBuilder_.build();
-        }
-        result.admissionNumber_ = admissionNumber_;
         if (courseBuilder_ == null) {
           result.course_ = course_;
         } else {
@@ -5700,13 +5549,6 @@ public final class CourseServiceProto {
         if (other == elite.sas.api.grpc.CourseServiceProto.UpdateStudentRequest.getDefaultInstance()) return this;
         if (!other.getId().isEmpty()) {
           id_ = other.id_;
-          onChanged();
-        }
-        if (other.hasAppUser()) {
-          mergeAppUser(other.getAppUser());
-        }
-        if (!other.getAdmissionNumber().isEmpty()) {
-          admissionNumber_ = other.admissionNumber_;
           onChanged();
         }
         if (other.hasCourse()) {
@@ -5813,201 +5655,6 @@ public final class CourseServiceProto {
   checkByteStringIsUtf8(value);
         
         id_ = value;
-        onChanged();
-        return this;
-      }
-
-      private elite.sas.api.grpc.UserServiceProto.AppUser appUser_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          elite.sas.api.grpc.UserServiceProto.AppUser, elite.sas.api.grpc.UserServiceProto.AppUser.Builder, elite.sas.api.grpc.UserServiceProto.AppUserOrBuilder> appUserBuilder_;
-      /**
-       * <code>.AppUser appUser = 2;</code>
-       * @return Whether the appUser field is set.
-       */
-      public boolean hasAppUser() {
-        return appUserBuilder_ != null || appUser_ != null;
-      }
-      /**
-       * <code>.AppUser appUser = 2;</code>
-       * @return The appUser.
-       */
-      public elite.sas.api.grpc.UserServiceProto.AppUser getAppUser() {
-        if (appUserBuilder_ == null) {
-          return appUser_ == null ? elite.sas.api.grpc.UserServiceProto.AppUser.getDefaultInstance() : appUser_;
-        } else {
-          return appUserBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.AppUser appUser = 2;</code>
-       */
-      public Builder setAppUser(elite.sas.api.grpc.UserServiceProto.AppUser value) {
-        if (appUserBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          appUser_ = value;
-          onChanged();
-        } else {
-          appUserBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.AppUser appUser = 2;</code>
-       */
-      public Builder setAppUser(
-          elite.sas.api.grpc.UserServiceProto.AppUser.Builder builderForValue) {
-        if (appUserBuilder_ == null) {
-          appUser_ = builderForValue.build();
-          onChanged();
-        } else {
-          appUserBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.AppUser appUser = 2;</code>
-       */
-      public Builder mergeAppUser(elite.sas.api.grpc.UserServiceProto.AppUser value) {
-        if (appUserBuilder_ == null) {
-          if (appUser_ != null) {
-            appUser_ =
-              elite.sas.api.grpc.UserServiceProto.AppUser.newBuilder(appUser_).mergeFrom(value).buildPartial();
-          } else {
-            appUser_ = value;
-          }
-          onChanged();
-        } else {
-          appUserBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.AppUser appUser = 2;</code>
-       */
-      public Builder clearAppUser() {
-        if (appUserBuilder_ == null) {
-          appUser_ = null;
-          onChanged();
-        } else {
-          appUser_ = null;
-          appUserBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.AppUser appUser = 2;</code>
-       */
-      public elite.sas.api.grpc.UserServiceProto.AppUser.Builder getAppUserBuilder() {
-        
-        onChanged();
-        return getAppUserFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.AppUser appUser = 2;</code>
-       */
-      public elite.sas.api.grpc.UserServiceProto.AppUserOrBuilder getAppUserOrBuilder() {
-        if (appUserBuilder_ != null) {
-          return appUserBuilder_.getMessageOrBuilder();
-        } else {
-          return appUser_ == null ?
-              elite.sas.api.grpc.UserServiceProto.AppUser.getDefaultInstance() : appUser_;
-        }
-      }
-      /**
-       * <code>.AppUser appUser = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          elite.sas.api.grpc.UserServiceProto.AppUser, elite.sas.api.grpc.UserServiceProto.AppUser.Builder, elite.sas.api.grpc.UserServiceProto.AppUserOrBuilder> 
-          getAppUserFieldBuilder() {
-        if (appUserBuilder_ == null) {
-          appUserBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              elite.sas.api.grpc.UserServiceProto.AppUser, elite.sas.api.grpc.UserServiceProto.AppUser.Builder, elite.sas.api.grpc.UserServiceProto.AppUserOrBuilder>(
-                  getAppUser(),
-                  getParentForChildren(),
-                  isClean());
-          appUser_ = null;
-        }
-        return appUserBuilder_;
-      }
-
-      private java.lang.Object admissionNumber_ = "";
-      /**
-       * <code>string admissionNumber = 3;</code>
-       * @return The admissionNumber.
-       */
-      public java.lang.String getAdmissionNumber() {
-        java.lang.Object ref = admissionNumber_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          admissionNumber_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string admissionNumber = 3;</code>
-       * @return The bytes for admissionNumber.
-       */
-      public com.google.protobuf.ByteString
-          getAdmissionNumberBytes() {
-        java.lang.Object ref = admissionNumber_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          admissionNumber_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string admissionNumber = 3;</code>
-       * @param value The admissionNumber to set.
-       * @return This builder for chaining.
-       */
-      public Builder setAdmissionNumber(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        admissionNumber_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string admissionNumber = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearAdmissionNumber() {
-        
-        admissionNumber_ = getDefaultInstance().getAdmissionNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string admissionNumber = 3;</code>
-       * @param value The bytes for admissionNumber to set.
-       * @return This builder for chaining.
-       */
-      public Builder setAdmissionNumberBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        admissionNumber_ = value;
         onChanged();
         return this;
       }
@@ -7895,27 +7542,26 @@ public final class CourseServiceProto {
       "admissionNumber\030\t \001(\t\022\020\n\010courseId\030\n \001(\t\"" +
       "q\n\023SearchStudentParams\022\n\n\002id\030\001 \001(\t\022\021\n\tap" +
       "pUserId\030\002 \001(\t\022\027\n\017admissionNumber\030\003 \001(\t\022\020" +
-      "\n\010courseId\030\004 \001(\t\022\020\n\010schoolId\030\005 \001(\t\"o\n\024Up" +
-      "dateStudentRequest\022\n\n\002id\030\001 \001(\t\022\031\n\007appUse" +
-      "r\030\002 \001(\0132\010.AppUser\022\027\n\017admissionNumber\030\003 \001" +
-      "(\t\022\027\n\006course\030\004 \001(\0132\007.Course\"Q\n\022SearchCou" +
-      "rseParams\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022!\n\013c" +
-      "ourseLevel\030\003 \001(\0162\014.CourseLevel\"R\n\023Update" +
-      "CourseRequest\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022" +
-      "!\n\013courseLevel\030\003 \001(\0162\014.CourseLevel2\310\003\n\016s" +
-      "tudentService\0224\n\017registerStudent\022\027.Regis" +
-      "terStudentRequest\032\010.Student\022$\n\016getAllStu" +
-      "dents\022\006.Empty\032\010.Student0\001\022,\n\ngetStudent\022" +
-      "\024.SearchStudentParams\032\010.Student\022/\n\013getSt" +
-      "udents\022\024.SearchStudentParams\032\010.Student0\001" +
-      "\0220\n\rupdateStudent\022\025.UpdateStudentRequest" +
-      "\032\010.Student\022\035\n\taddCourse\022\007.Course\032\007.Cours" +
-      "e\022\"\n\rgetAllCourses\022\006.Empty\032\007.Course0\001\022)\n" +
-      "\tgetCourse\022\023.SearchCourseParams\032\007.Course" +
-      "\022,\n\ngetCourses\022\023.SearchCourseParams\032\007.Co" +
-      "urse0\001\022-\n\014updateCourse\022\024.UpdateCourseReq" +
-      "uest\032\007.CourseB*\n\022elite.sas.api.grpcB\022Cou" +
-      "rseServiceProtoP\000b\006proto3"
+      "\n\010courseId\030\004 \001(\t\022\020\n\010schoolId\030\005 \001(\t\";\n\024Up" +
+      "dateStudentRequest\022\n\n\002id\030\001 \001(\t\022\027\n\006course" +
+      "\030\004 \001(\0132\007.Course\"Q\n\022SearchCourseParams\022\n\n" +
+      "\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022!\n\013courseLevel\030\003" +
+      " \001(\0162\014.CourseLevel\"R\n\023UpdateCourseReques" +
+      "t\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022!\n\013courseLev" +
+      "el\030\003 \001(\0162\014.CourseLevel2\310\003\n\016studentServic" +
+      "e\0224\n\017registerStudent\022\027.RegisterStudentRe" +
+      "quest\032\010.Student\022$\n\016getAllStudents\022\006.Empt" +
+      "y\032\010.Student0\001\022,\n\ngetStudent\022\024.SearchStud" +
+      "entParams\032\010.Student\022/\n\013getStudents\022\024.Sea" +
+      "rchStudentParams\032\010.Student0\001\0220\n\rupdateSt" +
+      "udent\022\025.UpdateStudentRequest\032\010.Student\022\035" +
+      "\n\taddCourse\022\007.Course\032\007.Course\022\"\n\rgetAllC" +
+      "ourses\022\006.Empty\032\007.Course0\001\022)\n\tgetCourse\022\023" +
+      ".SearchCourseParams\032\007.Course\022,\n\ngetCours" +
+      "es\022\023.SearchCourseParams\032\007.Course0\001\022-\n\014up" +
+      "dateCourse\022\024.UpdateCourseRequest\032\007.Cours" +
+      "eB*\n\022elite.sas.api.grpcB\022CourseServicePr" +
+      "otoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -7953,7 +7599,7 @@ public final class CourseServiceProto {
     internal_static_UpdateStudentRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UpdateStudentRequest_descriptor,
-        new java.lang.String[] { "Id", "AppUser", "AdmissionNumber", "Course", });
+        new java.lang.String[] { "Id", "Course", });
     internal_static_SearchCourseParams_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_SearchCourseParams_fieldAccessorTable = new
