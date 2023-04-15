@@ -1,9 +1,7 @@
 package elite.sas.api;
 
 import elite.sas.api.exceptions.UnretriableException;
-import elite.sas.api.grpc.CommonsProto;
-import elite.sas.api.grpc.TenantServiceProto;
-import elite.sas.api.grpc.UserServiceProto;
+import elite.sas.api.grpc.*;
 import elite.sas.core.entities.*;
 
 import java.util.Objects;
@@ -11,9 +9,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public final class APIUtil {
+public final class ApiUtil {
 
-    public static AppUser fromApi(UserServiceProto.AppUser appUser) throws UnretriableException {
+    public static AppUser tenantFromApi(UserServiceProto.AppUser appUser) throws UnretriableException {
         if (Objects.isNull(appUser.getId()) || Objects.isNull(appUser.getEmail()) ||
                 Objects.isNull(appUser.getFirstName()) || Objects.isNull(appUser.getLastName()) ||
                 Objects.isNull(appUser.getUserName()) || !appUser.hasTenant() ||
@@ -26,7 +24,7 @@ public final class APIUtil {
             try {
                 return Role.builder()
                         .Id(UUID.fromString(r.getId()))
-                        .roleName(fromApi(r.getRoleName()))
+                        .roleName(tenantFromApi(r.getRoleName()))
                         .build();
             } catch (UnretriableException e) {
                 throw new RuntimeException(e);
@@ -39,14 +37,14 @@ public final class APIUtil {
                 .firstName(appUser.getFirstName())
                 .lastName(appUser.getLastName())
                 .userName(appUser.getUserName())
-                .tenant(fromApi(appUser.getTenant()))
+                .tenant(tenantFromApi(appUser.getTenant()))
                 .userType(userTypeFromAPi(appUser.getUserType()))
                 .roles(roleSet);
 
         return userBuilder.build();
     }
 
-    public static Tenant fromApi(TenantServiceProto.Tenant tenant) throws UnretriableException {
+    public static Tenant tenantFromApi(TenantServiceProto.Tenant tenant) throws UnretriableException {
         if (Objects.isNull(tenant.getId()) || Objects.isNull(tenant.getEmail()) ||
                 Objects.isNull(tenant.getName()) || Objects.isNull(tenant.getTenantType())
         ) {
@@ -79,7 +77,7 @@ public final class APIUtil {
         }
     }
 
-    public static RoleName fromApi(CommonsProto.RoleName roleName) throws UnretriableException {
+    public static RoleName tenantFromApi(CommonsProto.RoleName roleName) throws UnretriableException {
         switch (roleName.name()) {
             case "student":
                 return RoleName.STUDENT;
@@ -107,6 +105,50 @@ public final class APIUtil {
         }
     }
 
+    public static Course courseFromApi(CourseServiceProto.Course apiCourse) throws UnretriableException {
+        if (Objects.isNull(apiCourse.getId()) || Objects.isNull(apiCourse.getName()) ||
+                Objects.isNull(apiCourse.getCourseLevel())
+        ) {
+            throw new UnretriableException();
+        }
+        return Course.builder()
+                .Id(UUID.fromString(apiCourse.getId()))
+                .name(apiCourse.getName())
+                .courseLevel(CourseLevel.valueOf(apiCourse.getCourseLevel().name()))
+                .build();
+    }
+
+    public static Listing listingFromApi(ApplicationServiceProto.Listing apiListing) throws UnretriableException {
+        if (Objects.isNull(apiListing.getId()) || !apiListing.hasTenant() ||
+                !apiListing.hasCourse()
+        ) {
+            throw new UnretriableException();
+        }
+        var listingBuilder = Listing.builder()
+                .Id(UUID.fromString(apiListing.getId()))
+                .tenant(tenantFromApi(apiListing.getTenant()))
+                .course(courseFromApi(apiListing.getCourse()));
+
+        if (Objects.nonNull(apiListing.getDescription())) {
+            listingBuilder.description(apiListing.getDescription());
+        }
+
+        if (Objects.nonNull(apiListing.getAttachmentPeriod())) {
+            listingBuilder.attachmentPeriod(AttachmentPeriod.valueOf(apiListing.getAttachmentPeriod().name()));
+        }
+
+        if (Objects.nonNull(apiListing.getDeadline())) {
+
+        }
+
+        return listingBuilder.build();
+
+    }
+
+
+    /*
+     To Api
+    */
 
     public static UserServiceProto.AppUser appUserToApi(AppUser appUser) throws UnretriableException {
         if (Objects.isNull(appUser.getId()) || Objects.isNull(appUser.getEmail()) ||
@@ -178,7 +220,7 @@ public final class APIUtil {
 
     public static CommonsProto.RoleName roleNameToApi(RoleName roleName) throws UnretriableException {
         switch (roleName.name()) {
-            case "STUDENT" :
+            case "STUDENT":
                 return CommonsProto.RoleName.student;
             case "SUOERVISOR":
                 return CommonsProto.RoleName.supervisor;
@@ -202,5 +244,32 @@ public final class APIUtil {
             default:
                 throw new UnretriableException();
         }
+    }
+
+    public static CourseServiceProto.Course courseToApi(Course course) throws UnretriableException {
+        if (Objects.isNull(course.getId()) || Objects.isNull(course.getName()) ||
+                Objects.isNull(course.getCourseLevel())
+        ) {
+            throw new UnretriableException();
+        }
+        return CourseServiceProto.Course.newBuilder()
+                .setId(String.valueOf(course.getId()))
+                .setName(course.getName())
+                .setCourseLevel(CommonsProto.CourseLevel.valueOf(course.getCourseLevel().name()))
+                .build();
+    }
+
+    public static ApplicationServiceProto.Listing listingToApi(Listing listing) throws UnretriableException {
+        if (Objects.isNull(listing.getId()) || Objects.isNull(listing.getCourse()) ||
+                Objects.isNull(listing.getTenant())
+        ) {
+            throw new UnretriableException();
+        }
+        var listingBuilder = ApplicationServiceProto.Listing.newBuilder()
+                .setId(String.valueOf(listing.getId()))
+                .setTenant(tenantToApi(listing.getTenant()))
+                .setCourse(courseToApi(listing.getCourse()));
+
+        return listingBuilder.build();
     }
 }

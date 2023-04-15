@@ -18,6 +18,7 @@ public class GRPCServer {
     private static GRPCServer INSTANCE = null;
 
     private final UserService userService;
+    private final ApplicationService applicationService;
 
 
     public void startServer() {

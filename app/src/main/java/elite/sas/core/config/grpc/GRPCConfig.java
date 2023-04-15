@@ -1,5 +1,6 @@
 package elite.sas.core.config.grpc;
 
+import elite.sas.api.server.ApplicationService;
 import elite.sas.api.server.GRPCServer;
 import elite.sas.api.server.UserService;
 import elite.sas.core.service.AppUserService;
@@ -17,9 +18,14 @@ public class GRPCConfig {
         return new UserService(appUserService);
     }
 
+    @Bean(name = "GRPCApplicationService")
+    ApplicationService applicationService(elite.sas.core.service.ApplicationService applicationService) {
+        return new ApplicationService(applicationService);
+    }
+
     @Bean
-    GRPCServer grpcServer(UserService userService) {
-        return new GRPCServer(userService);
+    GRPCServer grpcServer(UserService userService, ApplicationService applicationService) {
+        return new GRPCServer(userService, applicationService);
     }
 
 

@@ -1,17 +1,14 @@
 package elite.sas.api.server;
 
-import elite.sas.api.APIUtil;
+import elite.sas.api.ApiUtil;
 import elite.sas.api.exceptions.UnretriableException;
 import elite.sas.api.grpc.CommonsProto;
-import elite.sas.api.grpc.TenantServiceProto;
 import elite.sas.api.grpc.UserServiceProto;
 import elite.sas.api.grpc.userServiceGrpc;
 import elite.sas.core.api.params.CreateUserParams;
 import elite.sas.core.entities.AppUser;
-import elite.sas.core.repository.UserRepository;
 import elite.sas.core.service.AppUserService;
 import elite.sas.core.util.TemporalUtil;
-import elite.sas.core.workflows.UserAccountRegistrationWorkflowImpl;
 import elite.sas.core.workflows.definition.UserAccountRegistrationWorkflow;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +32,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
         try {
             createUserParams = CreateUserParams.builder()
                     .userName(request.getUserName())
-                    .userType(APIUtil.userTypeFromAPi(request.getUserType()))
+                    .userType(ApiUtil.userTypeFromAPi(request.getUserType()))
                     .build();
         } catch (UnretriableException e) {
             responseObserver.onError(e);
@@ -43,7 +40,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
         AppUser appUser = userAccountRegistrationWorkflow.handle(createUserParams);
 
         try {
-            responseObserver.onNext(APIUtil.appUserToApi(appUser));
+            responseObserver.onNext(ApiUtil.appUserToApi(appUser));
         } catch (UnretriableException e) {
             responseObserver.onCompleted();
         }
@@ -57,7 +54,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
         appUserService.findAllUsers().forEach(u -> {
             log.debug("user ----> {}", u);
             try {
-                responseObserver.onNext(APIUtil.appUserToApi(u));
+                responseObserver.onNext(ApiUtil.appUserToApi(u));
             } catch (UnretriableException e) {
                 responseObserver.onError(e);
             }
@@ -71,7 +68,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
         if (Objects.nonNull(request.getTenantId())) {
             appUserService.getAllUsersForTenant(request.getTenantId()).forEach(u -> {
                         try {
-                            responseObserver.onNext(APIUtil.appUserToApi(u));
+                            responseObserver.onNext(ApiUtil.appUserToApi(u));
                         } catch (UnretriableException e) {
                             responseObserver.onError(e);
                         }
@@ -91,7 +88,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
                 responseObserver.onCompleted();
             }
             try {
-                responseObserver.onNext(APIUtil.appUserToApi(optionalAppUser.get()));
+                responseObserver.onNext(ApiUtil.appUserToApi(optionalAppUser.get()));
             } catch (UnretriableException e) {
                 responseObserver.onError(e);
             }
@@ -103,7 +100,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
                 responseObserver.onCompleted();
             }
             try {
-                responseObserver.onNext(APIUtil.appUserToApi(optionalAppUser.get()));
+                responseObserver.onNext(ApiUtil.appUserToApi(optionalAppUser.get()));
             } catch (UnretriableException e) {
                 responseObserver.onError(e);
             }
