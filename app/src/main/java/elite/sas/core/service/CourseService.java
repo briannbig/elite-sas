@@ -1,7 +1,9 @@
 package elite.sas.core.service;
 
 import elite.sas.core.entities.Course;
+import elite.sas.core.entities.CourseLevel;
 import elite.sas.core.repository.CourseRepository;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +22,41 @@ public class CourseService {
     @Autowired
     private final CourseRepository courseRepository;
 
-    public List<Course> getAllCourses() {
-        return  courseRepository.findAll();
-    }
-
     public Optional<Course> getCourseById(String courseId) {
         return courseRepository.findById(UUID.fromString(courseId));
     }
 
     public Optional<Course> getCourseByName(String courseName) {
-        return getAllCourses().stream().filter(c -> Objects.equals(c.getName(), courseName)).findAny();
+        return courseRepository.findByName(courseName);
+    }
+
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
+    }
+
+    public List<Course> getAllCoursesForLevel(CourseLevel courseLevel) {
+        return courseRepository.findByCourseLevel(courseLevel.name());
+    }
+
+    public Optional<Course> updateCourse(String courseId, @Nullable String courseName, @Nullable CourseLevel courseLevel) {
+        Optional<Course> optionalCourse = courseRepository.findById(UUID.fromString(courseId));
+        if (optionalCourse.isEmpty()) {
+            log.debug("course with id {} not found", courseId);
+            return Optional.empty();
+        }
+
+
+        if (Objects.nonNull(courseName) && Objects.equals(optionalCourse.get().getName(), courseName)) {
+            optionalCourse.get().setName(courseName);
+        }
+
+        if (Objects.nonNull(courseLevel) &&
+                Objects.equals(optionalCourse.get().getName().toLowerCase(), courseLevel.name().toLowerCase())) {
+            optionalCourse.get().setCourseLevel(courseLevel);
+        }
+
+        return Optional.of(courseRepository.save(optionalCourse.get()));
+
     }
 
 }

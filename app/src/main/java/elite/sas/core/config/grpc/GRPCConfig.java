@@ -1,10 +1,8 @@
 package elite.sas.core.config.grpc;
 
-import elite.sas.api.server.ApplicationService;
-import elite.sas.api.server.GRPCServer;
-import elite.sas.api.server.TenantService;
-import elite.sas.api.server.UserService;
+import elite.sas.api.server.*;
 import elite.sas.core.service.AppUserService;
+import elite.sas.core.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,9 +27,17 @@ public class GRPCConfig {
         return new TenantService(tenantService);
     }
 
+
+
+    @Bean(name = "GRPCStudentService")
+    StudentService studentService(elite.sas.core.service.StudentService studentService, CourseService courseService) {
+        return new StudentService(studentService, courseService);
+    }
+
     @Bean
-    GRPCServer grpcServer(UserService userService, ApplicationService applicationService, TenantService tenantService) {
-        return new GRPCServer(userService, applicationService, tenantService);
+    GRPCServer grpcServer(UserService userService, ApplicationService applicationService,
+                          TenantService tenantService, StudentService studentService) {
+        return new GRPCServer(userService, applicationService, tenantService, studentService);
     }
 
 

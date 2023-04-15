@@ -114,6 +114,10 @@ public final class ApiUtil {
         return TenantType.valueOf(tenantType.name());
     }
 
+    public static CourseLevel courseLevelFromApi(CommonsProto.CourseLevel apiCourseLevel) {
+        return CourseLevel.valueOf(apiCourseLevel.name());
+    }
+
     public static Course courseFromApi(CourseServiceProto.Course apiCourse) throws ModelConversionException {
         if (Objects.isNull(apiCourse.getId()) || Objects.isNull(apiCourse.getName()) ||
                 Objects.isNull(apiCourse.getCourseLevel())
@@ -284,6 +288,10 @@ public final class ApiUtil {
             default:
                 throw new ModelConversionException();
         }
+    }
+
+    public static CommonsProto.CourseLevel courseLevelToApi(CommonsProto.CourseLevel courseLevel) {
+        return CommonsProto.CourseLevel.valueOf(courseLevel.name());
     }
 
     public static CourseServiceProto.Course courseToApi(Course course) throws ModelConversionException {

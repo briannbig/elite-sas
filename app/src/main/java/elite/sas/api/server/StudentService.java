@@ -7,7 +7,9 @@ import elite.sas.api.grpc.CommonsProto;
 import elite.sas.api.grpc.CourseServiceProto;
 import elite.sas.api.grpc.studentServiceGrpc;
 import elite.sas.core.api.params.CreateStudentParams;
+import elite.sas.core.entities.Course;
 import elite.sas.core.entities.Student;
+import elite.sas.core.service.CourseService;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,7 @@ import static elite.sas.api.ApiUtil.*;
 public class StudentService extends studentServiceGrpc.studentServiceImplBase {
 
     private final elite.sas.core.service.StudentService studentService;
+    private final CourseService courseService;
 
     @Override
     public void registerStudent(CourseServiceProto.RegisterStudentRequest request, StreamObserver<CourseServiceProto.Student> responseObserver) {
@@ -180,6 +183,7 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
 
     /**
      * updates student. Only update course
+     *
      * @param request
      * @param responseObserver
      */
@@ -210,32 +214,121 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
         responseObserver.onCompleted();
 
 
-
-
     }
 
     @Override
     public void addCourse(CourseServiceProto.Course request, StreamObserver<CourseServiceProto.Course> responseObserver) {
-        super.addCourse(request, responseObserver);
+        if (Objects.isNull(request.getName()) || Objects.isNull(request.getCourseLevel())) {
+            responseObserver.onError(new UnRetriableException("Missing required field(s)"));
+            log.debug("Missing required field(s) for request {}", request);
+            return;
+        }
+
     }
 
     @Override
     public void getAllCourses(CommonsProto.Empty request, StreamObserver<CourseServiceProto.Course> responseObserver) {
-        super.getAllCourses(request, responseObserver);
+        courseService.getAllCourses().forEach(
+                course -> {
+                    try {
+                        responseObserver.onNext(courseToApi(course));
+                    } catch (ModelConversionException e) {
+                        log.debug("Conversion error: {}", e);
+                    }
+                }
+        );
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getCourse(CourseServiceProto.SearchCourseParams request, StreamObserver<CourseServiceProto.Course> responseObserver) {
-        super.getCourse(request, responseObserver);
+
+        if (Objects.nonNull(request.getId())) {
+            Optional<Course> optionalCourse = courseService.getCourseById(request.getId());
+            if (optionalCourse.isEmpty()) {
+                log.debug("could not find course with id {}", request.getId());
+                responseObserver.onError(new UnRetriableException("could not find course with given Id"));
+                return;
+            }
+            try {
+                responseObserver.onNext(courseToApi(optionalCourse.get()));
+            } catch (ModelConversionException e) {
+                responseObserver.onError(e);
+                return;
+            }
+            responseObserver.onCompleted();
+        }
+
+        if (Objects.nonNull(request.getName())) {
+            Optional<Course> optionalCourse = courseService.getCourseByName(request.getName());
+            if (optionalCourse.isEmpty()) {
+                log.debug("could not find course with name {}", request.getName());
+                responseObserver.onError(new UnRetriableException("could not find course with given name"));
+                return;
+            }
+            try {
+                responseObserver.onNext(courseToApi(optionalCourse.get()));
+            } catch (ModelConversionException e) {
+                responseObserver.onError(e);
+                return;
+            }
+            responseObserver.onCompleted();
+        }
+
+        log.debug("missing required param(s) for request {}", request);
+        responseObserver.onError(new UnRetriableException("Missing required param(s) in the request"));
+
     }
 
+    /**
+     * get courses by level
+     *
+     * @param request          must have course level for filtering
+     * @param responseObserver
+     */
     @Override
     public void getCourses(CourseServiceProto.SearchCourseParams request, StreamObserver<CourseServiceProto.Course> responseObserver) {
-        super.getCourses(request, responseObserver);
+        if (Objects.isNull(request.getCourseLevel())) {
+            log.debug("missing course level in the request: {}", request);
+            responseObserver.onError(new UnRetriableException("missing course level in request"));
+            return;
+        }
+
+        courseService.getAllCoursesForLevel(ApiUtil.courseLevelFromApi(request.getCourseLevel())).forEach(
+                course -> {
+                    try {
+                        responseObserver.onNext(courseToApi(course));
+                    } catch (ModelConversionException e) {
+                        log.debug("Conversion error: {}", e);
+                    }
+                }
+        );
+        responseObserver.onCompleted();
     }
 
     @Override
     public void updateCourse(CourseServiceProto.UpdateCourseRequest request, StreamObserver<CourseServiceProto.Course> responseObserver) {
-        super.updateCourse(request, responseObserver);
+        if (Objects.isNull(request.getId())) {
+            log.debug("missing course id in the request: {}", request);
+            responseObserver.onError(new UnRetriableException("missing course id in request"));
+            return;
+        }
+
+        Optional<Course> optionalCourse = courseService.updateCourse(request.getId(), request.getName(), courseLevelFromApi(request.getCourseLevel()));
+
+        if (optionalCourse.isEmpty()) {
+            log.debug("could not update course with id: {}", request.getId());
+            responseObserver.onError(new UnRetriableException("Could not update course"));
+            return;
+        }
+
+        try {
+            responseObserver.onNext(courseToApi(optionalCourse.get()));
+        } catch (ModelConversionException e) {
+            responseObserver.onError(e);
+            return;
+        }
+        responseObserver.onCompleted();
+
     }
 }
