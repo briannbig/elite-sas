@@ -24,7 +24,7 @@ public final class ApiUtil {
             try {
                 return Role.builder()
                         .Id(UUID.fromString(r.getId()))
-                        .roleName(tenantFromApi(r.getRoleName()))
+                        .roleName(roleNameFromApi(r.getRoleName()))
                         .build();
             } catch (ModelConversionException e) {
                 throw new RuntimeException(e);
@@ -77,7 +77,7 @@ public final class ApiUtil {
         }
     }
 
-    public static RoleName tenantFromApi(CommonsProto.RoleName roleName) throws ModelConversionException {
+    public static RoleName roleNameFromApi(CommonsProto.RoleName roleName) throws ModelConversionException {
         switch (roleName.name()) {
             case "student":
                 return RoleName.STUDENT;
