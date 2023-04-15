@@ -18,4 +18,5 @@ public interface TenantRepository extends JpaRepository<Tenant, UUID> {
 
     List<Tenant> findByTenantType(TenantType tenantType);
 
+    List<Tenant> findByLocation(String location);
 }

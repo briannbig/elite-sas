@@ -26,11 +26,12 @@ message RegisterTenantRequest {
 }
 
 message UpdateTenantRequest {
-  string name = 1;
-  string location = 2;
-  string telephone = 3;
-  string email = 4;
-  TenantType tenantType = 5;
+  string id = 1;
+  string name = 2;
+  string location = 3;
+  string telephone = 4;
+  string email = 5;
+  TenantType tenantType = 6;
 }
 
 message SearchParams {
@@ -49,7 +50,7 @@ service tenantService {
 
   rpc getTenantById (SearchParams) returns (Tenant);
 
-  rpc getTenantByType(SearchParams) returns (Tenant);
+  rpc getTenants(SearchParams) returns (stream Tenant);
 
   rpc updateTenant(UpdateTenantRequest) returns (Tenant);
 

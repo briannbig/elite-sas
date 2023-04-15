@@ -40,6 +40,14 @@ public class TenantService {
         return tenantRepository.findByTenantType(TenantType.COMPANY);
     }
 
+    public List<Tenant> getAllTenantsByType(TenantType tenantType) {
+        return tenantRepository.findByTenantType(tenantType);
+    }
+
+    public List<Tenant> getAllTenantsByLocation(String location) {
+        return tenantRepository.findByLocation(location);
+    }
+
     public Optional<Tenant> getInternalTenant() {
         return tenantRepository.findByTenantType(TenantType.INTERNAL)
                 .stream().findFirst();
@@ -68,7 +76,38 @@ public class TenantService {
     }
 
     @Transactional
-    public Tenant createTenant(CreateTenantParams createTenantParams) {
-        return TemporalUtil.tenantRegistrationWorkflow().handle(createTenantParams);
+    public Optional<Tenant> createTenant(CreateTenantParams createTenantParams) {
+        return Optional.ofNullable(TemporalUtil.tenantRegistrationWorkflow().handle(createTenantParams));
+    }
+
+
+    public Optional<Tenant> updateTenant(Tenant tenant) {
+        var optionalTenant = tenantRepository.findById(tenant.getId());
+        if (optionalTenant.isEmpty()) {
+            log.debug("tenant with id {} not found", tenant.getId());
+            return Optional.empty();
+        }
+
+        if (!Objects.equals(optionalTenant.get().getName(), tenant.getName())) {
+            optionalTenant.get().setName(tenant.getName());
+        }
+
+        if (!Objects.equals(optionalTenant.get().getLocation(), tenant.getLocation())) {
+            optionalTenant.get().setLocation(tenant.getLocation());
+        }
+
+        if (!Objects.equals(optionalTenant.get().getTelephone(), tenant.getTelephone())) {
+            var optionalTenantByTelephone = tenantRepository.findByTelephone(tenant.getTelephone());
+            if (optionalTenantByTelephone.isEmpty()) {
+                optionalTenant.get().setTelephone(tenant.getTelephone());
+            }
+            else {
+                log.debug("telephone {} already taken", tenant.getTelephone());
+                return Optional.empty();
+            }
+
+        }
+
+        return Optional.of(tenantRepository.save(optionalTenant.get()));
     }
 }

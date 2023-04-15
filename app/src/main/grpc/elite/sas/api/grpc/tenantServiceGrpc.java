@@ -109,34 +109,34 @@ public final class tenantServiceGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.TenantServiceProto.SearchParams,
-      elite.sas.api.grpc.TenantServiceProto.Tenant> getGetTenantByTypeMethod;
+      elite.sas.api.grpc.TenantServiceProto.Tenant> getGetTenantsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "getTenantByType",
+      fullMethodName = SERVICE_NAME + '/' + "getTenants",
       requestType = elite.sas.api.grpc.TenantServiceProto.SearchParams.class,
       responseType = elite.sas.api.grpc.TenantServiceProto.Tenant.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<elite.sas.api.grpc.TenantServiceProto.SearchParams,
-      elite.sas.api.grpc.TenantServiceProto.Tenant> getGetTenantByTypeMethod() {
-    io.grpc.MethodDescriptor<elite.sas.api.grpc.TenantServiceProto.SearchParams, elite.sas.api.grpc.TenantServiceProto.Tenant> getGetTenantByTypeMethod;
-    if ((getGetTenantByTypeMethod = tenantServiceGrpc.getGetTenantByTypeMethod) == null) {
+      elite.sas.api.grpc.TenantServiceProto.Tenant> getGetTenantsMethod() {
+    io.grpc.MethodDescriptor<elite.sas.api.grpc.TenantServiceProto.SearchParams, elite.sas.api.grpc.TenantServiceProto.Tenant> getGetTenantsMethod;
+    if ((getGetTenantsMethod = tenantServiceGrpc.getGetTenantsMethod) == null) {
       synchronized (tenantServiceGrpc.class) {
-        if ((getGetTenantByTypeMethod = tenantServiceGrpc.getGetTenantByTypeMethod) == null) {
-          tenantServiceGrpc.getGetTenantByTypeMethod = getGetTenantByTypeMethod =
+        if ((getGetTenantsMethod = tenantServiceGrpc.getGetTenantsMethod) == null) {
+          tenantServiceGrpc.getGetTenantsMethod = getGetTenantsMethod =
               io.grpc.MethodDescriptor.<elite.sas.api.grpc.TenantServiceProto.SearchParams, elite.sas.api.grpc.TenantServiceProto.Tenant>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getTenantByType"))
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getTenants"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   elite.sas.api.grpc.TenantServiceProto.SearchParams.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   elite.sas.api.grpc.TenantServiceProto.Tenant.getDefaultInstance()))
-              .setSchemaDescriptor(new tenantServiceMethodDescriptorSupplier("getTenantByType"))
+              .setSchemaDescriptor(new tenantServiceMethodDescriptorSupplier("getTenants"))
               .build();
         }
       }
     }
-    return getGetTenantByTypeMethod;
+    return getGetTenantsMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest,
@@ -241,9 +241,9 @@ public final class tenantServiceGrpc {
 
     /**
      */
-    public void getTenantByType(elite.sas.api.grpc.TenantServiceProto.SearchParams request,
+    public void getTenants(elite.sas.api.grpc.TenantServiceProto.SearchParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetTenantByTypeMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetTenantsMethod(), responseObserver);
     }
 
     /**
@@ -277,12 +277,12 @@ public final class tenantServiceGrpc {
                 elite.sas.api.grpc.TenantServiceProto.Tenant>(
                   this, METHODID_GET_TENANT_BY_ID)))
           .addMethod(
-            getGetTenantByTypeMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
+            getGetTenantsMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
               new MethodHandlers<
                 elite.sas.api.grpc.TenantServiceProto.SearchParams,
                 elite.sas.api.grpc.TenantServiceProto.Tenant>(
-                  this, METHODID_GET_TENANT_BY_TYPE)))
+                  this, METHODID_GET_TENANTS)))
           .addMethod(
             getUpdateTenantMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -334,10 +334,10 @@ public final class tenantServiceGrpc {
 
     /**
      */
-    public void getTenantByType(elite.sas.api.grpc.TenantServiceProto.SearchParams request,
+    public void getTenants(elite.sas.api.grpc.TenantServiceProto.SearchParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGetTenantByTypeMethod(), getCallOptions()), request, responseObserver);
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetTenantsMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -387,9 +387,10 @@ public final class tenantServiceGrpc {
 
     /**
      */
-    public elite.sas.api.grpc.TenantServiceProto.Tenant getTenantByType(elite.sas.api.grpc.TenantServiceProto.SearchParams request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGetTenantByTypeMethod(), getCallOptions(), request);
+    public java.util.Iterator<elite.sas.api.grpc.TenantServiceProto.Tenant> getTenants(
+        elite.sas.api.grpc.TenantServiceProto.SearchParams request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetTenantsMethod(), getCallOptions(), request);
     }
 
     /**
@@ -432,14 +433,6 @@ public final class tenantServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<elite.sas.api.grpc.TenantServiceProto.Tenant> getTenantByType(
-        elite.sas.api.grpc.TenantServiceProto.SearchParams request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGetTenantByTypeMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
     public com.google.common.util.concurrent.ListenableFuture<elite.sas.api.grpc.TenantServiceProto.Tenant> updateTenant(
         elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -450,7 +443,7 @@ public final class tenantServiceGrpc {
   private static final int METHODID_REGISTER_TENANT = 0;
   private static final int METHODID_GET_ALL_TENANTS = 1;
   private static final int METHODID_GET_TENANT_BY_ID = 2;
-  private static final int METHODID_GET_TENANT_BY_TYPE = 3;
+  private static final int METHODID_GET_TENANTS = 3;
   private static final int METHODID_UPDATE_TENANT = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
@@ -482,8 +475,8 @@ public final class tenantServiceGrpc {
           serviceImpl.getTenantById((elite.sas.api.grpc.TenantServiceProto.SearchParams) request,
               (io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant>) responseObserver);
           break;
-        case METHODID_GET_TENANT_BY_TYPE:
-          serviceImpl.getTenantByType((elite.sas.api.grpc.TenantServiceProto.SearchParams) request,
+        case METHODID_GET_TENANTS:
+          serviceImpl.getTenants((elite.sas.api.grpc.TenantServiceProto.SearchParams) request,
               (io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant>) responseObserver);
           break;
         case METHODID_UPDATE_TENANT:
@@ -554,7 +547,7 @@ public final class tenantServiceGrpc {
               .addMethod(getRegisterTenantMethod())
               .addMethod(getGetAllTenantsMethod())
               .addMethod(getGetTenantByIdMethod())
-              .addMethod(getGetTenantByTypeMethod())
+              .addMethod(getGetTenantsMethod())
               .addMethod(getUpdateTenantMethod())
               .build();
         }

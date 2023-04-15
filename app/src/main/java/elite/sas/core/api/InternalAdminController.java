@@ -12,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/admin/internal")
@@ -69,7 +70,7 @@ public class InternalAdminController {
 
     @PostMapping("/")
     public Tenant registerTenant(@RequestBody CreateTenantParams createTenantParams) {
-        return tenantService.createTenant(createTenantParams);
+        return tenantService.createTenant(createTenantParams).get();
     }
 
 

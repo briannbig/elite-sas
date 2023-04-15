@@ -15,16 +15,18 @@ import java.util.List;
 public class GRPCServer {
 
     private static final int port = 9001;
-    private static GRPCServer INSTANCE = null;
 
     private final UserService userService;
     private final ApplicationService applicationService;
+    private final TenantService tenantService;
 
 
     public void startServer() {
         log.info("starting grpc server...");
         Server server = ServerBuilder.forPort(port)
                 .addService(userService)
+                .addService(applicationService)
+                .addService(tenantService)
                 .build();
 
         log.info("starting grppc server on port {}", port);

@@ -2423,60 +2423,72 @@ public final class TenantServiceProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string name = 1;</code>
+     * <code>string id = 1;</code>
+     * @return The id.
+     */
+    java.lang.String getId();
+    /**
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    /**
+     * <code>string name = 2;</code>
      * @return The name.
      */
     java.lang.String getName();
     /**
-     * <code>string name = 1;</code>
+     * <code>string name = 2;</code>
      * @return The bytes for name.
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
-     * <code>string location = 2;</code>
+     * <code>string location = 3;</code>
      * @return The location.
      */
     java.lang.String getLocation();
     /**
-     * <code>string location = 2;</code>
+     * <code>string location = 3;</code>
      * @return The bytes for location.
      */
     com.google.protobuf.ByteString
         getLocationBytes();
 
     /**
-     * <code>string telephone = 3;</code>
+     * <code>string telephone = 4;</code>
      * @return The telephone.
      */
     java.lang.String getTelephone();
     /**
-     * <code>string telephone = 3;</code>
+     * <code>string telephone = 4;</code>
      * @return The bytes for telephone.
      */
     com.google.protobuf.ByteString
         getTelephoneBytes();
 
     /**
-     * <code>string email = 4;</code>
+     * <code>string email = 5;</code>
      * @return The email.
      */
     java.lang.String getEmail();
     /**
-     * <code>string email = 4;</code>
+     * <code>string email = 5;</code>
      * @return The bytes for email.
      */
     com.google.protobuf.ByteString
         getEmailBytes();
 
     /**
-     * <code>.TenantType tenantType = 5;</code>
+     * <code>.TenantType tenantType = 6;</code>
      * @return The enum numeric value on the wire for tenantType.
      */
     int getTenantTypeValue();
     /**
-     * <code>.TenantType tenantType = 5;</code>
+     * <code>.TenantType tenantType = 6;</code>
      * @return The tenantType.
      */
     elite.sas.api.grpc.CommonsProto.TenantType getTenantType();
@@ -2494,6 +2506,7 @@ public final class TenantServiceProto {
       super(builder);
     }
     private UpdateTenantRequest() {
+      id_ = "";
       name_ = "";
       location_ = "";
       telephone_ = "";
@@ -2534,28 +2547,34 @@ public final class TenantServiceProto {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              name_ = s;
+              id_ = s;
               break;
             }
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              location_ = s;
+              name_ = s;
               break;
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              telephone_ = s;
+              location_ = s;
               break;
             }
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
+              telephone_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
               email_ = s;
               break;
             }
-            case 40: {
+            case 48: {
               int rawValue = input.readEnum();
 
               tenantType_ = rawValue;
@@ -2595,10 +2614,48 @@ public final class TenantServiceProto {
               elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest.class, elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest.Builder.class);
     }
 
-    public static final int NAME_FIELD_NUMBER = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object id_;
+    /**
+     * <code>string id = 1;</code>
+     * @return The id.
+     */
+    @java.lang.Override
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        id_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
     private volatile java.lang.Object name_;
     /**
-     * <code>string name = 1;</code>
+     * <code>string name = 2;</code>
      * @return The name.
      */
     @java.lang.Override
@@ -2615,7 +2672,7 @@ public final class TenantServiceProto {
       }
     }
     /**
-     * <code>string name = 1;</code>
+     * <code>string name = 2;</code>
      * @return The bytes for name.
      */
     @java.lang.Override
@@ -2633,10 +2690,10 @@ public final class TenantServiceProto {
       }
     }
 
-    public static final int LOCATION_FIELD_NUMBER = 2;
+    public static final int LOCATION_FIELD_NUMBER = 3;
     private volatile java.lang.Object location_;
     /**
-     * <code>string location = 2;</code>
+     * <code>string location = 3;</code>
      * @return The location.
      */
     @java.lang.Override
@@ -2653,7 +2710,7 @@ public final class TenantServiceProto {
       }
     }
     /**
-     * <code>string location = 2;</code>
+     * <code>string location = 3;</code>
      * @return The bytes for location.
      */
     @java.lang.Override
@@ -2671,10 +2728,10 @@ public final class TenantServiceProto {
       }
     }
 
-    public static final int TELEPHONE_FIELD_NUMBER = 3;
+    public static final int TELEPHONE_FIELD_NUMBER = 4;
     private volatile java.lang.Object telephone_;
     /**
-     * <code>string telephone = 3;</code>
+     * <code>string telephone = 4;</code>
      * @return The telephone.
      */
     @java.lang.Override
@@ -2691,7 +2748,7 @@ public final class TenantServiceProto {
       }
     }
     /**
-     * <code>string telephone = 3;</code>
+     * <code>string telephone = 4;</code>
      * @return The bytes for telephone.
      */
     @java.lang.Override
@@ -2709,10 +2766,10 @@ public final class TenantServiceProto {
       }
     }
 
-    public static final int EMAIL_FIELD_NUMBER = 4;
+    public static final int EMAIL_FIELD_NUMBER = 5;
     private volatile java.lang.Object email_;
     /**
-     * <code>string email = 4;</code>
+     * <code>string email = 5;</code>
      * @return The email.
      */
     @java.lang.Override
@@ -2729,7 +2786,7 @@ public final class TenantServiceProto {
       }
     }
     /**
-     * <code>string email = 4;</code>
+     * <code>string email = 5;</code>
      * @return The bytes for email.
      */
     @java.lang.Override
@@ -2747,17 +2804,17 @@ public final class TenantServiceProto {
       }
     }
 
-    public static final int TENANTTYPE_FIELD_NUMBER = 5;
+    public static final int TENANTTYPE_FIELD_NUMBER = 6;
     private int tenantType_;
     /**
-     * <code>.TenantType tenantType = 5;</code>
+     * <code>.TenantType tenantType = 6;</code>
      * @return The enum numeric value on the wire for tenantType.
      */
     @java.lang.Override public int getTenantTypeValue() {
       return tenantType_;
     }
     /**
-     * <code>.TenantType tenantType = 5;</code>
+     * <code>.TenantType tenantType = 6;</code>
      * @return The tenantType.
      */
     @java.lang.Override public elite.sas.api.grpc.CommonsProto.TenantType getTenantType() {
@@ -2780,20 +2837,23 @@ public final class TenantServiceProto {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(location_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, location_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, location_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(telephone_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, telephone_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, telephone_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(email_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, email_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, email_);
       }
       if (tenantType_ != elite.sas.api.grpc.CommonsProto.TenantType.SCHOOL.getNumber()) {
-        output.writeEnum(5, tenantType_);
+        output.writeEnum(6, tenantType_);
       }
       unknownFields.writeTo(output);
     }
@@ -2804,21 +2864,24 @@ public final class TenantServiceProto {
       if (size != -1) return size;
 
       size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(location_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, location_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, location_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(telephone_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, telephone_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, telephone_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(email_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, email_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, email_);
       }
       if (tenantType_ != elite.sas.api.grpc.CommonsProto.TenantType.SCHOOL.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, tenantType_);
+          .computeEnumSize(6, tenantType_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2835,6 +2898,8 @@ public final class TenantServiceProto {
       }
       elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest other = (elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest) obj;
 
+      if (!getId()
+          .equals(other.getId())) return false;
       if (!getName()
           .equals(other.getName())) return false;
       if (!getLocation()
@@ -2855,6 +2920,8 @@ public final class TenantServiceProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + LOCATION_FIELD_NUMBER;
@@ -2998,6 +3065,8 @@ public final class TenantServiceProto {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        id_ = "";
+
         name_ = "";
 
         location_ = "";
@@ -3034,6 +3103,7 @@ public final class TenantServiceProto {
       @java.lang.Override
       public elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest buildPartial() {
         elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest result = new elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest(this);
+        result.id_ = id_;
         result.name_ = name_;
         result.location_ = location_;
         result.telephone_ = telephone_;
@@ -3087,6 +3157,10 @@ public final class TenantServiceProto {
 
       public Builder mergeFrom(elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest other) {
         if (other == elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest.getDefaultInstance()) return this;
+        if (!other.getId().isEmpty()) {
+          id_ = other.id_;
+          onChanged();
+        }
         if (!other.getName().isEmpty()) {
           name_ = other.name_;
           onChanged();
@@ -3135,9 +3209,85 @@ public final class TenantServiceProto {
         return this;
       }
 
+      private java.lang.Object id_ = "";
+      /**
+       * <code>string id = 1;</code>
+       * @return The id.
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string id = 1;</code>
+       * @return The bytes for id.
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string id = 1;</code>
+       * @param value The id to set.
+       * @return This builder for chaining.
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string id = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearId() {
+        
+        id_ = getDefaultInstance().getId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string id = 1;</code>
+       * @param value The bytes for id to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object name_ = "";
       /**
-       * <code>string name = 1;</code>
+       * <code>string name = 2;</code>
        * @return The name.
        */
       public java.lang.String getName() {
@@ -3153,7 +3303,7 @@ public final class TenantServiceProto {
         }
       }
       /**
-       * <code>string name = 1;</code>
+       * <code>string name = 2;</code>
        * @return The bytes for name.
        */
       public com.google.protobuf.ByteString
@@ -3170,7 +3320,7 @@ public final class TenantServiceProto {
         }
       }
       /**
-       * <code>string name = 1;</code>
+       * <code>string name = 2;</code>
        * @param value The name to set.
        * @return This builder for chaining.
        */
@@ -3185,7 +3335,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>string name = 1;</code>
+       * <code>string name = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearName() {
@@ -3195,7 +3345,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>string name = 1;</code>
+       * <code>string name = 2;</code>
        * @param value The bytes for name to set.
        * @return This builder for chaining.
        */
@@ -3213,7 +3363,7 @@ public final class TenantServiceProto {
 
       private java.lang.Object location_ = "";
       /**
-       * <code>string location = 2;</code>
+       * <code>string location = 3;</code>
        * @return The location.
        */
       public java.lang.String getLocation() {
@@ -3229,7 +3379,7 @@ public final class TenantServiceProto {
         }
       }
       /**
-       * <code>string location = 2;</code>
+       * <code>string location = 3;</code>
        * @return The bytes for location.
        */
       public com.google.protobuf.ByteString
@@ -3246,7 +3396,7 @@ public final class TenantServiceProto {
         }
       }
       /**
-       * <code>string location = 2;</code>
+       * <code>string location = 3;</code>
        * @param value The location to set.
        * @return This builder for chaining.
        */
@@ -3261,7 +3411,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>string location = 2;</code>
+       * <code>string location = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearLocation() {
@@ -3271,7 +3421,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>string location = 2;</code>
+       * <code>string location = 3;</code>
        * @param value The bytes for location to set.
        * @return This builder for chaining.
        */
@@ -3289,7 +3439,7 @@ public final class TenantServiceProto {
 
       private java.lang.Object telephone_ = "";
       /**
-       * <code>string telephone = 3;</code>
+       * <code>string telephone = 4;</code>
        * @return The telephone.
        */
       public java.lang.String getTelephone() {
@@ -3305,7 +3455,7 @@ public final class TenantServiceProto {
         }
       }
       /**
-       * <code>string telephone = 3;</code>
+       * <code>string telephone = 4;</code>
        * @return The bytes for telephone.
        */
       public com.google.protobuf.ByteString
@@ -3322,7 +3472,7 @@ public final class TenantServiceProto {
         }
       }
       /**
-       * <code>string telephone = 3;</code>
+       * <code>string telephone = 4;</code>
        * @param value The telephone to set.
        * @return This builder for chaining.
        */
@@ -3337,7 +3487,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>string telephone = 3;</code>
+       * <code>string telephone = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearTelephone() {
@@ -3347,7 +3497,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>string telephone = 3;</code>
+       * <code>string telephone = 4;</code>
        * @param value The bytes for telephone to set.
        * @return This builder for chaining.
        */
@@ -3365,7 +3515,7 @@ public final class TenantServiceProto {
 
       private java.lang.Object email_ = "";
       /**
-       * <code>string email = 4;</code>
+       * <code>string email = 5;</code>
        * @return The email.
        */
       public java.lang.String getEmail() {
@@ -3381,7 +3531,7 @@ public final class TenantServiceProto {
         }
       }
       /**
-       * <code>string email = 4;</code>
+       * <code>string email = 5;</code>
        * @return The bytes for email.
        */
       public com.google.protobuf.ByteString
@@ -3398,7 +3548,7 @@ public final class TenantServiceProto {
         }
       }
       /**
-       * <code>string email = 4;</code>
+       * <code>string email = 5;</code>
        * @param value The email to set.
        * @return This builder for chaining.
        */
@@ -3413,7 +3563,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>string email = 4;</code>
+       * <code>string email = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearEmail() {
@@ -3423,7 +3573,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>string email = 4;</code>
+       * <code>string email = 5;</code>
        * @param value The bytes for email to set.
        * @return This builder for chaining.
        */
@@ -3441,14 +3591,14 @@ public final class TenantServiceProto {
 
       private int tenantType_ = 0;
       /**
-       * <code>.TenantType tenantType = 5;</code>
+       * <code>.TenantType tenantType = 6;</code>
        * @return The enum numeric value on the wire for tenantType.
        */
       @java.lang.Override public int getTenantTypeValue() {
         return tenantType_;
       }
       /**
-       * <code>.TenantType tenantType = 5;</code>
+       * <code>.TenantType tenantType = 6;</code>
        * @param value The enum numeric value on the wire for tenantType to set.
        * @return This builder for chaining.
        */
@@ -3459,7 +3609,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>.TenantType tenantType = 5;</code>
+       * <code>.TenantType tenantType = 6;</code>
        * @return The tenantType.
        */
       @java.lang.Override
@@ -3469,7 +3619,7 @@ public final class TenantServiceProto {
         return result == null ? elite.sas.api.grpc.CommonsProto.TenantType.UNRECOGNIZED : result;
       }
       /**
-       * <code>.TenantType tenantType = 5;</code>
+       * <code>.TenantType tenantType = 6;</code>
        * @param value The tenantType to set.
        * @return This builder for chaining.
        */
@@ -3483,7 +3633,7 @@ public final class TenantServiceProto {
         return this;
       }
       /**
-       * <code>.TenantType tenantType = 5;</code>
+       * <code>.TenantType tenantType = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearTenantType() {
@@ -4708,20 +4858,21 @@ public final class TenantServiceProto {
       "\n\ntenantType\030\006 \001(\0162\013.TenantType\"z\n\025Regis" +
       "terTenantRequest\022\014\n\004name\030\001 \001(\t\022\020\n\010locati" +
       "on\030\002 \001(\t\022\021\n\ttelephone\030\003 \001(\t\022\r\n\005email\030\004 \001" +
-      "(\t\022\037\n\ntenantType\030\005 \001(\0162\013.TenantType\"x\n\023U" +
-      "pdateTenantRequest\022\014\n\004name\030\001 \001(\t\022\020\n\010loca" +
-      "tion\030\002 \001(\t\022\021\n\ttelephone\030\003 \001(\t\022\r\n\005email\030\004" +
-      " \001(\t\022\037\n\ntenantType\030\005 \001(\0162\013.TenantType\"o\n" +
-      "\014SearchParams\022\n\n\002id\030\001 \001(\t\022\r\n\005email\030\002 \001(\t" +
-      "\022\021\n\ttelephone\030\003 \001(\t\022\020\n\010location\030\004 \001(\t\022\037\n" +
-      "\ntenantType\030\005 \001(\0162\013.TenantType2\351\001\n\rtenan" +
-      "tService\0221\n\016registerTenant\022\026.RegisterTen" +
-      "antRequest\032\007.Tenant\022\"\n\rgetAllTenants\022\006.E" +
-      "mpty\032\007.Tenant0\001\022\'\n\rgetTenantById\022\r.Searc" +
-      "hParams\032\007.Tenant\022)\n\017getTenantByType\022\r.Se" +
-      "archParams\032\007.Tenant\022-\n\014updateTenant\022\024.Up" +
-      "dateTenantRequest\032\007.TenantB*\n\022elite.sas." +
-      "api.grpcB\022TenantServiceProtoP\000b\006proto3"
+      "(\t\022\037\n\ntenantType\030\005 \001(\0162\013.TenantType\"\204\001\n\023" +
+      "UpdateTenantRequest\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030" +
+      "\002 \001(\t\022\020\n\010location\030\003 \001(\t\022\021\n\ttelephone\030\004 \001" +
+      "(\t\022\r\n\005email\030\005 \001(\t\022\037\n\ntenantType\030\006 \001(\0162\013." +
+      "TenantType\"o\n\014SearchParams\022\n\n\002id\030\001 \001(\t\022\r" +
+      "\n\005email\030\002 \001(\t\022\021\n\ttelephone\030\003 \001(\t\022\020\n\010loca" +
+      "tion\030\004 \001(\t\022\037\n\ntenantType\030\005 \001(\0162\013.TenantT" +
+      "ype2\346\001\n\rtenantService\0221\n\016registerTenant\022" +
+      "\026.RegisterTenantRequest\032\007.Tenant\022\"\n\rgetA" +
+      "llTenants\022\006.Empty\032\007.Tenant0\001\022\'\n\rgetTenan" +
+      "tById\022\r.SearchParams\032\007.Tenant\022&\n\ngetTena" +
+      "nts\022\r.SearchParams\032\007.Tenant0\001\022-\n\014updateT" +
+      "enant\022\024.UpdateTenantRequest\032\007.TenantB*\n\022" +
+      "elite.sas.api.grpcB\022TenantServiceProtoP\000" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4746,7 +4897,7 @@ public final class TenantServiceProto {
     internal_static_UpdateTenantRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UpdateTenantRequest_descriptor,
-        new java.lang.String[] { "Name", "Location", "Telephone", "Email", "TenantType", });
+        new java.lang.String[] { "Id", "Name", "Location", "Telephone", "Email", "TenantType", });
     internal_static_SearchParams_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_SearchParams_fieldAccessorTable = new

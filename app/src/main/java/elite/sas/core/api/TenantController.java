@@ -51,7 +51,7 @@ public class TenantController {
 
     @PostMapping("/")
     public Tenant registerTenant(@RequestBody CreateTenantParams createTenantParams) {
-        return tenantService.createTenant(createTenantParams);
+        return tenantService.createTenant(createTenantParams).get();
     }
 
 

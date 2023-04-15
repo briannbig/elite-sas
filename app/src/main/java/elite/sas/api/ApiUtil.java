@@ -92,17 +92,8 @@ public final class ApiUtil {
         }
     }
 
-    public static TenantType tenantTypeFromApi(CommonsProto.TenantType tenantType) throws ModelConversionException {
-        switch (tenantType.name()) {
-            case "SCHOOL":
-                return TenantType.SCHOOL;
-            case "COMPANY":
-                return TenantType.COMPANY;
-            case "INTERNAL":
-                return TenantType.INTERNAL;
-            default:
-                throw new ModelConversionException();
-        }
+    public static TenantType tenantTypeFromApi(CommonsProto.TenantType tenantType) {
+        return TenantType.valueOf(tenantType.name());
     }
 
     public static Course courseFromApi(CourseServiceProto.Course apiCourse) throws ModelConversionException {

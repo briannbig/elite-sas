@@ -2,6 +2,7 @@ package elite.sas.core.config.grpc;
 
 import elite.sas.api.server.ApplicationService;
 import elite.sas.api.server.GRPCServer;
+import elite.sas.api.server.TenantService;
 import elite.sas.api.server.UserService;
 import elite.sas.core.service.AppUserService;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,14 @@ public class GRPCConfig {
         return new ApplicationService(applicationService);
     }
 
+    @Bean(name = "GRPCTenantService")
+    TenantService tenantService(elite.sas.core.service.TenantService tenantService) {
+        return new TenantService(tenantService);
+    }
+
     @Bean
-    GRPCServer grpcServer(UserService userService, ApplicationService applicationService) {
-        return new GRPCServer(userService, applicationService);
+    GRPCServer grpcServer(UserService userService, ApplicationService applicationService, TenantService tenantService) {
+        return new GRPCServer(userService, applicationService, tenantService);
     }
 
 
