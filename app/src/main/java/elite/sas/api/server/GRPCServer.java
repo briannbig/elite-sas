@@ -20,6 +20,7 @@ public class GRPCServer {
     private final ApplicationService applicationService;
     private final TenantService tenantService;
     private final StudentService studentService;
+    private final InternshipService internshipService;
 
 
     public void startServer() {
@@ -29,6 +30,7 @@ public class GRPCServer {
                 .addService(applicationService)
                 .addService(tenantService)
                 .addService(studentService)
+                .addService(internshipService)
                 .build();
 
         log.info("starting grppc server on port {}", port);

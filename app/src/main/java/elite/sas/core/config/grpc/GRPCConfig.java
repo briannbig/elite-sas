@@ -2,6 +2,7 @@ package elite.sas.core.config.grpc;
 
 import elite.sas.api.server.*;
 import elite.sas.core.service.AppUserService;
+import elite.sas.core.service.AttachmentService;
 import elite.sas.core.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ public class GRPCConfig {
         return new TenantService(tenantService);
     }
 
+    @Bean
+    InternshipService internshipService(AttachmentService attachmentService) {
+        return new InternshipService(attachmentService);
+    }
 
 
     @Bean(name = "GRPCStudentService")
@@ -36,8 +41,10 @@ public class GRPCConfig {
 
     @Bean
     GRPCServer grpcServer(UserService userService, ApplicationService applicationService,
-                          TenantService tenantService, StudentService studentService) {
-        return new GRPCServer(userService, applicationService, tenantService, studentService);
+                          TenantService tenantService, StudentService studentService,
+                          InternshipService internshipService
+    ) {
+        return new GRPCServer(userService, applicationService, tenantService, studentService, internshipService);
     }
 
 

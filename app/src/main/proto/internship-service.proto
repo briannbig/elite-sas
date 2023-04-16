@@ -37,21 +37,25 @@ message AttachmentWeek {
 message Log {
 
   string id = 1;
-  string workDone = 2;
-  string industrySupervisorComment = 3;
-  string schoolSupervisorComment = 4;
+  string attachmentWeekId = 2;
+  string workDone = 3;
+  string industrySupervisorComment = 4;
+  string schoolSupervisorComment = 5;
 
 }
 
 message SearchAttachmentParams {
   string id = 1;
   string studentId = 2;
-  string companyId = 3;
-  AttachmentPeriod attachmentPeriod = 4;
-  google.protobuf.Timestamp startDate = 5;
-  google.protobuf.Timestamp endDate = 6;
-  string industrySupervisorId = 7;
-  string schoolSupervisorId = 8;
+  string studentAdmissionNumber = 3;
+  string schoolId = 4;
+  string companyId = 5;
+  string courseId = 6;
+  AttachmentPeriod attachmentPeriod = 7;
+  google.protobuf.Timestamp startDate = 8;
+  google.protobuf.Timestamp endDate = 9;
+  string industrySupervisorId = 10;
+  string schoolSupervisorId = 11;
 
 }
 

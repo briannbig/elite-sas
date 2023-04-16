@@ -1,13 +1,19 @@
 package elite.sas.api;
 
+import com.google.protobuf.Timestamp;
 import elite.sas.api.exceptions.ModelConversionException;
 import elite.sas.api.grpc.*;
 import elite.sas.core.entities.*;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class ApiUtil {
 
@@ -156,6 +162,120 @@ public final class ApiUtil {
 
         return listingBuilder.build();
 
+    }
+
+    public static Attachment attachmentFromApi(InternshipServiceProto.Attachment apiAttachment) throws ModelConversionException {
+        if (Objects.isNull(apiAttachment.getId()) || !apiAttachment.hasStudent() ||
+                !apiAttachment.hasCompany() || Objects.isNull(apiAttachment.getAttachmentPeriod())
+        ) {
+            throw new ModelConversionException();
+        }
+
+        Attachment.AttachmentBuilder attachmentBuilder = Attachment.builder()
+                .Id(UUID.fromString(apiAttachment.getId()))
+                .student(studentFromApi(apiAttachment.getStudent()))
+                .tenant(tenantFromApi(apiAttachment.getCompany()))
+                .attachmentPeriod(attachmentPeriodFromApi(apiAttachment.getAttachmentPeriod()));
+
+        if (Objects.nonNull(apiAttachment.getStartDate())) {
+            attachmentBuilder.startDate(timeStampFromApi(apiAttachment.getStartDate()));
+        }
+
+        if (Objects.nonNull(apiAttachment.getEndDate())) {
+            attachmentBuilder.endDate(timeStampFromApi(apiAttachment.getEndDate()));
+        }
+
+        List<AttachmentWeek> attachmentWeeksFromApi = apiAttachment.getAttachmentWeeksList().stream().map(
+                attachmentWeek -> {
+                    try {
+                        return attachmentWeekFromApi(attachmentWeek);
+                    } catch (ModelConversionException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        ).toList();
+
+        attachmentBuilder.attachmentWeeks(attachmentWeeksFromApi);
+
+        return attachmentBuilder.build();
+    }
+
+    public static AttachmentWeek attachmentWeekFromApi(InternshipServiceProto.AttachmentWeek apiAttachmentWeek) throws ModelConversionException {
+        if (Objects.isNull(apiAttachmentWeek.getId()) || Objects.isNull(apiAttachmentWeek.getWeekNumber())) {
+            throw new ModelConversionException();
+        }
+        AttachmentWeek.AttachmentWeekBuilder builder = AttachmentWeek.builder()
+                .Id(UUID.fromString(apiAttachmentWeek.getId()))
+                .weekNumber(apiAttachmentWeek.getWeekNumber());
+
+        if (Objects.nonNull(apiAttachmentWeek.getWeekSummary())) {
+            builder.weekSummary(apiAttachmentWeek.getWeekSummary());
+        }
+
+        if (Objects.nonNull(apiAttachmentWeek.getStudentComment())) {
+            builder.studentComment(apiAttachmentWeek.getStudentComment());
+        }
+
+        if (Objects.nonNull(apiAttachmentWeek.getIndustrySupervisorComment())) {
+            builder.industrySupervisorComment(apiAttachmentWeek.getIndustrySupervisorComment());
+        }
+
+        if (Objects.nonNull(apiAttachmentWeek.getSchoolSupervisorComment())) {
+            builder.schoolSupervisorComment(apiAttachmentWeek.getSchoolSupervisorComment());
+        }
+
+        builder.isActive(apiAttachmentWeek.getIsActive());
+
+        List<Log> apiLogsList = apiAttachmentWeek.getLogsList().stream().map(log -> {
+            try {
+                return logFromApi(log);
+            } catch (ModelConversionException e) {
+                throw new RuntimeException(e);
+            }
+        }).toList();
+
+        builder.logs(apiLogsList);
+
+
+        return builder.build();
+
+    }
+
+    public static Log logFromApi(InternshipServiceProto.Log apiLog) throws ModelConversionException {
+        if (Objects.isNull(apiLog.getId()) || Objects.isNull(apiLog.getAttachmentWeekId())) {
+            throw new ModelConversionException();
+        }
+
+        AttachmentWeek attachmentWeek = AttachmentWeek.builder().Id(UUID.fromString(apiLog.getAttachmentWeekId())).build();
+
+        Log.LogBuilder logBuilder = Log.builder().Id(UUID.fromString(apiLog.getId()))
+                .attachmentWeek(attachmentWeek);
+
+        if (Objects.nonNull(apiLog.getWorkDone())) {
+            logBuilder.workDone(apiLog.getWorkDone());
+        }
+
+        if (Objects.nonNull(apiLog.getIndustrySupervisorComment())) {
+            logBuilder.industrySupervisorComment(apiLog.getIndustrySupervisorComment());
+        }
+
+        if (Objects.nonNull(apiLog.getSchoolSupervisorComment())) {
+            logBuilder.schoolSupervisorComment(apiLog.getSchoolSupervisorComment());
+        }
+
+        return logBuilder.build();
+
+    }
+
+    public static AttachmentPeriod attachmentPeriodFromApi(CommonsProto.AttachmentPeriod apiAttachmentPeriod) {
+        return AttachmentPeriod.valueOf(apiAttachmentPeriod.name());
+    }
+
+    public static LocalDateTime timeStampFromApi(Timestamp apiTimestamp) {
+        Instant instant = Instant.ofEpochSecond(apiTimestamp.getSeconds(), apiTimestamp.getNanos())
+                .atZone(ZoneId.systemDefault())
+                .toInstant();
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
 
 
@@ -319,6 +439,123 @@ public final class ApiUtil {
                 .setCourse(courseToApi(listing.getCourse()));
 
         return listingBuilder.build();
+    }
+
+    public static InternshipServiceProto.Attachment attachmentToApi(Attachment attachment) throws ModelConversionException {
+        if (Objects.isNull(attachment.getId()) || Objects.isNull(attachment.getStudent()) ||
+                Objects.isNull(attachment.getTenant()) || Objects.isNull(attachment.getAttachmentPeriod())
+        ) {
+            throw new ModelConversionException();
+        }
+
+        InternshipServiceProto.Attachment.Builder attachmentBuilder = InternshipServiceProto.Attachment.newBuilder()
+                .setId(String.valueOf(attachment.getId()))
+                .setStudent(studentToApi(attachment.getStudent()))
+                .setCompany(tenantToApi(attachment.getTenant()))
+                .setAttachmentPeriod(attachmentPeriodToApi(attachment.getAttachmentPeriod()));
+
+        if (Objects.nonNull(attachment.getStartDate())) {
+            attachmentBuilder.setStartDate(timeStampToApi(attachment.getStartDate()));
+        }
+
+        if (Objects.nonNull(attachment.getEndDate())) {
+            attachmentBuilder.setEndDate(timeStampToApi(attachment.getEndDate()));
+        }
+
+        List<InternshipServiceProto.AttachmentWeek> attachmentWeekList = attachment.getAttachmentWeeks().stream().map(
+                attachmentWeek -> {
+                    try {
+                        return attachmentWeekToApi(attachmentWeek);
+                    } catch (ModelConversionException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        ).toList();
+
+        attachmentBuilder.addAllAttachmentWeeks(attachmentWeekList);
+
+        return attachmentBuilder.build();
+    }
+
+    public static InternshipServiceProto.AttachmentWeek attachmentWeekToApi(AttachmentWeek attachmentWeek) throws ModelConversionException {
+        if (Objects.isNull(attachmentWeek.getId()) || Objects.isNull(attachmentWeek.getWeekNumber())) {
+            throw new ModelConversionException();
+        }
+        InternshipServiceProto.AttachmentWeek.Builder builder = InternshipServiceProto.AttachmentWeek.newBuilder()
+                .setId(String.valueOf(attachmentWeek.getId()))
+                .setWeekNumber(attachmentWeek.getWeekNumber());
+
+        if (Objects.nonNull(attachmentWeek.getWeekSummary())) {
+            builder.setWeekSummary(attachmentWeek.getWeekSummary());
+        }
+
+        if (Objects.nonNull(attachmentWeek.getStudentComment())) {
+            builder.setStudentComment(attachmentWeek.getStudentComment());
+        }
+
+        if (Objects.nonNull(attachmentWeek.getIndustrySupervisorComment())) {
+            builder.setIndustrySupervisorComment(attachmentWeek.getIndustrySupervisorComment());
+        }
+
+        if (Objects.nonNull(attachmentWeek.getSchoolSupervisorComment())) {
+            builder.setSchoolSupervisorComment(attachmentWeek.getSchoolSupervisorComment());
+        }
+
+        builder.setIsActive(attachmentWeek.isActive());
+
+        List<InternshipServiceProto.Log> logsList = attachmentWeek.getLogs().stream().map(log -> {
+            try {
+                return logToApi(log);
+            } catch (ModelConversionException e) {
+                throw new RuntimeException(e);
+            }
+        }).toList();
+
+        builder.addAllLogs(logsList);
+
+
+        return builder.build();
+
+
+    }
+
+    public static InternshipServiceProto.Log logToApi(Log log) throws ModelConversionException {
+        if (Objects.isNull(log.getId()) || Objects.isNull(log.getAttachmentWeek())) {
+            throw new ModelConversionException();
+        }
+
+        InternshipServiceProto.Log.Builder builder = InternshipServiceProto.Log.newBuilder()
+                .setId(String.valueOf(log.getId()))
+                .setAttachmentWeekId(String.valueOf(log.getAttachmentWeek().getId()));
+
+        if (Objects.nonNull(log.getWorkDone())) {
+            builder.setWorkDone(log.getWorkDone());
+        }
+
+        if (Objects.nonNull(log.getIndustrySupervisorComment())) {
+            builder.setIndustrySupervisorComment(log.getIndustrySupervisorComment());
+        }
+
+        if (Objects.nonNull(log.getSchoolSupervisorComment())) {
+            builder.setSchoolSupervisorComment(log.getSchoolSupervisorComment());
+        }
+
+        return builder.build();
+
+    }
+
+    public static CommonsProto.AttachmentPeriod attachmentPeriodToApi(AttachmentPeriod attachmentPeriod) {
+        return CommonsProto.AttachmentPeriod.valueOf(attachmentPeriod.name());
+    }
+
+    public static Timestamp timeStampToApi(LocalDateTime localDateTime) {
+        Instant instant = Instant.ofEpochSecond(localDateTime.getSecond(), localDateTime.getNano())
+                .atZone(ZoneId.systemDefault())
+                .toInstant();
+        return Timestamp.newBuilder()
+                .setSeconds(instant.getEpochSecond())
+                .setNanos(instant.getNano())
+                .build();
     }
 
     public static ApplicationServiceProto.Application applicationToApi(Application application) throws ModelConversionException {

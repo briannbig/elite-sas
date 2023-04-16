@@ -3987,36 +3987,48 @@ public final class InternshipServiceProto {
         getIdBytes();
 
     /**
-     * <code>string workDone = 2;</code>
+     * <code>string attachmentWeekId = 2;</code>
+     * @return The attachmentWeekId.
+     */
+    java.lang.String getAttachmentWeekId();
+    /**
+     * <code>string attachmentWeekId = 2;</code>
+     * @return The bytes for attachmentWeekId.
+     */
+    com.google.protobuf.ByteString
+        getAttachmentWeekIdBytes();
+
+    /**
+     * <code>string workDone = 3;</code>
      * @return The workDone.
      */
     java.lang.String getWorkDone();
     /**
-     * <code>string workDone = 2;</code>
+     * <code>string workDone = 3;</code>
      * @return The bytes for workDone.
      */
     com.google.protobuf.ByteString
         getWorkDoneBytes();
 
     /**
-     * <code>string industrySupervisorComment = 3;</code>
+     * <code>string industrySupervisorComment = 4;</code>
      * @return The industrySupervisorComment.
      */
     java.lang.String getIndustrySupervisorComment();
     /**
-     * <code>string industrySupervisorComment = 3;</code>
+     * <code>string industrySupervisorComment = 4;</code>
      * @return The bytes for industrySupervisorComment.
      */
     com.google.protobuf.ByteString
         getIndustrySupervisorCommentBytes();
 
     /**
-     * <code>string schoolSupervisorComment = 4;</code>
+     * <code>string schoolSupervisorComment = 5;</code>
      * @return The schoolSupervisorComment.
      */
     java.lang.String getSchoolSupervisorComment();
     /**
-     * <code>string schoolSupervisorComment = 4;</code>
+     * <code>string schoolSupervisorComment = 5;</code>
      * @return The bytes for schoolSupervisorComment.
      */
     com.google.protobuf.ByteString
@@ -4036,6 +4048,7 @@ public final class InternshipServiceProto {
     }
     private Log() {
       id_ = "";
+      attachmentWeekId_ = "";
       workDone_ = "";
       industrySupervisorComment_ = "";
       schoolSupervisorComment_ = "";
@@ -4080,16 +4093,22 @@ public final class InternshipServiceProto {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              workDone_ = s;
+              attachmentWeekId_ = s;
               break;
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              industrySupervisorComment_ = s;
+              workDone_ = s;
               break;
             }
             case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              industrySupervisorComment_ = s;
+              break;
+            }
+            case 42: {
               java.lang.String s = input.readStringRequireUtf8();
 
               schoolSupervisorComment_ = s;
@@ -4167,10 +4186,48 @@ public final class InternshipServiceProto {
       }
     }
 
-    public static final int WORKDONE_FIELD_NUMBER = 2;
+    public static final int ATTACHMENTWEEKID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object attachmentWeekId_;
+    /**
+     * <code>string attachmentWeekId = 2;</code>
+     * @return The attachmentWeekId.
+     */
+    @java.lang.Override
+    public java.lang.String getAttachmentWeekId() {
+      java.lang.Object ref = attachmentWeekId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        attachmentWeekId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string attachmentWeekId = 2;</code>
+     * @return The bytes for attachmentWeekId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getAttachmentWeekIdBytes() {
+      java.lang.Object ref = attachmentWeekId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        attachmentWeekId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int WORKDONE_FIELD_NUMBER = 3;
     private volatile java.lang.Object workDone_;
     /**
-     * <code>string workDone = 2;</code>
+     * <code>string workDone = 3;</code>
      * @return The workDone.
      */
     @java.lang.Override
@@ -4187,7 +4244,7 @@ public final class InternshipServiceProto {
       }
     }
     /**
-     * <code>string workDone = 2;</code>
+     * <code>string workDone = 3;</code>
      * @return The bytes for workDone.
      */
     @java.lang.Override
@@ -4205,10 +4262,10 @@ public final class InternshipServiceProto {
       }
     }
 
-    public static final int INDUSTRYSUPERVISORCOMMENT_FIELD_NUMBER = 3;
+    public static final int INDUSTRYSUPERVISORCOMMENT_FIELD_NUMBER = 4;
     private volatile java.lang.Object industrySupervisorComment_;
     /**
-     * <code>string industrySupervisorComment = 3;</code>
+     * <code>string industrySupervisorComment = 4;</code>
      * @return The industrySupervisorComment.
      */
     @java.lang.Override
@@ -4225,7 +4282,7 @@ public final class InternshipServiceProto {
       }
     }
     /**
-     * <code>string industrySupervisorComment = 3;</code>
+     * <code>string industrySupervisorComment = 4;</code>
      * @return The bytes for industrySupervisorComment.
      */
     @java.lang.Override
@@ -4243,10 +4300,10 @@ public final class InternshipServiceProto {
       }
     }
 
-    public static final int SCHOOLSUPERVISORCOMMENT_FIELD_NUMBER = 4;
+    public static final int SCHOOLSUPERVISORCOMMENT_FIELD_NUMBER = 5;
     private volatile java.lang.Object schoolSupervisorComment_;
     /**
-     * <code>string schoolSupervisorComment = 4;</code>
+     * <code>string schoolSupervisorComment = 5;</code>
      * @return The schoolSupervisorComment.
      */
     @java.lang.Override
@@ -4263,7 +4320,7 @@ public final class InternshipServiceProto {
       }
     }
     /**
-     * <code>string schoolSupervisorComment = 4;</code>
+     * <code>string schoolSupervisorComment = 5;</code>
      * @return The bytes for schoolSupervisorComment.
      */
     @java.lang.Override
@@ -4298,14 +4355,17 @@ public final class InternshipServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attachmentWeekId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, attachmentWeekId_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(workDone_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, workDone_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, workDone_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(industrySupervisorComment_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, industrySupervisorComment_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, industrySupervisorComment_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolSupervisorComment_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, schoolSupervisorComment_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, schoolSupervisorComment_);
       }
       unknownFields.writeTo(output);
     }
@@ -4319,14 +4379,17 @@ public final class InternshipServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attachmentWeekId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, attachmentWeekId_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(workDone_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, workDone_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, workDone_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(industrySupervisorComment_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, industrySupervisorComment_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, industrySupervisorComment_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolSupervisorComment_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, schoolSupervisorComment_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, schoolSupervisorComment_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4345,6 +4408,8 @@ public final class InternshipServiceProto {
 
       if (!getId()
           .equals(other.getId())) return false;
+      if (!getAttachmentWeekId()
+          .equals(other.getAttachmentWeekId())) return false;
       if (!getWorkDone()
           .equals(other.getWorkDone())) return false;
       if (!getIndustrySupervisorComment()
@@ -4364,6 +4429,8 @@ public final class InternshipServiceProto {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId().hashCode();
+      hash = (37 * hash) + ATTACHMENTWEEKID_FIELD_NUMBER;
+      hash = (53 * hash) + getAttachmentWeekId().hashCode();
       hash = (37 * hash) + WORKDONE_FIELD_NUMBER;
       hash = (53 * hash) + getWorkDone().hashCode();
       hash = (37 * hash) + INDUSTRYSUPERVISORCOMMENT_FIELD_NUMBER;
@@ -4505,6 +4572,8 @@ public final class InternshipServiceProto {
         super.clear();
         id_ = "";
 
+        attachmentWeekId_ = "";
+
         workDone_ = "";
 
         industrySupervisorComment_ = "";
@@ -4538,6 +4607,7 @@ public final class InternshipServiceProto {
       public elite.sas.api.grpc.InternshipServiceProto.Log buildPartial() {
         elite.sas.api.grpc.InternshipServiceProto.Log result = new elite.sas.api.grpc.InternshipServiceProto.Log(this);
         result.id_ = id_;
+        result.attachmentWeekId_ = attachmentWeekId_;
         result.workDone_ = workDone_;
         result.industrySupervisorComment_ = industrySupervisorComment_;
         result.schoolSupervisorComment_ = schoolSupervisorComment_;
@@ -4591,6 +4661,10 @@ public final class InternshipServiceProto {
         if (other == elite.sas.api.grpc.InternshipServiceProto.Log.getDefaultInstance()) return this;
         if (!other.getId().isEmpty()) {
           id_ = other.id_;
+          onChanged();
+        }
+        if (!other.getAttachmentWeekId().isEmpty()) {
+          attachmentWeekId_ = other.attachmentWeekId_;
           onChanged();
         }
         if (!other.getWorkDone().isEmpty()) {
@@ -4710,9 +4784,85 @@ public final class InternshipServiceProto {
         return this;
       }
 
+      private java.lang.Object attachmentWeekId_ = "";
+      /**
+       * <code>string attachmentWeekId = 2;</code>
+       * @return The attachmentWeekId.
+       */
+      public java.lang.String getAttachmentWeekId() {
+        java.lang.Object ref = attachmentWeekId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          attachmentWeekId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string attachmentWeekId = 2;</code>
+       * @return The bytes for attachmentWeekId.
+       */
+      public com.google.protobuf.ByteString
+          getAttachmentWeekIdBytes() {
+        java.lang.Object ref = attachmentWeekId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          attachmentWeekId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string attachmentWeekId = 2;</code>
+       * @param value The attachmentWeekId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAttachmentWeekId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        attachmentWeekId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string attachmentWeekId = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAttachmentWeekId() {
+        
+        attachmentWeekId_ = getDefaultInstance().getAttachmentWeekId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string attachmentWeekId = 2;</code>
+       * @param value The bytes for attachmentWeekId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAttachmentWeekIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        attachmentWeekId_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object workDone_ = "";
       /**
-       * <code>string workDone = 2;</code>
+       * <code>string workDone = 3;</code>
        * @return The workDone.
        */
       public java.lang.String getWorkDone() {
@@ -4728,7 +4878,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string workDone = 2;</code>
+       * <code>string workDone = 3;</code>
        * @return The bytes for workDone.
        */
       public com.google.protobuf.ByteString
@@ -4745,7 +4895,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string workDone = 2;</code>
+       * <code>string workDone = 3;</code>
        * @param value The workDone to set.
        * @return This builder for chaining.
        */
@@ -4760,7 +4910,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string workDone = 2;</code>
+       * <code>string workDone = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearWorkDone() {
@@ -4770,7 +4920,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string workDone = 2;</code>
+       * <code>string workDone = 3;</code>
        * @param value The bytes for workDone to set.
        * @return This builder for chaining.
        */
@@ -4788,7 +4938,7 @@ public final class InternshipServiceProto {
 
       private java.lang.Object industrySupervisorComment_ = "";
       /**
-       * <code>string industrySupervisorComment = 3;</code>
+       * <code>string industrySupervisorComment = 4;</code>
        * @return The industrySupervisorComment.
        */
       public java.lang.String getIndustrySupervisorComment() {
@@ -4804,7 +4954,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string industrySupervisorComment = 3;</code>
+       * <code>string industrySupervisorComment = 4;</code>
        * @return The bytes for industrySupervisorComment.
        */
       public com.google.protobuf.ByteString
@@ -4821,7 +4971,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string industrySupervisorComment = 3;</code>
+       * <code>string industrySupervisorComment = 4;</code>
        * @param value The industrySupervisorComment to set.
        * @return This builder for chaining.
        */
@@ -4836,7 +4986,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string industrySupervisorComment = 3;</code>
+       * <code>string industrySupervisorComment = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearIndustrySupervisorComment() {
@@ -4846,7 +4996,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string industrySupervisorComment = 3;</code>
+       * <code>string industrySupervisorComment = 4;</code>
        * @param value The bytes for industrySupervisorComment to set.
        * @return This builder for chaining.
        */
@@ -4864,7 +5014,7 @@ public final class InternshipServiceProto {
 
       private java.lang.Object schoolSupervisorComment_ = "";
       /**
-       * <code>string schoolSupervisorComment = 4;</code>
+       * <code>string schoolSupervisorComment = 5;</code>
        * @return The schoolSupervisorComment.
        */
       public java.lang.String getSchoolSupervisorComment() {
@@ -4880,7 +5030,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string schoolSupervisorComment = 4;</code>
+       * <code>string schoolSupervisorComment = 5;</code>
        * @return The bytes for schoolSupervisorComment.
        */
       public com.google.protobuf.ByteString
@@ -4897,7 +5047,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string schoolSupervisorComment = 4;</code>
+       * <code>string schoolSupervisorComment = 5;</code>
        * @param value The schoolSupervisorComment to set.
        * @return This builder for chaining.
        */
@@ -4912,7 +5062,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string schoolSupervisorComment = 4;</code>
+       * <code>string schoolSupervisorComment = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearSchoolSupervisorComment() {
@@ -4922,7 +5072,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string schoolSupervisorComment = 4;</code>
+       * <code>string schoolSupervisorComment = 5;</code>
        * @param value The bytes for schoolSupervisorComment to set.
        * @return This builder for chaining.
        */
@@ -5019,77 +5169,113 @@ public final class InternshipServiceProto {
         getStudentIdBytes();
 
     /**
-     * <code>string companyId = 3;</code>
+     * <code>string studentAdmissionNumber = 3;</code>
+     * @return The studentAdmissionNumber.
+     */
+    java.lang.String getStudentAdmissionNumber();
+    /**
+     * <code>string studentAdmissionNumber = 3;</code>
+     * @return The bytes for studentAdmissionNumber.
+     */
+    com.google.protobuf.ByteString
+        getStudentAdmissionNumberBytes();
+
+    /**
+     * <code>string schoolId = 4;</code>
+     * @return The schoolId.
+     */
+    java.lang.String getSchoolId();
+    /**
+     * <code>string schoolId = 4;</code>
+     * @return The bytes for schoolId.
+     */
+    com.google.protobuf.ByteString
+        getSchoolIdBytes();
+
+    /**
+     * <code>string companyId = 5;</code>
      * @return The companyId.
      */
     java.lang.String getCompanyId();
     /**
-     * <code>string companyId = 3;</code>
+     * <code>string companyId = 5;</code>
      * @return The bytes for companyId.
      */
     com.google.protobuf.ByteString
         getCompanyIdBytes();
 
     /**
-     * <code>.AttachmentPeriod attachmentPeriod = 4;</code>
+     * <code>string courseId = 6;</code>
+     * @return The courseId.
+     */
+    java.lang.String getCourseId();
+    /**
+     * <code>string courseId = 6;</code>
+     * @return The bytes for courseId.
+     */
+    com.google.protobuf.ByteString
+        getCourseIdBytes();
+
+    /**
+     * <code>.AttachmentPeriod attachmentPeriod = 7;</code>
      * @return The enum numeric value on the wire for attachmentPeriod.
      */
     int getAttachmentPeriodValue();
     /**
-     * <code>.AttachmentPeriod attachmentPeriod = 4;</code>
+     * <code>.AttachmentPeriod attachmentPeriod = 7;</code>
      * @return The attachmentPeriod.
      */
     elite.sas.api.grpc.CommonsProto.AttachmentPeriod getAttachmentPeriod();
 
     /**
-     * <code>.google.protobuf.Timestamp startDate = 5;</code>
+     * <code>.google.protobuf.Timestamp startDate = 8;</code>
      * @return Whether the startDate field is set.
      */
     boolean hasStartDate();
     /**
-     * <code>.google.protobuf.Timestamp startDate = 5;</code>
+     * <code>.google.protobuf.Timestamp startDate = 8;</code>
      * @return The startDate.
      */
     com.google.protobuf.Timestamp getStartDate();
     /**
-     * <code>.google.protobuf.Timestamp startDate = 5;</code>
+     * <code>.google.protobuf.Timestamp startDate = 8;</code>
      */
     com.google.protobuf.TimestampOrBuilder getStartDateOrBuilder();
 
     /**
-     * <code>.google.protobuf.Timestamp endDate = 6;</code>
+     * <code>.google.protobuf.Timestamp endDate = 9;</code>
      * @return Whether the endDate field is set.
      */
     boolean hasEndDate();
     /**
-     * <code>.google.protobuf.Timestamp endDate = 6;</code>
+     * <code>.google.protobuf.Timestamp endDate = 9;</code>
      * @return The endDate.
      */
     com.google.protobuf.Timestamp getEndDate();
     /**
-     * <code>.google.protobuf.Timestamp endDate = 6;</code>
+     * <code>.google.protobuf.Timestamp endDate = 9;</code>
      */
     com.google.protobuf.TimestampOrBuilder getEndDateOrBuilder();
 
     /**
-     * <code>string industrySupervisorId = 7;</code>
+     * <code>string industrySupervisorId = 10;</code>
      * @return The industrySupervisorId.
      */
     java.lang.String getIndustrySupervisorId();
     /**
-     * <code>string industrySupervisorId = 7;</code>
+     * <code>string industrySupervisorId = 10;</code>
      * @return The bytes for industrySupervisorId.
      */
     com.google.protobuf.ByteString
         getIndustrySupervisorIdBytes();
 
     /**
-     * <code>string schoolSupervisorId = 8;</code>
+     * <code>string schoolSupervisorId = 11;</code>
      * @return The schoolSupervisorId.
      */
     java.lang.String getSchoolSupervisorId();
     /**
-     * <code>string schoolSupervisorId = 8;</code>
+     * <code>string schoolSupervisorId = 11;</code>
      * @return The bytes for schoolSupervisorId.
      */
     com.google.protobuf.ByteString
@@ -5110,7 +5296,10 @@ public final class InternshipServiceProto {
     private SearchAttachmentParams() {
       id_ = "";
       studentId_ = "";
+      studentAdmissionNumber_ = "";
+      schoolId_ = "";
       companyId_ = "";
+      courseId_ = "";
       attachmentPeriod_ = 0;
       industrySupervisorId_ = "";
       schoolSupervisorId_ = "";
@@ -5161,16 +5350,34 @@ public final class InternshipServiceProto {
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
+              studentAdmissionNumber_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              schoolId_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
               companyId_ = s;
               break;
             }
-            case 32: {
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              courseId_ = s;
+              break;
+            }
+            case 56: {
               int rawValue = input.readEnum();
 
               attachmentPeriod_ = rawValue;
               break;
             }
-            case 42: {
+            case 66: {
               com.google.protobuf.Timestamp.Builder subBuilder = null;
               if (startDate_ != null) {
                 subBuilder = startDate_.toBuilder();
@@ -5183,7 +5390,7 @@ public final class InternshipServiceProto {
 
               break;
             }
-            case 50: {
+            case 74: {
               com.google.protobuf.Timestamp.Builder subBuilder = null;
               if (endDate_ != null) {
                 subBuilder = endDate_.toBuilder();
@@ -5196,13 +5403,13 @@ public final class InternshipServiceProto {
 
               break;
             }
-            case 58: {
+            case 82: {
               java.lang.String s = input.readStringRequireUtf8();
 
               industrySupervisorId_ = s;
               break;
             }
-            case 66: {
+            case 90: {
               java.lang.String s = input.readStringRequireUtf8();
 
               schoolSupervisorId_ = s;
@@ -5318,10 +5525,86 @@ public final class InternshipServiceProto {
       }
     }
 
-    public static final int COMPANYID_FIELD_NUMBER = 3;
+    public static final int STUDENTADMISSIONNUMBER_FIELD_NUMBER = 3;
+    private volatile java.lang.Object studentAdmissionNumber_;
+    /**
+     * <code>string studentAdmissionNumber = 3;</code>
+     * @return The studentAdmissionNumber.
+     */
+    @java.lang.Override
+    public java.lang.String getStudentAdmissionNumber() {
+      java.lang.Object ref = studentAdmissionNumber_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        studentAdmissionNumber_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string studentAdmissionNumber = 3;</code>
+     * @return The bytes for studentAdmissionNumber.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getStudentAdmissionNumberBytes() {
+      java.lang.Object ref = studentAdmissionNumber_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        studentAdmissionNumber_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SCHOOLID_FIELD_NUMBER = 4;
+    private volatile java.lang.Object schoolId_;
+    /**
+     * <code>string schoolId = 4;</code>
+     * @return The schoolId.
+     */
+    @java.lang.Override
+    public java.lang.String getSchoolId() {
+      java.lang.Object ref = schoolId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        schoolId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string schoolId = 4;</code>
+     * @return The bytes for schoolId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getSchoolIdBytes() {
+      java.lang.Object ref = schoolId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        schoolId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int COMPANYID_FIELD_NUMBER = 5;
     private volatile java.lang.Object companyId_;
     /**
-     * <code>string companyId = 3;</code>
+     * <code>string companyId = 5;</code>
      * @return The companyId.
      */
     @java.lang.Override
@@ -5338,7 +5621,7 @@ public final class InternshipServiceProto {
       }
     }
     /**
-     * <code>string companyId = 3;</code>
+     * <code>string companyId = 5;</code>
      * @return The bytes for companyId.
      */
     @java.lang.Override
@@ -5356,17 +5639,55 @@ public final class InternshipServiceProto {
       }
     }
 
-    public static final int ATTACHMENTPERIOD_FIELD_NUMBER = 4;
+    public static final int COURSEID_FIELD_NUMBER = 6;
+    private volatile java.lang.Object courseId_;
+    /**
+     * <code>string courseId = 6;</code>
+     * @return The courseId.
+     */
+    @java.lang.Override
+    public java.lang.String getCourseId() {
+      java.lang.Object ref = courseId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        courseId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string courseId = 6;</code>
+     * @return The bytes for courseId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getCourseIdBytes() {
+      java.lang.Object ref = courseId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        courseId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ATTACHMENTPERIOD_FIELD_NUMBER = 7;
     private int attachmentPeriod_;
     /**
-     * <code>.AttachmentPeriod attachmentPeriod = 4;</code>
+     * <code>.AttachmentPeriod attachmentPeriod = 7;</code>
      * @return The enum numeric value on the wire for attachmentPeriod.
      */
     @java.lang.Override public int getAttachmentPeriodValue() {
       return attachmentPeriod_;
     }
     /**
-     * <code>.AttachmentPeriod attachmentPeriod = 4;</code>
+     * <code>.AttachmentPeriod attachmentPeriod = 7;</code>
      * @return The attachmentPeriod.
      */
     @java.lang.Override public elite.sas.api.grpc.CommonsProto.AttachmentPeriod getAttachmentPeriod() {
@@ -5375,10 +5696,10 @@ public final class InternshipServiceProto {
       return result == null ? elite.sas.api.grpc.CommonsProto.AttachmentPeriod.UNRECOGNIZED : result;
     }
 
-    public static final int STARTDATE_FIELD_NUMBER = 5;
+    public static final int STARTDATE_FIELD_NUMBER = 8;
     private com.google.protobuf.Timestamp startDate_;
     /**
-     * <code>.google.protobuf.Timestamp startDate = 5;</code>
+     * <code>.google.protobuf.Timestamp startDate = 8;</code>
      * @return Whether the startDate field is set.
      */
     @java.lang.Override
@@ -5386,7 +5707,7 @@ public final class InternshipServiceProto {
       return startDate_ != null;
     }
     /**
-     * <code>.google.protobuf.Timestamp startDate = 5;</code>
+     * <code>.google.protobuf.Timestamp startDate = 8;</code>
      * @return The startDate.
      */
     @java.lang.Override
@@ -5394,17 +5715,17 @@ public final class InternshipServiceProto {
       return startDate_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : startDate_;
     }
     /**
-     * <code>.google.protobuf.Timestamp startDate = 5;</code>
+     * <code>.google.protobuf.Timestamp startDate = 8;</code>
      */
     @java.lang.Override
     public com.google.protobuf.TimestampOrBuilder getStartDateOrBuilder() {
       return getStartDate();
     }
 
-    public static final int ENDDATE_FIELD_NUMBER = 6;
+    public static final int ENDDATE_FIELD_NUMBER = 9;
     private com.google.protobuf.Timestamp endDate_;
     /**
-     * <code>.google.protobuf.Timestamp endDate = 6;</code>
+     * <code>.google.protobuf.Timestamp endDate = 9;</code>
      * @return Whether the endDate field is set.
      */
     @java.lang.Override
@@ -5412,7 +5733,7 @@ public final class InternshipServiceProto {
       return endDate_ != null;
     }
     /**
-     * <code>.google.protobuf.Timestamp endDate = 6;</code>
+     * <code>.google.protobuf.Timestamp endDate = 9;</code>
      * @return The endDate.
      */
     @java.lang.Override
@@ -5420,17 +5741,17 @@ public final class InternshipServiceProto {
       return endDate_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : endDate_;
     }
     /**
-     * <code>.google.protobuf.Timestamp endDate = 6;</code>
+     * <code>.google.protobuf.Timestamp endDate = 9;</code>
      */
     @java.lang.Override
     public com.google.protobuf.TimestampOrBuilder getEndDateOrBuilder() {
       return getEndDate();
     }
 
-    public static final int INDUSTRYSUPERVISORID_FIELD_NUMBER = 7;
+    public static final int INDUSTRYSUPERVISORID_FIELD_NUMBER = 10;
     private volatile java.lang.Object industrySupervisorId_;
     /**
-     * <code>string industrySupervisorId = 7;</code>
+     * <code>string industrySupervisorId = 10;</code>
      * @return The industrySupervisorId.
      */
     @java.lang.Override
@@ -5447,7 +5768,7 @@ public final class InternshipServiceProto {
       }
     }
     /**
-     * <code>string industrySupervisorId = 7;</code>
+     * <code>string industrySupervisorId = 10;</code>
      * @return The bytes for industrySupervisorId.
      */
     @java.lang.Override
@@ -5465,10 +5786,10 @@ public final class InternshipServiceProto {
       }
     }
 
-    public static final int SCHOOLSUPERVISORID_FIELD_NUMBER = 8;
+    public static final int SCHOOLSUPERVISORID_FIELD_NUMBER = 11;
     private volatile java.lang.Object schoolSupervisorId_;
     /**
-     * <code>string schoolSupervisorId = 8;</code>
+     * <code>string schoolSupervisorId = 11;</code>
      * @return The schoolSupervisorId.
      */
     @java.lang.Override
@@ -5485,7 +5806,7 @@ public final class InternshipServiceProto {
       }
     }
     /**
-     * <code>string schoolSupervisorId = 8;</code>
+     * <code>string schoolSupervisorId = 11;</code>
      * @return The bytes for schoolSupervisorId.
      */
     @java.lang.Override
@@ -5523,23 +5844,32 @@ public final class InternshipServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(studentId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, studentId_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(studentAdmissionNumber_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, studentAdmissionNumber_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, schoolId_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(companyId_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, companyId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, companyId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(courseId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, courseId_);
       }
       if (attachmentPeriod_ != elite.sas.api.grpc.CommonsProto.AttachmentPeriod.JAN_MAR.getNumber()) {
-        output.writeEnum(4, attachmentPeriod_);
+        output.writeEnum(7, attachmentPeriod_);
       }
       if (startDate_ != null) {
-        output.writeMessage(5, getStartDate());
+        output.writeMessage(8, getStartDate());
       }
       if (endDate_ != null) {
-        output.writeMessage(6, getEndDate());
+        output.writeMessage(9, getEndDate());
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(industrySupervisorId_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, industrySupervisorId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, industrySupervisorId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolSupervisorId_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, schoolSupervisorId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, schoolSupervisorId_);
       }
       unknownFields.writeTo(output);
     }
@@ -5556,26 +5886,35 @@ public final class InternshipServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(studentId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, studentId_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(studentAdmissionNumber_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, studentAdmissionNumber_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, schoolId_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(companyId_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, companyId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, companyId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(courseId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, courseId_);
       }
       if (attachmentPeriod_ != elite.sas.api.grpc.CommonsProto.AttachmentPeriod.JAN_MAR.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, attachmentPeriod_);
+          .computeEnumSize(7, attachmentPeriod_);
       }
       if (startDate_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getStartDate());
+          .computeMessageSize(8, getStartDate());
       }
       if (endDate_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getEndDate());
+          .computeMessageSize(9, getEndDate());
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(industrySupervisorId_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, industrySupervisorId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, industrySupervisorId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolSupervisorId_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, schoolSupervisorId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, schoolSupervisorId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5596,8 +5935,14 @@ public final class InternshipServiceProto {
           .equals(other.getId())) return false;
       if (!getStudentId()
           .equals(other.getStudentId())) return false;
+      if (!getStudentAdmissionNumber()
+          .equals(other.getStudentAdmissionNumber())) return false;
+      if (!getSchoolId()
+          .equals(other.getSchoolId())) return false;
       if (!getCompanyId()
           .equals(other.getCompanyId())) return false;
+      if (!getCourseId()
+          .equals(other.getCourseId())) return false;
       if (attachmentPeriod_ != other.attachmentPeriod_) return false;
       if (hasStartDate() != other.hasStartDate()) return false;
       if (hasStartDate()) {
@@ -5628,8 +5973,14 @@ public final class InternshipServiceProto {
       hash = (53 * hash) + getId().hashCode();
       hash = (37 * hash) + STUDENTID_FIELD_NUMBER;
       hash = (53 * hash) + getStudentId().hashCode();
+      hash = (37 * hash) + STUDENTADMISSIONNUMBER_FIELD_NUMBER;
+      hash = (53 * hash) + getStudentAdmissionNumber().hashCode();
+      hash = (37 * hash) + SCHOOLID_FIELD_NUMBER;
+      hash = (53 * hash) + getSchoolId().hashCode();
       hash = (37 * hash) + COMPANYID_FIELD_NUMBER;
       hash = (53 * hash) + getCompanyId().hashCode();
+      hash = (37 * hash) + COURSEID_FIELD_NUMBER;
+      hash = (53 * hash) + getCourseId().hashCode();
       hash = (37 * hash) + ATTACHMENTPERIOD_FIELD_NUMBER;
       hash = (53 * hash) + attachmentPeriod_;
       if (hasStartDate()) {
@@ -5781,7 +6132,13 @@ public final class InternshipServiceProto {
 
         studentId_ = "";
 
+        studentAdmissionNumber_ = "";
+
+        schoolId_ = "";
+
         companyId_ = "";
+
+        courseId_ = "";
 
         attachmentPeriod_ = 0;
 
@@ -5829,7 +6186,10 @@ public final class InternshipServiceProto {
         elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams result = new elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams(this);
         result.id_ = id_;
         result.studentId_ = studentId_;
+        result.studentAdmissionNumber_ = studentAdmissionNumber_;
+        result.schoolId_ = schoolId_;
         result.companyId_ = companyId_;
+        result.courseId_ = courseId_;
         result.attachmentPeriod_ = attachmentPeriod_;
         if (startDateBuilder_ == null) {
           result.startDate_ = startDate_;
@@ -5899,8 +6259,20 @@ public final class InternshipServiceProto {
           studentId_ = other.studentId_;
           onChanged();
         }
+        if (!other.getStudentAdmissionNumber().isEmpty()) {
+          studentAdmissionNumber_ = other.studentAdmissionNumber_;
+          onChanged();
+        }
+        if (!other.getSchoolId().isEmpty()) {
+          schoolId_ = other.schoolId_;
+          onChanged();
+        }
         if (!other.getCompanyId().isEmpty()) {
           companyId_ = other.companyId_;
+          onChanged();
+        }
+        if (!other.getCourseId().isEmpty()) {
+          courseId_ = other.courseId_;
           onChanged();
         }
         if (other.attachmentPeriod_ != 0) {
@@ -6101,9 +6473,161 @@ public final class InternshipServiceProto {
         return this;
       }
 
+      private java.lang.Object studentAdmissionNumber_ = "";
+      /**
+       * <code>string studentAdmissionNumber = 3;</code>
+       * @return The studentAdmissionNumber.
+       */
+      public java.lang.String getStudentAdmissionNumber() {
+        java.lang.Object ref = studentAdmissionNumber_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          studentAdmissionNumber_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string studentAdmissionNumber = 3;</code>
+       * @return The bytes for studentAdmissionNumber.
+       */
+      public com.google.protobuf.ByteString
+          getStudentAdmissionNumberBytes() {
+        java.lang.Object ref = studentAdmissionNumber_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          studentAdmissionNumber_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string studentAdmissionNumber = 3;</code>
+       * @param value The studentAdmissionNumber to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStudentAdmissionNumber(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        studentAdmissionNumber_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string studentAdmissionNumber = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearStudentAdmissionNumber() {
+        
+        studentAdmissionNumber_ = getDefaultInstance().getStudentAdmissionNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string studentAdmissionNumber = 3;</code>
+       * @param value The bytes for studentAdmissionNumber to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStudentAdmissionNumberBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        studentAdmissionNumber_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object schoolId_ = "";
+      /**
+       * <code>string schoolId = 4;</code>
+       * @return The schoolId.
+       */
+      public java.lang.String getSchoolId() {
+        java.lang.Object ref = schoolId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          schoolId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string schoolId = 4;</code>
+       * @return The bytes for schoolId.
+       */
+      public com.google.protobuf.ByteString
+          getSchoolIdBytes() {
+        java.lang.Object ref = schoolId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          schoolId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string schoolId = 4;</code>
+       * @param value The schoolId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSchoolId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        schoolId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string schoolId = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSchoolId() {
+        
+        schoolId_ = getDefaultInstance().getSchoolId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string schoolId = 4;</code>
+       * @param value The bytes for schoolId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSchoolIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        schoolId_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object companyId_ = "";
       /**
-       * <code>string companyId = 3;</code>
+       * <code>string companyId = 5;</code>
        * @return The companyId.
        */
       public java.lang.String getCompanyId() {
@@ -6119,7 +6643,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string companyId = 3;</code>
+       * <code>string companyId = 5;</code>
        * @return The bytes for companyId.
        */
       public com.google.protobuf.ByteString
@@ -6136,7 +6660,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string companyId = 3;</code>
+       * <code>string companyId = 5;</code>
        * @param value The companyId to set.
        * @return This builder for chaining.
        */
@@ -6151,7 +6675,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string companyId = 3;</code>
+       * <code>string companyId = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearCompanyId() {
@@ -6161,7 +6685,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string companyId = 3;</code>
+       * <code>string companyId = 5;</code>
        * @param value The bytes for companyId to set.
        * @return This builder for chaining.
        */
@@ -6177,16 +6701,92 @@ public final class InternshipServiceProto {
         return this;
       }
 
+      private java.lang.Object courseId_ = "";
+      /**
+       * <code>string courseId = 6;</code>
+       * @return The courseId.
+       */
+      public java.lang.String getCourseId() {
+        java.lang.Object ref = courseId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          courseId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string courseId = 6;</code>
+       * @return The bytes for courseId.
+       */
+      public com.google.protobuf.ByteString
+          getCourseIdBytes() {
+        java.lang.Object ref = courseId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          courseId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string courseId = 6;</code>
+       * @param value The courseId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCourseId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        courseId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string courseId = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCourseId() {
+        
+        courseId_ = getDefaultInstance().getCourseId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string courseId = 6;</code>
+       * @param value The bytes for courseId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCourseIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        courseId_ = value;
+        onChanged();
+        return this;
+      }
+
       private int attachmentPeriod_ = 0;
       /**
-       * <code>.AttachmentPeriod attachmentPeriod = 4;</code>
+       * <code>.AttachmentPeriod attachmentPeriod = 7;</code>
        * @return The enum numeric value on the wire for attachmentPeriod.
        */
       @java.lang.Override public int getAttachmentPeriodValue() {
         return attachmentPeriod_;
       }
       /**
-       * <code>.AttachmentPeriod attachmentPeriod = 4;</code>
+       * <code>.AttachmentPeriod attachmentPeriod = 7;</code>
        * @param value The enum numeric value on the wire for attachmentPeriod to set.
        * @return This builder for chaining.
        */
@@ -6197,7 +6797,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.AttachmentPeriod attachmentPeriod = 4;</code>
+       * <code>.AttachmentPeriod attachmentPeriod = 7;</code>
        * @return The attachmentPeriod.
        */
       @java.lang.Override
@@ -6207,7 +6807,7 @@ public final class InternshipServiceProto {
         return result == null ? elite.sas.api.grpc.CommonsProto.AttachmentPeriod.UNRECOGNIZED : result;
       }
       /**
-       * <code>.AttachmentPeriod attachmentPeriod = 4;</code>
+       * <code>.AttachmentPeriod attachmentPeriod = 7;</code>
        * @param value The attachmentPeriod to set.
        * @return This builder for chaining.
        */
@@ -6221,7 +6821,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.AttachmentPeriod attachmentPeriod = 4;</code>
+       * <code>.AttachmentPeriod attachmentPeriod = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearAttachmentPeriod() {
@@ -6235,14 +6835,14 @@ public final class InternshipServiceProto {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> startDateBuilder_;
       /**
-       * <code>.google.protobuf.Timestamp startDate = 5;</code>
+       * <code>.google.protobuf.Timestamp startDate = 8;</code>
        * @return Whether the startDate field is set.
        */
       public boolean hasStartDate() {
         return startDateBuilder_ != null || startDate_ != null;
       }
       /**
-       * <code>.google.protobuf.Timestamp startDate = 5;</code>
+       * <code>.google.protobuf.Timestamp startDate = 8;</code>
        * @return The startDate.
        */
       public com.google.protobuf.Timestamp getStartDate() {
@@ -6253,7 +6853,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>.google.protobuf.Timestamp startDate = 5;</code>
+       * <code>.google.protobuf.Timestamp startDate = 8;</code>
        */
       public Builder setStartDate(com.google.protobuf.Timestamp value) {
         if (startDateBuilder_ == null) {
@@ -6269,7 +6869,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp startDate = 5;</code>
+       * <code>.google.protobuf.Timestamp startDate = 8;</code>
        */
       public Builder setStartDate(
           com.google.protobuf.Timestamp.Builder builderForValue) {
@@ -6283,7 +6883,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp startDate = 5;</code>
+       * <code>.google.protobuf.Timestamp startDate = 8;</code>
        */
       public Builder mergeStartDate(com.google.protobuf.Timestamp value) {
         if (startDateBuilder_ == null) {
@@ -6301,7 +6901,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp startDate = 5;</code>
+       * <code>.google.protobuf.Timestamp startDate = 8;</code>
        */
       public Builder clearStartDate() {
         if (startDateBuilder_ == null) {
@@ -6315,7 +6915,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp startDate = 5;</code>
+       * <code>.google.protobuf.Timestamp startDate = 8;</code>
        */
       public com.google.protobuf.Timestamp.Builder getStartDateBuilder() {
         
@@ -6323,7 +6923,7 @@ public final class InternshipServiceProto {
         return getStartDateFieldBuilder().getBuilder();
       }
       /**
-       * <code>.google.protobuf.Timestamp startDate = 5;</code>
+       * <code>.google.protobuf.Timestamp startDate = 8;</code>
        */
       public com.google.protobuf.TimestampOrBuilder getStartDateOrBuilder() {
         if (startDateBuilder_ != null) {
@@ -6334,7 +6934,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>.google.protobuf.Timestamp startDate = 5;</code>
+       * <code>.google.protobuf.Timestamp startDate = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
@@ -6354,14 +6954,14 @@ public final class InternshipServiceProto {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> endDateBuilder_;
       /**
-       * <code>.google.protobuf.Timestamp endDate = 6;</code>
+       * <code>.google.protobuf.Timestamp endDate = 9;</code>
        * @return Whether the endDate field is set.
        */
       public boolean hasEndDate() {
         return endDateBuilder_ != null || endDate_ != null;
       }
       /**
-       * <code>.google.protobuf.Timestamp endDate = 6;</code>
+       * <code>.google.protobuf.Timestamp endDate = 9;</code>
        * @return The endDate.
        */
       public com.google.protobuf.Timestamp getEndDate() {
@@ -6372,7 +6972,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>.google.protobuf.Timestamp endDate = 6;</code>
+       * <code>.google.protobuf.Timestamp endDate = 9;</code>
        */
       public Builder setEndDate(com.google.protobuf.Timestamp value) {
         if (endDateBuilder_ == null) {
@@ -6388,7 +6988,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp endDate = 6;</code>
+       * <code>.google.protobuf.Timestamp endDate = 9;</code>
        */
       public Builder setEndDate(
           com.google.protobuf.Timestamp.Builder builderForValue) {
@@ -6402,7 +7002,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp endDate = 6;</code>
+       * <code>.google.protobuf.Timestamp endDate = 9;</code>
        */
       public Builder mergeEndDate(com.google.protobuf.Timestamp value) {
         if (endDateBuilder_ == null) {
@@ -6420,7 +7020,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp endDate = 6;</code>
+       * <code>.google.protobuf.Timestamp endDate = 9;</code>
        */
       public Builder clearEndDate() {
         if (endDateBuilder_ == null) {
@@ -6434,7 +7034,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp endDate = 6;</code>
+       * <code>.google.protobuf.Timestamp endDate = 9;</code>
        */
       public com.google.protobuf.Timestamp.Builder getEndDateBuilder() {
         
@@ -6442,7 +7042,7 @@ public final class InternshipServiceProto {
         return getEndDateFieldBuilder().getBuilder();
       }
       /**
-       * <code>.google.protobuf.Timestamp endDate = 6;</code>
+       * <code>.google.protobuf.Timestamp endDate = 9;</code>
        */
       public com.google.protobuf.TimestampOrBuilder getEndDateOrBuilder() {
         if (endDateBuilder_ != null) {
@@ -6453,7 +7053,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>.google.protobuf.Timestamp endDate = 6;</code>
+       * <code>.google.protobuf.Timestamp endDate = 9;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
@@ -6471,7 +7071,7 @@ public final class InternshipServiceProto {
 
       private java.lang.Object industrySupervisorId_ = "";
       /**
-       * <code>string industrySupervisorId = 7;</code>
+       * <code>string industrySupervisorId = 10;</code>
        * @return The industrySupervisorId.
        */
       public java.lang.String getIndustrySupervisorId() {
@@ -6487,7 +7087,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string industrySupervisorId = 7;</code>
+       * <code>string industrySupervisorId = 10;</code>
        * @return The bytes for industrySupervisorId.
        */
       public com.google.protobuf.ByteString
@@ -6504,7 +7104,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string industrySupervisorId = 7;</code>
+       * <code>string industrySupervisorId = 10;</code>
        * @param value The industrySupervisorId to set.
        * @return This builder for chaining.
        */
@@ -6519,7 +7119,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string industrySupervisorId = 7;</code>
+       * <code>string industrySupervisorId = 10;</code>
        * @return This builder for chaining.
        */
       public Builder clearIndustrySupervisorId() {
@@ -6529,7 +7129,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string industrySupervisorId = 7;</code>
+       * <code>string industrySupervisorId = 10;</code>
        * @param value The bytes for industrySupervisorId to set.
        * @return This builder for chaining.
        */
@@ -6547,7 +7147,7 @@ public final class InternshipServiceProto {
 
       private java.lang.Object schoolSupervisorId_ = "";
       /**
-       * <code>string schoolSupervisorId = 8;</code>
+       * <code>string schoolSupervisorId = 11;</code>
        * @return The schoolSupervisorId.
        */
       public java.lang.String getSchoolSupervisorId() {
@@ -6563,7 +7163,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string schoolSupervisorId = 8;</code>
+       * <code>string schoolSupervisorId = 11;</code>
        * @return The bytes for schoolSupervisorId.
        */
       public com.google.protobuf.ByteString
@@ -6580,7 +7180,7 @@ public final class InternshipServiceProto {
         }
       }
       /**
-       * <code>string schoolSupervisorId = 8;</code>
+       * <code>string schoolSupervisorId = 11;</code>
        * @param value The schoolSupervisorId to set.
        * @return This builder for chaining.
        */
@@ -6595,7 +7195,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string schoolSupervisorId = 8;</code>
+       * <code>string schoolSupervisorId = 11;</code>
        * @return This builder for chaining.
        */
       public Builder clearSchoolSupervisorId() {
@@ -6605,7 +7205,7 @@ public final class InternshipServiceProto {
         return this;
       }
       /**
-       * <code>string schoolSupervisorId = 8;</code>
+       * <code>string schoolSupervisorId = 11;</code>
        * @param value The bytes for schoolSupervisorId to set.
        * @return This builder for chaining.
        */
@@ -6718,26 +7318,28 @@ public final class InternshipServiceProto {
       "\001(\005\022\022\n\004logs\030\003 \003(\0132\004.Log\022\023\n\013weekSummary\030\004" +
       " \001(\t\022\026\n\016studentComment\030\005 \001(\t\022!\n\031industry" +
       "SupervisorComment\030\006 \001(\t\022\037\n\027schoolSupervi" +
-      "sorComment\030\007 \001(\t\022\020\n\010isActive\030\010 \001(\010\"g\n\003Lo" +
-      "g\022\n\n\002id\030\001 \001(\t\022\020\n\010workDone\030\002 \001(\t\022!\n\031indus" +
-      "trySupervisorComment\030\003 \001(\t\022\037\n\027schoolSupe" +
-      "rvisorComment\030\004 \001(\t\"\215\002\n\026SearchAttachment" +
-      "Params\022\n\n\002id\030\001 \001(\t\022\021\n\tstudentId\030\002 \001(\t\022\021\n" +
-      "\tcompanyId\030\003 \001(\t\022+\n\020attachmentPeriod\030\004 \001" +
-      "(\0162\021.AttachmentPeriod\022-\n\tstartDate\030\005 \001(\013" +
-      "2\032.google.protobuf.Timestamp\022+\n\007endDate\030" +
-      "\006 \001(\0132\032.google.protobuf.Timestamp\022\034\n\024ind" +
-      "ustrySupervisorId\030\007 \001(\t\022\032\n\022schoolSupervi" +
-      "sorId\030\010 \001(\t2\250\002\n\021internshipService\022)\n\radd" +
-      "Attachment\022\013.Attachment\032\013.Attachment\022*\n\021" +
-      "getAllAttachments\022\006.Empty\032\013.Attachment0\001" +
-      "\0225\n\rgetAttachment\022\027.SearchAttachmentPara" +
-      "ms\032\013.Attachment\0228\n\016getAttachments\022\027.Sear" +
-      "chAttachmentParams\032\013.Attachment0\001\022\024\n\006add" +
-      "Log\022\004.Log\032\004.Log\0225\n\021addAttachmentWeek\022\017.A" +
-      "ttachmentWeek\032\017.AttachmentWeekB.\n\022elite." +
-      "sas.api.grpcB\026InternshipServiceProtoP\000b\006" +
-      "proto3"
+      "sorComment\030\007 \001(\t\022\020\n\010isActive\030\010 \001(\010\"\201\001\n\003L" +
+      "og\022\n\n\002id\030\001 \001(\t\022\030\n\020attachmentWeekId\030\002 \001(\t" +
+      "\022\020\n\010workDone\030\003 \001(\t\022!\n\031industrySupervisor" +
+      "Comment\030\004 \001(\t\022\037\n\027schoolSupervisorComment" +
+      "\030\005 \001(\t\"\321\002\n\026SearchAttachmentParams\022\n\n\002id\030" +
+      "\001 \001(\t\022\021\n\tstudentId\030\002 \001(\t\022\036\n\026studentAdmis" +
+      "sionNumber\030\003 \001(\t\022\020\n\010schoolId\030\004 \001(\t\022\021\n\tco" +
+      "mpanyId\030\005 \001(\t\022\020\n\010courseId\030\006 \001(\t\022+\n\020attac" +
+      "hmentPeriod\030\007 \001(\0162\021.AttachmentPeriod\022-\n\t" +
+      "startDate\030\010 \001(\0132\032.google.protobuf.Timest" +
+      "amp\022+\n\007endDate\030\t \001(\0132\032.google.protobuf.T" +
+      "imestamp\022\034\n\024industrySupervisorId\030\n \001(\t\022\032" +
+      "\n\022schoolSupervisorId\030\013 \001(\t2\250\002\n\021internshi" +
+      "pService\022)\n\raddAttachment\022\013.Attachment\032\013" +
+      ".Attachment\022*\n\021getAllAttachments\022\006.Empty" +
+      "\032\013.Attachment0\001\0225\n\rgetAttachment\022\027.Searc" +
+      "hAttachmentParams\032\013.Attachment\0228\n\016getAtt" +
+      "achments\022\027.SearchAttachmentParams\032\013.Atta" +
+      "chment0\001\022\024\n\006addLog\022\004.Log\032\004.Log\0225\n\021addAtt" +
+      "achmentWeek\022\017.AttachmentWeek\032\017.Attachmen" +
+      "tWeekB.\n\022elite.sas.api.grpcB\026InternshipS" +
+      "erviceProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -6765,13 +7367,13 @@ public final class InternshipServiceProto {
     internal_static_Log_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Log_descriptor,
-        new java.lang.String[] { "Id", "WorkDone", "IndustrySupervisorComment", "SchoolSupervisorComment", });
+        new java.lang.String[] { "Id", "AttachmentWeekId", "WorkDone", "IndustrySupervisorComment", "SchoolSupervisorComment", });
     internal_static_SearchAttachmentParams_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_SearchAttachmentParams_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SearchAttachmentParams_descriptor,
-        new java.lang.String[] { "Id", "StudentId", "CompanyId", "AttachmentPeriod", "StartDate", "EndDate", "IndustrySupervisorId", "SchoolSupervisorId", });
+        new java.lang.String[] { "Id", "StudentId", "StudentAdmissionNumber", "SchoolId", "CompanyId", "CourseId", "AttachmentPeriod", "StartDate", "EndDate", "IndustrySupervisorId", "SchoolSupervisorId", });
     com.google.protobuf.TimestampProto.getDescriptor();
     elite.sas.api.grpc.CourseServiceProto.getDescriptor();
     elite.sas.api.grpc.UserServiceProto.getDescriptor();

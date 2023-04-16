@@ -2,6 +2,7 @@ package elite.sas.core.entities;
 
 import elite.sas.core.util.TimeUtil;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,8 @@ import java.util.UUID;
 @Getter @Setter
 public class Log extends BaseModel{
 
+    @ManyToOne
+    private AttachmentWeek attachmentWeek;
     private String workDone;
     private String industrySupervisorComment;
     private String schoolSupervisorComment;
@@ -22,8 +25,9 @@ public class Log extends BaseModel{
     public Log() {}
 
     @Builder
-    public Log(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String workDone, String industrySupervisorComment, String schoolSupervisorComment) {
+    public Log(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, AttachmentWeek attachmentWeek, String workDone, String industrySupervisorComment, String schoolSupervisorComment) {
         super(Id, createdAt, updatedAt, deletedAt);
+        this.attachmentWeek = attachmentWeek;
         this.workDone = workDone;
         this.industrySupervisorComment = industrySupervisorComment;
         this.schoolSupervisorComment = schoolSupervisorComment;

@@ -1,8 +1,9 @@
 package elite.sas.core.service;
 
+import elite.sas.core.entities.*;
 import elite.sas.core.repository.AttachmentRepository;
-import elite.sas.core.entities.Attachment;
-import elite.sas.core.entities.Student;
+import elite.sas.core.repository.AttachmentWeekRepository;
+import elite.sas.core.repository.LogRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class AttachmentService {
     @Autowired
     private final AttachmentRepository attachmentRepository;
 
+    @Autowired
+    private final AttachmentWeekRepository attachmentWeekRepository;
+    @Autowired
+    private final LogRepository logRepository;
+
 
     public List<Attachment> getAllAttachments() {
         return attachmentRepository.findAll();
@@ -29,7 +35,7 @@ public class AttachmentService {
         return getAllAttachments().stream().filter(Attachment::isActive).toList();
     }
 
-    public Optional<Attachment> getAttachmentsById(String id) {
+    public Optional<Attachment> getAttachmentById(String id) {
         return attachmentRepository.findById(UUID.fromString(id));
     }
 
@@ -37,8 +43,12 @@ public class AttachmentService {
         return attachmentRepository.findByStudentCourseId(UUID.fromString(courseId));
     }
 
-    public Optional<Attachment> getAttachmentByStudentAdmissionNumber(String id) {
-        return attachmentRepository.findByStudentAdmissionNumber(UUID.fromString(id));
+    public Optional<Attachment> getAttachmentByStudentAdmissionNumber(String admissionNumber) {
+        return attachmentRepository.findByStudentAdmissionNumber(UUID.fromString(admissionNumber));
+    }
+
+    public Optional<Attachment> getAttachmentByStudentId(String studentId) {
+        return attachmentRepository.findByStudentId(UUID.fromString(studentId));
     }
 
 
@@ -60,6 +70,19 @@ public class AttachmentService {
         return attachmentRepository.findByStudentAppUserTenantId(UUID.fromString(tenantId));
     }
 
+    public List<Attachment> getAllAttachmentsForIndustrySupervisor(String supervisorId) {
+        return attachmentRepository.findByIndustrySupervisorId(UUID.fromString(supervisorId));
+    }
+
+    public List<Attachment> getAllAttachmentsForSchoolSupervisor(String tenantId) {
+        return attachmentRepository.findBySchoolSupervisorId(UUID.fromString(tenantId));
+    }
+
+    public List<Attachment> getAllAttachmentsForPeriod(AttachmentPeriod attachmentPeriod) {
+        return attachmentRepository.findByAttachmentPeriod(attachmentPeriod.name());
+    }
+
+
     /**
      * active attachments at company xyz
      *
@@ -73,6 +96,7 @@ public class AttachmentService {
 
     /**
      * active attachments with students from school xyz
+     *
      * @param tenantId school tenant id
      * @return List of active attachments
      */
@@ -119,6 +143,15 @@ public class AttachmentService {
      */
     public List<Student> getActiveStudentsFromSchool(String tenantId) {
         return getActiveAttachmentsFromSchool(tenantId).stream().map(Attachment::getStudent).toList();
+    }
+
+
+    public Optional<AttachmentWeek> getAttachmentWeekById(String weekId) {
+        return attachmentWeekRepository.findById(UUID.fromString(weekId));
+    }
+
+    public Optional<Log> addLog(Log log) {
+        return Optional.of(logRepository.save(log));
     }
 
 
