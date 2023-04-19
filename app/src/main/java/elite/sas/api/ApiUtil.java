@@ -50,6 +50,17 @@ public final class ApiUtil {
         return userBuilder.build();
     }
 
+    public static Account accountFromApi(UserServiceProto.Account apiAccount) throws ModelConversionException {
+        if (Objects.isNull(apiAccount.getId()) || Objects.isNull(apiAccount.getAppUser()) || Objects.isNull(apiAccount.getPassword())) {
+            throw new ModelConversionException("Bad account data");
+        }
+        return Account.builder()
+                .Id(UUID.fromString(apiAccount.getId()))
+                .appUser(appUserFromApi(apiAccount.getAppUser()))
+                .password(apiAccount.getPassword())
+                .build();
+    }
+
     public static Tenant tenantFromApi(TenantServiceProto.Tenant tenant) throws ModelConversionException {
         if (Objects.isNull(tenant.getId()) || Objects.isNull(tenant.getEmail()) ||
                 Objects.isNull(tenant.getName()) || Objects.isNull(tenant.getTenantType())
@@ -343,6 +354,17 @@ public final class ApiUtil {
                 .addAllRoles(roleSet);
 
         return userBuilder.build();
+    }
+
+    public static UserServiceProto.Account accountToApi(Account account) throws ModelConversionException {
+        if (Objects.isNull(account.getId()) || Objects.isNull(account.getAppUser()) || Objects.isNull(account.getPassword())) {
+            throw new ModelConversionException("Bad account data");
+        }
+        return UserServiceProto.Account.newBuilder()
+                .setId(String.valueOf(account.getId()))
+                .setAppUser(appUserToApi(account.getAppUser()))
+                .setPassword(account.getPassword())
+                .build();
     }
 
     public static TenantServiceProto.Tenant tenantToApi(Tenant tenant) throws ModelConversionException {

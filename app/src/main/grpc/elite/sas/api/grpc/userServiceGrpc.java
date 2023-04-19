@@ -232,6 +232,37 @@ public final class userServiceGrpc {
     return getGetAccountMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.UserServiceProto.LogInRequest,
+      elite.sas.api.grpc.UserServiceProto.Account> getLoginMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "login",
+      requestType = elite.sas.api.grpc.UserServiceProto.LogInRequest.class,
+      responseType = elite.sas.api.grpc.UserServiceProto.Account.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<elite.sas.api.grpc.UserServiceProto.LogInRequest,
+      elite.sas.api.grpc.UserServiceProto.Account> getLoginMethod() {
+    io.grpc.MethodDescriptor<elite.sas.api.grpc.UserServiceProto.LogInRequest, elite.sas.api.grpc.UserServiceProto.Account> getLoginMethod;
+    if ((getLoginMethod = userServiceGrpc.getLoginMethod) == null) {
+      synchronized (userServiceGrpc.class) {
+        if ((getLoginMethod = userServiceGrpc.getLoginMethod) == null) {
+          userServiceGrpc.getLoginMethod = getLoginMethod =
+              io.grpc.MethodDescriptor.<elite.sas.api.grpc.UserServiceProto.LogInRequest, elite.sas.api.grpc.UserServiceProto.Account>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "login"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  elite.sas.api.grpc.UserServiceProto.LogInRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  elite.sas.api.grpc.UserServiceProto.Account.getDefaultInstance()))
+              .setSchemaDescriptor(new userServiceMethodDescriptorSupplier("login"))
+              .build();
+        }
+      }
+    }
+    return getLoginMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -329,6 +360,13 @@ public final class userServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAccountMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void login(elite.sas.api.grpc.UserServiceProto.LogInRequest request,
+        io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.Account> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -380,6 +418,13 @@ public final class userServiceGrpc {
                 elite.sas.api.grpc.UserServiceProto.GetAccountRequest,
                 elite.sas.api.grpc.UserServiceProto.Account>(
                   this, METHODID_GET_ACCOUNT)))
+          .addMethod(
+            getLoginMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                elite.sas.api.grpc.UserServiceProto.LogInRequest,
+                elite.sas.api.grpc.UserServiceProto.Account>(
+                  this, METHODID_LOGIN)))
           .build();
     }
   }
@@ -453,6 +498,14 @@ public final class userServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetAccountMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void login(elite.sas.api.grpc.UserServiceProto.LogInRequest request,
+        io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.Account> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getLoginMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -519,6 +572,13 @@ public final class userServiceGrpc {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetAccountMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public elite.sas.api.grpc.UserServiceProto.Account login(elite.sas.api.grpc.UserServiceProto.LogInRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getLoginMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -574,6 +634,14 @@ public final class userServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetAccountMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<elite.sas.api.grpc.UserServiceProto.Account> login(
+        elite.sas.api.grpc.UserServiceProto.LogInRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getLoginMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_REGISTER_USER = 0;
@@ -583,6 +651,7 @@ public final class userServiceGrpc {
   private static final int METHODID_UPDATE_USER = 4;
   private static final int METHODID_UPDATE_PASSWORD = 5;
   private static final int METHODID_GET_ACCOUNT = 6;
+  private static final int METHODID_LOGIN = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -627,6 +696,10 @@ public final class userServiceGrpc {
           break;
         case METHODID_GET_ACCOUNT:
           serviceImpl.getAccount((elite.sas.api.grpc.UserServiceProto.GetAccountRequest) request,
+              (io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.Account>) responseObserver);
+          break;
+        case METHODID_LOGIN:
+          serviceImpl.login((elite.sas.api.grpc.UserServiceProto.LogInRequest) request,
               (io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.Account>) responseObserver);
           break;
         default:
@@ -697,6 +770,7 @@ public final class userServiceGrpc {
               .addMethod(getUpdateUserMethod())
               .addMethod(getUpdatePasswordMethod())
               .addMethod(getGetAccountMethod())
+              .addMethod(getLoginMethod())
               .build();
         }
       }

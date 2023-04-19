@@ -182,4 +182,14 @@ public class AppUserService {
     public Optional<AppUser> getUserByUserName(String username) {
         return userRepository.findByUserName(username);
     }
+
+    public Optional<Account> getAccountById(String accountId) {
+        return accountRepository.findById(UUID.fromString(accountId));
+    }
+
+
+    public Optional<Account> getAccountByUserName(String userName) {
+        return accountRepository.findByAppUserUserName(userName);
+    }
+
 }
