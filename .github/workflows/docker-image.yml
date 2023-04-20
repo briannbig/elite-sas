@@ -13,6 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set up latest available JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'zulu'
+        cache: 'gradle'
+
+    - name: Build with Gradle
+      run: ./gradlew clean build
+
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file app/Dockerfile --tag my-image-name:$(date +%s)
