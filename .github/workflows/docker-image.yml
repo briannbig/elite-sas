@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: release docker image
+      uses: actions/checkout@v3
+      
     - name: Set up latest available JDK
       uses: actions/setup-java@v3
       with:
@@ -23,6 +26,6 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew clean build
 
-    - uses: actions/checkout@v3
+    
     - name: Build the Docker image
       run: docker build . --file app/Dockerfile --tag my-image-name:$(date +%s)
