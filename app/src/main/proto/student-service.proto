@@ -13,6 +13,7 @@ message Student {
   AppUser appUser = 2;
   string admissionNumber = 3;
   Course course = 4;
+  Metadata metadata = 5;
 
 }
 
@@ -20,6 +21,7 @@ message Course {
   string id = 1;
   string name = 2;
   CourseLevel courseLevel = 3;
+  Metadata metadata = 4;
 
 }
 

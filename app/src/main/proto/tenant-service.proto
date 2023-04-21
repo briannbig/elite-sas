@@ -14,6 +14,7 @@ message Tenant {
   string telephone = 4;
   string email = 5;
   TenantType tenantType = 6;
+  Metadata metadata = 7;
 
 }
 

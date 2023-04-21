@@ -127,6 +127,21 @@ public final class UserServiceProto {
      */
     elite.sas.api.grpc.UserServiceProto.RoleOrBuilder getRolesOrBuilder(
         int index);
+
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     * @return Whether the metadata field is set.
+     */
+    boolean hasMetadata();
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     * @return The metadata.
+     */
+    elite.sas.api.grpc.CommonsProto.Metadata getMetadata();
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     */
+    elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder();
   }
   /**
    * Protobuf type {@code AppUser}
@@ -237,6 +252,19 @@ public final class UserServiceProto {
               }
               roles_.add(
                   input.readMessage(elite.sas.api.grpc.UserServiceProto.Role.parser(), extensionRegistry));
+              break;
+            }
+            case 74: {
+              elite.sas.api.grpc.CommonsProto.Metadata.Builder subBuilder = null;
+              if (metadata_ != null) {
+                subBuilder = metadata_.toBuilder();
+              }
+              metadata_ = input.readMessage(elite.sas.api.grpc.CommonsProto.Metadata.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(metadata_);
+                metadata_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -551,6 +579,32 @@ public final class UserServiceProto {
       return roles_.get(index);
     }
 
+    public static final int METADATA_FIELD_NUMBER = 9;
+    private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     * @return Whether the metadata field is set.
+     */
+    @java.lang.Override
+    public boolean hasMetadata() {
+      return metadata_ != null;
+    }
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     * @return The metadata.
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+      return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+    }
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+      return getMetadata();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -589,6 +643,9 @@ public final class UserServiceProto {
       for (int i = 0; i < roles_.size(); i++) {
         output.writeMessage(8, roles_.get(i));
       }
+      if (metadata_ != null) {
+        output.writeMessage(9, getMetadata());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -625,6 +682,10 @@ public final class UserServiceProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, roles_.get(i));
       }
+      if (metadata_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, getMetadata());
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -658,6 +719,11 @@ public final class UserServiceProto {
       if (userType_ != other.userType_) return false;
       if (!getRolesList()
           .equals(other.getRolesList())) return false;
+      if (hasMetadata() != other.hasMetadata()) return false;
+      if (hasMetadata()) {
+        if (!getMetadata()
+            .equals(other.getMetadata())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -688,6 +754,10 @@ public final class UserServiceProto {
       if (getRolesCount() > 0) {
         hash = (37 * hash) + ROLES_FIELD_NUMBER;
         hash = (53 * hash) + getRolesList().hashCode();
+      }
+      if (hasMetadata()) {
+        hash = (37 * hash) + METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + getMetadata().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -847,6 +917,12 @@ public final class UserServiceProto {
         } else {
           rolesBuilder_.clear();
         }
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
         return this;
       }
 
@@ -893,6 +969,11 @@ public final class UserServiceProto {
           result.roles_ = roles_;
         } else {
           result.roles_ = rolesBuilder_.build();
+        }
+        if (metadataBuilder_ == null) {
+          result.metadata_ = metadata_;
+        } else {
+          result.metadata_ = metadataBuilder_.build();
         }
         onBuilt();
         return result;
@@ -993,6 +1074,9 @@ public final class UserServiceProto {
               rolesBuilder_.addAllMessages(other.roles_);
             }
           }
+        }
+        if (other.hasMetadata()) {
+          mergeMetadata(other.getMetadata());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1816,6 +1900,125 @@ public final class UserServiceProto {
         }
         return rolesBuilder_;
       }
+
+      private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> metadataBuilder_;
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       * @return Whether the metadata field is set.
+       */
+      public boolean hasMetadata() {
+        return metadataBuilder_ != null || metadata_ != null;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       * @return The metadata.
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+        if (metadataBuilder_ == null) {
+          return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        } else {
+          return metadataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public Builder setMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          metadata_ = value;
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public Builder setMetadata(
+          elite.sas.api.grpc.CommonsProto.Metadata.Builder builderForValue) {
+        if (metadataBuilder_ == null) {
+          metadata_ = builderForValue.build();
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public Builder mergeMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (metadata_ != null) {
+            metadata_ =
+              elite.sas.api.grpc.CommonsProto.Metadata.newBuilder(metadata_).mergeFrom(value).buildPartial();
+          } else {
+            metadata_ = value;
+          }
+          onChanged();
+        } else {
+          metadataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public Builder clearMetadata() {
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+          onChanged();
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata.Builder getMetadataBuilder() {
+        
+        onChanged();
+        return getMetadataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+        if (metadataBuilder_ != null) {
+          return metadataBuilder_.getMessageOrBuilder();
+        } else {
+          return metadata_ == null ?
+              elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> 
+          getMetadataFieldBuilder() {
+        if (metadataBuilder_ == null) {
+          metadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder>(
+                  getMetadata(),
+                  getParentForChildren(),
+                  isClean());
+          metadata_ = null;
+        }
+        return metadataBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1911,6 +2114,21 @@ public final class UserServiceProto {
      */
     com.google.protobuf.ByteString
         getPasswordBytes();
+
+    /**
+     * <code>.Metadata metadata = 4;</code>
+     * @return Whether the metadata field is set.
+     */
+    boolean hasMetadata();
+    /**
+     * <code>.Metadata metadata = 4;</code>
+     * @return The metadata.
+     */
+    elite.sas.api.grpc.CommonsProto.Metadata getMetadata();
+    /**
+     * <code>.Metadata metadata = 4;</code>
+     */
+    elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder();
   }
   /**
    * Protobuf type {@code Account}
@@ -1982,6 +2200,19 @@ public final class UserServiceProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               password_ = s;
+              break;
+            }
+            case 34: {
+              elite.sas.api.grpc.CommonsProto.Metadata.Builder subBuilder = null;
+              if (metadata_ != null) {
+                subBuilder = metadata_.toBuilder();
+              }
+              metadata_ = input.readMessage(elite.sas.api.grpc.CommonsProto.Metadata.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(metadata_);
+                metadata_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -2120,6 +2351,32 @@ public final class UserServiceProto {
       }
     }
 
+    public static final int METADATA_FIELD_NUMBER = 4;
+    private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+    /**
+     * <code>.Metadata metadata = 4;</code>
+     * @return Whether the metadata field is set.
+     */
+    @java.lang.Override
+    public boolean hasMetadata() {
+      return metadata_ != null;
+    }
+    /**
+     * <code>.Metadata metadata = 4;</code>
+     * @return The metadata.
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+      return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+    }
+    /**
+     * <code>.Metadata metadata = 4;</code>
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+      return getMetadata();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2143,6 +2400,9 @@ public final class UserServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(password_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, password_);
       }
+      if (metadata_ != null) {
+        output.writeMessage(4, getMetadata());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2161,6 +2421,10 @@ public final class UserServiceProto {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(password_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, password_);
+      }
+      if (metadata_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getMetadata());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2186,6 +2450,11 @@ public final class UserServiceProto {
       }
       if (!getPassword()
           .equals(other.getPassword())) return false;
+      if (hasMetadata() != other.hasMetadata()) return false;
+      if (hasMetadata()) {
+        if (!getMetadata()
+            .equals(other.getMetadata())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2205,6 +2474,10 @@ public final class UserServiceProto {
       }
       hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
       hash = (53 * hash) + getPassword().hashCode();
+      if (hasMetadata()) {
+        hash = (37 * hash) + METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + getMetadata().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2348,6 +2621,12 @@ public final class UserServiceProto {
         }
         password_ = "";
 
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
         return this;
       }
 
@@ -2381,6 +2660,11 @@ public final class UserServiceProto {
           result.appUser_ = appUserBuilder_.build();
         }
         result.password_ = password_;
+        if (metadataBuilder_ == null) {
+          result.metadata_ = metadata_;
+        } else {
+          result.metadata_ = metadataBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -2439,6 +2723,9 @@ public final class UserServiceProto {
         if (!other.getPassword().isEmpty()) {
           password_ = other.password_;
           onChanged();
+        }
+        if (other.hasMetadata()) {
+          mergeMetadata(other.getMetadata());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2739,6 +3026,125 @@ public final class UserServiceProto {
         onChanged();
         return this;
       }
+
+      private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> metadataBuilder_;
+      /**
+       * <code>.Metadata metadata = 4;</code>
+       * @return Whether the metadata field is set.
+       */
+      public boolean hasMetadata() {
+        return metadataBuilder_ != null || metadata_ != null;
+      }
+      /**
+       * <code>.Metadata metadata = 4;</code>
+       * @return The metadata.
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+        if (metadataBuilder_ == null) {
+          return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        } else {
+          return metadataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 4;</code>
+       */
+      public Builder setMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          metadata_ = value;
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 4;</code>
+       */
+      public Builder setMetadata(
+          elite.sas.api.grpc.CommonsProto.Metadata.Builder builderForValue) {
+        if (metadataBuilder_ == null) {
+          metadata_ = builderForValue.build();
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 4;</code>
+       */
+      public Builder mergeMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (metadata_ != null) {
+            metadata_ =
+              elite.sas.api.grpc.CommonsProto.Metadata.newBuilder(metadata_).mergeFrom(value).buildPartial();
+          } else {
+            metadata_ = value;
+          }
+          onChanged();
+        } else {
+          metadataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 4;</code>
+       */
+      public Builder clearMetadata() {
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+          onChanged();
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 4;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata.Builder getMetadataBuilder() {
+        
+        onChanged();
+        return getMetadataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Metadata metadata = 4;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+        if (metadataBuilder_ != null) {
+          return metadataBuilder_.getMessageOrBuilder();
+        } else {
+          return metadata_ == null ?
+              elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> 
+          getMetadataFieldBuilder() {
+        if (metadataBuilder_ == null) {
+          metadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder>(
+                  getMetadata(),
+                  getParentForChildren(),
+                  isClean());
+          metadata_ = null;
+        }
+        return metadataBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2818,6 +3224,21 @@ public final class UserServiceProto {
      * @return The roleName.
      */
     elite.sas.api.grpc.CommonsProto.RoleName getRoleName();
+
+    /**
+     * <code>.Metadata metadata = 3;</code>
+     * @return Whether the metadata field is set.
+     */
+    boolean hasMetadata();
+    /**
+     * <code>.Metadata metadata = 3;</code>
+     * @return The metadata.
+     */
+    elite.sas.api.grpc.CommonsProto.Metadata getMetadata();
+    /**
+     * <code>.Metadata metadata = 3;</code>
+     */
+    elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder();
   }
   /**
    * Protobuf type {@code Role}
@@ -2876,6 +3297,19 @@ public final class UserServiceProto {
               int rawValue = input.readEnum();
 
               roleName_ = rawValue;
+              break;
+            }
+            case 26: {
+              elite.sas.api.grpc.CommonsProto.Metadata.Builder subBuilder = null;
+              if (metadata_ != null) {
+                subBuilder = metadata_.toBuilder();
+              }
+              metadata_ = input.readMessage(elite.sas.api.grpc.CommonsProto.Metadata.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(metadata_);
+                metadata_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -2969,6 +3403,32 @@ public final class UserServiceProto {
       return result == null ? elite.sas.api.grpc.CommonsProto.RoleName.UNRECOGNIZED : result;
     }
 
+    public static final int METADATA_FIELD_NUMBER = 3;
+    private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+    /**
+     * <code>.Metadata metadata = 3;</code>
+     * @return Whether the metadata field is set.
+     */
+    @java.lang.Override
+    public boolean hasMetadata() {
+      return metadata_ != null;
+    }
+    /**
+     * <code>.Metadata metadata = 3;</code>
+     * @return The metadata.
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+      return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+    }
+    /**
+     * <code>.Metadata metadata = 3;</code>
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+      return getMetadata();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2989,6 +3449,9 @@ public final class UserServiceProto {
       if (roleName_ != elite.sas.api.grpc.CommonsProto.RoleName.student.getNumber()) {
         output.writeEnum(2, roleName_);
       }
+      if (metadata_ != null) {
+        output.writeMessage(3, getMetadata());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -3004,6 +3467,10 @@ public final class UserServiceProto {
       if (roleName_ != elite.sas.api.grpc.CommonsProto.RoleName.student.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, roleName_);
+      }
+      if (metadata_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getMetadata());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3023,6 +3490,11 @@ public final class UserServiceProto {
       if (!getId()
           .equals(other.getId())) return false;
       if (roleName_ != other.roleName_) return false;
+      if (hasMetadata() != other.hasMetadata()) return false;
+      if (hasMetadata()) {
+        if (!getMetadata()
+            .equals(other.getMetadata())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3038,6 +3510,10 @@ public final class UserServiceProto {
       hash = (53 * hash) + getId().hashCode();
       hash = (37 * hash) + ROLENAME_FIELD_NUMBER;
       hash = (53 * hash) + roleName_;
+      if (hasMetadata()) {
+        hash = (37 * hash) + METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + getMetadata().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3175,6 +3651,12 @@ public final class UserServiceProto {
 
         roleName_ = 0;
 
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
         return this;
       }
 
@@ -3203,6 +3685,11 @@ public final class UserServiceProto {
         elite.sas.api.grpc.UserServiceProto.Role result = new elite.sas.api.grpc.UserServiceProto.Role(this);
         result.id_ = id_;
         result.roleName_ = roleName_;
+        if (metadataBuilder_ == null) {
+          result.metadata_ = metadata_;
+        } else {
+          result.metadata_ = metadataBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -3257,6 +3744,9 @@ public final class UserServiceProto {
         }
         if (other.roleName_ != 0) {
           setRoleNameValue(other.getRoleNameValue());
+        }
+        if (other.hasMetadata()) {
+          mergeMetadata(other.getMetadata());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3415,6 +3905,125 @@ public final class UserServiceProto {
         roleName_ = 0;
         onChanged();
         return this;
+      }
+
+      private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> metadataBuilder_;
+      /**
+       * <code>.Metadata metadata = 3;</code>
+       * @return Whether the metadata field is set.
+       */
+      public boolean hasMetadata() {
+        return metadataBuilder_ != null || metadata_ != null;
+      }
+      /**
+       * <code>.Metadata metadata = 3;</code>
+       * @return The metadata.
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+        if (metadataBuilder_ == null) {
+          return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        } else {
+          return metadataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 3;</code>
+       */
+      public Builder setMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          metadata_ = value;
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 3;</code>
+       */
+      public Builder setMetadata(
+          elite.sas.api.grpc.CommonsProto.Metadata.Builder builderForValue) {
+        if (metadataBuilder_ == null) {
+          metadata_ = builderForValue.build();
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 3;</code>
+       */
+      public Builder mergeMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (metadata_ != null) {
+            metadata_ =
+              elite.sas.api.grpc.CommonsProto.Metadata.newBuilder(metadata_).mergeFrom(value).buildPartial();
+          } else {
+            metadata_ = value;
+          }
+          onChanged();
+        } else {
+          metadataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 3;</code>
+       */
+      public Builder clearMetadata() {
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+          onChanged();
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 3;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata.Builder getMetadataBuilder() {
+        
+        onChanged();
+        return getMetadataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Metadata metadata = 3;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+        if (metadataBuilder_ != null) {
+          return metadataBuilder_.getMessageOrBuilder();
+        } else {
+          return metadata_ == null ?
+              elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> 
+          getMetadataFieldBuilder() {
+        if (metadataBuilder_ == null) {
+          metadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder>(
+                  getMetadata(),
+                  getParentForChildren(),
+                  isClean());
+          metadata_ = null;
+        }
+        return metadataBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -12619,45 +13228,47 @@ public final class UserServiceProto {
     java.lang.String[] descriptorData = {
       "\n\022user-service.proto\032\037google/protobuf/ti" +
       "mestamp.proto\032\024tenant-service.proto\032\rcom" +
-      "mons.proto\"\247\001\n\007AppUser\022\n\n\002id\030\001 \001(\t\022\027\n\006te" +
+      "mons.proto\"\304\001\n\007AppUser\022\n\n\002id\030\001 \001(\t\022\027\n\006te" +
       "nant\030\002 \001(\0132\007.Tenant\022\r\n\005email\030\003 \001(\t\022\020\n\010us" +
       "erName\030\004 \001(\t\022\021\n\tfirstName\030\005 \001(\t\022\020\n\010lastN" +
       "ame\030\006 \001(\t\022\033\n\010userType\030\007 \001(\0162\t.UserType\022\024" +
-      "\n\005roles\030\010 \003(\0132\005.Role\"B\n\007Account\022\n\n\002id\030\001 " +
-      "\001(\t\022\031\n\007appUser\030\002 \001(\0132\010.AppUser\022\020\n\010passwo" +
-      "rd\030\003 \001(\t\"/\n\004Role\022\n\n\002id\030\001 \001(\t\022\033\n\010roleName" +
-      "\030\002 \001(\0162\t.RoleName\"\336\001\n\023RegisterUserReques" +
-      "t\022\n\n\002id\030\001 \001(\t\022\027\n\006tenant\030\002 \001(\0132\007.Tenant\022\r" +
-      "\n\005email\030\003 \001(\t\022\020\n\010userName\030\004 \001(\t\022\021\n\tfirst" +
-      "Name\030\005 \001(\t\022\020\n\010lastName\030\006 \001(\t\022\033\n\010userType" +
-      "\030\007 \001(\0162\t.UserType\022\024\n\005roles\030\010 \003(\0132\005.Role\022" +
-      "\020\n\010password\030\t \001(\t\022\027\n\017passwordConfirm\030\n \001" +
-      "(\t\"\251\001\n\020SearchUserParams\022\n\n\002id\030\001 \001(\t\022\020\n\010t" +
-      "enantId\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\022\020\n\010userName" +
-      "\030\004 \001(\t\022\021\n\tfirstName\030\005 \001(\t\022\020\n\010lastName\030\006 " +
-      "\001(\t\022\033\n\010userType\030\007 \001(\0162\t.UserType\022\024\n\005role" +
-      "s\030\010 \003(\0132\005.Role\"4\n\023SearchAccountParams\022\n\n" +
-      "\002id\030\001 \001(\t\022\021\n\tappUserId\030\002 \001(\t\"\252\001\n\021UpdateU" +
-      "serRequest\022\n\n\002id\030\001 \001(\t\022\020\n\010tenantId\030\002 \001(\t" +
-      "\022\r\n\005email\030\003 \001(\t\022\020\n\010userName\030\004 \001(\t\022\021\n\tfir" +
-      "stName\030\005 \001(\t\022\020\n\010lastName\030\006 \001(\t\022\033\n\010userTy" +
-      "pe\030\007 \001(\0162\t.UserType\022\024\n\005roles\030\010 \003(\0132\005.Rol" +
-      "e\"P\n\023UpdateAccountParams\022\016\n\006userId\030\001 \001(\t" +
-      "\022\020\n\010password\030\002 \001(\t\022\027\n\017passwordConfirm\030\003 " +
-      "\001(\t\"Z\n\021GetAccountRequest\022\021\n\taccountId\030\001 " +
-      "\001(\t\022\016\n\006userId\030\002 \001(\t\022\020\n\010username\030\003 \001(\t\022\020\n" +
-      "\010password\030\004 \001(\t\"2\n\014LogInRequest\022\020\n\010usern" +
-      "ame\030\001 \001(\t\022\020\n\010password\030\002 \001(\t2\337\002\n\013userServ" +
-      "ice\022.\n\014registerUser\022\024.RegisterUserReques" +
-      "t\032\010.AppUser\022!\n\013getAllUsers\022\006.Empty\032\010.App" +
-      "User0\001\022)\n\010getUsers\022\021.SearchUserParams\032\010." +
-      "AppUser0\001\022&\n\007getUser\022\021.SearchUserParams\032" +
-      "\010.AppUser\022*\n\nupdateUser\022\022.UpdateUserRequ" +
-      "est\032\010.AppUser\0220\n\016updatePassword\022\024.Update" +
-      "AccountParams\032\010.Account\022*\n\ngetAccount\022\022." +
-      "GetAccountRequest\032\010.Account\022 \n\005login\022\r.L" +
-      "ogInRequest\032\010.AccountB(\n\022elite.sas.api.g" +
-      "rpcB\020UserServiceProtoP\000b\006proto3"
+      "\n\005roles\030\010 \003(\0132\005.Role\022\033\n\010metadata\030\t \001(\0132\t" +
+      ".Metadata\"_\n\007Account\022\n\n\002id\030\001 \001(\t\022\031\n\007appU" +
+      "ser\030\002 \001(\0132\010.AppUser\022\020\n\010password\030\003 \001(\t\022\033\n" +
+      "\010metadata\030\004 \001(\0132\t.Metadata\"L\n\004Role\022\n\n\002id" +
+      "\030\001 \001(\t\022\033\n\010roleName\030\002 \001(\0162\t.RoleName\022\033\n\010m" +
+      "etadata\030\003 \001(\0132\t.Metadata\"\336\001\n\023RegisterUse" +
+      "rRequest\022\n\n\002id\030\001 \001(\t\022\027\n\006tenant\030\002 \001(\0132\007.T" +
+      "enant\022\r\n\005email\030\003 \001(\t\022\020\n\010userName\030\004 \001(\t\022\021" +
+      "\n\tfirstName\030\005 \001(\t\022\020\n\010lastName\030\006 \001(\t\022\033\n\010u" +
+      "serType\030\007 \001(\0162\t.UserType\022\024\n\005roles\030\010 \003(\0132" +
+      "\005.Role\022\020\n\010password\030\t \001(\t\022\027\n\017passwordConf" +
+      "irm\030\n \001(\t\"\251\001\n\020SearchUserParams\022\n\n\002id\030\001 \001" +
+      "(\t\022\020\n\010tenantId\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\022\020\n\010u" +
+      "serName\030\004 \001(\t\022\021\n\tfirstName\030\005 \001(\t\022\020\n\010last" +
+      "Name\030\006 \001(\t\022\033\n\010userType\030\007 \001(\0162\t.UserType\022" +
+      "\024\n\005roles\030\010 \003(\0132\005.Role\"4\n\023SearchAccountPa" +
+      "rams\022\n\n\002id\030\001 \001(\t\022\021\n\tappUserId\030\002 \001(\t\"\252\001\n\021" +
+      "UpdateUserRequest\022\n\n\002id\030\001 \001(\t\022\020\n\010tenantI" +
+      "d\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\022\020\n\010userName\030\004 \001(\t" +
+      "\022\021\n\tfirstName\030\005 \001(\t\022\020\n\010lastName\030\006 \001(\t\022\033\n" +
+      "\010userType\030\007 \001(\0162\t.UserType\022\024\n\005roles\030\010 \003(" +
+      "\0132\005.Role\"P\n\023UpdateAccountParams\022\016\n\006userI" +
+      "d\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\022\027\n\017passwordCon" +
+      "firm\030\003 \001(\t\"Z\n\021GetAccountRequest\022\021\n\taccou" +
+      "ntId\030\001 \001(\t\022\016\n\006userId\030\002 \001(\t\022\020\n\010username\030\003" +
+      " \001(\t\022\020\n\010password\030\004 \001(\t\"2\n\014LogInRequest\022\020" +
+      "\n\010username\030\001 \001(\t\022\020\n\010password\030\002 \001(\t2\337\002\n\013u" +
+      "serService\022.\n\014registerUser\022\024.RegisterUse" +
+      "rRequest\032\010.AppUser\022!\n\013getAllUsers\022\006.Empt" +
+      "y\032\010.AppUser0\001\022)\n\010getUsers\022\021.SearchUserPa" +
+      "rams\032\010.AppUser0\001\022&\n\007getUser\022\021.SearchUser" +
+      "Params\032\010.AppUser\022*\n\nupdateUser\022\022.UpdateU" +
+      "serRequest\032\010.AppUser\0220\n\016updatePassword\022\024" +
+      ".UpdateAccountParams\032\010.Account\022*\n\ngetAcc" +
+      "ount\022\022.GetAccountRequest\032\010.Account\022 \n\005lo" +
+      "gin\022\r.LogInRequest\032\010.AccountB(\n\022elite.sa" +
+      "s.api.grpcB\020UserServiceProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -12671,19 +13282,19 @@ public final class UserServiceProto {
     internal_static_AppUser_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AppUser_descriptor,
-        new java.lang.String[] { "Id", "Tenant", "Email", "UserName", "FirstName", "LastName", "UserType", "Roles", });
+        new java.lang.String[] { "Id", "Tenant", "Email", "UserName", "FirstName", "LastName", "UserType", "Roles", "Metadata", });
     internal_static_Account_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_Account_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Account_descriptor,
-        new java.lang.String[] { "Id", "AppUser", "Password", });
+        new java.lang.String[] { "Id", "AppUser", "Password", "Metadata", });
     internal_static_Role_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_Role_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Role_descriptor,
-        new java.lang.String[] { "Id", "RoleName", });
+        new java.lang.String[] { "Id", "RoleName", "Metadata", });
     internal_static_RegisterUserRequest_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_RegisterUserRequest_fieldAccessorTable = new

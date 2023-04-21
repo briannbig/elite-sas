@@ -88,6 +88,21 @@ public final class TenantServiceProto {
      * @return The tenantType.
      */
     elite.sas.api.grpc.CommonsProto.TenantType getTenantType();
+
+    /**
+     * <code>.Metadata metadata = 7;</code>
+     * @return Whether the metadata field is set.
+     */
+    boolean hasMetadata();
+    /**
+     * <code>.Metadata metadata = 7;</code>
+     * @return The metadata.
+     */
+    elite.sas.api.grpc.CommonsProto.Metadata getMetadata();
+    /**
+     * <code>.Metadata metadata = 7;</code>
+     */
+    elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder();
   }
   /**
    * Protobuf type {@code Tenant}
@@ -174,6 +189,19 @@ public final class TenantServiceProto {
               int rawValue = input.readEnum();
 
               tenantType_ = rawValue;
+              break;
+            }
+            case 58: {
+              elite.sas.api.grpc.CommonsProto.Metadata.Builder subBuilder = null;
+              if (metadata_ != null) {
+                subBuilder = metadata_.toBuilder();
+              }
+              metadata_ = input.readMessage(elite.sas.api.grpc.CommonsProto.Metadata.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(metadata_);
+                metadata_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -419,6 +447,32 @@ public final class TenantServiceProto {
       return result == null ? elite.sas.api.grpc.CommonsProto.TenantType.UNRECOGNIZED : result;
     }
 
+    public static final int METADATA_FIELD_NUMBER = 7;
+    private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+    /**
+     * <code>.Metadata metadata = 7;</code>
+     * @return Whether the metadata field is set.
+     */
+    @java.lang.Override
+    public boolean hasMetadata() {
+      return metadata_ != null;
+    }
+    /**
+     * <code>.Metadata metadata = 7;</code>
+     * @return The metadata.
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+      return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+    }
+    /**
+     * <code>.Metadata metadata = 7;</code>
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+      return getMetadata();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -451,6 +505,9 @@ public final class TenantServiceProto {
       if (tenantType_ != elite.sas.api.grpc.CommonsProto.TenantType.SCHOOL.getNumber()) {
         output.writeEnum(6, tenantType_);
       }
+      if (metadata_ != null) {
+        output.writeMessage(7, getMetadata());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -479,6 +536,10 @@ public final class TenantServiceProto {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(6, tenantType_);
       }
+      if (metadata_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, getMetadata());
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -505,6 +566,11 @@ public final class TenantServiceProto {
       if (!getEmail()
           .equals(other.getEmail())) return false;
       if (tenantType_ != other.tenantType_) return false;
+      if (hasMetadata() != other.hasMetadata()) return false;
+      if (hasMetadata()) {
+        if (!getMetadata()
+            .equals(other.getMetadata())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -528,6 +594,10 @@ public final class TenantServiceProto {
       hash = (53 * hash) + getEmail().hashCode();
       hash = (37 * hash) + TENANTTYPE_FIELD_NUMBER;
       hash = (53 * hash) + tenantType_;
+      if (hasMetadata()) {
+        hash = (37 * hash) + METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + getMetadata().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -673,6 +743,12 @@ public final class TenantServiceProto {
 
         tenantType_ = 0;
 
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
         return this;
       }
 
@@ -705,6 +781,11 @@ public final class TenantServiceProto {
         result.telephone_ = telephone_;
         result.email_ = email_;
         result.tenantType_ = tenantType_;
+        if (metadataBuilder_ == null) {
+          result.metadata_ = metadata_;
+        } else {
+          result.metadata_ = metadataBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -775,6 +856,9 @@ public final class TenantServiceProto {
         }
         if (other.tenantType_ != 0) {
           setTenantTypeValue(other.getTenantTypeValue());
+        }
+        if (other.hasMetadata()) {
+          mergeMetadata(other.getMetadata());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1237,6 +1321,125 @@ public final class TenantServiceProto {
         tenantType_ = 0;
         onChanged();
         return this;
+      }
+
+      private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> metadataBuilder_;
+      /**
+       * <code>.Metadata metadata = 7;</code>
+       * @return Whether the metadata field is set.
+       */
+      public boolean hasMetadata() {
+        return metadataBuilder_ != null || metadata_ != null;
+      }
+      /**
+       * <code>.Metadata metadata = 7;</code>
+       * @return The metadata.
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+        if (metadataBuilder_ == null) {
+          return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        } else {
+          return metadataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 7;</code>
+       */
+      public Builder setMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          metadata_ = value;
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 7;</code>
+       */
+      public Builder setMetadata(
+          elite.sas.api.grpc.CommonsProto.Metadata.Builder builderForValue) {
+        if (metadataBuilder_ == null) {
+          metadata_ = builderForValue.build();
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 7;</code>
+       */
+      public Builder mergeMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (metadata_ != null) {
+            metadata_ =
+              elite.sas.api.grpc.CommonsProto.Metadata.newBuilder(metadata_).mergeFrom(value).buildPartial();
+          } else {
+            metadata_ = value;
+          }
+          onChanged();
+        } else {
+          metadataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 7;</code>
+       */
+      public Builder clearMetadata() {
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+          onChanged();
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 7;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata.Builder getMetadataBuilder() {
+        
+        onChanged();
+        return getMetadataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Metadata metadata = 7;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+        if (metadataBuilder_ != null) {
+          return metadataBuilder_.getMessageOrBuilder();
+        } else {
+          return metadata_ == null ?
+              elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> 
+          getMetadataFieldBuilder() {
+        if (metadataBuilder_ == null) {
+          metadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder>(
+                  getMetadata(),
+                  getParentForChildren(),
+                  isClean());
+          metadata_ = null;
+        }
+        return metadataBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -4852,27 +5055,27 @@ public final class TenantServiceProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\024tenant-service.proto\032\037google/protobuf/" +
-      "timestamp.proto\032\rcommons.proto\"w\n\006Tenant" +
-      "\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\020\n\010location\030\003" +
-      " \001(\t\022\021\n\ttelephone\030\004 \001(\t\022\r\n\005email\030\005 \001(\t\022\037" +
-      "\n\ntenantType\030\006 \001(\0162\013.TenantType\"z\n\025Regis" +
-      "terTenantRequest\022\014\n\004name\030\001 \001(\t\022\020\n\010locati" +
-      "on\030\002 \001(\t\022\021\n\ttelephone\030\003 \001(\t\022\r\n\005email\030\004 \001" +
-      "(\t\022\037\n\ntenantType\030\005 \001(\0162\013.TenantType\"\204\001\n\023" +
-      "UpdateTenantRequest\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030" +
-      "\002 \001(\t\022\020\n\010location\030\003 \001(\t\022\021\n\ttelephone\030\004 \001" +
-      "(\t\022\r\n\005email\030\005 \001(\t\022\037\n\ntenantType\030\006 \001(\0162\013." +
-      "TenantType\"o\n\014SearchParams\022\n\n\002id\030\001 \001(\t\022\r" +
-      "\n\005email\030\002 \001(\t\022\021\n\ttelephone\030\003 \001(\t\022\020\n\010loca" +
-      "tion\030\004 \001(\t\022\037\n\ntenantType\030\005 \001(\0162\013.TenantT" +
-      "ype2\346\001\n\rtenantService\0221\n\016registerTenant\022" +
-      "\026.RegisterTenantRequest\032\007.Tenant\022\"\n\rgetA" +
-      "llTenants\022\006.Empty\032\007.Tenant0\001\022\'\n\rgetTenan" +
-      "tById\022\r.SearchParams\032\007.Tenant\022&\n\ngetTena" +
-      "nts\022\r.SearchParams\032\007.Tenant0\001\022-\n\014updateT" +
-      "enant\022\024.UpdateTenantRequest\032\007.TenantB*\n\022" +
-      "elite.sas.api.grpcB\022TenantServiceProtoP\000" +
-      "b\006proto3"
+      "timestamp.proto\032\rcommons.proto\"\224\001\n\006Tenan" +
+      "t\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\020\n\010location\030" +
+      "\003 \001(\t\022\021\n\ttelephone\030\004 \001(\t\022\r\n\005email\030\005 \001(\t\022" +
+      "\037\n\ntenantType\030\006 \001(\0162\013.TenantType\022\033\n\010meta" +
+      "data\030\007 \001(\0132\t.Metadata\"z\n\025RegisterTenantR" +
+      "equest\022\014\n\004name\030\001 \001(\t\022\020\n\010location\030\002 \001(\t\022\021" +
+      "\n\ttelephone\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\037\n\ntena" +
+      "ntType\030\005 \001(\0162\013.TenantType\"\204\001\n\023UpdateTena" +
+      "ntRequest\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\020\n\010l" +
+      "ocation\030\003 \001(\t\022\021\n\ttelephone\030\004 \001(\t\022\r\n\005emai" +
+      "l\030\005 \001(\t\022\037\n\ntenantType\030\006 \001(\0162\013.TenantType" +
+      "\"o\n\014SearchParams\022\n\n\002id\030\001 \001(\t\022\r\n\005email\030\002 " +
+      "\001(\t\022\021\n\ttelephone\030\003 \001(\t\022\020\n\010location\030\004 \001(\t" +
+      "\022\037\n\ntenantType\030\005 \001(\0162\013.TenantType2\346\001\n\rte" +
+      "nantService\0221\n\016registerTenant\022\026.Register" +
+      "TenantRequest\032\007.Tenant\022\"\n\rgetAllTenants\022" +
+      "\006.Empty\032\007.Tenant0\001\022\'\n\rgetTenantById\022\r.Se" +
+      "archParams\032\007.Tenant\022&\n\ngetTenants\022\r.Sear" +
+      "chParams\032\007.Tenant0\001\022-\n\014updateTenant\022\024.Up" +
+      "dateTenantRequest\032\007.TenantB*\n\022elite.sas." +
+      "api.grpcB\022TenantServiceProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4885,7 +5088,7 @@ public final class TenantServiceProto {
     internal_static_Tenant_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Tenant_descriptor,
-        new java.lang.String[] { "Id", "Name", "Location", "Telephone", "Email", "TenantType", });
+        new java.lang.String[] { "Id", "Name", "Location", "Telephone", "Email", "TenantType", "Metadata", });
     internal_static_RegisterTenantRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_RegisterTenantRequest_fieldAccessorTable = new

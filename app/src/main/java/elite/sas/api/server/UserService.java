@@ -35,17 +35,11 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
     @Override
     public void registerUser(UserServiceProto.RegisterUserRequest request, StreamObserver<UserServiceProto.AppUser> responseObserver) {
 
-        CreateUserParams createUserParams = null;
-        try {
-            createUserParams = CreateUserParams.builder()
-                    .userName(request.getUserName())
-                    .userType(userTypeFromAPi(request.getUserType()))
-                    .build();
-        } catch (ModelConversionException e) {
-            log.debug("Conversion error: {}", e);
-            responseObserver.onError(e);
-            return;
-        }
+        CreateUserParams createUserParams = CreateUserParams.builder()
+                .userName(request.getUserName())
+                .userType(userTypeFromAPi(request.getUserType()))
+                .build();
+
         AppUser appUser = userAccountRegistrationWorkflow.handle(createUserParams);
 
         try {
