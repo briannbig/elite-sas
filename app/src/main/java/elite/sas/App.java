@@ -25,6 +25,20 @@ public class App {
     }
 
     @Bean
+    CommandLineRunner startTemporalWorker(WorkerFactory workerFactory) {
+        return args -> {
+            workerFactory.start();
+        };
+    }
+
+    @Bean
+    CommandLineRunner startLogsCronRunner() {
+        return args -> {
+            LogsCronRunner.getInstance().run();
+        };
+    }
+
+    @Bean
     public CommandLineRunner initAppRolesAndInternalAdmin(AppUserService appUserService, TenantService tenantService) {
         return args -> {
 
@@ -52,13 +66,8 @@ public class App {
         };
     }
 
-    @Bean
-    CommandLineRunner startLogsCronRunner(WorkerFactory workerFactory) {
-        return args -> {
-            workerFactory.start();
-            LogsCronRunner.getInstance().run();
-        };
-    }
+
+
 
     @Bean
     CommandLineRunner startGrpcServer(GRPCServer grpcServer) {
