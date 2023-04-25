@@ -154,6 +154,21 @@ public final class InternshipServiceProto {
      */
     elite.sas.api.grpc.InternshipServiceProto.AttachmentWeekOrBuilder getAttachmentWeeksOrBuilder(
         int index);
+
+    /**
+     * <code>.Metadata metadata = 10;</code>
+     * @return Whether the metadata field is set.
+     */
+    boolean hasMetadata();
+    /**
+     * <code>.Metadata metadata = 10;</code>
+     * @return The metadata.
+     */
+    elite.sas.api.grpc.CommonsProto.Metadata getMetadata();
+    /**
+     * <code>.Metadata metadata = 10;</code>
+     */
+    elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder();
   }
   /**
    * Protobuf type {@code Attachment}
@@ -301,6 +316,19 @@ public final class InternshipServiceProto {
               }
               attachmentWeeks_.add(
                   input.readMessage(elite.sas.api.grpc.InternshipServiceProto.AttachmentWeek.parser(), extensionRegistry));
+              break;
+            }
+            case 82: {
+              elite.sas.api.grpc.CommonsProto.Metadata.Builder subBuilder = null;
+              if (metadata_ != null) {
+                subBuilder = metadata_.toBuilder();
+              }
+              metadata_ = input.readMessage(elite.sas.api.grpc.CommonsProto.Metadata.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(metadata_);
+                metadata_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -593,6 +621,32 @@ public final class InternshipServiceProto {
       return attachmentWeeks_.get(index);
     }
 
+    public static final int METADATA_FIELD_NUMBER = 10;
+    private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+    /**
+     * <code>.Metadata metadata = 10;</code>
+     * @return Whether the metadata field is set.
+     */
+    @java.lang.Override
+    public boolean hasMetadata() {
+      return metadata_ != null;
+    }
+    /**
+     * <code>.Metadata metadata = 10;</code>
+     * @return The metadata.
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+      return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+    }
+    /**
+     * <code>.Metadata metadata = 10;</code>
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+      return getMetadata();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -633,6 +687,9 @@ public final class InternshipServiceProto {
       }
       for (int i = 0; i < attachmentWeeks_.size(); i++) {
         output.writeMessage(9, attachmentWeeks_.get(i));
+      }
+      if (metadata_ != null) {
+        output.writeMessage(10, getMetadata());
       }
       unknownFields.writeTo(output);
     }
@@ -677,6 +734,10 @@ public final class InternshipServiceProto {
       for (int i = 0; i < attachmentWeeks_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, attachmentWeeks_.get(i));
+      }
+      if (metadata_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, getMetadata());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -728,6 +789,11 @@ public final class InternshipServiceProto {
       }
       if (!getAttachmentWeeksList()
           .equals(other.getAttachmentWeeksList())) return false;
+      if (hasMetadata() != other.hasMetadata()) return false;
+      if (hasMetadata()) {
+        if (!getMetadata()
+            .equals(other.getMetadata())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -770,6 +836,10 @@ public final class InternshipServiceProto {
       if (getAttachmentWeeksCount() > 0) {
         hash = (37 * hash) + ATTACHMENTWEEKS_FIELD_NUMBER;
         hash = (53 * hash) + getAttachmentWeeksList().hashCode();
+      }
+      if (hasMetadata()) {
+        hash = (37 * hash) + METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + getMetadata().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -951,6 +1021,12 @@ public final class InternshipServiceProto {
         } else {
           attachmentWeeksBuilder_.clear();
         }
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
         return this;
       }
 
@@ -1018,6 +1094,11 @@ public final class InternshipServiceProto {
           result.attachmentWeeks_ = attachmentWeeks_;
         } else {
           result.attachmentWeeks_ = attachmentWeeksBuilder_.build();
+        }
+        if (metadataBuilder_ == null) {
+          result.metadata_ = metadata_;
+        } else {
+          result.metadata_ = metadataBuilder_.build();
         }
         onBuilt();
         return result;
@@ -1117,6 +1198,9 @@ public final class InternshipServiceProto {
               attachmentWeeksBuilder_.addAllMessages(other.attachmentWeeks_);
             }
           }
+        }
+        if (other.hasMetadata()) {
+          mergeMetadata(other.getMetadata());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2231,6 +2315,125 @@ public final class InternshipServiceProto {
         }
         return attachmentWeeksBuilder_;
       }
+
+      private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> metadataBuilder_;
+      /**
+       * <code>.Metadata metadata = 10;</code>
+       * @return Whether the metadata field is set.
+       */
+      public boolean hasMetadata() {
+        return metadataBuilder_ != null || metadata_ != null;
+      }
+      /**
+       * <code>.Metadata metadata = 10;</code>
+       * @return The metadata.
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+        if (metadataBuilder_ == null) {
+          return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        } else {
+          return metadataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 10;</code>
+       */
+      public Builder setMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          metadata_ = value;
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 10;</code>
+       */
+      public Builder setMetadata(
+          elite.sas.api.grpc.CommonsProto.Metadata.Builder builderForValue) {
+        if (metadataBuilder_ == null) {
+          metadata_ = builderForValue.build();
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 10;</code>
+       */
+      public Builder mergeMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (metadata_ != null) {
+            metadata_ =
+              elite.sas.api.grpc.CommonsProto.Metadata.newBuilder(metadata_).mergeFrom(value).buildPartial();
+          } else {
+            metadata_ = value;
+          }
+          onChanged();
+        } else {
+          metadataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 10;</code>
+       */
+      public Builder clearMetadata() {
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+          onChanged();
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 10;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata.Builder getMetadataBuilder() {
+        
+        onChanged();
+        return getMetadataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Metadata metadata = 10;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+        if (metadataBuilder_ != null) {
+          return metadataBuilder_.getMessageOrBuilder();
+        } else {
+          return metadata_ == null ?
+              elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 10;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> 
+          getMetadataFieldBuilder() {
+        if (metadataBuilder_ == null) {
+          metadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder>(
+                  getMetadata(),
+                  getParentForChildren(),
+                  isClean());
+          metadata_ = null;
+        }
+        return metadataBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2383,6 +2586,21 @@ public final class InternshipServiceProto {
      * @return The isActive.
      */
     boolean getIsActive();
+
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     * @return Whether the metadata field is set.
+     */
+    boolean hasMetadata();
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     * @return The metadata.
+     */
+    elite.sas.api.grpc.CommonsProto.Metadata getMetadata();
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     */
+    elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder();
   }
   /**
    * Protobuf type {@code AttachmentWeek}
@@ -2483,6 +2701,19 @@ public final class InternshipServiceProto {
             case 64: {
 
               isActive_ = input.readBool();
+              break;
+            }
+            case 74: {
+              elite.sas.api.grpc.CommonsProto.Metadata.Builder subBuilder = null;
+              if (metadata_ != null) {
+                subBuilder = metadata_.toBuilder();
+              }
+              metadata_ = input.readMessage(elite.sas.api.grpc.CommonsProto.Metadata.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(metadata_);
+                metadata_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -2774,6 +3005,32 @@ public final class InternshipServiceProto {
       return isActive_;
     }
 
+    public static final int METADATA_FIELD_NUMBER = 9;
+    private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     * @return Whether the metadata field is set.
+     */
+    @java.lang.Override
+    public boolean hasMetadata() {
+      return metadata_ != null;
+    }
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     * @return The metadata.
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+      return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+    }
+    /**
+     * <code>.Metadata metadata = 9;</code>
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+      return getMetadata();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2812,6 +3069,9 @@ public final class InternshipServiceProto {
       if (isActive_ != false) {
         output.writeBool(8, isActive_);
       }
+      if (metadata_ != null) {
+        output.writeMessage(9, getMetadata());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2848,6 +3108,10 @@ public final class InternshipServiceProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(8, isActive_);
       }
+      if (metadata_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, getMetadata());
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -2879,6 +3143,11 @@ public final class InternshipServiceProto {
           .equals(other.getSchoolSupervisorComment())) return false;
       if (getIsActive()
           != other.getIsActive()) return false;
+      if (hasMetadata() != other.hasMetadata()) return false;
+      if (hasMetadata()) {
+        if (!getMetadata()
+            .equals(other.getMetadata())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2909,6 +3178,10 @@ public final class InternshipServiceProto {
       hash = (37 * hash) + ISACTIVE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getIsActive());
+      if (hasMetadata()) {
+        hash = (37 * hash) + METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + getMetadata().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3063,6 +3336,12 @@ public final class InternshipServiceProto {
 
         isActive_ = false;
 
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
         return this;
       }
 
@@ -3106,6 +3385,11 @@ public final class InternshipServiceProto {
         result.industrySupervisorComment_ = industrySupervisorComment_;
         result.schoolSupervisorComment_ = schoolSupervisorComment_;
         result.isActive_ = isActive_;
+        if (metadataBuilder_ == null) {
+          result.metadata_ = metadata_;
+        } else {
+          result.metadata_ = metadataBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -3205,6 +3489,9 @@ public final class InternshipServiceProto {
         }
         if (other.getIsActive() != false) {
           setIsActive(other.getIsActive());
+        }
+        if (other.hasMetadata()) {
+          mergeMetadata(other.getMetadata());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3917,6 +4204,125 @@ public final class InternshipServiceProto {
         onChanged();
         return this;
       }
+
+      private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> metadataBuilder_;
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       * @return Whether the metadata field is set.
+       */
+      public boolean hasMetadata() {
+        return metadataBuilder_ != null || metadata_ != null;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       * @return The metadata.
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+        if (metadataBuilder_ == null) {
+          return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        } else {
+          return metadataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public Builder setMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          metadata_ = value;
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public Builder setMetadata(
+          elite.sas.api.grpc.CommonsProto.Metadata.Builder builderForValue) {
+        if (metadataBuilder_ == null) {
+          metadata_ = builderForValue.build();
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public Builder mergeMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (metadata_ != null) {
+            metadata_ =
+              elite.sas.api.grpc.CommonsProto.Metadata.newBuilder(metadata_).mergeFrom(value).buildPartial();
+          } else {
+            metadata_ = value;
+          }
+          onChanged();
+        } else {
+          metadataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public Builder clearMetadata() {
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+          onChanged();
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata.Builder getMetadataBuilder() {
+        
+        onChanged();
+        return getMetadataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+        if (metadataBuilder_ != null) {
+          return metadataBuilder_.getMessageOrBuilder();
+        } else {
+          return metadata_ == null ?
+              elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 9;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> 
+          getMetadataFieldBuilder() {
+        if (metadataBuilder_ == null) {
+          metadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder>(
+                  getMetadata(),
+                  getParentForChildren(),
+                  isClean());
+          metadata_ = null;
+        }
+        return metadataBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4033,6 +4439,21 @@ public final class InternshipServiceProto {
      */
     com.google.protobuf.ByteString
         getSchoolSupervisorCommentBytes();
+
+    /**
+     * <code>.Metadata metadata = 6;</code>
+     * @return Whether the metadata field is set.
+     */
+    boolean hasMetadata();
+    /**
+     * <code>.Metadata metadata = 6;</code>
+     * @return The metadata.
+     */
+    elite.sas.api.grpc.CommonsProto.Metadata getMetadata();
+    /**
+     * <code>.Metadata metadata = 6;</code>
+     */
+    elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder();
   }
   /**
    * Protobuf type {@code Log}
@@ -4112,6 +4533,19 @@ public final class InternshipServiceProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               schoolSupervisorComment_ = s;
+              break;
+            }
+            case 50: {
+              elite.sas.api.grpc.CommonsProto.Metadata.Builder subBuilder = null;
+              if (metadata_ != null) {
+                subBuilder = metadata_.toBuilder();
+              }
+              metadata_ = input.readMessage(elite.sas.api.grpc.CommonsProto.Metadata.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(metadata_);
+                metadata_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -4338,6 +4772,32 @@ public final class InternshipServiceProto {
       }
     }
 
+    public static final int METADATA_FIELD_NUMBER = 6;
+    private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+    /**
+     * <code>.Metadata metadata = 6;</code>
+     * @return Whether the metadata field is set.
+     */
+    @java.lang.Override
+    public boolean hasMetadata() {
+      return metadata_ != null;
+    }
+    /**
+     * <code>.Metadata metadata = 6;</code>
+     * @return The metadata.
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+      return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+    }
+    /**
+     * <code>.Metadata metadata = 6;</code>
+     */
+    @java.lang.Override
+    public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+      return getMetadata();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4367,6 +4827,9 @@ public final class InternshipServiceProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolSupervisorComment_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, schoolSupervisorComment_);
       }
+      if (metadata_ != null) {
+        output.writeMessage(6, getMetadata());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4390,6 +4853,10 @@ public final class InternshipServiceProto {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(schoolSupervisorComment_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, schoolSupervisorComment_);
+      }
+      if (metadata_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, getMetadata());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4416,6 +4883,11 @@ public final class InternshipServiceProto {
           .equals(other.getIndustrySupervisorComment())) return false;
       if (!getSchoolSupervisorComment()
           .equals(other.getSchoolSupervisorComment())) return false;
+      if (hasMetadata() != other.hasMetadata()) return false;
+      if (hasMetadata()) {
+        if (!getMetadata()
+            .equals(other.getMetadata())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4437,6 +4909,10 @@ public final class InternshipServiceProto {
       hash = (53 * hash) + getIndustrySupervisorComment().hashCode();
       hash = (37 * hash) + SCHOOLSUPERVISORCOMMENT_FIELD_NUMBER;
       hash = (53 * hash) + getSchoolSupervisorComment().hashCode();
+      if (hasMetadata()) {
+        hash = (37 * hash) + METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + getMetadata().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4580,6 +5056,12 @@ public final class InternshipServiceProto {
 
         schoolSupervisorComment_ = "";
 
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
         return this;
       }
 
@@ -4611,6 +5093,11 @@ public final class InternshipServiceProto {
         result.workDone_ = workDone_;
         result.industrySupervisorComment_ = industrySupervisorComment_;
         result.schoolSupervisorComment_ = schoolSupervisorComment_;
+        if (metadataBuilder_ == null) {
+          result.metadata_ = metadata_;
+        } else {
+          result.metadata_ = metadataBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -4678,6 +5165,9 @@ public final class InternshipServiceProto {
         if (!other.getSchoolSupervisorComment().isEmpty()) {
           schoolSupervisorComment_ = other.schoolSupervisorComment_;
           onChanged();
+        }
+        if (other.hasMetadata()) {
+          mergeMetadata(other.getMetadata());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5086,6 +5576,125 @@ public final class InternshipServiceProto {
         schoolSupervisorComment_ = value;
         onChanged();
         return this;
+      }
+
+      private elite.sas.api.grpc.CommonsProto.Metadata metadata_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> metadataBuilder_;
+      /**
+       * <code>.Metadata metadata = 6;</code>
+       * @return Whether the metadata field is set.
+       */
+      public boolean hasMetadata() {
+        return metadataBuilder_ != null || metadata_ != null;
+      }
+      /**
+       * <code>.Metadata metadata = 6;</code>
+       * @return The metadata.
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata getMetadata() {
+        if (metadataBuilder_ == null) {
+          return metadata_ == null ? elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        } else {
+          return metadataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 6;</code>
+       */
+      public Builder setMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          metadata_ = value;
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 6;</code>
+       */
+      public Builder setMetadata(
+          elite.sas.api.grpc.CommonsProto.Metadata.Builder builderForValue) {
+        if (metadataBuilder_ == null) {
+          metadata_ = builderForValue.build();
+          onChanged();
+        } else {
+          metadataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 6;</code>
+       */
+      public Builder mergeMetadata(elite.sas.api.grpc.CommonsProto.Metadata value) {
+        if (metadataBuilder_ == null) {
+          if (metadata_ != null) {
+            metadata_ =
+              elite.sas.api.grpc.CommonsProto.Metadata.newBuilder(metadata_).mergeFrom(value).buildPartial();
+          } else {
+            metadata_ = value;
+          }
+          onChanged();
+        } else {
+          metadataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 6;</code>
+       */
+      public Builder clearMetadata() {
+        if (metadataBuilder_ == null) {
+          metadata_ = null;
+          onChanged();
+        } else {
+          metadata_ = null;
+          metadataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Metadata metadata = 6;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.Metadata.Builder getMetadataBuilder() {
+        
+        onChanged();
+        return getMetadataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Metadata metadata = 6;</code>
+       */
+      public elite.sas.api.grpc.CommonsProto.MetadataOrBuilder getMetadataOrBuilder() {
+        if (metadataBuilder_ != null) {
+          return metadataBuilder_.getMessageOrBuilder();
+        } else {
+          return metadata_ == null ?
+              elite.sas.api.grpc.CommonsProto.Metadata.getDefaultInstance() : metadata_;
+        }
+      }
+      /**
+       * <code>.Metadata metadata = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder> 
+          getMetadataFieldBuilder() {
+        if (metadataBuilder_ == null) {
+          metadataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              elite.sas.api.grpc.CommonsProto.Metadata, elite.sas.api.grpc.CommonsProto.Metadata.Builder, elite.sas.api.grpc.CommonsProto.MetadataOrBuilder>(
+                  getMetadata(),
+                  getParentForChildren(),
+                  isClean());
+          metadata_ = null;
+        }
+        return metadataBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -7305,7 +7914,7 @@ public final class InternshipServiceProto {
       "\n\030internship-service.proto\032\037google/proto" +
       "buf/timestamp.proto\032\025student-service.pro" +
       "to\032\022user-service.proto\032\024tenant-service.p" +
-      "roto\032\rcommons.proto\"\312\002\n\nAttachment\022\n\n\002id" +
+      "roto\032\rcommons.proto\"\347\002\n\nAttachment\022\n\n\002id" +
       "\030\001 \001(\t\022\031\n\007student\030\002 \001(\0132\010.Student\022\030\n\007com" +
       "pany\030\003 \001(\0132\007.Tenant\022+\n\020attachmentPeriod\030" +
       "\004 \001(\0162\021.AttachmentPeriod\022-\n\tstartDate\030\005 " +
@@ -7313,33 +7922,35 @@ public final class InternshipServiceProto {
       "te\030\006 \001(\0132\032.google.protobuf.Timestamp\022$\n\022" +
       "industrySupervisor\030\007 \001(\0132\010.AppUser\022\"\n\020sc" +
       "hoolSupervisor\030\010 \001(\0132\010.AppUser\022(\n\017attach" +
-      "mentWeeks\030\t \003(\0132\017.AttachmentWeek\"\307\001\n\016Att" +
-      "achmentWeek\022\n\n\002id\030\001 \001(\t\022\022\n\nweekNumber\030\002 " +
-      "\001(\005\022\022\n\004logs\030\003 \003(\0132\004.Log\022\023\n\013weekSummary\030\004" +
-      " \001(\t\022\026\n\016studentComment\030\005 \001(\t\022!\n\031industry" +
-      "SupervisorComment\030\006 \001(\t\022\037\n\027schoolSupervi" +
-      "sorComment\030\007 \001(\t\022\020\n\010isActive\030\010 \001(\010\"\201\001\n\003L" +
-      "og\022\n\n\002id\030\001 \001(\t\022\030\n\020attachmentWeekId\030\002 \001(\t" +
-      "\022\020\n\010workDone\030\003 \001(\t\022!\n\031industrySupervisor" +
-      "Comment\030\004 \001(\t\022\037\n\027schoolSupervisorComment" +
-      "\030\005 \001(\t\"\321\002\n\026SearchAttachmentParams\022\n\n\002id\030" +
-      "\001 \001(\t\022\021\n\tstudentId\030\002 \001(\t\022\036\n\026studentAdmis" +
-      "sionNumber\030\003 \001(\t\022\020\n\010schoolId\030\004 \001(\t\022\021\n\tco" +
-      "mpanyId\030\005 \001(\t\022\020\n\010courseId\030\006 \001(\t\022+\n\020attac" +
-      "hmentPeriod\030\007 \001(\0162\021.AttachmentPeriod\022-\n\t" +
-      "startDate\030\010 \001(\0132\032.google.protobuf.Timest" +
-      "amp\022+\n\007endDate\030\t \001(\0132\032.google.protobuf.T" +
-      "imestamp\022\034\n\024industrySupervisorId\030\n \001(\t\022\032" +
-      "\n\022schoolSupervisorId\030\013 \001(\t2\250\002\n\021internshi" +
-      "pService\022)\n\raddAttachment\022\013.Attachment\032\013" +
-      ".Attachment\022*\n\021getAllAttachments\022\006.Empty" +
-      "\032\013.Attachment0\001\0225\n\rgetAttachment\022\027.Searc" +
-      "hAttachmentParams\032\013.Attachment\0228\n\016getAtt" +
-      "achments\022\027.SearchAttachmentParams\032\013.Atta" +
-      "chment0\001\022\024\n\006addLog\022\004.Log\032\004.Log\0225\n\021addAtt" +
-      "achmentWeek\022\017.AttachmentWeek\032\017.Attachmen" +
-      "tWeekB.\n\022elite.sas.api.grpcB\026InternshipS" +
-      "erviceProtoP\000b\006proto3"
+      "mentWeeks\030\t \003(\0132\017.AttachmentWeek\022\033\n\010meta" +
+      "data\030\n \001(\0132\t.Metadata\"\344\001\n\016AttachmentWeek" +
+      "\022\n\n\002id\030\001 \001(\t\022\022\n\nweekNumber\030\002 \001(\005\022\022\n\004logs" +
+      "\030\003 \003(\0132\004.Log\022\023\n\013weekSummary\030\004 \001(\t\022\026\n\016stu" +
+      "dentComment\030\005 \001(\t\022!\n\031industrySupervisorC" +
+      "omment\030\006 \001(\t\022\037\n\027schoolSupervisorComment\030" +
+      "\007 \001(\t\022\020\n\010isActive\030\010 \001(\010\022\033\n\010metadata\030\t \001(" +
+      "\0132\t.Metadata\"\236\001\n\003Log\022\n\n\002id\030\001 \001(\t\022\030\n\020atta" +
+      "chmentWeekId\030\002 \001(\t\022\020\n\010workDone\030\003 \001(\t\022!\n\031" +
+      "industrySupervisorComment\030\004 \001(\t\022\037\n\027schoo" +
+      "lSupervisorComment\030\005 \001(\t\022\033\n\010metadata\030\006 \001" +
+      "(\0132\t.Metadata\"\321\002\n\026SearchAttachmentParams" +
+      "\022\n\n\002id\030\001 \001(\t\022\021\n\tstudentId\030\002 \001(\t\022\036\n\026stude" +
+      "ntAdmissionNumber\030\003 \001(\t\022\020\n\010schoolId\030\004 \001(" +
+      "\t\022\021\n\tcompanyId\030\005 \001(\t\022\020\n\010courseId\030\006 \001(\t\022+" +
+      "\n\020attachmentPeriod\030\007 \001(\0162\021.AttachmentPer" +
+      "iod\022-\n\tstartDate\030\010 \001(\0132\032.google.protobuf" +
+      ".Timestamp\022+\n\007endDate\030\t \001(\0132\032.google.pro" +
+      "tobuf.Timestamp\022\034\n\024industrySupervisorId\030" +
+      "\n \001(\t\022\032\n\022schoolSupervisorId\030\013 \001(\t2\250\002\n\021in" +
+      "ternshipService\022)\n\raddAttachment\022\013.Attac" +
+      "hment\032\013.Attachment\022*\n\021getAllAttachments\022" +
+      "\006.Empty\032\013.Attachment0\001\0225\n\rgetAttachment\022" +
+      "\027.SearchAttachmentParams\032\013.Attachment\0228\n" +
+      "\016getAttachments\022\027.SearchAttachmentParams" +
+      "\032\013.Attachment0\001\022\024\n\006addLog\022\004.Log\032\004.Log\0225\n" +
+      "\021addAttachmentWeek\022\017.AttachmentWeek\032\017.At" +
+      "tachmentWeekB.\n\022elite.sas.api.grpcB\026Inte" +
+      "rnshipServiceProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -7355,19 +7966,19 @@ public final class InternshipServiceProto {
     internal_static_Attachment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Attachment_descriptor,
-        new java.lang.String[] { "Id", "Student", "Company", "AttachmentPeriod", "StartDate", "EndDate", "IndustrySupervisor", "SchoolSupervisor", "AttachmentWeeks", });
+        new java.lang.String[] { "Id", "Student", "Company", "AttachmentPeriod", "StartDate", "EndDate", "IndustrySupervisor", "SchoolSupervisor", "AttachmentWeeks", "Metadata", });
     internal_static_AttachmentWeek_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_AttachmentWeek_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AttachmentWeek_descriptor,
-        new java.lang.String[] { "Id", "WeekNumber", "Logs", "WeekSummary", "StudentComment", "IndustrySupervisorComment", "SchoolSupervisorComment", "IsActive", });
+        new java.lang.String[] { "Id", "WeekNumber", "Logs", "WeekSummary", "StudentComment", "IndustrySupervisorComment", "SchoolSupervisorComment", "IsActive", "Metadata", });
     internal_static_Log_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_Log_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Log_descriptor,
-        new java.lang.String[] { "Id", "AttachmentWeekId", "WorkDone", "IndustrySupervisorComment", "SchoolSupervisorComment", });
+        new java.lang.String[] { "Id", "AttachmentWeekId", "WorkDone", "IndustrySupervisorComment", "SchoolSupervisorComment", "Metadata", });
     internal_static_SearchAttachmentParams_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_SearchAttachmentParams_fieldAccessorTable = new

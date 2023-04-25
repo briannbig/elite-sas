@@ -18,6 +18,7 @@ message AppUser {
   string lastName = 6;
   UserType userType = 7;
   repeated Role roles = 8;
+  Metadata metadata = 9;
 
 }
 
@@ -26,12 +27,14 @@ message Account {
   string id = 1;
   AppUser appUser = 2;
   string password = 3;
+  Metadata metadata = 4;
 
 }
 
 message Role {
   string id = 1;
   RoleName roleName = 2;
+  Metadata metadata = 3;
 
 }
 

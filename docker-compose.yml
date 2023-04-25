@@ -1,15 +1,18 @@
 version: '3.8'
 
 services:
-#  app:
-#    container_name: elite-sas
-#    restart: on-failure
-#    build: ./app
-#    network_mode: host
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - database
+  app:
+    container_name: elite-sas
+    restart: on-failure
+    build: ./app
+    network_mode: host
+    ports:
+      - "8080:8080"
+      - "9001:9001"
+    depends_on:
+      - database
+      - temporal
+
   database:
     image: 'postgres:alpine'
     container_name: elite-sas-db
@@ -20,3 +23,64 @@ services:
       POSTGRES_DB: "elite-sas"
     ports:
       - "5424:5432"
+
+  elasticsearch:
+    container_name: temporal-elasticsearch
+    environment:
+      - cluster.routing.allocation.disk.threshold_enabled=true
+      - cluster.routing.allocation.disk.watermark.low=512mb
+      - cluster.routing.allocation.disk.watermark.high=256mb
+      - cluster.routing.allocation.disk.watermark.flood_stage=128mb
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+      - xpack.security.enabled=false
+    image: elasticsearch:7.16.2
+    volumes:
+      - /var/lib/elasticsearch/data
+    expose:
+      - 9200
+
+
+  postgresql:
+    image: postgres:alpine
+    container_name: temporal-db
+    environment:
+      POSTGRES_USER: temporal
+      POSTGRES_PASSWORD: temporal
+      POSTGRES_DB: temporal
+    ports:
+      - "5432:5432"
+
+  temporal:
+    container_name: elite-sas-temporal
+    depends_on:
+      - postgresql
+      - elasticsearch
+    environment:
+      - DB=postgresql
+      - DB_PORT=5432
+      - POSTGRES_USER=temporal
+      - POSTGRES_PWD=temporal
+      - POSTGRES_SEEDS=postgresql
+      - DYNAMIC_CONFIG_FILE_PATH=dynamicconfig/development-sql.yaml
+      - ENABLE_ES=true
+      - ES_SEEDS=elasticsearch
+      - ES_VERSION=v7
+    image: temporalio/auto-setup:1.20.2
+    ports:
+      - 7233:7233
+    labels:
+      kompose.volume.type: configMap
+    volumes:
+      - ./dynamicconfig:/etc/temporal/dynamicconfig
+
+  temporal-ui:
+    container_name: temporal-ui
+    depends_on:
+      - temporal
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+      - TEMPORAL_CORS_ORIGINS=http://localhost:3000
+    image: temporalio/ui:2.14.0
+    ports:
+      - "8088:8080"

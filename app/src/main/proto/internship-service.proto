@@ -20,6 +20,7 @@ message Attachment {
   AppUser industrySupervisor = 7;
   AppUser schoolSupervisor = 8;
   repeated AttachmentWeek attachmentWeeks = 9;
+  Metadata metadata = 10;
 
 }
 
@@ -32,6 +33,7 @@ message AttachmentWeek {
   string industrySupervisorComment = 6;
   string schoolSupervisorComment = 7;
   bool isActive = 8;
+  Metadata metadata = 9;
 
 }
 message Log {
@@ -41,6 +43,7 @@ message Log {
   string workDone = 3;
   string industrySupervisorComment = 4;
   string schoolSupervisorComment = 5;
+  Metadata metadata = 6;
 
 }
 

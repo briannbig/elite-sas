@@ -18,6 +18,7 @@ message Application {
   string application = 5;
   string schoolLetterUrl = 6;
   string cvUrl = 7;
+  Metadata metadata = 8;
 
 }
 
@@ -29,6 +30,7 @@ message Listing {
   AttachmentPeriod attachmentPeriod = 4;
   string description = 5;
   google.protobuf.Timestamp deadline = 6;
+  Metadata metadata =7;
 
 }
 

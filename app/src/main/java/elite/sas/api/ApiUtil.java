@@ -4,6 +4,7 @@ import com.google.protobuf.Timestamp;
 import elite.sas.api.exceptions.ModelConversionException;
 import elite.sas.api.grpc.*;
 import elite.sas.core.entities.*;
+import jakarta.annotation.Nullable;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -17,16 +18,16 @@ import java.util.stream.Stream;
 
 public final class ApiUtil {
 
-    public static AppUser appUserFromApi(UserServiceProto.AppUser appUser) throws ModelConversionException {
-        if (Objects.isNull(appUser.getId()) || Objects.isNull(appUser.getEmail()) ||
-                Objects.isNull(appUser.getFirstName()) || Objects.isNull(appUser.getLastName()) ||
-                Objects.isNull(appUser.getUserName()) || !appUser.hasTenant() ||
-                Objects.isNull(appUser.getUserType()) || appUser.getRolesList().isEmpty()
+    public static AppUser appUserFromApi(UserServiceProto.AppUser apiAppUser) throws ModelConversionException {
+        if (Objects.isNull(apiAppUser.getId()) || Objects.isNull(apiAppUser.getEmail()) ||
+                Objects.isNull(apiAppUser.getFirstName()) || Objects.isNull(apiAppUser.getLastName()) ||
+                Objects.isNull(apiAppUser.getUserName()) || !apiAppUser.hasTenant() ||
+                Objects.isNull(apiAppUser.getUserType()) || apiAppUser.getRolesList().isEmpty()
         ) {
             throw new ModelConversionException();
         }
 
-        Set<Role> roleSet = appUser.getRolesList().stream().map(r -> {
+        Set<Role> roleSet = apiAppUser.getRolesList().stream().map(r -> {
             try {
                 return Role.builder()
                         .Id(UUID.fromString(r.getId()))
@@ -38,14 +39,27 @@ public final class ApiUtil {
         }).collect(Collectors.toSet());
 
         AppUser.AppUserBuilder userBuilder = AppUser.builder();
-        userBuilder.Id(UUID.fromString(appUser.getId()))
-                .email(appUser.getEmail())
-                .firstName(appUser.getFirstName())
-                .lastName(appUser.getLastName())
-                .userName(appUser.getUserName())
-                .tenant(tenantFromApi(appUser.getTenant()))
-                .userType(userTypeFromAPi(appUser.getUserType()))
+        userBuilder.Id(UUID.fromString(apiAppUser.getId()))
+                .email(apiAppUser.getEmail())
+                .firstName(apiAppUser.getFirstName())
+                .lastName(apiAppUser.getLastName())
+                .userName(apiAppUser.getUserName())
+                .tenant(tenantFromApi(apiAppUser.getTenant()))
+                .userType(userTypeFromAPi(apiAppUser.getUserType()))
                 .roles(roleSet);
+
+        if (apiAppUser.hasMetadata()) {
+            var metadata = apiAppUser.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                userBuilder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                userBuilder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                userBuilder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
+        }
 
         return userBuilder.build();
     }
@@ -54,28 +68,56 @@ public final class ApiUtil {
         if (Objects.isNull(apiAccount.getId()) || Objects.isNull(apiAccount.getAppUser()) || Objects.isNull(apiAccount.getPassword())) {
             throw new ModelConversionException("Bad account data");
         }
-        return Account.builder()
+        Account.AccountBuilder accountBuilder = Account.builder()
                 .Id(UUID.fromString(apiAccount.getId()))
                 .appUser(appUserFromApi(apiAccount.getAppUser()))
-                .password(apiAccount.getPassword())
-                .build();
+                .password(apiAccount.getPassword());
+
+        if (apiAccount.hasMetadata()) {
+            var metadata = apiAccount.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                accountBuilder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                accountBuilder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                accountBuilder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
+        }
+
+        return accountBuilder.build();
+
     }
 
-    public static Tenant tenantFromApi(TenantServiceProto.Tenant tenant) throws ModelConversionException {
-        if (Objects.isNull(tenant.getId()) || Objects.isNull(tenant.getEmail()) ||
-                Objects.isNull(tenant.getName()) || Objects.isNull(tenant.getTenantType())
+    public static Tenant tenantFromApi(TenantServiceProto.Tenant apiTenant) throws ModelConversionException {
+        if (Objects.isNull(apiTenant.getId()) || Objects.isNull(apiTenant.getEmail()) ||
+                Objects.isNull(apiTenant.getName()) || Objects.isNull(apiTenant.getTenantType())
         ) {
             throw new ModelConversionException();
         }
 
         Tenant.TenantBuilder tenantBuilder = Tenant.builder()
-                .Id(UUID.fromString(tenant.getId()))
-                .email(tenant.getEmail())
-                .name(tenant.getName())
-                .tenantType(TenantType.valueOf(tenant.getTenantType().name()));
+                .Id(UUID.fromString(apiTenant.getId()))
+                .email(apiTenant.getEmail())
+                .name(apiTenant.getName())
+                .tenantType(TenantType.valueOf(apiTenant.getTenantType().name()));
 
-        if (Objects.isNull(tenant.getLocation())) {
-            tenantBuilder.location(tenant.getLocation());
+        if (Objects.isNull(apiTenant.getLocation())) {
+            tenantBuilder.location(apiTenant.getLocation());
+        }
+
+        if (apiTenant.hasMetadata()) {
+            var metadata = apiTenant.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                tenantBuilder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                tenantBuilder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                tenantBuilder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
         }
 
         return tenantBuilder.build();
@@ -89,31 +131,34 @@ public final class ApiUtil {
             throw new ModelConversionException("Missing required field(s)");
         }
 
-        var student = Student.builder()
+        var studentBuilder = Student.builder()
                 .Id(UUID.fromString(apiStudent.getId()))
                 .admissionNumber(apiStudent.getAdmissionNumber())
                 .appUser(appUserFromApi(apiStudent.getAppUser()))
-                .course(courseFromApi(apiStudent.getCourse()))
-                .build();
+                .course(courseFromApi(apiStudent.getCourse()));
 
-        return student;
-    }
-
-    public static UserType userTypeFromAPi(CommonsProto.UserType userType) throws ModelConversionException {
-        switch (userType.name()) {
-            case "STUDENT":
-                return UserType.STUDENT;
-            case "SUPERVISOR":
-                return UserType.SUPERVISOR;
-            case "ADMIN":
-                return UserType.ADMIN;
-            default:
-                throw new ModelConversionException();
+        if (apiStudent.hasMetadata()) {
+            var metadata = apiStudent.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                studentBuilder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                studentBuilder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                studentBuilder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
         }
+
+        return studentBuilder.build();
     }
 
-    public static RoleName roleNameFromApi(CommonsProto.RoleName roleName) throws ModelConversionException {
-        switch (roleName.name()) {
+    public static UserType userTypeFromAPi(CommonsProto.UserType apiUserType) {
+        return UserType.valueOf(apiUserType.name());
+    }
+
+    public static RoleName roleNameFromApi(CommonsProto.RoleName apiRoleName) throws ModelConversionException {
+        switch (apiRoleName.name()) {
             case "student":
                 return RoleName.STUDENT;
             case "supervisor":
@@ -127,8 +172,8 @@ public final class ApiUtil {
         }
     }
 
-    public static TenantType tenantTypeFromApi(CommonsProto.TenantType tenantType) {
-        return TenantType.valueOf(tenantType.name());
+    public static TenantType tenantTypeFromApi(CommonsProto.TenantType apiTenantType) {
+        return TenantType.valueOf(apiTenantType.name());
     }
 
     public static CourseLevel courseLevelFromApi(CommonsProto.CourseLevel apiCourseLevel) {
@@ -141,11 +186,25 @@ public final class ApiUtil {
         ) {
             throw new ModelConversionException();
         }
-        return Course.builder()
+        Course.CourseBuilder courseBuilder = Course.builder()
                 .Id(UUID.fromString(apiCourse.getId()))
                 .name(apiCourse.getName())
-                .courseLevel(CourseLevel.valueOf(apiCourse.getCourseLevel().name()))
-                .build();
+                .courseLevel(CourseLevel.valueOf(apiCourse.getCourseLevel().name()));
+
+        if (apiCourse.hasMetadata()) {
+            var metadata = apiCourse.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                courseBuilder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                courseBuilder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                courseBuilder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
+        }
+
+        return courseBuilder.build();
     }
 
     public static Listing listingFromApi(ApplicationServiceProto.Listing apiListing) throws ModelConversionException {
@@ -168,7 +227,20 @@ public final class ApiUtil {
         }
 
         if (Objects.nonNull(apiListing.getDeadline())) {
+            listingBuilder.deadline(timeStampFromApi(apiListing.getDeadline()));
+        }
 
+        if (apiListing.hasMetadata()) {
+            var metadata = apiListing.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                listingBuilder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                listingBuilder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                listingBuilder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
         }
 
         return listingBuilder.build();
@@ -207,6 +279,19 @@ public final class ApiUtil {
         ).toList();
 
         attachmentBuilder.attachmentWeeks(attachmentWeeksFromApi);
+
+        if (apiAttachment.hasMetadata()) {
+            var metadata = apiAttachment.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                attachmentBuilder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                attachmentBuilder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                attachmentBuilder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
+        }
 
         return attachmentBuilder.build();
     }
@@ -247,6 +332,19 @@ public final class ApiUtil {
 
         builder.logs(apiLogsList);
 
+        if (apiAttachmentWeek.hasMetadata()) {
+            var metadata = apiAttachmentWeek.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                builder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                builder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                builder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
+        }
+
 
         return builder.build();
 
@@ -272,6 +370,19 @@ public final class ApiUtil {
 
         if (Objects.nonNull(apiLog.getSchoolSupervisorComment())) {
             logBuilder.schoolSupervisorComment(apiLog.getSchoolSupervisorComment());
+        }
+
+        if (apiLog.hasMetadata()) {
+            var metadata = apiLog.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                logBuilder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                logBuilder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                logBuilder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
         }
 
         return logBuilder.build();
@@ -314,6 +425,19 @@ public final class ApiUtil {
             builder.applicationStatus(ApplicationStatus.valueOf(apiApplication.getApplicationStatus().name()));
         }
 
+        if (apiApplication.hasMetadata()) {
+            var metadata = apiApplication.getMetadata();
+            if (Objects.nonNull(metadata.getCreatedAt())) {
+                builder.createdAt(timeStampFromApi(metadata.getCreatedAt()));
+            }
+            if (Objects.nonNull(metadata.getUpdatedAt())) {
+                builder.updatedAt(timeStampFromApi(metadata.getUpdatedAt()));
+            }
+            if (Objects.nonNull(metadata.getDeletedAt())) {
+                builder.deletedAt(timeStampFromApi(metadata.getDeletedAt()));
+            }
+        }
+
         return builder.build();
     }
 
@@ -353,6 +477,8 @@ public final class ApiUtil {
                 .setUserType(CommonsProto.UserType.valueOf(appUser.getUserType().name()))
                 .addAllRoles(roleSet);
 
+        userBuilder.setMetadata(metadataToApi(appUser.getCreatedAt(), appUser.getUpdatedAt(), appUser.getDeletedAt()));
+
         return userBuilder.build();
     }
 
@@ -364,6 +490,7 @@ public final class ApiUtil {
                 .setId(String.valueOf(account.getId()))
                 .setAppUser(appUserToApi(account.getAppUser()))
                 .setPassword(account.getPassword())
+                .setMetadata(metadataToApi(account.getCreatedAt(), account.getUpdatedAt(), account.getDeletedAt()))
                 .build();
     }
 
@@ -384,6 +511,8 @@ public final class ApiUtil {
             tenantBuilder.setLocation(tenant.getLocation());
         }
 
+        tenantBuilder.setMetadata(metadataToApi(tenant.getCreatedAt(), tenant.getUpdatedAt(), tenant.getDeletedAt()));
+
         return tenantBuilder.build();
     }
 
@@ -399,6 +528,7 @@ public final class ApiUtil {
                 .setAdmissionNumber(student.getAdmissionNumber())
                 .setAppUser(appUserToApi(student.getAppUser()))
                 .setCourse(courseToApi(student.getCourse()))
+                .setMetadata(metadataToApi(student.getCreatedAt(), student.getUpdatedAt(), student.getDeletedAt()))
                 .build();
 
         return apiStudent;
@@ -446,6 +576,7 @@ public final class ApiUtil {
                 .setId(String.valueOf(course.getId()))
                 .setName(course.getName())
                 .setCourseLevel(CommonsProto.CourseLevel.valueOf(course.getCourseLevel().name()))
+                .setMetadata(metadataToApi(course.getCreatedAt(), course.getUpdatedAt(), course.getDeletedAt()))
                 .build();
     }
 
@@ -459,6 +590,7 @@ public final class ApiUtil {
                 .setId(String.valueOf(listing.getId()))
                 .setTenant(tenantToApi(listing.getTenant()))
                 .setCourse(courseToApi(listing.getCourse()));
+        listingBuilder.setMetadata(metadataToApi(listing.getCreatedAt(), listing.getUpdatedAt(), listing.getDeletedAt()));
 
         return listingBuilder.build();
     }
@@ -495,6 +627,7 @@ public final class ApiUtil {
         ).toList();
 
         attachmentBuilder.addAllAttachmentWeeks(attachmentWeekList);
+        attachmentBuilder.setMetadata(metadataToApi(attachment.getCreatedAt(), attachment.getUpdatedAt(), attachment.getDeletedAt()));
 
         return attachmentBuilder.build();
     }
@@ -535,6 +668,8 @@ public final class ApiUtil {
 
         builder.addAllLogs(logsList);
 
+        builder.setMetadata(metadataToApi(attachmentWeek.getCreatedAt(), attachmentWeek.getUpdatedAt(), attachmentWeek.getDeletedAt()));
+
 
         return builder.build();
 
@@ -561,6 +696,8 @@ public final class ApiUtil {
         if (Objects.nonNull(log.getSchoolSupervisorComment())) {
             builder.setSchoolSupervisorComment(log.getSchoolSupervisorComment());
         }
+
+        builder.setMetadata(metadataToApi(log.getCreatedAt(), log.getUpdatedAt(), log.getDeletedAt()));
 
         return builder.build();
 
@@ -602,6 +739,23 @@ public final class ApiUtil {
 
         if (Objects.nonNull(application.getApplicationStatus())) {
             builder.setApplicationStatus(CommonsProto.ApplicationStatus.valueOf(application.getApplicationStatus().name()));
+        }
+
+        builder.setMetadata(metadataToApi(application.getCreatedAt(), application.getUpdatedAt(), application.getDeletedAt()));
+
+        return builder.build();
+    }
+
+    private static CommonsProto.Metadata metadataToApi(@Nullable LocalDateTime createdAt, @Nullable LocalDateTime updatedAt, @Nullable LocalDateTime deletedAt) {
+        CommonsProto.Metadata.Builder builder = CommonsProto.Metadata.newBuilder()
+                .setCreatedAt(timeStampToApi(createdAt));
+
+        if (Objects.nonNull(updatedAt)) {
+            builder.setUpdatedAt(timeStampToApi(updatedAt));
+        }
+
+        if (Objects.nonNull(deletedAt)) {
+            builder.setDeletedAt(timeStampToApi(deletedAt));
         }
 
         return builder.build();
