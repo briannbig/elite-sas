@@ -8,6 +8,7 @@ import elite.sas.core.workflows.ProcessDailyLogBookWorkflowImpl;
 import elite.sas.core.workflows.RegisterStudentWorkflowImpl;
 import elite.sas.core.workflows.TenantRegistrationWorkflowImpl;
 import elite.sas.core.workflows.UserAccountRegistrationWorkflowImpl;
+import elite.sas.workflows.ProcessWeeklyLogsWorkflowImpl;
 import io.temporal.client.WorkflowClient;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.serviceclient.WorkflowServiceStubsOptions;
@@ -75,7 +76,8 @@ public class TemporalConfig {
                 UserAccountRegistrationWorkflowImpl.class,
                 TenantRegistrationWorkflowImpl.class,
                 RegisterStudentWorkflowImpl.class,
-                ProcessDailyLogBookWorkflowImpl.class
+                ProcessDailyLogBookWorkflowImpl.class,
+                ProcessWeeklyLogsWorkflowImpl.class
         );
         worker.registerActivitiesImplementations(registrationActivity, notificationsActivity, logBookActivity);
 

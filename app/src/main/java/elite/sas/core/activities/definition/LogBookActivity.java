@@ -16,7 +16,10 @@ public interface LogBookActivity {
     Optional<Log> processLogEntry(Log logEntry);
 
     @ActivityMethod
-    AttachmentWeek processAttachmentWeek(AttachmentWeek attachmentWeek);
+    Optional<AttachmentWeek> processAttachmentWeek(AttachmentWeek attachmentWeek);
+
+    @ActivityMethod
+    Optional<AttachmentWeek> createNextAttachmentWeek(AttachmentWeek attachmentWeek);
 
     @ActivityMethod
     List<Attachment> getActiveAttachments();

@@ -32,19 +32,39 @@ public class LogBookActivityImpl implements LogBookActivity {
     }
 
     @Override
-    public AttachmentWeek processAttachmentWeek(AttachmentWeek attachmentWeek) {
+    public Optional<AttachmentWeek> processAttachmentWeek(AttachmentWeek attachmentWeek) {
+
+        boolean needsToBeUpdated = (Objects.isNull(attachmentWeek.getWeekSummary()) ||
+                Objects.isNull(attachmentWeek.getStudentComment()));
 
         if (Objects.isNull(attachmentWeek.getWeekSummary())) {
             attachmentWeek.setWeekSummary("No record");
-            attachmentWeek = attachmentWeekRepository.save(attachmentWeek);
         }
 
         if (Objects.isNull(attachmentWeek.getStudentComment())) {
             attachmentWeek.setStudentComment("No comment");
+        }
+
+        if (needsToBeUpdated) {
             attachmentWeek = attachmentWeekRepository.save(attachmentWeek);
         }
 
-        return attachmentWeek;
+        return Optional.of(attachmentWeek);
+    }
+
+    @Override
+    public Optional<AttachmentWeek> createNextAttachmentWeek(AttachmentWeek attachmentWeek) {
+
+        if (!attachmentWeek.getAttachment().isActive()) {
+            return Optional.empty();
+        }
+
+        var nextAttachmentWeek = AttachmentWeek.builder()
+                .weekNumber(attachmentWeek.getWeekNumber()+1)
+                .attachment(attachmentWeek.getAttachment()).build();
+        AttachmentWeek week = attachmentWeekRepository.save(nextAttachmentWeek);
+
+        return Optional.of(week);
     }
 
     @Override

@@ -15,6 +15,9 @@ import java.util.UUID;
 @Getter @Setter
 public class AttachmentWeek extends BaseModel{
 
+    @ManyToOne
+    private Attachment attachment;
+
     @Column(nullable = false)
     private int weekNumber;
 
@@ -33,8 +36,9 @@ public class AttachmentWeek extends BaseModel{
     }
 
     @Builder
-    public AttachmentWeek(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, int weekNumber, List<Log> logs, String weekSummary, String studentComment, String industrySupervisorComment, String schoolSupervisorComment, boolean isActive) {
+    public AttachmentWeek(UUID Id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, Attachment attachment, int weekNumber, List<Log> logs, String weekSummary, String studentComment, String industrySupervisorComment, String schoolSupervisorComment, boolean isActive) {
         super(Id, createdAt, updatedAt, deletedAt);
+        this.attachment = attachment;
         this.weekNumber = weekNumber;
         this.logs = logs;
         this.weekSummary = weekSummary;
