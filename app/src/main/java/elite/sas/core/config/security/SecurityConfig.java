@@ -40,11 +40,12 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests(
                         (auth) -> auth
+                                .requestMatchers(antMatcher("/")).permitAll()
                                 .requestMatchers(antMatcher("/api/v1/auth/**")).permitAll()
                                 .requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
                                 .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
-                                .requestMatchers(antMatcher("/api/v1/admin/**")).hasAnyAuthority(""+RoleName.INTERNAL_ADMIN, ""+RoleName.TENANT_ADMIN)
-                                .requestMatchers(antMatcher("/api/v1/admin/internal/**")).hasAnyAuthority(""+RoleName.INTERNAL_ADMIN)
+                                .requestMatchers(antMatcher("/api/v1/admin/**")).hasAnyAuthority("" + RoleName.INTERNAL_ADMIN, "" + RoleName.TENANT_ADMIN)
+                                .requestMatchers(antMatcher("/api/v1/admin/internal/**")).hasAnyAuthority("" + RoleName.INTERNAL_ADMIN)
                                 .anyRequest().authenticated()
                 )
 
