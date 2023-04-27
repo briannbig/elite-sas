@@ -2,6 +2,7 @@ package elite.sas.core.util;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 public final class TimeUtil {
@@ -12,6 +13,13 @@ public final class TimeUtil {
         var sec = TimeUnit.MILLISECONDS.toSeconds(timeInMillis) - TimeUnit.MILLISECONDS.toSeconds(hour) - TimeUnit.MILLISECONDS.toSeconds(min);
 
         return hour + ":" + min + ":" + sec;
+
+    }
+
+    public static String formartedDate(LocalDateTime localDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        return localDateTime.format(formatter);
 
     }
     public static LocalDateTime getNextMonday() {
