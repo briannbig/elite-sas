@@ -22,6 +22,22 @@ public class CourseService {
     @Autowired
     private final CourseRepository courseRepository;
 
+    public Optional<Course> addCourse(Course course) {
+        if (Objects.isNull(course.getName()) || Objects.isNull(course.getCourseLevel())) {
+            log.info("Course name or level not specified");
+            return Optional.empty();
+        }
+
+        Optional<Course> optionalCourse = courseRepository.findByName(course.getName());
+        if (optionalCourse.isPresent()) {
+            log.debug("course with name {} not found", course.getName());
+            return Optional.empty();
+        }
+
+        return Optional.of(courseRepository.save(course));
+
+    }
+
     public Optional<Course> getCourseById(String courseId) {
         return courseRepository.findById(UUID.fromString(courseId));
     }
