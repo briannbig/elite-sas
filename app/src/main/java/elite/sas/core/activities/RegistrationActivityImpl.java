@@ -174,19 +174,22 @@ public class RegistrationActivityImpl implements RegistrationActivity {
         Optional<Tenant> optionalTenantWithName = tenantRepository.findByName(params.getName());
         if (optionalTenantWithName.isPresent()) {
             log.debug("tenant with name '{}' already exists!", params.getName());
+            return Optional.empty();
         }
 
         Optional<Tenant> optionalTenantWithEmail = tenantRepository.findByEmail(params.getEmail());
         if (optionalTenantWithEmail.isPresent()) {
             log.debug("tenant with email '{}' already exists!", params.getEmail());
+            return Optional.empty();
         }
 
         Optional<Tenant> optionalTenantWithTelephone = tenantRepository.findByTelephone(params.getTelephone());
         if (optionalTenantWithTelephone.isPresent()) {
             log.debug("tenant with telephone '{}' already exists!", params.getTelephone());
+            return Optional.empty();
         }
 
-        TenantType tenantType = null;
+        TenantType tenantType = TenantType.SCHOOL;
         if (Objects.nonNull(params.getTenantType())) {
             tenantType = params.getTenantType();
         }
