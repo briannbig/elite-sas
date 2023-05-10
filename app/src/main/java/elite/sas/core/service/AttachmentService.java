@@ -36,19 +36,39 @@ public class AttachmentService {
     }
 
     public Optional<Attachment> getAttachmentById(String id) {
-        return attachmentRepository.findById(UUID.fromString(id));
+        try {
+            return attachmentRepository.findById(UUID.fromString(id));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
     public Optional<Attachment> getAttachmentsByCourseId(String courseId) {
-        return attachmentRepository.findByStudentCourseId(UUID.fromString(courseId));
+        try {
+            return attachmentRepository.findByStudentCourseId(UUID.fromString(courseId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
     public Optional<Attachment> getAttachmentByStudentAdmissionNumber(String admissionNumber) {
-        return attachmentRepository.findByStudentAdmissionNumber(UUID.fromString(admissionNumber));
+        try {
+            return attachmentRepository.findByStudentAdmissionNumber(UUID.fromString(admissionNumber));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
     public Optional<Attachment> getAttachmentByStudentId(String studentId) {
-        return attachmentRepository.findByStudentId(UUID.fromString(studentId));
+        try {
+            return attachmentRepository.findByStudentId(UUID.fromString(studentId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
 
@@ -58,7 +78,12 @@ public class AttachmentService {
      */
 
     public List<Attachment> getAllAttachmentsAtCompany(String tenantId) {
-        return attachmentRepository.findByTenantId(UUID.fromString(tenantId));
+        try {
+            return attachmentRepository.findByTenantId(UUID.fromString(tenantId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
     /**
@@ -67,15 +92,30 @@ public class AttachmentService {
      */
 
     public List<Attachment> getAllAttachmentsFromSchool(String tenantId) {
-        return attachmentRepository.findByStudentAppUserTenantId(UUID.fromString(tenantId));
+        try {
+            return attachmentRepository.findByStudentAppUserTenantId(UUID.fromString(tenantId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
     public List<Attachment> getAllAttachmentsForIndustrySupervisor(String supervisorId) {
-        return attachmentRepository.findByIndustrySupervisorId(UUID.fromString(supervisorId));
+        try {
+            return attachmentRepository.findByIndustrySupervisorId(UUID.fromString(supervisorId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
     public List<Attachment> getAllAttachmentsForSchoolSupervisor(String tenantId) {
-        return attachmentRepository.findBySchoolSupervisorId(UUID.fromString(tenantId));
+        try {
+            return attachmentRepository.findBySchoolSupervisorId(UUID.fromString(tenantId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
     public List<Attachment> getAllAttachmentsForPeriod(AttachmentPeriod attachmentPeriod) {

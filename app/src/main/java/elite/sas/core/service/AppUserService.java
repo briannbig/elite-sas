@@ -144,7 +144,12 @@ public class AppUserService {
     }
 
     public Optional<AppUser> findUserById(String uuid) {
-        return Optional.of(userRepository.findById(UUID.fromString(uuid)).orElseThrow());
+        try {
+            return Optional.of(userRepository.findById(UUID.fromString(uuid)).orElseThrow());
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
     public List<AppUser> findAllUsers() {
@@ -184,7 +189,12 @@ public class AppUserService {
     }
 
     public Optional<Account> getAccountById(String accountId) {
-        return accountRepository.findById(UUID.fromString(accountId));
+        try {
+            return accountRepository.findById(UUID.fromString(accountId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
 

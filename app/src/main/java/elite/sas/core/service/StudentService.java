@@ -37,23 +37,48 @@ public class StudentService {
     }
 
     public Optional<Student> getStudentById(String id) {
-        return studentRepository.findById(UUID.fromString(id));
+        try {
+            return studentRepository.findById(UUID.fromString(id));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
     public Optional<Student> getStudentByAppUserId(String id) {
-        return studentRepository.findByAppUserId(UUID.fromString(id));
+        try {
+            return studentRepository.findByAppUserId(UUID.fromString(id));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
     public Optional<Student> getStudentByAdmissionNumber(String admNumber) {
-        return studentRepository.findByAdmissionNumber(UUID.fromString(admNumber));
+        try {
+            return studentRepository.findByAdmissionNumber(UUID.fromString(admNumber));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
     public List<Student> getAllStudentsForCourse(String courseId) {
-        return studentRepository.findByCourseId(UUID.fromString(courseId));
+        try {
+            return studentRepository.findByCourseId(UUID.fromString(courseId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
     public List<Student> getAllStudentsForSchool(String tenantId) {
-        return studentRepository.findByAppUserTenantId(UUID.fromString(tenantId));
+        try {
+            return studentRepository.findByAppUserTenantId(UUID.fromString(tenantId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
     /**
