@@ -224,6 +224,27 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
             return;
         }
 
+        var course = Course.builder()
+                .name(request.getName())
+                .courseLevel(ApiUtil.courseLevelFromApi(request.getCourseLevel()))
+                .build();
+        Optional<Course> optionalCourse = courseService.addCourse(course);
+
+        if (optionalCourse.isEmpty()) {
+            responseObserver.onError(new UnRetriableException("Could not save course"));
+            responseObserver.onCompleted();
+            return;
+        }
+
+        try {
+            responseObserver.onNext(courseToApi( optionalCourse.get()));
+        } catch (ModelConversionException e) {
+            responseObserver.onError(e);
+            log.debug("Conversion error: {}", e);
+        }
+
+        responseObserver.onCompleted();
+
     }
 
     @Override
