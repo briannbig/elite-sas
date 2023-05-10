@@ -25,7 +25,12 @@ public class TenantService {
     private final TenantRepository tenantRepository;
 
     public Optional<Tenant> findTenantById(String id) {
-        return tenantRepository.findById(UUID.fromString(id));
+        try {
+            return tenantRepository.findById(UUID.fromString(id));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
     public List<Tenant> getAllTenants() {
@@ -70,8 +75,13 @@ public class TenantService {
     }
 
     public List<AppUser> getAllUsersForTenant(String id) {
-        var optionalTenant = tenantRepository.findById(UUID.fromString(id));
-        return optionalTenant.get().getUsers();
+        try {
+            var optionalTenant = tenantRepository.findById(UUID.fromString(id));
+            return optionalTenant.get().getUsers();
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
 
     }
 
@@ -100,8 +110,7 @@ public class TenantService {
             var optionalTenantByTelephone = tenantRepository.findByTelephone(tenant.getTelephone());
             if (optionalTenantByTelephone.isEmpty()) {
                 optionalTenant.get().setTelephone(tenant.getTelephone());
-            }
-            else {
+            } else {
                 log.debug("telephone {} already taken", tenant.getTelephone());
                 return Optional.empty();
             }

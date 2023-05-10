@@ -51,16 +51,32 @@ public class ApplicationService {
     }
 
     public List<Listing> getAllCompanyListings(String tenantId) {
-        return listingRepository.findByTenantId(UUID.fromString(tenantId));
+        try {
+            return listingRepository.findByTenantId(UUID.fromString(tenantId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
     public List<Listing> getAllListingsByCourse(String courseId) {
-        return listingRepository.findByCourseId(UUID.fromString(courseId));
+        try {
+            return listingRepository.findByCourseId(UUID.fromString(courseId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
 
     public Optional<Application> getApplicationById(String applicationId) {
-        return applicationRepository.findById(UUID.fromString(applicationId));
+        try {
+            return applicationRepository.findById(UUID.fromString(applicationId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
+
     }
 
     public Optional<Application> addApplication(Application application) {
@@ -72,15 +88,30 @@ public class ApplicationService {
     }
 
     public List<Application> getAllApplicationsForCompany(String tenantId) {
-        return applicationRepository.findByApplicantTenantId(UUID.fromString(tenantId));
+        try {
+            return applicationRepository.findByApplicantTenantId(UUID.fromString(tenantId));
+        } catch (Exception e) {
+            log.error("{}", e);
+            return List.of();
+        }
     }
 
     public List<Application> getAllApplicationsByApplicant(String userId) {
-        return applicationRepository.findByApplicantId(UUID.fromString(userId));
+        try {
+            return applicationRepository.findByApplicantId(UUID.fromString(userId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
     public List<Application> getAllApplicationsForListing(String listingId) {
-        return applicationRepository.findByListingId(UUID.fromString(listingId));
+        try {
+            return applicationRepository.findByListingId(UUID.fromString(listingId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return List.of();
+        }
     }
 
 
@@ -95,7 +126,7 @@ public class ApplicationService {
             optionalApplication.get().setApplicationStatus(application.getApplicationStatus());
         }
 
-        if (!Objects.equals(optionalApplication.get().getApplication(), application.getApplication())){
+        if (!Objects.equals(optionalApplication.get().getApplication(), application.getApplication())) {
             optionalApplication.get().setApplication(application.getApplication());
         }
 
@@ -106,7 +137,6 @@ public class ApplicationService {
         return Optional.of(applicationRepository.save(optionalApplication.get()));
 
     }
-
 
 
 }

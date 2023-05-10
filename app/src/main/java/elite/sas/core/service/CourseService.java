@@ -39,7 +39,12 @@ public class CourseService {
     }
 
     public Optional<Course> getCourseById(String courseId) {
-        return courseRepository.findById(UUID.fromString(courseId));
+        try {
+            return courseRepository.findById(UUID.fromString(courseId));
+        } catch (Exception e) {
+            log.debug("{}", e);
+            return Optional.empty();
+        }
     }
 
     public Optional<Course> getCourseByName(String courseName) {

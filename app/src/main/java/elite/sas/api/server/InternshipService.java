@@ -9,6 +9,7 @@ import elite.sas.api.grpc.internshipServiceGrpc;
 import elite.sas.core.entities.Attachment;
 import elite.sas.core.entities.Log;
 import elite.sas.core.service.AttachmentService;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,7 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
                 responseObserver.onNext(attachmentToApi(attachment));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             }
         });
 
@@ -48,18 +50,19 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
 
     @Override
     public void getAttachment(InternshipServiceProto.SearchAttachmentParams request, StreamObserver<InternshipServiceProto.Attachment> responseObserver) {
-        if (Objects.nonNull(request.getId())) {
+        if (Objects.nonNull(request.getId()) && !request.getId().isEmpty()) {
             Optional<Attachment> optionalAttachment = attachmentService.getAttachmentById(request.getId());
             if (optionalAttachment.isEmpty()) {
                 log.debug("Could not find internship with id: {}", request.getId());
-                responseObserver.onError(new UnRetriableException("Could not find internship with given id"));
+                var e = new UnRetriableException("Could not find internship with given id");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
                 return;
             }
             try {
                 responseObserver.onNext(attachmentToApi(optionalAttachment.get()));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
-                responseObserver.onError(new ModelConversionException("Model conversion error"));
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
 
@@ -67,18 +70,19 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
             return;
         }
 
-        if (Objects.nonNull(request.getStudentId())) {
+        if (Objects.nonNull(request.getStudentId()) && !request.getStudentId().isEmpty()) {
             Optional<Attachment> optionalAttachment = attachmentService.getAttachmentByStudentId(request.getStudentId());
             if (optionalAttachment.isEmpty()) {
                 log.debug("Could not find internship for student with id: {}", request.getStudentId());
-                responseObserver.onError(new UnRetriableException("Could not find internship with given id"));
+                var e = new UnRetriableException("Could not find internship with given id");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
                 return;
             }
             try {
                 responseObserver.onNext(attachmentToApi(optionalAttachment.get()));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
-                responseObserver.onError(new ModelConversionException("Model conversion error"));
+                responseObserver.onError(Status.NOT_FOUND.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
 
@@ -87,18 +91,19 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
         }
 
 
-        if (Objects.nonNull(request.getStudentAdmissionNumber())) {
+        if (Objects.nonNull(request.getStudentAdmissionNumber()) && !request.getStudentAdmissionNumber().isEmpty()) {
             Optional<Attachment> optionalAttachment = attachmentService.getAttachmentByStudentAdmissionNumber(request.getStudentAdmissionNumber());
             if (optionalAttachment.isEmpty()) {
                 log.debug("Could not find internship for student with admission: {}", request.getStudentAdmissionNumber());
-                responseObserver.onError(new UnRetriableException("Could not find internship for student with given admission number"));
+                var e = new UnRetriableException("Could not find internship for student with given admission number");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
                 return;
             }
             try {
                 responseObserver.onNext(attachmentToApi(optionalAttachment.get()));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
-                responseObserver.onError(new ModelConversionException("Model conversion error"));
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
 
@@ -109,22 +114,24 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
 
     @Override
     public void getAttachments(InternshipServiceProto.SearchAttachmentParams request, StreamObserver<InternshipServiceProto.Attachment> responseObserver) {
-        if (Objects.nonNull(request.getCompanyId())) {
+        if (Objects.nonNull(request.getCompanyId()) && !request.getCompanyId().isEmpty()) {
             attachmentService.getAllAttachmentsAtCompany(request.getCompanyId()).forEach(attachment -> {
                 try {
                     responseObserver.onNext(attachmentToApi(attachment));
                 } catch (ModelConversionException e) {
                     log.debug("Conversion error: {}", e);
+                    responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 }
             });
         }
 
-        if (Objects.nonNull(request.getSchoolId())) {
+        if (Objects.nonNull(request.getSchoolId()) && !request.getSchoolId().isEmpty()) {
             attachmentService.getAllAttachmentsFromSchool(request.getSchoolId()).forEach(attachment -> {
                 try {
                     responseObserver.onNext(attachmentToApi(attachment));
                 } catch (ModelConversionException e) {
                     log.debug("Conversion error: {}", e);
+                    responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 }
             });
         }
@@ -135,26 +142,29 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
                     responseObserver.onNext(attachmentToApi(attachment));
                 } catch (ModelConversionException e) {
                     log.debug("Conversion error: {}", e);
+                    responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 }
             });
         }
 
-        if (Objects.nonNull(request.getIndustrySupervisorId())) {
+        if (Objects.nonNull(request.getIndustrySupervisorId()) && !request.getIndustrySupervisorId().isEmpty()) {
             attachmentService.getAllAttachmentsForIndustrySupervisor(request.getIndustrySupervisorId()).forEach(attachment -> {
                 try {
                     responseObserver.onNext(attachmentToApi(attachment));
                 } catch (ModelConversionException e) {
                     log.debug("Conversion error: {}", e);
+                    responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 }
             });
         }
 
-        if (Objects.nonNull(request.getSchoolSupervisorId())) {
+        if (Objects.nonNull(request.getSchoolSupervisorId()) && !request.getIndustrySupervisorId().isEmpty()) {
             attachmentService.getAllAttachmentsForSchoolSupervisor(request.getSchoolSupervisorId()).forEach(attachment -> {
                 try {
                     responseObserver.onNext(attachmentToApi(attachment));
                 } catch (ModelConversionException e) {
                     log.debug("Conversion error: {}", e);
+                    responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 }
             });
         }
@@ -165,9 +175,10 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
 
     @Override
     public void addLog(InternshipServiceProto.Log request, StreamObserver<InternshipServiceProto.Log> responseObserver) {
-        if (Objects.isNull(request.getWorkDone()) || request.getWorkDone().isEmpty() || Objects.isNull(request.getAttachmentWeekId())) {
+        if (Objects.isNull(request.getWorkDone()) || request.getWorkDone().isEmpty() || request.getAttachmentWeekId().isEmpty()) {
             log.debug("attempted to add an empty daily log or missing attachmentWeekId, request: {}", request);
-            responseObserver.onError(new UnRetriableException("Work done and attachment week cannot be empty"));
+            var e = new UnRetriableException("Work done and attachment week cannot be empty");
+            responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
             return;
         }
 
@@ -176,7 +187,8 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
 
         if (optionalAttachment.isEmpty()) {
             log.debug("attachment week with id: {} not found");
-            responseObserver.onError(new UnRetriableException("Attachment week with given id not found"));
+            var e = new UnRetriableException("Attachment week with given id not found");
+            responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
             return;
         }
 
@@ -196,7 +208,8 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
 
         if (optionalLog.isEmpty()) {
             log.debug("daily log could not be added to database");
-            responseObserver.onError(new UnRetriableException("Daily log could not be saved"));
+            var e = new UnRetriableException("Daily log could not be saved");
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             return;
         }
 
@@ -204,7 +217,7 @@ public class InternshipService extends internshipServiceGrpc.internshipServiceIm
             responseObserver.onNext(logToApi(optionalLog.get()));
         } catch (ModelConversionException e) {
             log.debug("conversion error: {}", e);
-            responseObserver.onError(e);
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             return;
         }
 

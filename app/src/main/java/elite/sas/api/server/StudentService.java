@@ -10,6 +10,7 @@ import elite.sas.core.api.params.CreateStudentParams;
 import elite.sas.core.entities.Course;
 import elite.sas.core.entities.Student;
 import elite.sas.core.service.CourseService;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,13 +31,14 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
     @Override
     public void registerStudent(CourseServiceProto.RegisterStudentRequest request, StreamObserver<CourseServiceProto.Student> responseObserver) {
 
-        if (Objects.isNull(Objects.isNull(request.getTenantId()) || Objects.isNull(request.getAdmissionNumber()) ||
-                Objects.isNull(request.getCourseId())) || Objects.isNull(request.getEmail()) ||
-                Objects.isNull(request.getFirstName()) || Objects.isNull(request.getLastName()) ||
-                Objects.isNull(request.getPassword()) || Objects.isNull(request.getPasswordConfirm())
+        if (request.getTenantId().isEmpty() || request.getAdmissionNumber().isEmpty() ||
+                request.getCourseId().isEmpty() || request.getEmail().isEmpty() ||
+                request.getFirstName().isEmpty() || request.getLastName().isEmpty() ||
+                request.getPassword().isEmpty() || request.getPasswordConfirm().isEmpty()
         ) {
-            responseObserver.onError(new UnRetriableException("Missing required field(s)"));
             log.debug("Missing required field(s) for request {}", request);
+            var e = new UnRetriableException("Missing required field(s)");
+            responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
             return;
         }
 
@@ -54,7 +56,8 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
         Optional<Student> optionalStudent = studentService.registerStudent(params);
 
         if (optionalStudent.isEmpty()) {
-            responseObserver.onError(new UnRetriableException("Could not register student"));
+            var e = new UnRetriableException("Could not register student");
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             return;
         }
 
@@ -62,7 +65,7 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
             responseObserver.onNext(studentToApi(optionalStudent.get()));
         } catch (ModelConversionException e) {
             log.debug("Conversion error: {}", e);
-            responseObserver.onError(e);
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             return;
         }
 
@@ -87,11 +90,12 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
     @Override
     public void getStudent(CourseServiceProto.SearchStudentParams request, StreamObserver<CourseServiceProto.Student> responseObserver) {
 
-        if (Objects.nonNull(request.getId())) {
+        if (Objects.nonNull(request.getId()) && !request.getId().isEmpty()) {
             Optional<Student> optionalStudent = studentService.getStudentById(request.getId());
             if (optionalStudent.isEmpty()) {
                 log.debug("student with id {} could not be found!", request.getId());
-                responseObserver.onError(new UnRetriableException("student with given id could not be found"));
+                var e = new UnRetriableException("student with given id could not be found");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
                 return;
             }
 
@@ -99,19 +103,20 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
                 responseObserver.onNext(studentToApi(optionalStudent.get()));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
-                responseObserver.onError(e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
 
             responseObserver.onCompleted();
         }
 
-        if (Objects.nonNull(request.getAdmissionNumber())) {
+        if (Objects.nonNull(request.getAdmissionNumber()) && !request.getAdmissionNumber().isEmpty()) {
 
             Optional<Student> optionalStudent = studentService.getStudentByAdmissionNumber(request.getId());
             if (optionalStudent.isEmpty()) {
                 log.debug("student with admission number {} could not be found!", request.getAdmissionNumber());
-                responseObserver.onError(new UnRetriableException("student with given admission number could not be found"));
+                var e = new UnRetriableException("student with given admission number could not be found");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
                 return;
             }
 
@@ -119,7 +124,7 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
                 responseObserver.onNext(studentToApi(optionalStudent.get()));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
-                responseObserver.onError(e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
 
@@ -127,12 +132,13 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
 
         }
 
-        if (Objects.nonNull(request.getAppUserId())) {
+        if (Objects.nonNull(request.getAppUserId()) && !request.getAppUserId().isEmpty()) {
 
             Optional<Student> optionalStudent = studentService.getStudentByAppUserId(request.getAppUserId());
             if (optionalStudent.isEmpty()) {
                 log.debug("student with app user having id {} could not be found!", request.getAppUserId());
-                responseObserver.onError(new UnRetriableException("student with app user of given id could not be found"));
+                var e = new UnRetriableException("student with app user of given id could not be found");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
                 return;
             }
 
@@ -140,7 +146,7 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
                 responseObserver.onNext(studentToApi(optionalStudent.get()));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
-                responseObserver.onError(e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
 
@@ -148,31 +154,34 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
         }
 
         log.debug("could not find suitable parameteres for getting student. {}", request);
-        responseObserver.onError(new UnRetriableException("could not find suitable parameteres for getting student"));
+        var e = new UnRetriableException("could not find suitable parameters for getting student");
+        responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
 
     }
 
     @Override
     public void getStudents(CourseServiceProto.SearchStudentParams request, StreamObserver<CourseServiceProto.Student> responseObserver) {
-        if (Objects.nonNull(request.getCourseId())) {
+        if (Objects.nonNull(request.getCourseId()) && !request.getSchoolId().isEmpty()) {
             studentService.getAllStudentsForCourse(request.getCourseId()).forEach(
                     student -> {
                         try {
                             responseObserver.onNext(studentToApi(student));
                         } catch (ModelConversionException e) {
                             log.debug("Conversion error: {}", e);
+                            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                         }
                     }
             );
         }
 
-        if (Objects.nonNull(request.getSchoolId())) {
+        if (Objects.nonNull(request.getSchoolId()) && !request.getSchoolId().isEmpty()) {
             studentService.getAllStudentsForSchool(request.getSchoolId()).forEach(
                     student -> {
                         try {
                             responseObserver.onNext(studentToApi(student));
                         } catch (ModelConversionException e) {
                             log.debug("Conversion error: {}", e);
+                            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                         }
                     }
             );
@@ -189,9 +198,10 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
      */
     @Override
     public void updateStudent(CourseServiceProto.UpdateStudentRequest request, StreamObserver<CourseServiceProto.Student> responseObserver) {
-        if (Objects.isNull(request.getId()) || Objects.isNull(request.getCourse())) {
+        if (request.getId().isEmpty() || request.hasCourse()) {
             log.debug("missing required field(s) for request: {}", request);
-            responseObserver.onError(new UnRetriableException("Missing required field(s) in the request"));
+            var e = new UnRetriableException("Missing required field(s) in the request");
+            responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
             return;
         }
 
@@ -199,7 +209,8 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
 
         if (optionalStudent.isEmpty()) {
             log.debug("could not update student for request {}", request);
-            responseObserver.onError(new UnRetriableException("could not update student, check student id and/or course"));
+            var e = new UnRetriableException("could not update student, check student id and/or course");
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             return;
         }
 
@@ -207,7 +218,7 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
             responseObserver.onNext(studentToApi(optionalStudent.get()));
         } catch (ModelConversionException e) {
             log.debug("Conversion error: {}", e);
-            responseObserver.onError(e);
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             return;
         }
 
@@ -218,9 +229,11 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
 
     @Override
     public void addCourse(CourseServiceProto.Course request, StreamObserver<CourseServiceProto.Course> responseObserver) {
-        if (Objects.isNull(request.getName()) || Objects.isNull(request.getCourseLevel())) {
-            responseObserver.onError(new UnRetriableException("Missing required field(s)"));
+        if (request.getName().isEmpty() || Objects.isNull(request.getCourseLevel())) {
             log.debug("Missing required field(s) for request {}", request);
+
+            var e = new UnRetriableException("Missing required field(s)");
+            responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
             return;
         }
 
@@ -231,16 +244,16 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
         Optional<Course> optionalCourse = courseService.addCourse(course);
 
         if (optionalCourse.isEmpty()) {
-            responseObserver.onError(new UnRetriableException("Could not save course"));
-            responseObserver.onCompleted();
+            var e = new UnRetriableException("Could not save course");
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             return;
         }
 
         try {
-            responseObserver.onNext(courseToApi( optionalCourse.get()));
+            responseObserver.onNext(courseToApi(optionalCourse.get()));
         } catch (ModelConversionException e) {
-            responseObserver.onError(e);
             log.debug("Conversion error: {}", e);
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
         }
 
         responseObserver.onCompleted();
@@ -255,6 +268,7 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
                         responseObserver.onNext(courseToApi(course));
                     } catch (ModelConversionException e) {
                         log.debug("Conversion error: {}", e);
+                        responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                     }
                 }
         );
@@ -268,13 +282,14 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
             Optional<Course> optionalCourse = courseService.getCourseById(request.getId());
             if (optionalCourse.isEmpty()) {
                 log.debug("could not find course with id {}", request.getId());
-                responseObserver.onError(new UnRetriableException("could not find course with given Id"));
+                var e = new UnRetriableException("could not find course with given Id");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
                 return;
             }
             try {
                 responseObserver.onNext(courseToApi(optionalCourse.get()));
             } catch (ModelConversionException e) {
-                responseObserver.onError(e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
             responseObserver.onCompleted();
@@ -284,20 +299,22 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
             Optional<Course> optionalCourse = courseService.getCourseByName(request.getName());
             if (optionalCourse.isEmpty()) {
                 log.debug("could not find course with name {}", request.getName());
-                responseObserver.onError(new UnRetriableException("could not find course with given name"));
+                var e = new UnRetriableException("could not find course with given name");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
                 return;
             }
             try {
                 responseObserver.onNext(courseToApi(optionalCourse.get()));
             } catch (ModelConversionException e) {
-                responseObserver.onError(e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
             responseObserver.onCompleted();
         }
 
         log.debug("missing required param(s) for request {}", request);
-        responseObserver.onError(new UnRetriableException("Missing required param(s) in the request"));
+        var e = new UnRetriableException("Missing required param(s) in the request");
+        responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
 
     }
 
@@ -329,9 +346,10 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
 
     @Override
     public void updateCourse(CourseServiceProto.UpdateCourseRequest request, StreamObserver<CourseServiceProto.Course> responseObserver) {
-        if (Objects.isNull(request.getId())) {
+        if (Objects.isNull(request.getId()) && !request.getId().isEmpty()) {
             log.debug("missing course id in the request: {}", request);
-            responseObserver.onError(new UnRetriableException("missing course id in request"));
+            var e = new UnRetriableException("missing course id in request");
+            responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
             return;
         }
 
@@ -339,14 +357,15 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
 
         if (optionalCourse.isEmpty()) {
             log.debug("could not update course with id: {}", request.getId());
-            responseObserver.onError(new UnRetriableException("Could not update course"));
+            var e = new UnRetriableException("Could not update course");
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             return;
         }
 
         try {
             responseObserver.onNext(courseToApi(optionalCourse.get()));
         } catch (ModelConversionException e) {
-            responseObserver.onError(e);
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             return;
         }
         responseObserver.onCompleted();
