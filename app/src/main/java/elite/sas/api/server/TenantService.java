@@ -8,6 +8,7 @@ import elite.sas.api.grpc.TenantServiceProto;
 import elite.sas.api.grpc.tenantServiceGrpc;
 import elite.sas.core.api.params.CreateTenantParams;
 import elite.sas.core.entities.Tenant;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +30,12 @@ public class TenantService extends tenantServiceGrpc.tenantServiceImplBase {
     @Override
     public void registerTenant(TenantServiceProto.RegisterTenantRequest request, StreamObserver<TenantServiceProto.Tenant> responseObserver) {
 
-        if (Objects.isNull(request.getName()) || Objects.isNull(request.getEmail()) ||
-                Objects.isNull(request.getTenantType()) || Objects.isNull(request.getTelephone()) ||
-                Objects.isNull(request.getLocation())
+        if (request.getName().isEmpty() || request.getEmail().isEmpty() ||
+                Objects.isNull(request.getTenantType()) || request.getTelephone().isEmpty() ||
+                request.getLocation().isEmpty()
         ) {
-            responseObserver.onError(new ModelConversionException());
+            var e = new ModelConversionException();
+            responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
             return;
         }
 
@@ -51,7 +53,7 @@ public class TenantService extends tenantServiceGrpc.tenantServiceImplBase {
                 responseObserver.onNext(tenantToApi(optionalTenant.get()));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
-                responseObserver.onError(e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
         }
@@ -67,7 +69,7 @@ public class TenantService extends tenantServiceGrpc.tenantServiceImplBase {
                     try {
                         responseObserver.onNext(tenantToApi(tenant));
                     } catch (ModelConversionException e) {
-                        log.debug("Conversion error");
+                        responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                     }
                 }
         );
@@ -77,9 +79,10 @@ public class TenantService extends tenantServiceGrpc.tenantServiceImplBase {
     @Override
     public void getTenantById(TenantServiceProto.SearchParams request, StreamObserver<TenantServiceProto.Tenant> responseObserver) {
 
-        if (Objects.isNull(request.getId())) {
-            responseObserver.onError(new ModelConversionException());
+        if (Objects.isNull(request.getId()) || request.getId().isEmpty()) {
+            var e = new ModelConversionException();
             log.debug("tenant id not specified in search params :{}", request);
+            responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
             return;
         }
 
@@ -89,8 +92,8 @@ public class TenantService extends tenantServiceGrpc.tenantServiceImplBase {
             try {
                 responseObserver.onNext(tenantToApi(optionalTenant.get()));
             } catch (ModelConversionException e) {
-                responseObserver.onError(e);
                 log.debug("Conversion error: {}", e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
         }
@@ -106,7 +109,7 @@ public class TenantService extends tenantServiceGrpc.tenantServiceImplBase {
                         try {
                             responseObserver.onNext(tenantToApi(tenant));
                         } catch (ModelConversionException e) {
-                            log.debug("Conversion error");
+                            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                         }
                     }
             );
@@ -119,6 +122,7 @@ public class TenantService extends tenantServiceGrpc.tenantServiceImplBase {
                             responseObserver.onNext(tenantToApi(tenant));
                         } catch (ModelConversionException e) {
                             log.debug("Conversion error");
+                            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                         }
                     }
             );
@@ -129,8 +133,9 @@ public class TenantService extends tenantServiceGrpc.tenantServiceImplBase {
 
     @Override
     public void updateTenant(TenantServiceProto.UpdateTenantRequest request, StreamObserver<TenantServiceProto.Tenant> responseObserver) {
-        if (Objects.isNull(request.getId())) {
-            responseObserver.onError(new ModelConversionException("tenant id not specified in update request"));
+        if (Objects.isNull(request.getId()) || !request.getId().isEmpty()) {
+            var e = new ModelConversionException("tenant id not specified in update request");
+            responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
             return;
         }
 
@@ -154,13 +159,13 @@ public class TenantService extends tenantServiceGrpc.tenantServiceImplBase {
             try {
                 responseObserver.onNext(tenantToApi(optionalTenant.get()));
             } catch (ModelConversionException e) {
-                responseObserver.onError(e);
-                return;
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             }
         } else {
-            responseObserver.onError(new UnRetriableException("could not update tenant"));
+
             log.debug("could not update tenant with id: {}", request.getId());
-            return;
+            var e = new UnRetriableException("could not update tenant");
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
         }
 
         responseObserver.onCompleted();

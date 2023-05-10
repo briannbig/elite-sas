@@ -13,6 +13,7 @@ import elite.sas.core.service.AppUserDetailsService;
 import elite.sas.core.service.AppUserService;
 import elite.sas.core.util.TemporalUtil;
 import elite.sas.core.workflows.definition.UserAccountRegistrationWorkflow;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,8 +47,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
             responseObserver.onNext(appUserToApi(appUser));
         } catch (ModelConversionException e) {
             log.debug("Conversion error: {}", e);
-            responseObserver.onError(e);
-            return;
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
         }
         responseObserver.onCompleted();
 
@@ -55,15 +55,12 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
 
     @Override
     public void getAllUsers(CommonsProto.Empty request, StreamObserver<UserServiceProto.AppUser> responseObserver) {
-        log.debug("-------------- Listing all users");
-        log.info("-------------- Listing all users");
+
         appUserService.findAllUsers().forEach(u -> {
-            log.debug("user ----> {}", u);
             try {
                 responseObserver.onNext(appUserToApi(u));
             } catch (ModelConversionException e) {
-                responseObserver.onError(e);
-                return;
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             }
         });
         responseObserver.onCompleted();
@@ -72,12 +69,12 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
     @Override
     public void getUsers(UserServiceProto.SearchUserParams request, StreamObserver<UserServiceProto.AppUser> responseObserver) {
         // list users by tenant
-        if (Objects.nonNull(request.getTenantId())) {
+        if (Objects.nonNull(request.getTenantId()) && !request.getTenantId().isEmpty()) {
             appUserService.getAllUsersForTenant(request.getTenantId()).forEach(u -> {
                         try {
                             responseObserver.onNext(appUserToApi(u));
                         } catch (ModelConversionException e) {
-                            responseObserver.onError(e);
+                            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                         }
                     }
             );
@@ -89,31 +86,34 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
     @Override
     public void getUser(UserServiceProto.SearchUserParams request, StreamObserver<UserServiceProto.AppUser> responseObserver) {
 
-        if (Objects.nonNull(request.getId())) {
+        if (Objects.nonNull(request.getId()) && !request.getId().isEmpty()) {
             Optional<AppUser> optionalAppUser = appUserService.findUserById(request.getId());
             if (optionalAppUser.isEmpty()) {
-                responseObserver.onCompleted();
+                var e = new UnRetriableException("user with given Id not found");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
             }
             try {
                 responseObserver.onNext(appUserToApi(optionalAppUser.get()));
             } catch (ModelConversionException e) {
-                responseObserver.onError(e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             }
+
+            responseObserver.onCompleted();
         }
 
-        if (Objects.nonNull(request.getUserName())) {
+        if (Objects.nonNull(request.getUserName()) && !request.getUserName().isEmpty()) {
             Optional<AppUser> optionalAppUser = appUserService.getUserByUserName(request.getUserName());
             if (optionalAppUser.isEmpty()) {
-                responseObserver.onCompleted();
+                var e = new UnRetriableException(("user with given userName not found"));
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
             }
             try {
                 responseObserver.onNext(appUserToApi(optionalAppUser.get()));
             } catch (ModelConversionException e) {
-                responseObserver.onError(e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             }
+            responseObserver.onCompleted();
         }
-
-        responseObserver.onCompleted();
     }
 
     @Override
@@ -128,22 +128,21 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
 
     @Override
     public void getAccount(UserServiceProto.GetAccountRequest request, StreamObserver<UserServiceProto.Account> responseObserver) {
-        if (Objects.nonNull(request.getAccountId())) {
+        if (Objects.nonNull(request.getAccountId()) && !request.getAccountId().isEmpty()) {
 
             Optional<Account> optionalAccount = appUserService.getAccountById(request.getAccountId());
 
             if (optionalAccount.isEmpty()) {
                 log.debug("Account with id: '{}' not found", request.getAccountId());
-                responseObserver.onError(new UnRetriableException("Account with given id not found!"));
-                return;
+                var e = new UnRetriableException("Account with given id not found!");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
             }
 
             try {
                 responseObserver.onNext(accountToApi(optionalAccount.get()));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
-                responseObserver.onError(e);
-                return;
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
             }
 
             responseObserver.onCompleted();
@@ -155,15 +154,15 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
 
             if (optionalAccount.isEmpty()) {
                 log.debug("Account with username: '{}' not found", request.getUsername());
-                responseObserver.onError(new UnRetriableException("Account with given username not found!"));
-                return;
+                var e = new UnRetriableException("Account with given username not found!");
+                responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
             }
 
             try {
                 responseObserver.onNext(accountToApi(optionalAccount.get()));
             } catch (ModelConversionException e) {
                 log.debug("Conversion error: {}", e);
-                responseObserver.onError(e);
+                responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
                 return;
             }
 
@@ -171,28 +170,30 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
 
         }
 
-        responseObserver.onError(new UnRetriableException("Required params(account id or user name) not provided"));
+        var e = new UnRetriableException("Required params(account id or user name) not provided");
+        responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
     }
 
     @Override
     public void login(UserServiceProto.LogInRequest request, StreamObserver<UserServiceProto.Account> responseObserver) {
-        if (Objects.isNull(request.getUsername()) || Objects.isNull(request.getPassword())) {
-            responseObserver.onError(new UnRetriableException("Required credentials not provided!"));
+        if (request.getUsername().isEmpty() || request.getPassword().isEmpty()) {
+            var e = new UnRetriableException("Required credentials not provided!");
+            responseObserver.onError(Status.INVALID_ARGUMENT.withCause(e).asRuntimeException());
         }
         Optional<Account> optionalAccount = appUserService.getAccountByUserName(request.getUsername());
 
         if (optionalAccount.isEmpty()) {
             log.debug("account with username '{}' not found", request.getUsername());
             log.info("account with username '{}' not found", request.getUsername());
-            responseObserver.onError(new UnRetriableException("account with given username not found"));
-            return;
+            var e = new UnRetriableException("account with given username not found");
+            responseObserver.onError(Status.NOT_FOUND.withCause(e).asRuntimeException());
         }
         var pass = passwordEncoder.matches(request.getPassword(), optionalAccount.get().getPassword());
         if (!pass) {
             log.debug("Incorrect password for {}", optionalAccount.get().getUsername());
             log.info("Incorrect password for {}", optionalAccount.get().getUsername());
-            responseObserver.onError(new UnRetriableException("Incorrect password!"));
-            return;
+            var e = new UnRetriableException("Incorrect password!");
+            responseObserver.onError(Status.NOT_FOUND.INTERNAL.withCause(e).asRuntimeException());
         }
 
         try {
@@ -200,7 +201,7 @@ public class UserService extends userServiceGrpc.userServiceImplBase {
         } catch (ModelConversionException e) {
             log.debug("Conversion error: {}", e);
             log.info("Conversion error: {}", e);
-            responseObserver.onError(e);
+            responseObserver.onError(Status.INTERNAL.withCause(e).asRuntimeException());
         }
 
         responseObserver.onCompleted();
