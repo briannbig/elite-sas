@@ -28,7 +28,13 @@ public class ApplicationService extends applicationServiceGrpc.applicationServic
     public void addListing(ApplicationServiceProto.Listing request, StreamObserver<ApplicationServiceProto.Listing> responseObserver) {
         Optional<Listing> optionalListing;
         try {
-             optionalListing = applicationService.addListing(listingFromApi(request));
+             optionalListing = applicationService.addListing(Listing.builder()
+                             .course(courseFromApi(request.getCourse()))
+                             .attachmentPeriod(attachmentPeriodFromApi(request.getAttachmentPeriod()))
+                             .tenant(tenantFromApi(request.getTenant()))
+                             .deadline(timeStampFromApi(request.getDeadline()))
+                             .description(request.getDescription())
+                     .build());
              if (optionalListing.isPresent()) {
                  responseObserver.onNext(listingToApi(optionalListing.get()));
              }
