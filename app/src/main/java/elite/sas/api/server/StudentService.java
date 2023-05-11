@@ -45,6 +45,7 @@ public class StudentService extends studentServiceGrpc.studentServiceImplBase {
         CreateStudentParams params = CreateStudentParams.builder()
                 .tenantId(UUID.fromString(request.getTenantId()))
                 .email(request.getEmail())
+                .userName(request.getUserName())
                 .admissionNumber(request.getAdmissionNumber())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
