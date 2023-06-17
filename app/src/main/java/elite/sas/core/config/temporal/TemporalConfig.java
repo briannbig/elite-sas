@@ -4,11 +4,8 @@ import elite.sas.core.activities.LogBookActivityImpl;
 import elite.sas.core.activities.NotificationsActivityImpl;
 import elite.sas.core.activities.RegistrationActivityImpl;
 import elite.sas.core.repository.*;
-import elite.sas.core.workflows.ProcessDailyLogBookWorkflowImpl;
-import elite.sas.core.workflows.RegisterStudentWorkflowImpl;
-import elite.sas.core.workflows.TenantRegistrationWorkflowImpl;
-import elite.sas.core.workflows.UserAccountRegistrationWorkflowImpl;
-import elite.sas.workflows.ProcessWeeklyLogsWorkflowImpl;
+import elite.sas.core.workflows.*;
+
 import io.temporal.client.WorkflowClient;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.serviceclient.WorkflowServiceStubsOptions;

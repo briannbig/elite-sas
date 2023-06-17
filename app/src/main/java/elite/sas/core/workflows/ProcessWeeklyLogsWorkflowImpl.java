@@ -1,4 +1,4 @@
-package elite.sas.workflows;
+package elite.sas.core.workflows;
 
 import elite.sas.core.activities.definition.LogBookActivity;
 import elite.sas.core.entities.Attachment;
