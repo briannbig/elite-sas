@@ -9,7 +9,6 @@ import elite.sas.core.api.response.TokenRefreshResponse;
 import elite.sas.core.entities.AppUser;
 import elite.sas.core.service.AppUserService;
 import elite.sas.core.util.TemporalUtil;
-import elite.sas.core.workflows.definition.UserAccountRegistrationWorkflow;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +33,6 @@ public class AuthController {
     @Autowired
     private AppUserService userService;
 
-    private final UserAccountRegistrationWorkflow userAccountRegistrationWorkflow = TemporalUtil.userAccountRegistrationWorkflow();
-
 
     @PostMapping("/sign-in")
     public ResponseEntity<JWTResponse> login(@RequestBody LoginParams request) {
@@ -50,9 +47,9 @@ public class AuthController {
     public ResponseEntity<AppUser> Register(@RequestBody CreateUserParams request) {
 
         //return userService.signUp(request);
-        var appUser = userAccountRegistrationWorkflow.handle(request);
+        var appUser = userService.registerNewUserAccount(request);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(appUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(appUser.get().getAppUser());
 
     }
 
@@ -60,8 +57,8 @@ public class AuthController {
 
     public ResponseEntity<TokenRefreshResponse> RefreshToken(@RequestBody TokenRefreshParams request) {
 
-        log.info(" RefreshToken to generate new access token:-->{}",request);
-        return ResponseEntity.status(HttpStatus.CREATED).body( userService.generateRefreshToken(request));
+        log.info(" RefreshToken to generate new access token:-->{}", request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.generateRefreshToken(request));
 
         //return userService.genarateRefreshToken(tokenRefreshRequest);
 
