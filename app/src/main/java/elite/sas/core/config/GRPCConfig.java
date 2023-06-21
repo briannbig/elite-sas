@@ -1,4 +1,4 @@
-package elite.sas.core.config.grpc;
+package elite.sas.core.config;
 
 import elite.sas.api.server.*;
 import elite.sas.core.service.AppUserService;

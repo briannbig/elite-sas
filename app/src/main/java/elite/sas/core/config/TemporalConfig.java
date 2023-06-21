@@ -1,4 +1,4 @@
-package elite.sas.core.config.temporal;
+package elite.sas.core.config;
 
 import elite.sas.core.activities.LogBookActivityImpl;
 import elite.sas.core.activities.NotificationsActivityImpl;
