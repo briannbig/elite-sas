@@ -1,5 +1,6 @@
 package elite.sas.api.exceptions;
 
+
 public class UnRetriableException extends Exception {
 
 

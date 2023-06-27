@@ -11,9 +11,11 @@ import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.serviceclient.WorkflowServiceStubsOptions;
 import io.temporal.worker.Worker;
 import io.temporal.worker.WorkerFactory;
+import io.temporal.workflow.Saga;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,9 +47,19 @@ public class TemporalConfig {
     private final PasswordEncoder passwordEncoder;
 
 
+    @Value("${temporal-properties.server.url}")
+    private String serverUrl = "localhost";
+    @Value("${temporal-properties.server.port}")
+    private String serverPort = "7233";
+
     @Bean
     WorkflowClient workflowClient() {
-        WorkflowServiceStubs workflowServiceStubs = WorkflowServiceStubs.newLocalServiceStubs();
+
+        WorkflowServiceStubsOptions options = WorkflowServiceStubsOptions.newBuilder()
+                .setTarget(serverUrl+':'+serverPort)
+                .build();
+
+        WorkflowServiceStubs workflowServiceStubs = WorkflowServiceStubs.newServiceStubs(options);
         return WorkflowClient.newInstance(workflowServiceStubs);
     }
 
