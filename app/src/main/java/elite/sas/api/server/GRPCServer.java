@@ -5,6 +5,7 @@ import io.grpc.ServerBuilder;
 import io.grpc.ServerServiceDefinition;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GRPCServer {
 
-    private static final int port = 9001;
+    @Value("${elite-sas.grpc.server.port}")
+    private String port = "9001";
+
 
     private final UserService userService;
     private final ApplicationService applicationService;
@@ -25,7 +28,7 @@ public class GRPCServer {
 
     public void startServer() {
         log.info("starting grpc server...");
-        Server server = ServerBuilder.forPort(port)
+        Server server = ServerBuilder.forPort(Integer.parseInt(port))
                 .addService(userService)
                 .addService(applicationService)
                 .addService(tenantService)
