@@ -8,4 +8,8 @@ import java.util.UUID;
 
 public record TenantDTO(UUID tenantId, String name, String location, String telephone, String email,
                         TenantType tenantType) {
+
+    public static TenantDTO fromModel(Tenant tenant) {
+        return new TenantDTO(tenant.getId(), tenant.getName(), tenant.getLocation(), tenant.getTelephone(), tenant.getEmail(), tenant.getTenantType());
+    }
 }

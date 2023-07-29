@@ -34,9 +34,8 @@ public class InternalAdminController {
         if (optionalAppUser.isEmpty()) {
             return null;
         }
-        var tenant = optionalAppUser.get().getTenant();
 
-        return new TenantDTO(tenant.getId(), tenant.getName(), tenant.getLocation(), tenant.getTelephone(), tenant.getEmail(), tenant.getTenantType());
+        return TenantDTO.fromModel(optionalAppUser.get().getTenant());
 
     }
 
@@ -44,7 +43,7 @@ public class InternalAdminController {
     @GetMapping("/tenants")
     public List<TenantDTO> getAllTenants() {
         return tenantService.getAllTenants().stream().map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).collect(Collectors.toList());
     }
 
@@ -52,49 +51,49 @@ public class InternalAdminController {
     @GetMapping("/{id}")
     public TenantDTO tenantById(@PathVariable("id") String id) {
         return tenantService.findTenantById(id).map(tenant -> {
-            return new TenantDTO(tenant.getId(), tenant.getName(), tenant.getLocation(), tenant.getTelephone(), tenant.getEmail(), tenant.getTenantType());
+            return TenantDTO.fromModel(tenant);
         }).orElse(null);
     }
 
     @GetMapping("/schools")
     public List<TenantDTO> schools() {
         return tenantService.getAllSchools().stream().map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/schools/{id}")
     public TenantDTO getSchoolById(@PathVariable("id") String id) {
         return tenantService.findTenantById(id).map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return  TenantDTO.fromModel(t);
         }).orElse(null);
     }
 
     @GetMapping("/companies")
     public List<TenantDTO> companies() {
         return tenantService.getAllCompanies().stream().map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/companies/{id}")
     public TenantDTO getCompanyById(@PathVariable("id") String id) {
         return tenantService.findTenantById(id).map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).orElse(null);
     }
 
     @GetMapping("/{id}/supervisors")
     public List<UserDTO> tenantSupervisors(@PathVariable("id") String id) {
         return tenantService.getTenantSupervisors(id).stream().map(u-> {
-            return new UserDTO(u.getId(), u.getTenant().getId(),u.getUserName(), u.getFirstName(), u.getLastName(), u.getEmail(), u.getUserType(), u.getRoles());
+            return UserDTO.fromModel(u);
         }).collect(Collectors.toList());
     }
 
     @PostMapping("/")
     public TenantDTO registerTenant(@RequestBody CreateTenantParams createTenantParams) {
         return tenantService.createTenant(createTenantParams).map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).orElse(null);
     }
 

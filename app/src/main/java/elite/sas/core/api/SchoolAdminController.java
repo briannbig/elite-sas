@@ -1,11 +1,9 @@
 package elite.sas.core.api;
 
-import elite.sas.core.api.dto.DTOConverter;
 import elite.sas.core.api.dto.TenantDTO;
 import elite.sas.core.api.dto.UserDTO;
 import elite.sas.core.entities.Account;
 import elite.sas.core.entities.AppUser;
-import elite.sas.core.entities.Tenant;
 import elite.sas.core.service.AppUserService;
 import elite.sas.core.service.TenantService;
 import lombok.RequiredArgsConstructor;
@@ -35,21 +33,21 @@ public class SchoolAdminController {
     @GetMapping("/")
     public TenantDTO thisTenant(@AuthenticationPrincipal Account account) {
         return appUserService.getUserByUserName(account.getUsername()).map(AppUser::getTenant).map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).get();
     }
 
     @GetMapping("/{id}")
     public TenantDTO tenantById(@PathVariable("id") String id) {
         return tenantService.findTenantById(id).map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).orElse(null);
     }
 
     @GetMapping("/companies")
     public List<TenantDTO> companies() {
         return tenantService.getAllCompanies().stream().map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).collect(Collectors.toList());
     }
 
@@ -63,7 +61,7 @@ public class SchoolAdminController {
             return null;
         }
         return tenantService.getTenantSupervisors(optionalTenant.get().getId().toString()).stream().map(u -> {
-            return DTOConverter.getUserDTO(u);
+            return UserDTO.fromModel(u);
         }).collect(Collectors.toList());
     }
 

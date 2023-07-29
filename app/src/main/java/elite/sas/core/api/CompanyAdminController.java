@@ -35,7 +35,7 @@ public class CompanyAdminController {
     @GetMapping("/")
     public TenantDTO thisTenant(@AuthenticationPrincipal Account account) {
         return appUserService.getUserByUserName(account.getUsername()).map(AppUser::getTenant).map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).get();
 
     }
@@ -43,7 +43,7 @@ public class CompanyAdminController {
     @GetMapping("/schools")
     public List<TenantDTO> schools() {
         return tenantService.getAllSchools().stream().map(t -> {
-            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+            return TenantDTO.fromModel(t);
         }).collect(Collectors.toList());
     }
 
@@ -58,7 +58,7 @@ public class CompanyAdminController {
         }
 
         return tenantService.getTenantSupervisors(optionalTenant.get().getId().toString()).stream().map(u -> {
-            return DTOConverter.getUserDTO(u);
+            return UserDTO.fromModel(u);
         }).collect(Collectors.toList());
     }
 
@@ -73,13 +73,11 @@ public class CompanyAdminController {
 
         if (active) {
             return optionalTenant.map(tenant -> attachmentService.getActiveStudentsAtCompany(String.valueOf(tenant.getId())).stream().map(s -> {
-                var c = s.getCourse();
-                return new StudentDTO(s.getId().toString(), DTOConverter.getUserDTO(s.getAppUser()), s.getAdmissionNumber(), new CourseDTO(c.getId().toString(), c.getName(), c.getCourseLevel().name()));
+                return StudentDTO.fromModel(s);
             }).collect(Collectors.toList())).orElse(null);
         } else {
             return optionalTenant.map(tenant -> attachmentService.getAllStudentsAtCompany(String.valueOf(tenant.getId())).stream().map(s -> {
-                var c = s.getCourse();
-                return new StudentDTO(s.getId().toString(), DTOConverter.getUserDTO(s.getAppUser()), s.getAdmissionNumber(), new CourseDTO(c.getId().toString(), c.getName(), c.getCourseLevel().name()));
+                return StudentDTO.fromModel(s);
             }).collect(Collectors.toList())).orElse(null);
         }
     }
@@ -94,22 +92,13 @@ public class CompanyAdminController {
 
         if (active) {
             return optionalTenant.map(tenant -> attachmentService.getActiveAttachmentsAtCompany(String.valueOf(tenant.getId())).stream().map(a -> {
-                var s = a.getStudent();
-                var attachmentWeeks = a.getAttachmentWeeks().stream().map(aw -> {
-                    return new AttachmentWeekDTO(aw.getId().toString(), aw.getAttachment().getId().toString(), aw.getWeekNumber(), aw.getLogs().stream().map(l -> new LogDTO(l.getId().toString(), l.getAttachmentWeek().getId().toString(), l.getWorkDone(), l.getIndustrySupervisorComment(), l.getSchoolSupervisorComment())).collect(Collectors.toList()), aw.getWeekSummary(), aw.getStudentComment(), aw.getIndustrySupervisorComment(), aw.getSchoolSupervisorComment(), aw.isActive());
-                }).collect(Collectors.toList());
-                var courseDTO = new CourseDTO(s.getCourse().getId().toString(), s.getCourse().getName(), s.getCourse().getCourseLevel().name());
-                return new AttachmentDTO(a.getId().toString(), new StudentDTO(s.getId().toString(), DTOConverter.getUserDTO(s.getAppUser()), s.getAdmissionNumber(), courseDTO), a.getTenant().getId().toString(), a.getAttachmentPeriod(), a.getStartDate(), a.getEndDate(), DTOConverter.getUserDTO(a.getIndustrySupervisor()), DTOConverter.getUserDTO(a.getSchoolSupervisor()), attachmentWeeks);
+                return AttachmentDTO.fromModel(a);
             }).collect(Collectors.toList())).orElse(null);
 
         } else {
             return optionalTenant.map(tenant -> attachmentService.getAllAttachmentsAtCompany(String.valueOf(tenant.getId())).stream().map(a -> {
-                var s = a.getStudent();
-                var attachmentWeeks = a.getAttachmentWeeks().stream().map(aw -> {
-                    return new AttachmentWeekDTO(aw.getId().toString(), aw.getAttachment().getId().toString(), aw.getWeekNumber(), aw.getLogs().stream().map(l -> new LogDTO(l.getId().toString(), l.getAttachmentWeek().getId().toString(), l.getWorkDone(), l.getIndustrySupervisorComment(), l.getSchoolSupervisorComment())).collect(Collectors.toList()), aw.getWeekSummary(), aw.getStudentComment(), aw.getIndustrySupervisorComment(), aw.getSchoolSupervisorComment(), aw.isActive());
-                }).collect(Collectors.toList());
-                var courseDTO = new CourseDTO(s.getCourse().getId().toString(), s.getCourse().getName(), s.getCourse().getCourseLevel().name());
-                return new AttachmentDTO(a.getId().toString(), new StudentDTO(s.getId().toString(), DTOConverter.getUserDTO(s.getAppUser()), s.getAdmissionNumber(), courseDTO), a.getTenant().getId().toString(), a.getAttachmentPeriod(), a.getStartDate(), a.getEndDate(), DTOConverter.getUserDTO(a.getIndustrySupervisor()), DTOConverter.getUserDTO(a.getSchoolSupervisor()), attachmentWeeks);
+
+                return AttachmentDTO.fromModel(a);
             }).collect(Collectors.toList())).orElse(null);
         }
     }
