@@ -1,5 +1,8 @@
 package elite.sas.core.api;
 
+import elite.sas.core.api.dto.DTOConverter;
+import elite.sas.core.api.dto.TenantDTO;
+import elite.sas.core.api.dto.UserDTO;
 import elite.sas.core.entities.Account;
 import elite.sas.core.entities.AppUser;
 import elite.sas.core.entities.Tenant;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/admin/school")
@@ -28,35 +32,40 @@ public class SchoolAdminController {
     private final AppUserService appUserService;
 
 
-
     @GetMapping("/")
-    public Tenant thisTenant(@AuthenticationPrincipal Account account){
-        var optionalAppUser = appUserService.getUserByUserName(account.getUsername());
-
-        return optionalAppUser.map(AppUser::getTenant).orElse(null);
-
+    public TenantDTO thisTenant(@AuthenticationPrincipal Account account) {
+        return appUserService.getUserByUserName(account.getUsername()).map(AppUser::getTenant).map(t -> {
+            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+        }).get();
     }
 
     @GetMapping("/{id}")
-    public Tenant tenantById(@PathVariable("id") String id) {
-        return tenantService.findTenantById(id).orElse(null);
+    public TenantDTO tenantById(@PathVariable("id") String id) {
+        return tenantService.findTenantById(id).map(t -> {
+            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+        }).orElse(null);
     }
 
     @GetMapping("/companies")
-    public List<Tenant> companies() {
-        return tenantService.getAllCompanies();
+    public List<TenantDTO> companies() {
+        return tenantService.getAllCompanies().stream().map(t -> {
+            return new TenantDTO(t.getId(), t.getName(), t.getLocation(), t.getTelephone(), t.getEmail(), t.getTenantType());
+        }).collect(Collectors.toList());
     }
 
     @GetMapping("/supervisors")
-    public List<AppUser> tenantSupervisors(@AuthenticationPrincipal Account account) {
+    public List<UserDTO> tenantSupervisors(@AuthenticationPrincipal Account account) {
         var optionalAppUser = appUserService.getUserByUserName(account.getUsername());
 
         var optionalTenant = optionalAppUser.map(AppUser::getTenant);
 
-        return optionalTenant.map(tenant -> tenantService.getTenantSupervisors(tenant.getId().toString())).orElse(null);
+        if (optionalTenant.isEmpty()) {
+            return null;
+        }
+        return tenantService.getTenantSupervisors(optionalTenant.get().getId().toString()).stream().map(u -> {
+            return DTOConverter.getUserDTO(u);
+        }).collect(Collectors.toList());
     }
-
-
 
 
 }
