@@ -1,5 +1,5 @@
 # elite-sas
-A student attachment internship backend.
+A student internship backend.
 
 ## Setting up locally
  - ### docker compose:
