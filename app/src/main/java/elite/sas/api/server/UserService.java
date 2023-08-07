@@ -9,7 +9,6 @@ import elite.sas.api.grpc.userServiceGrpc;
 import elite.sas.core.api.params.CreateUserParams;
 import elite.sas.core.entities.Account;
 import elite.sas.core.entities.AppUser;
-import elite.sas.core.service.AppUserDetailsService;
 import elite.sas.core.service.AppUserService;
 import elite.sas.core.util.TemporalUtil;
 import elite.sas.core.workflows.definition.UserAccountRegistrationWorkflow;
