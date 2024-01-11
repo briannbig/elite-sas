@@ -55,7 +55,7 @@ public class AttachmentService {
 
     public Optional<Attachment> getAttachmentByStudentAdmissionNumber(String admissionNumber) {
         try {
-            return attachmentRepository.findByStudentAdmissionNumber(UUID.fromString(admissionNumber));
+            return attachmentRepository.findByStudentAdmissionNumber(admissionNumber);
         } catch (Exception e) {
             log.debug("{}", e);
             return Optional.empty();

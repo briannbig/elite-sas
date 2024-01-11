@@ -8,7 +8,6 @@ import elite.sas.core.repository.StudentRepository;
 import elite.sas.core.util.TemporalUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +55,7 @@ public class StudentService {
 
     public Optional<Student> getStudentByAdmissionNumber(String admNumber) {
         try {
-            return studentRepository.findByAdmissionNumber(UUID.fromString(admNumber));
+            return studentRepository.findByAdmissionNumber(admNumber);
         } catch (Exception e) {
             log.debug("{}", e);
             return Optional.empty();
@@ -84,7 +83,7 @@ public class StudentService {
     /**
      * updates student. Only updates course
      *
-     * @param student
+     * @param studentId
      */
     public Optional<Student> updateStudent(String studentId, String courseId) {
         Optional<Student> optionalStudent = studentRepository.findById(UUID.fromString(studentId));

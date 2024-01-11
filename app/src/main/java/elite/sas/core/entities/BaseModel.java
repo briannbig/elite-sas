@@ -3,6 +3,8 @@ package elite.sas.core.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.type.descriptor.jdbc.UUIDJdbcType;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -19,6 +21,7 @@ public abstract class BaseModel {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
+    @JdbcType(UUIDJdbcType.class)
     private UUID Id;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

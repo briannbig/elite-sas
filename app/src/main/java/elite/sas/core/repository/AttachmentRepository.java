@@ -14,7 +14,7 @@ public interface AttachmentRepository extends JpaRepository<Attachment, UUID> {
 
     List<Attachment> findByTenantId(UUID tenantId);
 
-    Optional<Attachment> findByStudentAdmissionNumber(UUID studentAdmissionNumber);
+    Optional<Attachment> findByStudentAdmissionNumber(String studentAdmissionNumber);
 
     Optional<Attachment> findByStudentCourseId(UUID courseId);
 

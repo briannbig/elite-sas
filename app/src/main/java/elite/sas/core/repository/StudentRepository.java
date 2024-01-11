@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface StudentRepository extends JpaRepository<Student, UUID> {
 
-    Optional<Student> findByAdmissionNumber(UUID admissionNumber);
+    Optional<Student> findByAdmissionNumber(String admissionNumber);
 
     Optional<Student> findByAppUserId(UUID appUserId);
 
