@@ -9,10 +9,10 @@ public record AttachmentWeekDTO(String id, String attachmentId, int weekNumber, 
                                 String studentComment, String industrySupervisorComment, String schoolSupervisorComment,
                                 boolean isActive) {
 
-    public static AttachmentWeekDTO fromModel(AttachmentWeek attachmentWeek) {
+    public static AttachmentWeekDTO from(AttachmentWeek attachmentWeek) {
 
         return new AttachmentWeekDTO(attachmentWeek.getId().toString(), attachmentWeek.getAttachment().getId().toString(), attachmentWeek.getWeekNumber(),
-                attachmentWeek.getLogs().stream().map(log -> LogDTO.fromModel(log)).collect(Collectors.toList()), attachmentWeek.getWeekSummary(),
+                attachmentWeek.getLogs().stream().map(log -> LogDTO.from(log)).collect(Collectors.toList()), attachmentWeek.getWeekSummary(),
                 attachmentWeek.getStudentComment(), attachmentWeek.getIndustrySupervisorComment(), attachmentWeek.getSchoolSupervisorComment(), attachmentWeek.isActive());
     }
 }

@@ -11,8 +11,8 @@ public record AttachmentDTO(String id, StudentDTO student, TenantDTO company, At
                             LocalDateTime startDate, LocalDateTime endDate, UserDTO industrySupervisor,
                             UserDTO schoolSupervisor, List<AttachmentWeekDTO> attachmentWeeks) {
     public static AttachmentDTO fromModel(Attachment a) {
-        return new AttachmentDTO(a.getId().toString(), StudentDTO.fromModel(a.getStudent()), TenantDTO.fromModel(a.getTenant()),
-                a.getAttachmentPeriod(), a.getStartDate(), a.getEndDate(), UserDTO.fromModel(a.getIndustrySupervisor()), UserDTO.fromModel(a.getSchoolSupervisor()),
-                a.getAttachmentWeeks().stream().map(aw -> AttachmentWeekDTO.fromModel(aw)).collect(Collectors.toList()));
+        return new AttachmentDTO(a.getId().toString(), StudentDTO.fromModel(a.getStudent()), TenantDTO.from(a.getTenant()),
+                a.getAttachmentPeriod(), a.getStartDate(), a.getEndDate(), UserDTO.from(a.getIndustrySupervisor()), UserDTO.from(a.getSchoolSupervisor()),
+                a.getAttachmentWeeks().stream().map(aw -> AttachmentWeekDTO.from(aw)).collect(Collectors.toList()));
     }
 }

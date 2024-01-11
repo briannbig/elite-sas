@@ -7,10 +7,10 @@ import elite.sas.core.service.TenantService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @Tag(name = "Tenures controller")
@@ -22,52 +22,41 @@ public class TenantController {
     private final TenantService tenantService;
 
     @GetMapping("/{id}")
-    public TenantDTO tenantById(@PathVariable("id") String id) {
-        return tenantService.findTenantById(id).map(t -> {
-            return TenantDTO.fromModel(t);
-        }).orElse(null);
+    public ResponseEntity<TenantDTO> tenantById(@PathVariable("id") String id) {
+        return tenantService.findTenantById(id).map(value -> ResponseEntity.ok(TenantDTO.from(value))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/schools")
-    public List<TenantDTO> schools() {
-        return tenantService.getAllSchools().stream().map(t -> {
-            return TenantDTO.fromModel(t);
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<TenantDTO>> schools() {
+        var schools = tenantService.getAllSchools().stream().map(TenantDTO::from).toList();
+        return schools.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(schools);
     }
 
     @GetMapping("/schools/{id}")
-    public TenantDTO getSchoolById(@PathVariable("id") String id) {
-        return tenantService.findTenantById(id).map(t -> {
-            return TenantDTO.fromModel(t);
-        }).orElse(null);
+    public ResponseEntity<TenantDTO> getSchoolById(@PathVariable("id") String id) {
+        return tenantService.findTenantById(id).map(v -> ResponseEntity.ok(TenantDTO.from(v))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/companies")
-    public List<TenantDTO> companies() {
-        return tenantService.getAllCompanies().stream().map(t -> {
-            return TenantDTO.fromModel(t);
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<TenantDTO>> companies() {
+        var companies = tenantService.getAllCompanies().stream().map(TenantDTO::from).toList();
+        return companies.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(companies);
     }
 
     @GetMapping("/companies/{id}")
-    public TenantDTO getCompanyById(@PathVariable("id") String id) {
-        return tenantService.findTenantById(id).map(t -> {
-            return TenantDTO.fromModel(t);
-        }).orElse(null);
+    public ResponseEntity<TenantDTO> getCompanyById(@PathVariable("id") String id) {
+        return tenantService.findTenantById(id).map(v -> ResponseEntity.ok(TenantDTO.from(v))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{id}/supervisors")
-    public List<UserDTO> tenantSupervisors(@PathVariable("id") String id) {
-        return tenantService.getTenantSupervisors(id).stream().map(u -> {
-            return UserDTO.fromModel(u);
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<UserDTO>> tenantSupervisors(@PathVariable("id") String id) {
+        var supervisors = tenantService.getTenantSupervisors(id).stream().map(UserDTO::from).toList();
+        return supervisors.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(supervisors);
     }
 
     @PostMapping("/")
-    public TenantDTO registerTenant(@RequestBody CreateTenantParams createTenantParams) {
-        return tenantService.createTenant(createTenantParams).map(t -> {
-            return TenantDTO.fromModel(t);
-        }).get();
+    public ResponseEntity<TenantDTO> registerTenant(@RequestBody CreateTenantParams createTenantParams) {
+        return tenantService.createTenant(createTenantParams).map(v -> ResponseEntity.ok(TenantDTO.from(v))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 

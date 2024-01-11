@@ -9,6 +9,9 @@ import elite.sas.core.service.TenantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,39 +34,34 @@ public class SchoolAdminController {
 
 
     @GetMapping("/")
-    public TenantDTO thisTenant(@AuthenticationPrincipal Account account) {
-        return appUserService.getUserByUserName(account.getUsername()).map(AppUser::getTenant).map(t -> {
-            return TenantDTO.fromModel(t);
-        }).get();
+    public ResponseEntity<TenantDTO> thisTenant(@AuthenticationPrincipal Account account) {
+        return appUserService.getUserByUserName(account.getUsername()).map(AppUser::getTenant).map(TenantDTO::from)
+                .map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
     }
 
     @GetMapping("/{id}")
-    public TenantDTO tenantById(@PathVariable("id") String id) {
-        return tenantService.findTenantById(id).map(t -> {
-            return TenantDTO.fromModel(t);
-        }).orElse(null);
+    public ResponseEntity<TenantDTO> tenantById(@PathVariable("id") String id) {
+        return tenantService.findTenantById(id).map(TenantDTO::from)
+                .map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/companies")
-    public List<TenantDTO> companies() {
-        return tenantService.getAllCompanies().stream().map(t -> {
-            return TenantDTO.fromModel(t);
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<TenantDTO>> companies() {
+        var companies = tenantService.getAllCompanies().stream().map(TenantDTO::from).toList();
+        return companies.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(companies);
     }
 
     @GetMapping("/supervisors")
-    public List<UserDTO> tenantSupervisors(@AuthenticationPrincipal Account account) {
+    public ResponseEntity<List<UserDTO>> tenantSupervisors(@AuthenticationPrincipal Account account) {
         var optionalAppUser = appUserService.getUserByUserName(account.getUsername());
-
         var optionalTenant = optionalAppUser.map(AppUser::getTenant);
 
         if (optionalTenant.isEmpty()) {
-            return null;
+            return ResponseEntity.of(ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED)).build();
         }
-        return tenantService.getTenantSupervisors(optionalTenant.get().getId().toString()).stream().map(u -> {
-            return UserDTO.fromModel(u);
-        }).collect(Collectors.toList());
-    }
+        var supervisors = tenantService.getTenantSupervisors(optionalTenant.get().getId().toString()).stream().map(UserDTO::from).toList();
 
+        return supervisors.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(supervisors);
+    }
 
 }

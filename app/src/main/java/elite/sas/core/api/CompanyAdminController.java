@@ -1,13 +1,20 @@
 package elite.sas.core.api;
 
-import elite.sas.core.api.dto.*;
-import elite.sas.core.entities.*;
+import elite.sas.core.api.dto.AttachmentDTO;
+import elite.sas.core.api.dto.StudentDTO;
+import elite.sas.core.api.dto.TenantDTO;
+import elite.sas.core.api.dto.UserDTO;
+import elite.sas.core.entities.Account;
+import elite.sas.core.entities.AppUser;
 import elite.sas.core.service.AppUserService;
 import elite.sas.core.service.AttachmentService;
 import elite.sas.core.service.TenantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,74 +40,67 @@ public class CompanyAdminController {
 
 
     @GetMapping("/")
-    public TenantDTO thisTenant(@AuthenticationPrincipal Account account) {
-        return appUserService.getUserByUserName(account.getUsername()).map(AppUser::getTenant).map(t -> {
-            return TenantDTO.fromModel(t);
-        }).get();
-
+    public ResponseEntity<TenantDTO> thisTenant(@AuthenticationPrincipal Account account) {
+        return appUserService.getUserByUserName(account.getUsername()).map(AppUser::getTenant).map(TenantDTO::from).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/schools")
-    public List<TenantDTO> schools() {
-        return tenantService.getAllSchools().stream().map(t -> {
-            return TenantDTO.fromModel(t);
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<TenantDTO>> schools() {
+        var schools = tenantService.getAllSchools().stream().map(TenantDTO::from).toList();
+        return schools.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(schools);
     }
 
     @GetMapping("/supervisors")
-    public List<UserDTO> tenantSupervisors(@AuthenticationPrincipal Account account) {
+    public ResponseEntity<List<UserDTO>> tenantSupervisors(@AuthenticationPrincipal Account account) {
 
         var optionalAppUser = appUserService.getUserByUserName(account.getUsername());
 
         var optionalTenant = optionalAppUser.map(AppUser::getTenant);
         if (optionalTenant.isEmpty()) {
-            return null;
+            return ResponseEntity.of(ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED)).build();
         }
 
-        return tenantService.getTenantSupervisors(optionalTenant.get().getId().toString()).stream().map(u -> {
-            return UserDTO.fromModel(u);
-        }).collect(Collectors.toList());
+        var users = tenantService.getTenantSupervisors(optionalTenant.get().getId().toString()).stream().map(UserDTO::from).toList();
+
+        return users.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(users);
     }
 
 
     @GetMapping("/interns")
-    public List<StudentDTO> getInterns(@AuthenticationPrincipal Account account, @RequestParam(required = false) boolean active
+    public ResponseEntity<List<StudentDTO>> getInterns(@AuthenticationPrincipal Account account, @RequestParam(required = false) boolean active
 
     ) {
         var optionalAppUser = appUserService.getUserByUserName(account.getUsername());
         var optionalTenant = optionalAppUser.map(AppUser::getTenant);
 
-
+        List<StudentDTO> students;
         if (active) {
-            return optionalTenant.map(tenant -> attachmentService.getActiveStudentsAtCompany(String.valueOf(tenant.getId())).stream().map(s -> {
-                return StudentDTO.fromModel(s);
-            }).collect(Collectors.toList())).orElse(null);
+            students = optionalTenant.map(tenant -> attachmentService.getActiveStudentsAtCompany(String.valueOf(tenant.getId())).stream().map(StudentDTO::fromModel).collect(Collectors.toList())).orElse(null);
         } else {
-            return optionalTenant.map(tenant -> attachmentService.getAllStudentsAtCompany(String.valueOf(tenant.getId())).stream().map(s -> {
-                return StudentDTO.fromModel(s);
-            }).collect(Collectors.toList())).orElse(null);
+            students = optionalTenant.map(tenant -> attachmentService.getAllStudentsAtCompany(String.valueOf(tenant.getId())).stream().map(StudentDTO::fromModel).collect(Collectors.toList())).orElse(null);
         }
+
+        assert students != null;
+
+        return students.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(students);
+
     }
 
     @GetMapping("/attachments")
-    public List<AttachmentDTO> getAttachments(@AuthenticationPrincipal Account account, @RequestParam(required = false) boolean active
-
-    ) {
+    public ResponseEntity<List<AttachmentDTO>> getAttachments(@AuthenticationPrincipal Account account, @RequestParam(required = false) boolean active) {
         var optionalAppUser = appUserService.getUserByUserName(account.getUsername());
         var optionalTenant = optionalAppUser.map(AppUser::getTenant);
 
+        List<AttachmentDTO> internships;
 
         if (active) {
-            return optionalTenant.map(tenant -> attachmentService.getActiveAttachmentsAtCompany(String.valueOf(tenant.getId())).stream().map(a -> {
-                return AttachmentDTO.fromModel(a);
-            }).collect(Collectors.toList())).orElse(null);
+            internships = optionalTenant.map(tenant -> attachmentService.getActiveAttachmentsAtCompany(String.valueOf(tenant.getId())).stream().map(AttachmentDTO::fromModel).toList()).orElse(null);
 
         } else {
-            return optionalTenant.map(tenant -> attachmentService.getAllAttachmentsAtCompany(String.valueOf(tenant.getId())).stream().map(a -> {
-
-                return AttachmentDTO.fromModel(a);
-            }).collect(Collectors.toList())).orElse(null);
+            internships = optionalTenant.map(tenant -> attachmentService.getAllAttachmentsAtCompany(String.valueOf(tenant.getId())).stream().map(AttachmentDTO::fromModel).toList()).orElse(null);
         }
+        assert internships != null;
+        return internships.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(internships);
     }
 
 

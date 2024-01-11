@@ -4,18 +4,15 @@ import elite.sas.core.api.dto.TenantDTO;
 import elite.sas.core.api.dto.UserDTO;
 import elite.sas.core.api.params.CreateTenantParams;
 import elite.sas.core.entities.Account;
-import elite.sas.core.entities.AppUser;
-import elite.sas.core.entities.Tenant;
 import elite.sas.core.service.AppUserService;
 import elite.sas.core.service.TenantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/admin/internal")
@@ -29,72 +26,58 @@ public class InternalAdminController {
 
 
     @GetMapping("/")
-    public TenantDTO thisTenant(@AuthenticationPrincipal Account account) {
+    public ResponseEntity<TenantDTO> thisTenant(@AuthenticationPrincipal Account account) {
         var optionalAppUser = appUserService.getUserByUserName(account.getUsername());
-        if (optionalAppUser.isEmpty()) {
-            return null;
-        }
-
-        return TenantDTO.fromModel(optionalAppUser.get().getTenant());
-
+        return optionalAppUser.map(appUser -> ResponseEntity.ok(TenantDTO.from(appUser.getTenant()))).orElse(ResponseEntity.notFound().build());
     }
 
 
     @GetMapping("/tenants")
-    public List<TenantDTO> getAllTenants() {
-        return tenantService.getAllTenants().stream().map(t -> {
-            return TenantDTO.fromModel(t);
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<TenantDTO>> getAllTenants() {
+        var tenants = tenantService.getAllTenants().stream().map(TenantDTO::from).toList();
+        return tenants.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(tenants);
     }
 
 
     @GetMapping("/{id}")
-    public TenantDTO tenantById(@PathVariable("id") String id) {
-        return tenantService.findTenantById(id).map(tenant -> {
-            return TenantDTO.fromModel(tenant);
-        }).orElse(null);
+    public ResponseEntity<TenantDTO> tenantById(@PathVariable("id") String id) {
+        return tenantService.findTenantById(id).map(TenantDTO::from)
+                .map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/schools")
-    public List<TenantDTO> schools() {
-        return tenantService.getAllSchools().stream().map(t -> {
-            return TenantDTO.fromModel(t);
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<TenantDTO>> schools() {
+        var schools = tenantService.getAllSchools().stream().map(TenantDTO::from).toList();
+        return schools.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(schools);
     }
 
     @GetMapping("/schools/{id}")
-    public TenantDTO getSchoolById(@PathVariable("id") String id) {
-        return tenantService.findTenantById(id).map(t -> {
-            return  TenantDTO.fromModel(t);
-        }).orElse(null);
+    public ResponseEntity<TenantDTO> getSchoolById(@PathVariable("id") String id) {
+        return tenantService.findTenantById(id).map(TenantDTO::from).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/companies")
-    public List<TenantDTO> companies() {
-        return tenantService.getAllCompanies().stream().map(t -> {
-            return TenantDTO.fromModel(t);
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<TenantDTO>> companies() {
+        var companies = tenantService.getAllCompanies().stream().map(TenantDTO::from).toList();
+        return companies.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(companies);
     }
 
     @GetMapping("/companies/{id}")
-    public TenantDTO getCompanyById(@PathVariable("id") String id) {
-        return tenantService.findTenantById(id).map(t -> {
-            return TenantDTO.fromModel(t);
-        }).orElse(null);
+    public ResponseEntity<TenantDTO> getCompanyById(@PathVariable("id") String id) {
+        return tenantService.findTenantById(id).map(TenantDTO::from)
+                .map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{id}/supervisors")
-    public List<UserDTO> tenantSupervisors(@PathVariable("id") String id) {
-        return tenantService.getTenantSupervisors(id).stream().map(u-> {
-            return UserDTO.fromModel(u);
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<UserDTO>> tenantSupervisors(@PathVariable("id") String id) {
+        var supervisors = tenantService.getTenantSupervisors(id).stream().map(UserDTO::from).toList();
+        return supervisors.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(supervisors);
+
     }
 
     @PostMapping("/")
-    public TenantDTO registerTenant(@RequestBody CreateTenantParams createTenantParams) {
-        return tenantService.createTenant(createTenantParams).map(t -> {
-            return TenantDTO.fromModel(t);
-        }).orElse(null);
+    public ResponseEntity<TenantDTO> registerTenant(@RequestBody CreateTenantParams createTenantParams) {
+        return tenantService.createTenant(createTenantParams).map(TenantDTO::from).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
     }
 
 

@@ -1,6 +1,5 @@
 package elite.sas.api.server;
 
-import elite.sas.api.ApiUtil;
 import elite.sas.api.exceptions.ModelConversionException;
 import elite.sas.api.exceptions.UnRetriableException;
 import elite.sas.api.grpc.CommonsProto;
@@ -12,13 +11,13 @@ import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.query.sqm.sql.ConversionException;
 
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import static elite.sas.api.ApiUtil.*;
+import static elite.sas.api.ApiUtil.tenantToApi;
+import static elite.sas.api.ApiUtil.tenantTypeFromApi;
 
 @Slf4j
 @RequiredArgsConstructor
