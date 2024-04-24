@@ -31,7 +31,7 @@ dependencies {
 
     implementation 'com.github.0xshamil:java-xid:1.0.0'
     // springdoc
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
     //thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     // security
