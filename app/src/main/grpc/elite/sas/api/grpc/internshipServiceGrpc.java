@@ -5,14 +5,14 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.49.0)",
+    value = "by gRPC proto compiler (version 1.63.0)",
     comments = "Source: internship-service.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class internshipServiceGrpc {
 
   private internshipServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "internshipService";
+  public static final java.lang.String SERVICE_NAME = "internshipService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.InternshipServiceProto.Attachment,
@@ -247,101 +247,67 @@ public final class internshipServiceGrpc {
 
   /**
    */
-  public static abstract class internshipServiceImplBase implements io.grpc.BindableService {
+  public interface AsyncService {
 
     /**
      */
-    public void addAttachment(elite.sas.api.grpc.InternshipServiceProto.Attachment request,
+    default void addAttachment(elite.sas.api.grpc.InternshipServiceProto.Attachment request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.InternshipServiceProto.Attachment> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddAttachmentMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAllAttachments(elite.sas.api.grpc.CommonsProto.Empty request,
+    default void getAllAttachments(elite.sas.api.grpc.CommonsProto.Empty request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.InternshipServiceProto.Attachment> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllAttachmentsMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAttachment(elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams request,
+    default void getAttachment(elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.InternshipServiceProto.Attachment> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAttachmentMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAttachments(elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams request,
+    default void getAttachments(elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.InternshipServiceProto.Attachment> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAttachmentsMethod(), responseObserver);
     }
 
     /**
      */
-    public void addLog(elite.sas.api.grpc.InternshipServiceProto.Log request,
+    default void addLog(elite.sas.api.grpc.InternshipServiceProto.Log request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.InternshipServiceProto.Log> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddLogMethod(), responseObserver);
     }
 
     /**
      */
-    public void addAttachmentWeek(elite.sas.api.grpc.InternshipServiceProto.AttachmentWeek request,
+    default void addAttachmentWeek(elite.sas.api.grpc.InternshipServiceProto.AttachmentWeek request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.InternshipServiceProto.AttachmentWeek> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddAttachmentWeekMethod(), responseObserver);
-    }
-
-    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
-      return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            getAddAttachmentMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.InternshipServiceProto.Attachment,
-                elite.sas.api.grpc.InternshipServiceProto.Attachment>(
-                  this, METHODID_ADD_ATTACHMENT)))
-          .addMethod(
-            getGetAllAttachmentsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CommonsProto.Empty,
-                elite.sas.api.grpc.InternshipServiceProto.Attachment>(
-                  this, METHODID_GET_ALL_ATTACHMENTS)))
-          .addMethod(
-            getGetAttachmentMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams,
-                elite.sas.api.grpc.InternshipServiceProto.Attachment>(
-                  this, METHODID_GET_ATTACHMENT)))
-          .addMethod(
-            getGetAttachmentsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams,
-                elite.sas.api.grpc.InternshipServiceProto.Attachment>(
-                  this, METHODID_GET_ATTACHMENTS)))
-          .addMethod(
-            getAddLogMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.InternshipServiceProto.Log,
-                elite.sas.api.grpc.InternshipServiceProto.Log>(
-                  this, METHODID_ADD_LOG)))
-          .addMethod(
-            getAddAttachmentWeekMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.InternshipServiceProto.AttachmentWeek,
-                elite.sas.api.grpc.InternshipServiceProto.AttachmentWeek>(
-                  this, METHODID_ADD_ATTACHMENT_WEEK)))
-          .build();
     }
   }
 
   /**
+   * Base class for the server implementation of the service internshipService.
    */
-  public static final class internshipServiceStub extends io.grpc.stub.AbstractAsyncStub<internshipServiceStub> {
+  public static abstract class internshipServiceImplBase
+      implements io.grpc.BindableService, AsyncService {
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return internshipServiceGrpc.bindService(this);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do asynchronous rpc calls to service internshipService.
+   */
+  public static final class internshipServiceStub
+      extends io.grpc.stub.AbstractAsyncStub<internshipServiceStub> {
     private internshipServiceStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -403,8 +369,10 @@ public final class internshipServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do synchronous rpc calls to service internshipService.
    */
-  public static final class internshipServiceBlockingStub extends io.grpc.stub.AbstractBlockingStub<internshipServiceBlockingStub> {
+  public static final class internshipServiceBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<internshipServiceBlockingStub> {
     private internshipServiceBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -462,8 +430,10 @@ public final class internshipServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service internshipService.
    */
-  public static final class internshipServiceFutureStub extends io.grpc.stub.AbstractFutureStub<internshipServiceFutureStub> {
+  public static final class internshipServiceFutureStub
+      extends io.grpc.stub.AbstractFutureStub<internshipServiceFutureStub> {
     private internshipServiceFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -520,10 +490,10 @@ public final class internshipServiceGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final internshipServiceImplBase serviceImpl;
+    private final AsyncService serviceImpl;
     private final int methodId;
 
-    MethodHandlers(internshipServiceImplBase serviceImpl, int methodId) {
+    MethodHandlers(AsyncService serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -572,6 +542,53 @@ public final class internshipServiceGrpc {
     }
   }
 
+  public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
+    return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getAddAttachmentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.InternshipServiceProto.Attachment,
+              elite.sas.api.grpc.InternshipServiceProto.Attachment>(
+                service, METHODID_ADD_ATTACHMENT)))
+        .addMethod(
+          getGetAllAttachmentsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CommonsProto.Empty,
+              elite.sas.api.grpc.InternshipServiceProto.Attachment>(
+                service, METHODID_GET_ALL_ATTACHMENTS)))
+        .addMethod(
+          getGetAttachmentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams,
+              elite.sas.api.grpc.InternshipServiceProto.Attachment>(
+                service, METHODID_GET_ATTACHMENT)))
+        .addMethod(
+          getGetAttachmentsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.InternshipServiceProto.SearchAttachmentParams,
+              elite.sas.api.grpc.InternshipServiceProto.Attachment>(
+                service, METHODID_GET_ATTACHMENTS)))
+        .addMethod(
+          getAddLogMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.InternshipServiceProto.Log,
+              elite.sas.api.grpc.InternshipServiceProto.Log>(
+                service, METHODID_ADD_LOG)))
+        .addMethod(
+          getAddAttachmentWeekMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.InternshipServiceProto.AttachmentWeek,
+              elite.sas.api.grpc.InternshipServiceProto.AttachmentWeek>(
+                service, METHODID_ADD_ATTACHMENT_WEEK)))
+        .build();
+  }
+
   private static abstract class internshipServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
     internshipServiceBaseDescriptorSupplier() {}
@@ -595,9 +612,9 @@ public final class internshipServiceGrpc {
   private static final class internshipServiceMethodDescriptorSupplier
       extends internshipServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
-    private final String methodName;
+    private final java.lang.String methodName;
 
-    internshipServiceMethodDescriptorSupplier(String methodName) {
+    internshipServiceMethodDescriptorSupplier(java.lang.String methodName) {
       this.methodName = methodName;
     }
 

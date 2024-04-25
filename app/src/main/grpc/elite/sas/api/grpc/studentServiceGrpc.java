@@ -5,14 +5,14 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.49.0)",
+    value = "by gRPC proto compiler (version 1.63.0)",
     comments = "Source: student-service.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class studentServiceGrpc {
 
   private studentServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "studentService";
+  public static final java.lang.String SERVICE_NAME = "studentService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest,
@@ -371,157 +371,95 @@ public final class studentServiceGrpc {
 
   /**
    */
-  public static abstract class studentServiceImplBase implements io.grpc.BindableService {
+  public interface AsyncService {
 
     /**
      */
-    public void registerStudent(elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest request,
+    default void registerStudent(elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Student> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRegisterStudentMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAllStudents(elite.sas.api.grpc.CommonsProto.Empty request,
+    default void getAllStudents(elite.sas.api.grpc.CommonsProto.Empty request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Student> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllStudentsMethod(), responseObserver);
     }
 
     /**
      */
-    public void getStudent(elite.sas.api.grpc.CourseServiceProto.SearchStudentParams request,
+    default void getStudent(elite.sas.api.grpc.CourseServiceProto.SearchStudentParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Student> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetStudentMethod(), responseObserver);
     }
 
     /**
      */
-    public void getStudents(elite.sas.api.grpc.CourseServiceProto.SearchStudentParams request,
+    default void getStudents(elite.sas.api.grpc.CourseServiceProto.SearchStudentParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Student> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetStudentsMethod(), responseObserver);
     }
 
     /**
      */
-    public void updateStudent(elite.sas.api.grpc.CourseServiceProto.UpdateStudentRequest request,
+    default void updateStudent(elite.sas.api.grpc.CourseServiceProto.UpdateStudentRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Student> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateStudentMethod(), responseObserver);
     }
 
     /**
      */
-    public void addCourse(elite.sas.api.grpc.CourseServiceProto.Course request,
+    default void addCourse(elite.sas.api.grpc.CourseServiceProto.Course request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Course> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddCourseMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAllCourses(elite.sas.api.grpc.CommonsProto.Empty request,
+    default void getAllCourses(elite.sas.api.grpc.CommonsProto.Empty request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Course> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllCoursesMethod(), responseObserver);
     }
 
     /**
      */
-    public void getCourse(elite.sas.api.grpc.CourseServiceProto.SearchCourseParams request,
+    default void getCourse(elite.sas.api.grpc.CourseServiceProto.SearchCourseParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Course> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetCourseMethod(), responseObserver);
     }
 
     /**
      */
-    public void getCourses(elite.sas.api.grpc.CourseServiceProto.SearchCourseParams request,
+    default void getCourses(elite.sas.api.grpc.CourseServiceProto.SearchCourseParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Course> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetCoursesMethod(), responseObserver);
     }
 
     /**
      */
-    public void updateCourse(elite.sas.api.grpc.CourseServiceProto.UpdateCourseRequest request,
+    default void updateCourse(elite.sas.api.grpc.CourseServiceProto.UpdateCourseRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.CourseServiceProto.Course> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateCourseMethod(), responseObserver);
-    }
-
-    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
-      return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            getRegisterStudentMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest,
-                elite.sas.api.grpc.CourseServiceProto.Student>(
-                  this, METHODID_REGISTER_STUDENT)))
-          .addMethod(
-            getGetAllStudentsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CommonsProto.Empty,
-                elite.sas.api.grpc.CourseServiceProto.Student>(
-                  this, METHODID_GET_ALL_STUDENTS)))
-          .addMethod(
-            getGetStudentMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CourseServiceProto.SearchStudentParams,
-                elite.sas.api.grpc.CourseServiceProto.Student>(
-                  this, METHODID_GET_STUDENT)))
-          .addMethod(
-            getGetStudentsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CourseServiceProto.SearchStudentParams,
-                elite.sas.api.grpc.CourseServiceProto.Student>(
-                  this, METHODID_GET_STUDENTS)))
-          .addMethod(
-            getUpdateStudentMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CourseServiceProto.UpdateStudentRequest,
-                elite.sas.api.grpc.CourseServiceProto.Student>(
-                  this, METHODID_UPDATE_STUDENT)))
-          .addMethod(
-            getAddCourseMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CourseServiceProto.Course,
-                elite.sas.api.grpc.CourseServiceProto.Course>(
-                  this, METHODID_ADD_COURSE)))
-          .addMethod(
-            getGetAllCoursesMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CommonsProto.Empty,
-                elite.sas.api.grpc.CourseServiceProto.Course>(
-                  this, METHODID_GET_ALL_COURSES)))
-          .addMethod(
-            getGetCourseMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CourseServiceProto.SearchCourseParams,
-                elite.sas.api.grpc.CourseServiceProto.Course>(
-                  this, METHODID_GET_COURSE)))
-          .addMethod(
-            getGetCoursesMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CourseServiceProto.SearchCourseParams,
-                elite.sas.api.grpc.CourseServiceProto.Course>(
-                  this, METHODID_GET_COURSES)))
-          .addMethod(
-            getUpdateCourseMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CourseServiceProto.UpdateCourseRequest,
-                elite.sas.api.grpc.CourseServiceProto.Course>(
-                  this, METHODID_UPDATE_COURSE)))
-          .build();
     }
   }
 
   /**
+   * Base class for the server implementation of the service studentService.
    */
-  public static final class studentServiceStub extends io.grpc.stub.AbstractAsyncStub<studentServiceStub> {
+  public static abstract class studentServiceImplBase
+      implements io.grpc.BindableService, AsyncService {
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return studentServiceGrpc.bindService(this);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do asynchronous rpc calls to service studentService.
+   */
+  public static final class studentServiceStub
+      extends io.grpc.stub.AbstractAsyncStub<studentServiceStub> {
     private studentServiceStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -615,8 +553,10 @@ public final class studentServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do synchronous rpc calls to service studentService.
    */
-  public static final class studentServiceBlockingStub extends io.grpc.stub.AbstractBlockingStub<studentServiceBlockingStub> {
+  public static final class studentServiceBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<studentServiceBlockingStub> {
     private studentServiceBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -704,8 +644,10 @@ public final class studentServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service studentService.
    */
-  public static final class studentServiceFutureStub extends io.grpc.stub.AbstractFutureStub<studentServiceFutureStub> {
+  public static final class studentServiceFutureStub
+      extends io.grpc.stub.AbstractFutureStub<studentServiceFutureStub> {
     private studentServiceFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -782,10 +724,10 @@ public final class studentServiceGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final studentServiceImplBase serviceImpl;
+    private final AsyncService serviceImpl;
     private final int methodId;
 
-    MethodHandlers(studentServiceImplBase serviceImpl, int methodId) {
+    MethodHandlers(AsyncService serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -850,6 +792,81 @@ public final class studentServiceGrpc {
     }
   }
 
+  public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
+    return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getRegisterStudentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CourseServiceProto.RegisterStudentRequest,
+              elite.sas.api.grpc.CourseServiceProto.Student>(
+                service, METHODID_REGISTER_STUDENT)))
+        .addMethod(
+          getGetAllStudentsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CommonsProto.Empty,
+              elite.sas.api.grpc.CourseServiceProto.Student>(
+                service, METHODID_GET_ALL_STUDENTS)))
+        .addMethod(
+          getGetStudentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CourseServiceProto.SearchStudentParams,
+              elite.sas.api.grpc.CourseServiceProto.Student>(
+                service, METHODID_GET_STUDENT)))
+        .addMethod(
+          getGetStudentsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CourseServiceProto.SearchStudentParams,
+              elite.sas.api.grpc.CourseServiceProto.Student>(
+                service, METHODID_GET_STUDENTS)))
+        .addMethod(
+          getUpdateStudentMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CourseServiceProto.UpdateStudentRequest,
+              elite.sas.api.grpc.CourseServiceProto.Student>(
+                service, METHODID_UPDATE_STUDENT)))
+        .addMethod(
+          getAddCourseMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CourseServiceProto.Course,
+              elite.sas.api.grpc.CourseServiceProto.Course>(
+                service, METHODID_ADD_COURSE)))
+        .addMethod(
+          getGetAllCoursesMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CommonsProto.Empty,
+              elite.sas.api.grpc.CourseServiceProto.Course>(
+                service, METHODID_GET_ALL_COURSES)))
+        .addMethod(
+          getGetCourseMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CourseServiceProto.SearchCourseParams,
+              elite.sas.api.grpc.CourseServiceProto.Course>(
+                service, METHODID_GET_COURSE)))
+        .addMethod(
+          getGetCoursesMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CourseServiceProto.SearchCourseParams,
+              elite.sas.api.grpc.CourseServiceProto.Course>(
+                service, METHODID_GET_COURSES)))
+        .addMethod(
+          getUpdateCourseMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CourseServiceProto.UpdateCourseRequest,
+              elite.sas.api.grpc.CourseServiceProto.Course>(
+                service, METHODID_UPDATE_COURSE)))
+        .build();
+  }
+
   private static abstract class studentServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
     studentServiceBaseDescriptorSupplier() {}
@@ -873,9 +890,9 @@ public final class studentServiceGrpc {
   private static final class studentServiceMethodDescriptorSupplier
       extends studentServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
-    private final String methodName;
+    private final java.lang.String methodName;
 
-    studentServiceMethodDescriptorSupplier(String methodName) {
+    studentServiceMethodDescriptorSupplier(java.lang.String methodName) {
       this.methodName = methodName;
     }
 

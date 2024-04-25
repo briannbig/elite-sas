@@ -5,14 +5,14 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.49.0)",
+    value = "by gRPC proto compiler (version 1.63.0)",
     comments = "Source: user-service.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class userServiceGrpc {
 
   private userServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "userService";
+  public static final java.lang.String SERVICE_NAME = "userService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.UserServiceProto.RegisterUserRequest,
@@ -309,129 +309,81 @@ public final class userServiceGrpc {
 
   /**
    */
-  public static abstract class userServiceImplBase implements io.grpc.BindableService {
+  public interface AsyncService {
 
     /**
      */
-    public void registerUser(elite.sas.api.grpc.UserServiceProto.RegisterUserRequest request,
+    default void registerUser(elite.sas.api.grpc.UserServiceProto.RegisterUserRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.AppUser> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRegisterUserMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAllUsers(elite.sas.api.grpc.CommonsProto.Empty request,
+    default void getAllUsers(elite.sas.api.grpc.CommonsProto.Empty request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.AppUser> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllUsersMethod(), responseObserver);
     }
 
     /**
      */
-    public void getUsers(elite.sas.api.grpc.UserServiceProto.SearchUserParams request,
+    default void getUsers(elite.sas.api.grpc.UserServiceProto.SearchUserParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.AppUser> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetUsersMethod(), responseObserver);
     }
 
     /**
      */
-    public void getUser(elite.sas.api.grpc.UserServiceProto.SearchUserParams request,
+    default void getUser(elite.sas.api.grpc.UserServiceProto.SearchUserParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.AppUser> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetUserMethod(), responseObserver);
     }
 
     /**
      */
-    public void updateUser(elite.sas.api.grpc.UserServiceProto.UpdateUserRequest request,
+    default void updateUser(elite.sas.api.grpc.UserServiceProto.UpdateUserRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.AppUser> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateUserMethod(), responseObserver);
     }
 
     /**
      */
-    public void updatePassword(elite.sas.api.grpc.UserServiceProto.UpdateAccountParams request,
+    default void updatePassword(elite.sas.api.grpc.UserServiceProto.UpdateAccountParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.Account> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdatePasswordMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAccount(elite.sas.api.grpc.UserServiceProto.GetAccountRequest request,
+    default void getAccount(elite.sas.api.grpc.UserServiceProto.GetAccountRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.Account> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAccountMethod(), responseObserver);
     }
 
     /**
      */
-    public void login(elite.sas.api.grpc.UserServiceProto.LogInRequest request,
+    default void login(elite.sas.api.grpc.UserServiceProto.LogInRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.UserServiceProto.Account> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
-    }
-
-    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
-      return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            getRegisterUserMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.UserServiceProto.RegisterUserRequest,
-                elite.sas.api.grpc.UserServiceProto.AppUser>(
-                  this, METHODID_REGISTER_USER)))
-          .addMethod(
-            getGetAllUsersMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CommonsProto.Empty,
-                elite.sas.api.grpc.UserServiceProto.AppUser>(
-                  this, METHODID_GET_ALL_USERS)))
-          .addMethod(
-            getGetUsersMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.UserServiceProto.SearchUserParams,
-                elite.sas.api.grpc.UserServiceProto.AppUser>(
-                  this, METHODID_GET_USERS)))
-          .addMethod(
-            getGetUserMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.UserServiceProto.SearchUserParams,
-                elite.sas.api.grpc.UserServiceProto.AppUser>(
-                  this, METHODID_GET_USER)))
-          .addMethod(
-            getUpdateUserMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.UserServiceProto.UpdateUserRequest,
-                elite.sas.api.grpc.UserServiceProto.AppUser>(
-                  this, METHODID_UPDATE_USER)))
-          .addMethod(
-            getUpdatePasswordMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.UserServiceProto.UpdateAccountParams,
-                elite.sas.api.grpc.UserServiceProto.Account>(
-                  this, METHODID_UPDATE_PASSWORD)))
-          .addMethod(
-            getGetAccountMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.UserServiceProto.GetAccountRequest,
-                elite.sas.api.grpc.UserServiceProto.Account>(
-                  this, METHODID_GET_ACCOUNT)))
-          .addMethod(
-            getLoginMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.UserServiceProto.LogInRequest,
-                elite.sas.api.grpc.UserServiceProto.Account>(
-                  this, METHODID_LOGIN)))
-          .build();
     }
   }
 
   /**
+   * Base class for the server implementation of the service userService.
    */
-  public static final class userServiceStub extends io.grpc.stub.AbstractAsyncStub<userServiceStub> {
+  public static abstract class userServiceImplBase
+      implements io.grpc.BindableService, AsyncService {
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return userServiceGrpc.bindService(this);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do asynchronous rpc calls to service userService.
+   */
+  public static final class userServiceStub
+      extends io.grpc.stub.AbstractAsyncStub<userServiceStub> {
     private userServiceStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -509,8 +461,10 @@ public final class userServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do synchronous rpc calls to service userService.
    */
-  public static final class userServiceBlockingStub extends io.grpc.stub.AbstractBlockingStub<userServiceBlockingStub> {
+  public static final class userServiceBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<userServiceBlockingStub> {
     private userServiceBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -582,8 +536,10 @@ public final class userServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service userService.
    */
-  public static final class userServiceFutureStub extends io.grpc.stub.AbstractFutureStub<userServiceFutureStub> {
+  public static final class userServiceFutureStub
+      extends io.grpc.stub.AbstractFutureStub<userServiceFutureStub> {
     private userServiceFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -658,10 +614,10 @@ public final class userServiceGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final userServiceImplBase serviceImpl;
+    private final AsyncService serviceImpl;
     private final int methodId;
 
-    MethodHandlers(userServiceImplBase serviceImpl, int methodId) {
+    MethodHandlers(AsyncService serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -718,6 +674,67 @@ public final class userServiceGrpc {
     }
   }
 
+  public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
+    return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getRegisterUserMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.UserServiceProto.RegisterUserRequest,
+              elite.sas.api.grpc.UserServiceProto.AppUser>(
+                service, METHODID_REGISTER_USER)))
+        .addMethod(
+          getGetAllUsersMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CommonsProto.Empty,
+              elite.sas.api.grpc.UserServiceProto.AppUser>(
+                service, METHODID_GET_ALL_USERS)))
+        .addMethod(
+          getGetUsersMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.UserServiceProto.SearchUserParams,
+              elite.sas.api.grpc.UserServiceProto.AppUser>(
+                service, METHODID_GET_USERS)))
+        .addMethod(
+          getGetUserMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.UserServiceProto.SearchUserParams,
+              elite.sas.api.grpc.UserServiceProto.AppUser>(
+                service, METHODID_GET_USER)))
+        .addMethod(
+          getUpdateUserMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.UserServiceProto.UpdateUserRequest,
+              elite.sas.api.grpc.UserServiceProto.AppUser>(
+                service, METHODID_UPDATE_USER)))
+        .addMethod(
+          getUpdatePasswordMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.UserServiceProto.UpdateAccountParams,
+              elite.sas.api.grpc.UserServiceProto.Account>(
+                service, METHODID_UPDATE_PASSWORD)))
+        .addMethod(
+          getGetAccountMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.UserServiceProto.GetAccountRequest,
+              elite.sas.api.grpc.UserServiceProto.Account>(
+                service, METHODID_GET_ACCOUNT)))
+        .addMethod(
+          getLoginMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.UserServiceProto.LogInRequest,
+              elite.sas.api.grpc.UserServiceProto.Account>(
+                service, METHODID_LOGIN)))
+        .build();
+  }
+
   private static abstract class userServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
     userServiceBaseDescriptorSupplier() {}
@@ -741,9 +758,9 @@ public final class userServiceGrpc {
   private static final class userServiceMethodDescriptorSupplier
       extends userServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
-    private final String methodName;
+    private final java.lang.String methodName;
 
-    userServiceMethodDescriptorSupplier(String methodName) {
+    userServiceMethodDescriptorSupplier(java.lang.String methodName) {
       this.methodName = methodName;
     }
 

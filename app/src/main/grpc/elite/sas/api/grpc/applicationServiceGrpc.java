@@ -5,14 +5,14 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.49.0)",
+    value = "by gRPC proto compiler (version 1.63.0)",
     comments = "Source: application-service.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class applicationServiceGrpc {
 
   private applicationServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "applicationService";
+  public static final java.lang.String SERVICE_NAME = "applicationService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.ApplicationServiceProto.Listing,
@@ -371,14 +371,14 @@ public final class applicationServiceGrpc {
 
   /**
    */
-  public static abstract class applicationServiceImplBase implements io.grpc.BindableService {
+  public interface AsyncService {
 
     /**
      * <pre>
      *add a listing
      * </pre>
      */
-    public void addListing(elite.sas.api.grpc.ApplicationServiceProto.Listing request,
+    default void addListing(elite.sas.api.grpc.ApplicationServiceProto.Listing request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Listing> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddListingMethod(), responseObserver);
     }
@@ -388,7 +388,7 @@ public final class applicationServiceGrpc {
      *get all listings
      * </pre>
      */
-    public void getAllListings(elite.sas.api.grpc.CommonsProto.Empty request,
+    default void getAllListings(elite.sas.api.grpc.CommonsProto.Empty request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Listing> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllListingsMethod(), responseObserver);
     }
@@ -398,139 +398,77 @@ public final class applicationServiceGrpc {
      *search listings
      * </pre>
      */
-    public void getListings(elite.sas.api.grpc.ApplicationServiceProto.SearchListingParams request,
+    default void getListings(elite.sas.api.grpc.ApplicationServiceProto.SearchListingParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Listing> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetListingsMethod(), responseObserver);
     }
 
     /**
      */
-    public void getListing(elite.sas.api.grpc.ApplicationServiceProto.SearchListingParams request,
+    default void getListing(elite.sas.api.grpc.ApplicationServiceProto.SearchListingParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Listing> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetListingMethod(), responseObserver);
     }
 
     /**
      */
-    public void updateListing(elite.sas.api.grpc.ApplicationServiceProto.UpdateListingRequest request,
+    default void updateListing(elite.sas.api.grpc.ApplicationServiceProto.UpdateListingRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Listing> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateListingMethod(), responseObserver);
     }
 
     /**
      */
-    public void addApplication(elite.sas.api.grpc.ApplicationServiceProto.Application request,
+    default void addApplication(elite.sas.api.grpc.ApplicationServiceProto.Application request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Application> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddApplicationMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAllApplications(elite.sas.api.grpc.CommonsProto.Empty request,
+    default void getAllApplications(elite.sas.api.grpc.CommonsProto.Empty request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Application> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllApplicationsMethod(), responseObserver);
     }
 
     /**
      */
-    public void getApplications(elite.sas.api.grpc.ApplicationServiceProto.SearchApplicationParams request,
+    default void getApplications(elite.sas.api.grpc.ApplicationServiceProto.SearchApplicationParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Application> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetApplicationsMethod(), responseObserver);
     }
 
     /**
      */
-    public void getApplication(elite.sas.api.grpc.ApplicationServiceProto.SearchApplicationParams request,
+    default void getApplication(elite.sas.api.grpc.ApplicationServiceProto.SearchApplicationParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Application> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetApplicationMethod(), responseObserver);
     }
 
     /**
      */
-    public void updateApplication(elite.sas.api.grpc.ApplicationServiceProto.UpdateApplicationRequest request,
+    default void updateApplication(elite.sas.api.grpc.ApplicationServiceProto.UpdateApplicationRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.ApplicationServiceProto.Application> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateApplicationMethod(), responseObserver);
-    }
-
-    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
-      return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            getAddListingMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.ApplicationServiceProto.Listing,
-                elite.sas.api.grpc.ApplicationServiceProto.Listing>(
-                  this, METHODID_ADD_LISTING)))
-          .addMethod(
-            getGetAllListingsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CommonsProto.Empty,
-                elite.sas.api.grpc.ApplicationServiceProto.Listing>(
-                  this, METHODID_GET_ALL_LISTINGS)))
-          .addMethod(
-            getGetListingsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.ApplicationServiceProto.SearchListingParams,
-                elite.sas.api.grpc.ApplicationServiceProto.Listing>(
-                  this, METHODID_GET_LISTINGS)))
-          .addMethod(
-            getGetListingMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.ApplicationServiceProto.SearchListingParams,
-                elite.sas.api.grpc.ApplicationServiceProto.Listing>(
-                  this, METHODID_GET_LISTING)))
-          .addMethod(
-            getUpdateListingMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.ApplicationServiceProto.UpdateListingRequest,
-                elite.sas.api.grpc.ApplicationServiceProto.Listing>(
-                  this, METHODID_UPDATE_LISTING)))
-          .addMethod(
-            getAddApplicationMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.ApplicationServiceProto.Application,
-                elite.sas.api.grpc.ApplicationServiceProto.Application>(
-                  this, METHODID_ADD_APPLICATION)))
-          .addMethod(
-            getGetAllApplicationsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CommonsProto.Empty,
-                elite.sas.api.grpc.ApplicationServiceProto.Application>(
-                  this, METHODID_GET_ALL_APPLICATIONS)))
-          .addMethod(
-            getGetApplicationsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.ApplicationServiceProto.SearchApplicationParams,
-                elite.sas.api.grpc.ApplicationServiceProto.Application>(
-                  this, METHODID_GET_APPLICATIONS)))
-          .addMethod(
-            getGetApplicationMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.ApplicationServiceProto.SearchApplicationParams,
-                elite.sas.api.grpc.ApplicationServiceProto.Application>(
-                  this, METHODID_GET_APPLICATION)))
-          .addMethod(
-            getUpdateApplicationMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.ApplicationServiceProto.UpdateApplicationRequest,
-                elite.sas.api.grpc.ApplicationServiceProto.Application>(
-                  this, METHODID_UPDATE_APPLICATION)))
-          .build();
     }
   }
 
   /**
+   * Base class for the server implementation of the service applicationService.
    */
-  public static final class applicationServiceStub extends io.grpc.stub.AbstractAsyncStub<applicationServiceStub> {
+  public static abstract class applicationServiceImplBase
+      implements io.grpc.BindableService, AsyncService {
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return applicationServiceGrpc.bindService(this);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do asynchronous rpc calls to service applicationService.
+   */
+  public static final class applicationServiceStub
+      extends io.grpc.stub.AbstractAsyncStub<applicationServiceStub> {
     private applicationServiceStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -633,8 +571,10 @@ public final class applicationServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do synchronous rpc calls to service applicationService.
    */
-  public static final class applicationServiceBlockingStub extends io.grpc.stub.AbstractBlockingStub<applicationServiceBlockingStub> {
+  public static final class applicationServiceBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<applicationServiceBlockingStub> {
     private applicationServiceBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -731,8 +671,10 @@ public final class applicationServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service applicationService.
    */
-  public static final class applicationServiceFutureStub extends io.grpc.stub.AbstractFutureStub<applicationServiceFutureStub> {
+  public static final class applicationServiceFutureStub
+      extends io.grpc.stub.AbstractFutureStub<applicationServiceFutureStub> {
     private applicationServiceFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -812,10 +754,10 @@ public final class applicationServiceGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final applicationServiceImplBase serviceImpl;
+    private final AsyncService serviceImpl;
     private final int methodId;
 
-    MethodHandlers(applicationServiceImplBase serviceImpl, int methodId) {
+    MethodHandlers(AsyncService serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -880,6 +822,81 @@ public final class applicationServiceGrpc {
     }
   }
 
+  public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
+    return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getAddListingMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.ApplicationServiceProto.Listing,
+              elite.sas.api.grpc.ApplicationServiceProto.Listing>(
+                service, METHODID_ADD_LISTING)))
+        .addMethod(
+          getGetAllListingsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CommonsProto.Empty,
+              elite.sas.api.grpc.ApplicationServiceProto.Listing>(
+                service, METHODID_GET_ALL_LISTINGS)))
+        .addMethod(
+          getGetListingsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.ApplicationServiceProto.SearchListingParams,
+              elite.sas.api.grpc.ApplicationServiceProto.Listing>(
+                service, METHODID_GET_LISTINGS)))
+        .addMethod(
+          getGetListingMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.ApplicationServiceProto.SearchListingParams,
+              elite.sas.api.grpc.ApplicationServiceProto.Listing>(
+                service, METHODID_GET_LISTING)))
+        .addMethod(
+          getUpdateListingMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.ApplicationServiceProto.UpdateListingRequest,
+              elite.sas.api.grpc.ApplicationServiceProto.Listing>(
+                service, METHODID_UPDATE_LISTING)))
+        .addMethod(
+          getAddApplicationMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.ApplicationServiceProto.Application,
+              elite.sas.api.grpc.ApplicationServiceProto.Application>(
+                service, METHODID_ADD_APPLICATION)))
+        .addMethod(
+          getGetAllApplicationsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CommonsProto.Empty,
+              elite.sas.api.grpc.ApplicationServiceProto.Application>(
+                service, METHODID_GET_ALL_APPLICATIONS)))
+        .addMethod(
+          getGetApplicationsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.ApplicationServiceProto.SearchApplicationParams,
+              elite.sas.api.grpc.ApplicationServiceProto.Application>(
+                service, METHODID_GET_APPLICATIONS)))
+        .addMethod(
+          getGetApplicationMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.ApplicationServiceProto.SearchApplicationParams,
+              elite.sas.api.grpc.ApplicationServiceProto.Application>(
+                service, METHODID_GET_APPLICATION)))
+        .addMethod(
+          getUpdateApplicationMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.ApplicationServiceProto.UpdateApplicationRequest,
+              elite.sas.api.grpc.ApplicationServiceProto.Application>(
+                service, METHODID_UPDATE_APPLICATION)))
+        .build();
+  }
+
   private static abstract class applicationServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
     applicationServiceBaseDescriptorSupplier() {}
@@ -903,9 +920,9 @@ public final class applicationServiceGrpc {
   private static final class applicationServiceMethodDescriptorSupplier
       extends applicationServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
-    private final String methodName;
+    private final java.lang.String methodName;
 
-    applicationServiceMethodDescriptorSupplier(String methodName) {
+    applicationServiceMethodDescriptorSupplier(java.lang.String methodName) {
       this.methodName = methodName;
     }
 

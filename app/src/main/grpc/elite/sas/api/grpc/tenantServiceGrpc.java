@@ -5,14 +5,14 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.49.0)",
+    value = "by gRPC proto compiler (version 1.63.0)",
     comments = "Source: tenant-service.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class tenantServiceGrpc {
 
   private tenantServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "tenantService";
+  public static final java.lang.String SERVICE_NAME = "tenantService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<elite.sas.api.grpc.TenantServiceProto.RegisterTenantRequest,
@@ -216,87 +216,60 @@ public final class tenantServiceGrpc {
 
   /**
    */
-  public static abstract class tenantServiceImplBase implements io.grpc.BindableService {
+  public interface AsyncService {
 
     /**
      */
-    public void registerTenant(elite.sas.api.grpc.TenantServiceProto.RegisterTenantRequest request,
+    default void registerTenant(elite.sas.api.grpc.TenantServiceProto.RegisterTenantRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRegisterTenantMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAllTenants(elite.sas.api.grpc.CommonsProto.Empty request,
+    default void getAllTenants(elite.sas.api.grpc.CommonsProto.Empty request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllTenantsMethod(), responseObserver);
     }
 
     /**
      */
-    public void getTenantById(elite.sas.api.grpc.TenantServiceProto.SearchParams request,
+    default void getTenantById(elite.sas.api.grpc.TenantServiceProto.SearchParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetTenantByIdMethod(), responseObserver);
     }
 
     /**
      */
-    public void getTenants(elite.sas.api.grpc.TenantServiceProto.SearchParams request,
+    default void getTenants(elite.sas.api.grpc.TenantServiceProto.SearchParams request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetTenantsMethod(), responseObserver);
     }
 
     /**
      */
-    public void updateTenant(elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest request,
+    default void updateTenant(elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest request,
         io.grpc.stub.StreamObserver<elite.sas.api.grpc.TenantServiceProto.Tenant> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateTenantMethod(), responseObserver);
-    }
-
-    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
-      return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            getRegisterTenantMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.TenantServiceProto.RegisterTenantRequest,
-                elite.sas.api.grpc.TenantServiceProto.Tenant>(
-                  this, METHODID_REGISTER_TENANT)))
-          .addMethod(
-            getGetAllTenantsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.CommonsProto.Empty,
-                elite.sas.api.grpc.TenantServiceProto.Tenant>(
-                  this, METHODID_GET_ALL_TENANTS)))
-          .addMethod(
-            getGetTenantByIdMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.TenantServiceProto.SearchParams,
-                elite.sas.api.grpc.TenantServiceProto.Tenant>(
-                  this, METHODID_GET_TENANT_BY_ID)))
-          .addMethod(
-            getGetTenantsMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.TenantServiceProto.SearchParams,
-                elite.sas.api.grpc.TenantServiceProto.Tenant>(
-                  this, METHODID_GET_TENANTS)))
-          .addMethod(
-            getUpdateTenantMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest,
-                elite.sas.api.grpc.TenantServiceProto.Tenant>(
-                  this, METHODID_UPDATE_TENANT)))
-          .build();
     }
   }
 
   /**
+   * Base class for the server implementation of the service tenantService.
    */
-  public static final class tenantServiceStub extends io.grpc.stub.AbstractAsyncStub<tenantServiceStub> {
+  public static abstract class tenantServiceImplBase
+      implements io.grpc.BindableService, AsyncService {
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return tenantServiceGrpc.bindService(this);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do asynchronous rpc calls to service tenantService.
+   */
+  public static final class tenantServiceStub
+      extends io.grpc.stub.AbstractAsyncStub<tenantServiceStub> {
     private tenantServiceStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -350,8 +323,10 @@ public final class tenantServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do synchronous rpc calls to service tenantService.
    */
-  public static final class tenantServiceBlockingStub extends io.grpc.stub.AbstractBlockingStub<tenantServiceBlockingStub> {
+  public static final class tenantServiceBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<tenantServiceBlockingStub> {
     private tenantServiceBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -402,8 +377,10 @@ public final class tenantServiceGrpc {
   }
 
   /**
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service tenantService.
    */
-  public static final class tenantServiceFutureStub extends io.grpc.stub.AbstractFutureStub<tenantServiceFutureStub> {
+  public static final class tenantServiceFutureStub
+      extends io.grpc.stub.AbstractFutureStub<tenantServiceFutureStub> {
     private tenantServiceFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -451,10 +428,10 @@ public final class tenantServiceGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final tenantServiceImplBase serviceImpl;
+    private final AsyncService serviceImpl;
     private final int methodId;
 
-    MethodHandlers(tenantServiceImplBase serviceImpl, int methodId) {
+    MethodHandlers(AsyncService serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -499,6 +476,46 @@ public final class tenantServiceGrpc {
     }
   }
 
+  public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
+    return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getRegisterTenantMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.TenantServiceProto.RegisterTenantRequest,
+              elite.sas.api.grpc.TenantServiceProto.Tenant>(
+                service, METHODID_REGISTER_TENANT)))
+        .addMethod(
+          getGetAllTenantsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.CommonsProto.Empty,
+              elite.sas.api.grpc.TenantServiceProto.Tenant>(
+                service, METHODID_GET_ALL_TENANTS)))
+        .addMethod(
+          getGetTenantByIdMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.TenantServiceProto.SearchParams,
+              elite.sas.api.grpc.TenantServiceProto.Tenant>(
+                service, METHODID_GET_TENANT_BY_ID)))
+        .addMethod(
+          getGetTenantsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.TenantServiceProto.SearchParams,
+              elite.sas.api.grpc.TenantServiceProto.Tenant>(
+                service, METHODID_GET_TENANTS)))
+        .addMethod(
+          getUpdateTenantMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              elite.sas.api.grpc.TenantServiceProto.UpdateTenantRequest,
+              elite.sas.api.grpc.TenantServiceProto.Tenant>(
+                service, METHODID_UPDATE_TENANT)))
+        .build();
+  }
+
   private static abstract class tenantServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
     tenantServiceBaseDescriptorSupplier() {}
@@ -522,9 +539,9 @@ public final class tenantServiceGrpc {
   private static final class tenantServiceMethodDescriptorSupplier
       extends tenantServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
-    private final String methodName;
+    private final java.lang.String methodName;
 
-    tenantServiceMethodDescriptorSupplier(String methodName) {
+    tenantServiceMethodDescriptorSupplier(java.lang.String methodName) {
       this.methodName = methodName;
     }
 
