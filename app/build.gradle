@@ -54,7 +54,7 @@ dependencies {
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'org.glassfish.jaxb:jaxb-runtime:4.0.5'
     // temporal
-    implementation 'io.temporal:temporal-sdk:1.23.1'
+    implementation 'io.temporal:temporal-sdk:1.23.2'
     // open-pdf
     implementation 'com.github.librepdf:openpdf:2.0.2'
     // javax annotations
