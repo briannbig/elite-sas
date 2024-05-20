@@ -44,7 +44,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     // grpc
-    implementation 'io.grpc:grpc-netty-shaded:1.63.0'
+    implementation 'io.grpc:grpc-netty-shaded:1.64.0'
     implementation 'io.grpc:grpc-protobuf:1.63.0'
     implementation group: 'io.grpc', name: 'grpc-stub', version: '1.63.0'
     compileOnly group: 'com.google.protobuf', name: 'protobuf-java-util', version: '4.26.1'
